@@ -1,7 +1,8 @@
 ---
 layout: post
 title: Setting up the NUnit GUI
-categories: []
+categories:
+- Testing
 tags:
 - NUnit
 - TDD
@@ -15,6 +16,7 @@ meta:
   blogger_author: Mike Hook
   blogger_21e9281c9d3b6d2ff7500a6d800ca7bb_permalink: '1027098612660756480'
   _elasticsearch_indexed_on: '2009-06-28 12:30:00'
+  _wpcom_is_markdown: '1'
 ---
 I've setup the project using the default 'S#arp architecture Application' template. I won't go into detail about the steps taken to do this as it is all covered in the Sharp Architecture documentation. However I did hit a snag setting up the <a href="http://www.nunit.org/index.php">NUnit</a> project so I'll expand on that in this post.
 
@@ -24,9 +26,11 @@ The unit tests for the visual studio project can be easily loaded into the NUnit
 
 The following error message is reported:
 <br />
+
 <blockquote style="font-style:italic;">
 SharpArch.Core.PreconditionException : Please add an AppSetting to your app.config for 'nhibernate.mapping.assembly.' This setting takes a comma delimited list of assemblies containing NHibernate mapping files. Including '.dll' at the end of each is optional.<br />
 </blockquote>
+
 The error is pointing to a missing setting in the app.config file, however on checking the file the setting is present. Also the tests worked just fine before saving the NUnit project so why would they suddenly start to fail?
 
 The cause of the test failures appears to have been saving the NUnit project, this pointed to some settings changes which NUnit may have made during the save. Taking a look at the NUnit project settings the possible cause of the problem became clear. There are a couple of directory and file paths in the settings, of particular interest are a 'Configuration File Name' and 'ApplicationBase' settings.

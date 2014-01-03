@@ -1,9 +1,10 @@
 ---
 layout: post
 title: Branching the Project
-categories: []
+categories:
+- Hacking
 tags:
-- Source Control
+- Testing
 - TortoiseSVN
 - Unfuddle
 status: publish
@@ -14,10 +15,12 @@ meta:
   blogger_author: Mike Hook
   blogger_21e9281c9d3b6d2ff7500a6d800ca7bb_permalink: '8740943601947286469'
   _elasticsearch_indexed_on: '2009-08-23 21:02:00'
+  _wpcom_is_markdown: '1'
 ---
 I have used an SVN repository for the project, hosted on <a href="http://www.unfuddle.com/">unfuddle</a>, enabling versioned source control on all files in the project. I can use the trusty <a href="http://tortoisesvn.net/">TortoiseSVN</a> Windows application to send and receive files to the remote repository directly from Windows Explorer. After each work session I commit the changes to source control. Apart from the obvious advantages of maintaining backups, if at any stage I realise that I have made a mistake, then the changes can be rolled back to the previous commit.<br />
 The source control recently came in useful when I needed to upgrade the version of Sharp Architecture used on the project. I won’t go into detail about the reasons for me upgrading, suffice to say most of the technology stack in Sharp Architecture had benefitted from version updates and I was limiting myself by using a pre version 1.0 release.<br />
 These are the steps I took to upgrade the Sharp Architecture version of the project:<br />
+
 <ol><li>     <br />
 Use TortoiseSVN to Branch the code in source control from <i><span style="color:green;">/trunk</span></i> to <i><span style="color:green;">/branches/recipebookV1</span></i><br />
 </li>
@@ -42,7 +45,10 @@ Use the TortoiseSVN repo browser to delete all files from the Trunk… yes, I re
 <li>     <br />
 Import the new recipebook folder back into the trunk <br />
 </li>
-</ol>After completing the upgrade I realised that there may be an easier way to upgrade, without the scary and somewhat bad practice of deleting all the old files from the trunk, only to upload most of them again. I will list them below so I can try them out later:<br />
+</ol>
+
+After completing the upgrade I realised that there may be an easier way to upgrade, without the scary and somewhat bad practice of deleting all the old files from the trunk, only to upload most of them again. I will list them below so I can try them out later:<br />
+
 <ol><li>     <br />
 Use TortoiseSVN to Branch the code in source control from <i><span style="color:green;">/trunk</span></i> to <i><span style="color:green;">/branches/recipebookV1</span></i><br />
 </li>
