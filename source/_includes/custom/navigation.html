@@ -1,4 +1,8 @@
+<h3>categories</h3>
 <ul class="main-navigation">
-  <li><a href="{{ root_url }}/">Blog</a></li>
-  <li><a href="{{ root_url }}/blog/archives">Archives</a></li>
+{% for item in site.categories %}
+    <li><a href="/blog/categories/{{ item[0] }}/">{{ item[0] }}</a> [ {{ item[1].size }} ]</li>
+{% endfor %}
 </ul>
+<br/>
+<a href="{{ root_url }}/blog/archives">Archives</a>
