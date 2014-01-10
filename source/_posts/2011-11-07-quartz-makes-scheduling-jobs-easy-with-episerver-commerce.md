@@ -10,7 +10,7 @@ tags:
 status: publish
 type: post
 published: true
-date 2011-11-07 19:30:00
+date: 2011-11-07 19:30:00
 meta:
   _wpas_done_linkedin: '1'
   _wpas_done_twitter: '1'

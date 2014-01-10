@@ -7,7 +7,7 @@ title: Baking websites
 subtitle: Adventures in software development
 author: Mike Hook
 simple_search: http://google.com/search
-description: Adventures in software development from Haywards Heath, UK
+#description: Adventures in software development from Haywards Heath, UK
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
 # You can customize the format as defined in
