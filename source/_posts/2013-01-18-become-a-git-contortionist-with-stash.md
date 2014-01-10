@@ -9,6 +9,7 @@ tags:
 status: publish
 type: post
 published: true
+date: 2013-01-18 19:16:05
 meta:
   _wpcom_is_markdown: '1'
   _wpas_done_327858: '1'

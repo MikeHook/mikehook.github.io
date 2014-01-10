@@ -9,6 +9,7 @@ tags:
 status: publish
 type: post
 published: true
+date: 2011-10-06 17:00:59
 meta:
   _wpas_done_twitter: '1'
   _wpas_skip_yup: '1'

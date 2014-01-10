@@ -19,3 +19,11 @@
 //$sidebar-pad-medium: 15px;
 //$sidebar-pad-wide: 20px;
 //$sidebar-width-wide: 300px;
+
+.post img.alignright {
+	padding: 0 0 27px 27px;
+}
+
+.post img.alignleft {
+	padding: 0 27px 27px 0;
+}

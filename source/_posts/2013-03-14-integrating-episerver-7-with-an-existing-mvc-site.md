@@ -9,6 +9,7 @@ tags:
 status: publish
 type: post
 published: true
+date: 2013-03-14 15:54:57
 meta:
   publicize_reach: a:2:{s:7:"twitter";a:1:{i:327859;i:160;}s:2:"wp";a:1:{i:0;i:1;}}
   publicize_twitter_user: michael_hook

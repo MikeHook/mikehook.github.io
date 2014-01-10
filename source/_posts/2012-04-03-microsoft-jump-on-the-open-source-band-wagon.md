@@ -9,6 +9,7 @@ tags:
 status: publish
 type: post
 published: true
+date: 2012-04-03 11:35:04
 meta:
   tagazine-media: a:7:{s:7:"primary";s:78:"http://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Tux.png/220px-Tux.png";s:6:"images";a:1:{s:78:"http://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Tux.png/220px-Tux.png";a:6:{s:8:"file_url";s:78:"http://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Tux.png/220px-Tux.png";s:5:"width";s:3:"220";s:6:"height";s:3:"261";s:4:"type";s:5:"image";s:4:"area";s:5:"57420";s:9:"file_path";s:0:"";}}s:6:"videos";a:0:{}s:11:"image_count";s:1:"1";s:6:"author";s:8:"12339140";s:7:"blog_id";s:8:"11998060";s:9:"mod_stamp";s:19:"2012-04-03
     11:35:04";}

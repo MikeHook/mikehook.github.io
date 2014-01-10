@@ -9,6 +9,7 @@ tags:
 status: publish
 type: post
 published: true
+date: 2013-06-13 08:05:05
 meta:
   _wpcom_is_markdown: '1'
   _wpas_done_327858: '1'
@@ -16,10 +17,9 @@ meta:
   _wpas_done_327859: '1'
   _publicize_done_external: a:1:{s:7:"twitter";a:1:{i:33610861;b:1;}}
   _elasticsearch_indexed_on: '2013-06-13 08:05:05'
-  twitter_cards_summary_img_size: a:7:{i:0;i:960;i:1;i:642;i:2;i:2;i:3;s:24:"width="960"
-    height="642"";s:4:"bits";i:8;s:8:"channels";i:3;s:4:"mime";s:10:"image/jpeg";}
+  twitter_cards_summary_img_size: a:7:{i:0;i:960;i:1;i:642;i:2;i:2;i:3;s:24:"width="960"    height="642"";s:4:"bits";i:8;s:8:"channels";i:3;s:4:"mime";s:10:"image/jpeg";}
 ---
-<a href="http://bakingwebsites.files.wordpress.com/2013/06/asparagus-shoot.jpg"><img class="alignright size-medium wp-image-460" alt="asparagus shoot from http://sandyspringcsa.com/" src="http://bakingwebsites.files.wordpress.com/2013/06/asparagus-shoot.jpg?w=300" width="300" height="200" /></a>There are a number of design patterns which I have chosen not to implement a coding kata for. This is because I felt that I would either not use the pattern regularly in practice or they have alternative solutions that make the pattern redundant. However I think it is worth calling out these patterns and summarising how they work.
+There are a number of design patterns which I have chosen not to implement a coding kata for. This is because I felt that I would either not use the pattern regularly in practice or they have alternative solutions that make the pattern redundant. However I think it is worth calling out these patterns and summarising how they work.
 
 <h2>The decorator pattern</h2>
 
@@ -41,6 +41,7 @@ Also one of the main issues the factory pattern tries to solve is centralising o
 
 <blockquote>Ensure a class only has one instance and provide a global access point to it</blockquote>
 
+<a href="http://bakingwebsites.files.wordpress.com/2013/06/asparagus-shoot.jpg"><img class="alignright size-medium wp-image-460" alt="asparagus shoot from http://sandyspringcsa.com/" src="http://bakingwebsites.files.wordpress.com/2013/06/asparagus-shoot.jpg?w=300" width="300" height="200" /></a>
 This is a pattern which can be very useful in applications, however the implementation is so short that a coding kata would have little content. There are just a couple of pitfalls to watch out for when implementing this pattern:
 
 <ul>

@@ -9,6 +9,7 @@ tags:
 status: publish
 type: post
 published: true
+date: 2011-07-17 16:29:21
 meta:
   _wpas_done_twitter: '1'
   tagazine-media: a:7:{s:7:"primary";s:0:"";s:6:"images";a:0:{}s:6:"videos";a:0:{}s:11:"image_count";s:1:"0";s:6:"author";s:8:"12339140";s:7:"blog_id";s:8:"11998060";s:9:"mod_stamp";s:19:"2011-07-17
