@@ -1,8 +1,7 @@
 <h3>categories</h3>
 <ul class="main-navigation">
-{% for item in site.categories %}
-    <li><a href="/blog/categories/{{ item[0] }}/">{{ item[0] }}</a> [ {{ item[1].size }} ]</li>
-{% endfor %}
+{% category_list  %}
 </ul>
 <br/>
 <a href="{{ root_url }}/blog/archives">Archives</a>
+
