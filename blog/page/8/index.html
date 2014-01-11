@@ -1,0 +1,555 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>baking websites</title>
+	<meta name="author" content="Mike Hook">
+
+	
+	<meta name="description" content="Aug 27th, 2009 Software Design Preventing Dirty Domain Object Persistance The add recipes feature has currently been implemented in a way that does &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="baking websites" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://MikeHook.github.io/blog/page/8/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<!--
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css"> 
+-->
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+	
+</div>
+<hgroup>
+  <h1><a href="/">baking websites</a></h1>
+  
+    <h2>adventures in software development</h2>
+  
+</hgroup>
+
+<nav id="main-nav"><h3>categories</h3>
+<ul class="main-navigation">
+<li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 19 ]</li>
+<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 2 ]</li>
+<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 11 ]</li>
+<li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
+<li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 8 ]</li>
+
+</ul>
+<br/>
+<a href="/blog/archives">Archives</a>
+
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		
+			<a class="twitter" href="http://twitter.com/michael_hook" title="Twitter">Twitter</a>
+		
+		
+			<a class="github" href="https://github.com/MikeHook" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner">
+<div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-08-27T20:24:00+01:00" data-updated="true" itemprop="datePublished">Aug 27<span>th</span>, 2009</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/software-design/'>Software Design</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2009/08/27/preventing-dirty-domain-object-persistance/" itemprop="url">Preventing Dirty Domain Object Persistance</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>The add recipes feature has currently been implemented in a way that does not allow for dirty domain objects to be persisted (saved to the database). The recipe object constructor must be passed all the essential object properties to prevent a partial object from being persisted, as shown below:<br /></p>
+
+<br />
+
+
+
+
+<pre style="background-color:#eeeeee;border:1px dashed rgb(153,153,153);color:black;font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;font-size:12px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>        public Recipe(string title, IList recipeIngredients, string cookingMethod) : this()
+        {
+            //TODO - Add the recipe creator (ie. user) to the domain signature
+            Check.Require(title != null &amp;&amp; title.Trim() != string.Empty, "title must be provided.");
+            Check.Require(recipeIngredients != null, "recipeIngredients must be provided.");
+            Check.Require(cookingMethod != null &amp;&amp; cookingMethod.Trim() != string.Empty, "method must be provided.");
+            Title = title;
+            Ingredients = recipeIngredients;
+            CookingMethod = cookingMethod;        
+        }
+</code></pre>
+
+
+
+
+<br />
+
+
+<p>However this means that the state of the recipe object must be maintained across the 3 separate add recipe views. I&rsquo;ve had to use both hidden fields on the views and the TempDataDictionary to maintain this state. It has become clear to me that there may be a better way to implement this if I use a RecipeDraft domain object in addition to the Recipe object. However making this change will take a while so I need to weigh up whether I think it is worth while.<br /></p>
+
+<br />
+
+
+<p><b><span style="font-size:small;">Advantages</span></b><br /></p>
+
+<ul><li>Users can add draft recipes and return later to complete them</li>
+<li>More readable controller methods (RecipeIngredientDtos is a nasty object name!) <br />
+</li>
+<li>No need to maintain temporary state across views (using hidden fields and the TempDataDictionary)</li>
+<li>Simplifed View Models</li>
+</ul>
+
+
+<p><b>Disadvantages</b><br /></p>
+
+<ul><li>Time to refactor the code and unit tests</li>
+<li>More records in the database (potentially higher cost)<br />
+</li>
+<li>More I/O operations on the database (slower website page loads)</li>
+</ul>
+
+
+<p>On balance I think the advantages are outweigh the disadvantages, so I will be refactoring the code to use a RecipeDraft object. This will be the constructor of the RecipeDraft object:<br /></p>
+
+<br />
+
+
+
+
+<pre style="background-color:#eeeeee;border:1px dashed rgb(153,153,153);color:black;font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;font-size:12px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>        public RecipeDraft(string title) : this()
+        {
+            //TODO - Add the recipe creator (ie. user) to the domain signature
+            Check.Require(title != null &amp;&amp; title.Trim() != string.Empty, "title must be provided.");
+            Title = title;      
+        }
+</code></pre>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-08-23T22:02:00+01:00" data-updated="true" itemprop="datePublished">Aug 23<span>rd</span>, 2009</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/hacking/'>Hacking</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2009/08/23/branching-the-project/" itemprop="url">Branching the Project</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>I have used an SVN repository for the project, hosted on <a href="http://www.unfuddle.com/">unfuddle</a>, enabling versioned source control on all files in the project. I can use the trusty <a href="http://tortoisesvn.net/">TortoiseSVN</a> Windows application to send and receive files to the remote repository directly from Windows Explorer. After each work session I commit the changes to source control. Apart from the obvious advantages of maintaining backups, if at any stage I realise that I have made a mistake, then the changes can be rolled back to the previous commit.<br />
+The source control recently came in useful when I needed to upgrade the version of Sharp Architecture used on the project. I won   t go into detail about the reasons for me upgrading, suffice to say most of the technology stack in Sharp Architecture had benefitted from version updates and I was limiting myself by using a pre version 1.0 release.<br />
+These are the steps I took to upgrade the Sharp Architecture version of the project:<br /></p>
+
+<ol><li>     <br />
+Use TortoiseSVN to Branch the code in source control from <i><span style="color:green;">/trunk</span></i> to <i><span style="color:green;">/branches/recipebookV1</span></i><br />
+</li>
+<li>     <br />
+Rename the working folder (ie. the local folder in Windows Explorer) to recipebookV1 and switch it to the branch.<br />
+</li>
+<li>     <br />
+Update the Sharp Architecture project to fetch v1.0 from source control and copy the new project template into the Visual Studio templates folder.<br />
+</li>
+<li>     <br />
+Generate a new Visual Studio project, named recipebook, from the v1.0  Sharp Architecture templates.<br />
+</li>
+<li>     <br />
+Use <a href="http://www.scootersoftware.com/">Beyond Compare</a> to copy all the files that I have manually added / changed in the recipebookV1 project to the new recipebook project<br />
+</li>
+<li>     <br />
+Add the files to the recipebook project in Visual Studio, cross fingers, compile and run!<br />
+</li>
+<li>     <br />
+Use the TortoiseSVN repo browser to delete all files from the Trunk    yes, I really deleted them all! <br />
+</li>
+<li>     <br />
+Import the new recipebook folder back into the trunk <br />
+</li>
+</ol>
+
+
+<p>After completing the upgrade I realised that there may be an easier way to upgrade, without the scary and somewhat bad practice of deleting all the old files from the trunk, only to upload most of them again. I will list them below so I can try them out later:<br /></p>
+
+<ol><li>     <br />
+Use TortoiseSVN to Branch the code in source control from <i><span style="color:green;">/trunk</span></i> to <i><span style="color:green;">/branches/recipebookV1</span></i><br />
+</li>
+<li>     <br />
+Rename the working folder (ie. the local folder in Windows Explorer) to recipebookN. <i>This enables a new visual studio project of the same name to be created, with namespaces which are the same as the working project.</i><br />
+</li>
+<li>     <br />
+Update the Sharp Architecture project to fetch v1.0 from source control and copy the new project template into the Visual Studio templates folder.<br />
+</li>
+<li>     <br />
+Generate a new Visual Studio project named recipebook from the V1.0 Sharp Architecture templates.<br />
+</li>
+<li>     <br />
+Use <a href="http://www.scootersoftware.com/">Beyond Compare</a> to copy all updated Sharp Architecture files from the new recipebook project to the working recipebookn folder<br />
+</li>
+<li>     <br />
+Add any extra files to the working recipebook project in Visual Studio, cross fingers, compile and run!<br />
+</li>
+<li>     <br />
+Commit the changes to the trunk, remove the new recipebook project and rename the existing recipebook project folder to recipebook.  <br />
+</li>
+</ol>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-08-02T17:54:00+01:00" data-updated="true" itemprop="datePublished">Aug 2<span>nd</span>, 2009</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/hacking/'>Hacking</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2009/08/02/add-recipe-feature-task-breakdown/" itemprop="url">Add Recipe Feature - Task Breakdown</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><span>The add recipe feature is the first feature that will added to the site. This task can first be broken down into 4 subtasks:
+</span></p>
+
+<ol><li>Add a recipe summary</li><li>List / add ingredients
+</li><li>Add recipe ingredients</li><li>Add a recipe cooking method</li></ol>
+
+
+<p><span>However, the sharp architecture framework is designed for Test Driven Development. These are the TDD steps listed in the </span><span>sharp architecture</span><span> reference guide (in the docs folder of the SVN project):</span></p>
+
+<blockquote><ol><li>Write your test as if the target objects and API already exists.</li><li>Compile the solution and see it break.</li><li>Write just enough code to get it to compile.</li><li>Run the test and see if fail.</li><li>Write just enough code to get it to pass.</li><li>Run the test and see it pass!</li><li>Refactor if necessary!</li></ol></blockquote>
+
+
+<p>Taking another look at the feature subtasks  from a TDD perspective, the breakdown for each domain object looks more like this:
+<span>
+<span style="font-weight:bold;">Ingredient</span>
+</span></p>
+
+<ol><li>Add tests for the ingredient domain object and controller
+</li><li>Implement the ingredients domain object and controller to make the tests pass</li><li>Add Ingredients views for List and Create  </li></ol>
+
+
+<p><span style="font-weight:bold;">
+Recipe</span></p>
+
+<ol><li>Add tests for the recipe domain object and controller</li><li>Implement the recipe domain object and controller to make the tests pass</li><li>Add Recipe views for CreateSummary, CreateIngredients, CreateCookingMethod</li></ol>
+
+
+<p><span>
+Currently I just need to implement the Create view for the Ingredient object, then I can move onto recipes.</span></p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-06-28T13:30:00+01:00" data-updated="true" itemprop="datePublished">Jun 28<span>th</span>, 2009</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/testing/'>Testing</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2009/06/28/setting-up-the-nunit-gui/" itemprop="url">Setting Up the NUnit GUI</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>I&rsquo;ve setup the project using the default &rsquo;S#arp architecture Application&#8217; template. I won&rsquo;t go into detail about the steps taken to do this as it is all covered in the Sharp Architecture documentation. However I did hit a snag setting up the <a href="http://www.nunit.org/index.php">NUnit</a> project so I&rsquo;ll expand on that in this post.</p>
+
+<p>The Sharp Architecture template is setup for <a href="http://www.agiledata.org/essays/tdd.html">TDD</a> (Test Driven Design) and this is the approach I will be taking to the development. Having installed <a href="http://www.testdriven.net/">TestDriven.Net</a>, the tests can be run through visual studio, however I prefer the interface of the NUnit GUI. After each test run the results are displayed as a set of pleasing green ticks and/or nasty red crosses. Once you have a nice set of green ticks it becomes a bit of a fixation to keep it that way!</p>
+
+<p>The unit tests for the visual studio project can be easily loaded into the NUnit GUI. All you need to do is go to File &ndash;&gt; Open Project and navigate to the bin folder of the test project. Opening the compiled assembly (dll) of the test project will load all the unit tests into the GUI. Hitting the run button returns a nice list of green ticks as expected. However after saving the NUnit test project something alarming happens on the next test run. The standard Sharp Architecture Data tests all fail and nasty set of red ticks appear!</p>
+
+<p>The following error message is reported:</p>
+
+<br />
+
+
+
+
+<blockquote style="font-style:italic;">
+SharpArch.Core.PreconditionException : Please add an AppSetting to your app.config for &#8216;nhibernate.mapping.assembly.&#8217; This setting takes a comma delimited list of assemblies containing NHibernate mapping files. Including &#8216;.dll&#8217; at the end of each is optional.<br />
+</blockquote>
+
+
+<p>The error is pointing to a missing setting in the app.config file, however on checking the file the setting is present. Also the tests worked just fine before saving the NUnit project so why would they suddenly start to fail?</p>
+
+<p>The cause of the test failures appears to have been saving the NUnit project, this pointed to some settings changes which NUnit may have made during the save. Taking a look at the NUnit project settings the possible cause of the problem became clear. There are a couple of directory and file paths in the settings, of particular interest are a &lsquo;Configuration File Name&rsquo; and &lsquo;ApplicationBase&rsquo; settings.</p>
+
+<p><span style="font-size:100%;font-weight:bold;">Configuration File Name</span>
+When the test project assembly is first loaded this setting has a value of <span style="font-style:italic;">RecipeBook.Tests.dll.config</span>, however after saving the NUnit project the <span style="font-style:italic;">.dll </span>part of the filename disappears. So NUnit is no longer able to find the config file and read the settings from it.</p>
+
+<p><span style="font-weight:bold;">ApplicationBase</span>
+The ApplicationBase setting remains blank, however if you have saved the NUnit project in a different directory to the test project assembly you will need to change this. The path needs to be the relative path from your test project base to the test assembly location.</p>
+
+<p>Below is an image of the settings for my project:</p>
+
+<p><a href="http://bakingwebsites.files.wordpress.com/2009/06/nunitprojecteditor.jpg"><img alt="" border="0" src="http://bakingwebsites.files.wordpress.com/2009/06/nunitprojecteditor.jpg?w=300" /></a>
+After updating these settings NUnit was able to read the settings for the config file and the GUI happily reported a lovely set of green ticks :)<br /></p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-06-15T22:16:00+01:00" data-updated="true" itemprop="datePublished">Jun 15<span>th</span>, 2009</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/hacking/'>Hacking</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2009/06/15/addedit-recipe-wireframes/" itemprop="url">Add/Edit Recipe - Wireframes</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>I&rsquo;ve now generated some initial <span id="SPELLING_ERROR_0">wire frames</span> for the site&hellip; mere minutes after my last post, amazing eh ;)</p>
+
+<p>The following features have been <span id="SPELLING_ERROR_1">wire framed</span> so far:</p>
+
+<br />
+
+
+
+
+<ul>
+<li>Add/Edit Recipe (3 views)
+</li>
+<li>Search page</li>
+<li>Recipe book (list and details)
+</li>
+</ul>
+
+
+<p>Alas, only the Add/Edit recipes <span id="SPELLING_ERROR_2">wire frames</span> are online. The good old pencil and pad was proved best for the others, not nearly so high tech but certainly faster!</p>
+
+<p>I&rsquo;ve used an online application called <a href="http://www.gliffy.com/"><span id="SPELLING_ERROR_3">Gliffy</span></a> to create the add / edit recipes <span id="SPELLING_ERROR_4">wire frames</span>. The application is pretty well featured for a &lsquo;free&rsquo; online app.  Actually it is only free to use after 30 days if you publish the <span id="SPELLING_ERROR_5">wireframes</span> online, so maybe not ideal for a top secret &lsquo;best idea ever&rsquo; type of development, but for my needs its just fine!</p>
+
+<p>Below are the posts of the <span id="SPELLING_ERROR_6">wire frames</span>. You can click the links in the titles if the text is too <span id="SPELLING_ERROR_7">minuscule</span> to read on the images:<br /></p>
+
+<br />
+
+
+<p><span style="font-weight:bold;">Step 1 &ndash; </span><a href="http://www.gliffy.com/publish/1729438/" style="font-weight:bold;">Add Summary page</a><br />
+&nbsp;</p>
+
+<p><img src="http://www.gliffy.com/pubdoc/1729438/S.jpg" /><br />
+The add summary page needs to be simple and quick, I don&rsquo;t want users getting bored on the first screen!<br /></p>
+
+<p><span style="font-weight:bold;">&nbsp;</span><br />
+<span style="font-weight:bold;">Step 2 &ndash; </span><a href="http://www.gliffy.com/publish/1734114/" style="font-weight:bold;">Add Ingredients page</a><br />
+&nbsp;</p>
+
+<p><img src="http://www.gliffy.com/pubdoc/1734114/S.jpg" /><br />
+This page will be tricky to keep simple, early users will have to add each of the ingredients but once they are in the database and approved then anyone can use them. I&rsquo;d like some kind of self approval mechanism as I doubt anyone would want to moderate this (I know I <span id="SPELLING_ERROR_8">certainly</span> don&rsquo;t!)<br /></p>
+
+<br />
+
+
+<p><span style="font-weight:bold;"></p>
+
+<p>Step 3 &ndash; </span><a href="http://www.gliffy.com/publish/1734121/" style="font-weight:bold;">Add Method page</a><br />
+&nbsp;</p>
+
+<p><img src="http://www.gliffy.com/pubdoc/1734121/S.jpg" /><br />
+Will need to make sure that the Rich Text editor options are limited here to prevent users mucking up the site <span id="SPELLING_ERROR_9">styling</span>.
+Each of the above steps will be reused for the edit interface with the controls pre-populated with data.</p>
+
+<p>Now I&rsquo;m almost ready to fire up Visual Studio (finally!) however before that I will need to sort out an overall layout and styling to tie the site together. If I was American (and whooped <span id="SPELLING_ERROR_11">a lot</span>) I&rsquo;d probably says that the templates could do with some jazzing up to make them more punchy. As I&rsquo;m English and hardly ever whoop (intentionally) I&rsquo;d say that the site could do with some prettifying. I will most likely customise an existing CSS template (open source of course) which is close to what I am looking for.<br /></p>
+
+		
+		
+	</div>
+
+</article>
+
+</div>
+<nav id="pagenavi">
+    
+        <a href="/blog/page/7/" class="prev">Prev</a>
+    
+    
+        <a href="/blog/page/9/" class="next">Next</a>
+    
+    <div class="center"><a href="/blog/archives">Blog Archives</a></div>
+</nav></div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2014 - Mike Hook -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer>
+			
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

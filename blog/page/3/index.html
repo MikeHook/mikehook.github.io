@@ -1,0 +1,519 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>baking websites</title>
+	<meta name="author" content="Mike Hook">
+
+	
+	<meta name="description" content="Nov 7th, 2011 Software Design Quartz Makes Scheduling Jobs Easy With EPiServer Commerce A common requirement for e-commerce applications is the &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="baking websites" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://MikeHook.github.io/blog/page/3/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<!--
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css"> 
+-->
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+	
+</div>
+<hgroup>
+  <h1><a href="/">baking websites</a></h1>
+  
+    <h2>adventures in software development</h2>
+  
+</hgroup>
+
+<nav id="main-nav"><h3>categories</h3>
+<ul class="main-navigation">
+<li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 19 ]</li>
+<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 2 ]</li>
+<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 11 ]</li>
+<li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
+<li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 8 ]</li>
+
+</ul>
+<br/>
+<a href="/blog/archives">Archives</a>
+
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		
+			<a class="twitter" href="http://twitter.com/michael_hook" title="Twitter">Twitter</a>
+		
+		
+			<a class="github" href="https://github.com/MikeHook" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner">
+<div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-07T19:30:00+00:00" data-updated="true" itemprop="datePublished">Nov 7<span>th</span>, 2011</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/software-design/'>Software Design</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2011/11/07/quartz-makes-scheduling-jobs-easy-with-episerver-commerce/" itemprop="url">Quartz Makes Scheduling Jobs Easy With EPiServer Commerce</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><a href="http://quartznet.sourceforge.net/index.html"><img class="alignright" title="Quartz rock" src="http://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Quartz,_Tibet.jpg/240px-Quartz,_Tibet.jpg" alt="Quartz rock" width="168" height="169" /></a>A common requirement for e-commerce applications is the ability to schedule jobs or tasks. I am currently working on a project which uses EPiServer Commerce and I needed to schedule an order export job.</p>
+
+<p>I was pleasantly surprised to find that EPiServer Commerce is supplied bundled with the <a href="http://quartznet.sourceforge.net/index.html">Quartz.NET</a>  enterprise code library to facilitate these job scheduling requirements.</p>
+
+<h3>Gentlemen, choose your weapons</h3>
+
+
+<p>I had three main options available for implementing the export job, a separate windows service, an EPiServer CMS scheduled job or a Quartz job. I decided that the Quartz service was better than the option of a separate windows service because the framework was already there and available so would not increase the complexity of deployments. I also felt it was a better option than a EPiServer CMS scheduled job because Quartz runs  independently  to the website app pool so should not put the web application under greater load while it is running and potentially degrade the performance of the end user website.</p>
+
+<h3>A 1000 foot example</h3>
+
+
+<p>I&rsquo;m not going to go into a massively detailed explanation of how to implement the jobs as there is a already a good example available in the <a href="http://sdk.episerver.com/commerce/1.1.1/Content/Developers%20Guide/Architecture/LongRunProcessScheduling.htm">EPiServer Commerce dev guide</a>  along with a detailed <a href="http://quartznet.sourceforge.net/tutorial/index.html">tutorial on the Quartz .NET site</a>. However a quick overview demonstrates how intuitive it is to implement.</p>
+
+<p>The first thing you need to do is create your job class which will run when Quartz triggers the execution. The class must inherit from the IJob interface which just has a single Execute method to implement. Here is a sample skeleton class:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">    public class CommerceOrderExportJob : IStatefulJob
+    {
+        private readonly ILog _log;
+
+        public CommerceOrderExportJob()
+        {
+            _log = LogManager.GetLogger(base.GetType());
+            //Any other init code
+        }
+
+        public void Execute(JobExecutionContext context)
+        {
+            //Your export methods
+        }
+    }</pre>
+
+
+<p>You then need to extend the config file to configure Quartz to call your job. I think all the parameters are pretty self explanatory:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">&lt;job&gt;
+    &lt;job-detail&gt;
+      &lt;name&gt;OrderExportJob&lt;/name&gt;
+      &lt;group&gt;all&lt;/group&gt;
+      &lt;description&gt;This job exports orders from commerce&lt;/description&gt;
+      &lt;job-type&gt;Your.Assembly.CommerceOrderExportJob, Your.Assembly&lt;/job-type&gt;
+      &lt;volatile&gt;false&lt;/volatile&gt;
+      &lt;durable&gt;true&lt;/durable&gt;
+      &lt;recover&gt;false&lt;/recover&gt;
+    &lt;/job-detail&gt;
+    &lt;trigger&gt;
+      &lt;simple&gt;
+        &lt;name&gt;OrderExportJobTrigger&lt;/name&gt;
+        &lt;group&gt;eCommerceFramework&lt;/group&gt;
+        &lt;description&gt;Fires Order Export Job&lt;/description&gt;
+        &lt;misfire-instruction&gt;SmartPolicy&lt;/misfire-instruction&gt;
+        &lt;volatile&gt;false&lt;/volatile&gt;
+        &lt;job-name&gt;OrderExportJob&lt;/job-name&gt;
+        &lt;job-group&gt;eCommerceFramework&lt;/job-group&gt;
+        &lt;repeat-count&gt;RepeatIndefinitely&lt;/repeat-count&gt;
+        &lt;repeat-interval&gt;300000&lt;/repeat-interval&gt;
+      &lt;/simple&gt;
+    &lt;/trigger&gt;
+  &lt;/job&gt;</pre>
+
+
+<p>Hit run on the service and check the event log for any problems. Make sure to include some useful event/error logging in the job otherwise it will just be a mysterious black box! There are a couple of snags you may run into when running the job against EPiServer Commerce:</p>
+
+<div>
+<ul>
+    <li>ensure that your compiled assembly is actually available in the Quartz service directory, this is different from the main commerce site bin folder so it is not enough just to include it in the commerce app references</li>
+    <li>Make sure the data context has been initialised and the config file in the Quartz service directory is pointing to your database</li>
+</ul>
+</div>
+
+
+
+
+<h3>Mining for more gems</h3>
+
+
+<p>Ultimately only time will tell if Quartz was the best choice but I feel it has the best chance of high reliability and performance in the long term. I hope that, where appropriate, EPiServer can continue to expand the incorporation of proven open source libraries with their product offerings.</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-10-23T12:21:38+01:00" data-updated="true" itemprop="datePublished">Oct 23<span>rd</span>, 2011</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/software-design/'>Software Design</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2011/10/23/behaviour-driven-design-encourages-shared-understanding/" itemprop="url">Behaviour Driven Design Encourages Shared Understanding</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Most recent projects I have worked on have used unit tests  to define the requirements of our code and ensure they are met. Typically the tests are written by the developer while they are coding the solution. However this means that the tests are based entirely on the developers understanding of the requirements, which may not always be the same as the stakeholders understanding.</p>
+
+<p>To combat this issue we are introducing <a href="http://dannorth.net/introducing-bdd/">behaviour driven development</a>, to agree on a set of requirements for each feature with the stakeholders before starting development. The requirements are captured using the Gherkin syntax (Given, When, Then) based on real world examples. These examples can then be wired up to the system directly as automated tests using <a href="http://specflow.org/">Specflow</a>.</p>
+
+<h2>OK, show me the example already</h2>
+
+
+<p>Here is a fictionalised scenario which demonstrates the value that BDD adds to a project. An abbreviated version of the initial scenarios drafted by the developer are as follows:</p>
+
+<pre style="font-size:small;font-family:Consolas, 'Courier New', Courier, Monospace;width:100%;overflow:auto;border:1px dashed #999999;background-color:#eeeeee;"><span style="color:#0000ff;font-weight:bold;">Feature</span>: Process 3D secure authentication response
+        As a logged in user
+        I would like to place a 3D secure authenticated order
+        so that I have assurance of the websites security
+
+<span style="color:#0000ff;font-weight:bold;">Scenario</span>: Handle a 3D secure response of AUTHORISED
+    <span style="color:#0000ff;"><strong>Given </strong></span>a 3D secure response of AUTHORISED
+        <span style="color:#0000ff;font-weight:bold;">When</span>  i view the order confirmation page
+        <span style="color:#0000ff;font-weight:bold;">Then</span>  the order status will be Complete
+
+<span style="color:#0000ff;font-weight:bold;">Scenario</span>: Handle a 3D secure response of NOT AUTHORISED
+    <span style="color:#0000ff;"><strong>Given </strong></span>a 3D secure response of NOT AUTHORISED
+        <span style="color:#0000ff;font-weight:bold;">When</span>  i view the order confirmation page
+        <span style="color:#0000ff;font-weight:bold;">Then</span>  the order status will be Cancelled
+
+<span style="color:#0000ff;font-weight:bold;">Scenario</span>: Handle a 3D response of NOT PROCESSED
+    <span style="color:#0000ff;"><strong>Given </strong></span>a 3D secure response of NOT PROCESSED
+        <span style="color:#0000ff;font-weight:bold;">When</span>  i view the order confirmation page
+        <span style="color:#0000ff;font-weight:bold;">Then</span>  the order status will be Cancelled</pre>
+
+
+
+
+<h2>Evolving the scenario</h2>
+
+
+<p>The assumptions shown in these scenarios are perfectly reasonable, an order will only be completed if the 3D secure security check returns an authorised response. However it should really be a decision for the stakeholder&rsquo;s business whether the system should behave in this way. There are several valid scenarios where all 3D responses should actually result in a completed order, for example:</p>
+
+<pre style="font-size:small;font-family:Consolas, 'Courier New', Courier, Monospace;width:100%;overflow:auto;border:1px dashed #999999;background-color:#eeeeee;"><span style="color:#0000ff;font-weight:bold;">Scenario</span>: Handle a 3D secure response of NOT AUTHORISED
+<span style="color:#0000ff;"><strong>Given</strong></span> a 3D secure response of NOT AUTHORISED
+<span style="color:#0000ff;"><strong>And</strong></span> a total order value order value under the following amount:   25
+<span style="color:#0000ff;font-weight:bold;">When</span>  i view the order confirmation page
+<span style="color:#0000ff;font-weight:bold;">Then</span>  the order status will be Complete</pre>
+
+
+<p>The stakeholders calculated that the risk of charge-backs was so low on orders under   25 that they could disregard the 3D secure response completely and allow &lsquo;not authorised&rsquo; transactions to be completed.</p>
+
+<p>Here we can see a clear benefit in the stakeholder sharing their understanding of the system requirements with the implementation team. Rules which are beneficial to their business can be incorporated into the system, resulting in a more effective solution from the outset.</p>
+
+<p>If you are interested in reading more about using BDD for web applications I can recommend <a href="http://blog.stevensanderson.com/2010/03/03/behavior-driven-development-bdd-with-specflow-and-aspnet-mvc/">Steven Sanderson&rsquo;s excellent blog post</a>.</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-10-07T17:32:44+01:00" data-updated="true" itemprop="datePublished">Oct 7<span>th</span>, 2011</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/progress/'>Progress</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2011/10/07/discovering-the-original-inventors-of-the-internet/" itemprop="url">Discovering the Original Inventors of the Internet</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>I&rsquo;m sure many of you have heard about a chap called <a href="http://twitter.com/#!/timberners_lee">Tim Berners Lee</a> who is widely credited for inventing the world wide web as we know it today. The story is well known and I&rsquo;m not going to re-hash it here, however less is known about who may have come up with the first concept of the <a href="http://en.wikipedia.org/wiki/Internet">Internet</a>. You may be surprised to hear that the origins of the concept date back several centuries and take place on an entirely different continent, among a race of people commonly considered quite primitive and barbaric. Here&rsquo;s a little hint of who these people may have been.</p>
+
+<p><a href="http://bakingwebsites.files.wordpress.com/2011/10/machu_picchu_1.jpg"><img class="size-medium wp-image-257" title="Machu_Picchu_1" src="http://bakingwebsites.files.wordpress.com/2011/10/machu_picchu_1.jpg?w=300" alt="" width="300" height="225" /></a></p>
+
+<h2>The internet laid bare</h2>
+
+
+<p>You may well ask how the internet could exist centuries before computers had been invented or even the discovery of electricity. Naturally there was no way the internet as we know it today could be possible, however if we look at the abstract concept there are strong parallels. At it&rsquo;s heart the internet is a communications system made up of a group of connected devices. The power of the internet lies in its ability to efficiently send messages through the network from one node to another. When you open your web browser and type in www.google.co.uk your computer sends a message to the web server hosting google.co.uk asking for the web page. However this  message is not sent directly from your computer to the google web server, this would be very inefficient as each person that wanted to view the google web page would first need to establish a connection to their web server. As more people tried to connect to the same page the response would get slower and slower until the number of connections reached its limit.</p>
+
+<h2>Routing to the rescue</h2>
+
+
+<p>The internet has an elegant solution to this problem. Instead of attempting to establish a direct connection between the two end points, each of the nodes in the network just connects to their nearest nodes. So the end points are indirectly connected through the network in a similar way to this lovely node diagram:</p>
+
+<p><img class="size-full wp-image-252" title="onethousandpaintings_small1-300x300" src="http://bakingwebsites.files.wordpress.com/2011/10/onethousandpaintings_small1-300x300.gif" alt="Network nodes" width="300" height="300" /></p>
+
+<p>Each message is sent with the address of its final destination, each node only needs to know what direction to send the message in order to get it closer to its destination. In this way the message is naturally <a href="http://en.wikipedia.org/wiki/Routing">routed</a> on the most efficient path from its source to the destination. It is this concept if a nodal network and message routing that has strong parallels with a very old method of communications.</p>
+
+<p><span class="Apple-style-span" style="font-size:20px;"><strong>An ancient  Inca  network</strong></span></p>
+
+<p>I recently took a trip to Peru to hike the Inca trail to Machu Picchu. So this post is a (hopefully interesting) way to shoehorn some of my holiday snaps onto this blog!</p>
+
+<p><a href="http://bakingwebsites.files.wordpress.com/2011/10/machu_picchu.jpg"><img class="size-medium wp-image-255" title="Machu_Picchu" src="http://bakingwebsites.files.wordpress.com/2011/10/machu_picchu.jpg?w=225" alt="" width="225" height="300" /></a></p>
+
+<p>However quite apart from that I learnt a great deal about the fascinating Inca culture. Before the trip I had thought that there was essentially one Inca trail in Peru leading to Machu Picchu, how wrong I was! The Inca trails actually comprised of thousands of miles of pathways connected across the whole of the Inca empire. They were the key to enabling the Inca rulers establish and run the largest single empire in South America.</p>
+
+<p>One of the main uses of the trails was as a communications network. There were small guard posts dotted across the network, often high up in remote mountain areas. If the Inca ruler wanted to send a message they would encode it using a &lsquo;<a href="http://en.wikipedia.org/wiki/Quipus">quipus</a>&rsquo;, a device made up of multi-coloured plied rope, threads and knots.     The exact method of encoding has unfortunately been lost in time but it may well of been a binary system quite similar to one used by computers today. It would have been quite possible to encode fairly sophisticated messages in this way.</p>
+
+<p><a href="http://bakingwebsites.files.wordpress.com/2011/10/quipu2-150x150.jpg"><img class="size-full wp-image-259" title="quipu2-150x150" src="http://bakingwebsites.files.wordpress.com/2011/10/quipu2-150x150.jpg" alt="" width="150" height="150" /></a></p>
+
+<p>The ruler would then pass the quipus to a messenger to deliver the message. However the messenger would only take the message to the nearest checkpoint, then pass it onto another messenger who would carry the message to the next checkpoint. Each checkpoint would be around 5-10 KM apart, more distance for flat sections and less for mountainous terrain. In this way each of the messengers could run between the checkpoints as fast as possible and the message itself would reach its destination far quicker than would otherwise be possible.</p>
+
+<p>To give you some indication of how efficient this system was during Inca times the capital city was Cuzco, situated at around 3,300 metres in the middle of the Andes mountains, several hundred miles from the coast. However the Inca king was able to eat fresh fish in the capital because it was sent over the Inca trail network. It is estimated that the same delivery made by road transport today takes longer than an equivalent delivery made over the Inca network in the 15th century!</p>
+
+<p>So now all the pieces of the puzzle are in place we can see that the Inca trail network used the some communication method as today&rsquo;s internet. The trail checkpoints are equivalent to an internet router, the messengers have now been replaced with fibre optic cables and of course the quipus is directly equivalent to an <a href="http://en.wikipedia.org/wiki/Network_packet">IP network packet</a>. So there you have it, the Inca empire invented the alpha version of the internet.</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-10-06T18:00:59+01:00" data-updated="true" itemprop="datePublished">Oct 6<span>th</span>, 2011</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2011/10/06/the-beauty-of-cherry-pick/" itemprop="url">The Beauty of Cherry Pick</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>I&rsquo;m loving the <a href="http://gitready.com/intermediate/2009/03/04/pick-out-individual-commits.html">cherry pick command</a> in git right now, this is the scenario that it really helps me out for.</p>
+
+<p>I&rsquo;ve fixed a bug on the live branch, however before it can be published to the live website it needs to be tested. So I can first publish it to our UAT (user acceptance testing) site so the client can test the changes. However the UAT site already has a bunch of other unreleased features on it. If I merge my bug fix branch into the UAT branch it will overwrite some of the other feature changes.</p>
+
+<p>The solution here is to &lsquo;cherry pick&rsquo; just my changes from my bug fix branch and commit those to the UAT branch. In this way git doesn&rsquo;t merge all the other differences between the live and UAT branch.</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-29T15:40:26+01:00" data-updated="true" itemprop="datePublished">Aug 29<span>th</span>, 2011</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/hacking/'>Hacking</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2011/08/29/nhibernate-generator-class-for-sqlite-databases/" itemprop="url">Nhibernate Generator Class for SQLite Databases</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>I&rsquo;ve been developing a mobile app for Android which needs to query data in an SQLite database. So the first task I needed to get done was to import data into the SQLite database. As I&rsquo;m more used to writing .NET applications which use the NHibernate ORM I decided to write an import program on this technology stack.</p>
+
+<p>For my first attempt at the import program I just wanted to focus on the import logic, so choose to use a &lsquo;known working&rsquo; NHibernate configuration with a MS SQL 2005 database. While this worked fine for me it did mean that I had to manually copy all of the data from the MS SQL database into the SQLite database before it could be used in the Android app. This was quite laborious so when I needed to modify the importer at a later date I decided to change the NHibernate configuration to point directly to the SQLite database instead. This was the updated config file used:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">&lt;hibernate-configuration  xmlns="urn:nhibernate-configuration-2.2" &gt;
+    &lt;session-factory&gt;
+        &lt;property name="connection.provider"&gt;NHibernate.Connection.DriverConnectionProvider&lt;/property&gt;
+        &lt;property name="connection.driver_class"&gt;NHibernate.Driver.SQLiteDriver&lt;/property&gt;
+        &lt;property name="connection.connection_string_name"&gt;FootyLinks&lt;/property&gt;
+        &lt;property name="dialect"&gt;NHibernate.Dialect.SQLiteDialect&lt;/property&gt;
+        &lt;property name="query.substitutions"&gt;true=1;false=0&lt;/property&gt;
+    &lt;/session-factory&gt;
+&lt;/hibernate-configuration&gt;</pre>
+
+
+<p>And this is an example of the connection string format:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">&lt;configuration&gt;
+    &lt;connectionStrings&gt;
+        &lt;add name="FootyLinks" connectionString="Data Source=C:\path_to_the_SQLite_database_file;Version=3"/&gt;
+    &lt;/connectionStrings&gt;
+&lt;/configuration&gt;</pre>
+
+
+<p>This configuration worked OK and the import program could connect to the SQLite database, however I hit a problem when trying to save new records to the database. This was the inner exception reported by NHibernate:</p>
+
+<blockquote>Abort due to constraint violation Club.Id may not be NULL</blockquote>
+
+
+<p>The problem was that the import program was using the default generator class of <em>identity  </em>for in the NHibernate entity mappings. So NHibernate was expecting the database to generate the identity keys for the new records being saved to the database, however SQLite does not appear to support this. After some reading up on the options available for the <a href="http://nhforge.org/doc/nh/en/index.html#mapping-declaration-id-generator">NHibernate generator setting</a>  I decided to try the  <em>native  </em>setting. As this should select the implementation supported by the database. However this didn&rsquo;t work either, I think because, of all the options <em>native</em> can select, none are actually supported by SQLite. So my next preferred selection was to use <em>increment,</em>  this setting comes with a disclaimer that it should not be used in a cluster, which is absolutely fine as its very unlikely that I will ever be deploy the importer to a load balanced environment.</p>
+
+<p>The <em>increment</em> setting worked fine with the SQLite database and should streamline my workflow nicely for updating the app data .</p>
+
+		
+		
+	</div>
+
+</article>
+
+</div>
+<nav id="pagenavi">
+    
+        <a href="/blog/page/2/" class="prev">Prev</a>
+    
+    
+        <a href="/blog/page/4/" class="next">Next</a>
+    
+    <div class="center"><a href="/blog/archives">Blog Archives</a></div>
+</nav></div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2014 - Mike Hook -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer>
+			
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

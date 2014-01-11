@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Hacking | baking websites]]></title>
+  <link href="http://MikeHook.github.io/blog/categories/hacking/atom.xml" rel="self"/>
+  <link href="http://MikeHook.github.io/"/>
+  <updated>2014-01-11T18:09:45+00:00</updated>
+  <id>http://MikeHook.github.io/</id>
+  <author>
+    <name><![CDATA[Mike Hook]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Integrating EPiServer 7 With MVC - Next Steps]]></title>
+    <link href="http://MikeHook.github.io/2013/04/09/integrating-episerver-7-with-mvc-next-steps/"/>
+    <updated>2013-04-09T17:40:42+01:00</updated>
+    <id>http://MikeHook.github.io/2013/04/09/integrating-episerver-7-with-mvc-next-steps</id>
+    <content type="html"><![CDATA[<p>My previous blog post, <a title="Integrating EPiServer 7 with an existing MVC  site" href="http://bakingwebsites.co.uk/2013/03/14/integrating-episerver-7-with-an-existing-mvc-site/">Integrating EPiServer 7 with an existing MVC site</a>, outlined the initial steps to get EPiServer 7 running. However there are a number of additional steps you may need to take before your site is fully integrated.</p>
+
+<h3>Convert any Controllers not in Areas</h3>
+
+
+<p>If your site only contains controllers within Areas then you should not need to make any changes. However controllers in the root of the site will not work by default (at least for me). I found it was best to deal with these controllers on a case per case basis as the best course of action depended on the function of the controller. I implemented one of the following changes for each:</p>
+
+<ul>
+    <li><span style="line-height:13px;">Move the controller into an area. This option makes sense if the views for the controller do not have any CMS editable content</span></li>
+    <li>Convert the controller to be CMS managed. Makes sense if the views need to be CMS editable (inherit from  PageController&lt;T&gt; where T is a BasePage)</li>
+    <li>Convert the controller to an HttpHandler. In one case the controller did not have any views or models, it was really just a different entrypoint to the site which ran a bit of logic and redirected. In this case there was no point in retaining the controller as an HttpHanlder could do the same job more efficiently</li>
+</ul>
+
+
+
+
+<h3>Disable strict language routing</h3>
+
+
+<p>I encountered a further issue after patching my EPiServer.Core and EPiServer.Framework nuget packages to the latest versions. None of the controller actions in the home controller worked any more except for the Index. This was fairly easy to remedy by disabling the strict language routing, via the episerver/sites/site/strictLanguageRouting config setting.</p>
+
+<h3>Deployment Issues</h3>
+
+
+<p>While its all well and good having the site running on your machine, eventually it will need to be deployed somewhere. We handle configuration changes with file transforms and I was pleased to note that the config changes required for episerver deployments are now minimised. Here is a summary list of all the settings we changed per environment:</p>
+
+<ul>
+    <li><span style="line-height:13px;">connectionStrings
+</span></li>
+    <li>episerver/sites/site/siteSettings/siteUrl</li>
+    <li>episerver.framework/siteHostMapping/siteHosts</li>
+    <li>episerver.framework/appData/basePath</li>
+    <li>episerver.framework/licensing/licenseFilePath</li>
+    <li>episerver.search/namedIndexingServices/services/baseUri</li>
+</ul>
+
+
+<p>Note, you may need to transform further settings for a load balanced site.</p>
+
+<h5>EPiServer UI not deployed</h5>
+
+
+<p>Previously with EPiServer v6 all that was needed to run the CMS interface itself was to install the application on the web server. However the EPiServer 7 UI architecture also has a number of dependencies in the {VPP}\modules folder. So ensure that these files are also present in your deployed environment, otherwise you will probably encounter the following error:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">DirectoryNotFoundException: Could not find a part of the path '{Your site path} \Website\ClientResources\ClientResources\packages.config'</pre>
+
+
+
+
+<h5>Search service configuration</h5>
+
+
+<p>We have the search service configured on a local host name as the indexing service does not like to communicate over a public host name. However this caused a further issue with the service reporting that multiple hosts names could not be run for the service. Fortunately this could be remedied easily by setting the system.serviceModel/serviceHostingEnvironment/multipleSiteBindingsEnabled  setting to true.</p>
+
+<p>Those were all the steps we needed to take to deploy the site successfully. I&rsquo;d be interested to hear your experiences if you found any other settings that need to be changed. Feel free to reply in the comments below or contact me directly on twitter <a href="https://twitter.com/michael_hook">@michael_hook</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Integrating EPiServer 7 With an Existing MVC Site]]></title>
+    <link href="http://MikeHook.github.io/2013/03/14/integrating-episerver-7-with-an-existing-mvc-site/"/>
+    <updated>2013-03-14T15:54:57+00:00</updated>
+    <id>http://MikeHook.github.io/2013/03/14/integrating-episerver-7-with-an-existing-mvc-site</id>
+    <content type="html"><![CDATA[<p><a href="http://bakingwebsites.files.wordpress.com/2013/03/custom_integration.jpg"><img class="alignright size-full wp-image-408" alt="custom_integration" src="http://bakingwebsites.files.wordpress.com/2013/03/custom_integration.jpg" width="300" height="220" /></a>This post assumes you have EPiServer 7 installed on your machine. If you don&rsquo;t have it then it is available from <a href="http://world.episerver.com/Download/Categories/Products/EPiServer-CMS/">EPiServer world</a>  (once you have created an account).</p>
+
+<p>There are 2 main options for creating a new EPiServer 7 MVC stylee site:</p>
+
+<ul>
+    <li><span style="font-size:13px;">Create a new Visual studio project (after installing 'EPiServer 7 Visual Studio Integration', available from </span><a style="font-size:13px;" href="http://world.episerver.com/Download/Categories/Products/EPiServer-CMS/">EPiServer world</a><span style="font-size:13px;">)</span></li>
+    <li><span style="font-size:13px;line-height:19px;">Use the </span><a style="font-size:13px;line-height:19px;" href="http://world.episerver.com/Articles/Items/ASPNET-MVC-Templates-for-EPiServer-7-CMS/">EPiServer 7 MVC templates package</a></li>
+</ul>
+
+
+<p>For integrating with an existing site I&rsquo;d recommend using option 1, as there are far less files to integrate. However it is well worth looking at the templates package as well as this demonstrates how models and views can be implemented with EPiServer 7.</p>
+
+<p>After creating the new Visual Studio project I remembered that EPiServer have a NuGet feed, and they do have the version 7 assemblies on NuGet. However the version numbers are slightly different to those used in the visual studio project, so make sure you specify the version numbers to NuGet when you install the packages (they are listed below). Here are the steps I followed in detail:</p>
+
+<ol>
+    <li><span style="line-height:13px;">Created a new Visual studio project using the EPiServer Web Site (MVC) template
+</span></li>
+    <li>Followed the EPiServer tutorial (<strong>link</strong>) to add a home page and set it to the 'start page'</li>
+    <li>Upgraded my existing site to MVC 4 by installing the Microsoft ASP.NET MVC 4 nuget package (obviously not required if your existing site is already on MVC version 4.</li>
+    <li>Copy across the connectionStrings.config, episerver.config,  EPiServerFramework.config, EPiServerLog.Config and FileSummary.config files</li>
+    <li>Update the  siteUrl in  episserver.config.</li>
+    <li>Copy the AppData, IndexingService, modules and modules bin folders.</li>
+    <li>Merge the web.config files - ensure the  episerver.search baseUri is updated to point at your site address.</li>
+    <li>Installed EPiServer 7 from Nuget feeds using these commands to get the correct versions:
+<ul>
+    <li>Install-Package EPiServer.Framework -Version 7.0.859.1</li>
+    <li>Install-Package EPiServer.CMS.Core -Version 7.0.586.1</li>
+</ul>
+</li>
+    <li>Removed assembly references to Razor and System.WebPages.Razor (as was clashing with EPiServer versions)</li>
+    <li>Update Controllers to inherit from  PageController&lt;T&gt; where T is a PageData class.</li>
+    <li>Update Global.asax to inherit from  EPiServer.Global</li>
+</ol>
+
+
+
+
+<h2><strong>IoC containers clashing!</strong></h2>
+
+
+<p>OK, this is the tricky bit it gets quite involved but please stay with me!</p>
+
+<p>When I tried to run the site it now returned a &lsquo;No parameterless construct or defined for this object.&rsquo; message. Which in plainer  English  means the application can&rsquo;t create the Controller classes. This is because the site I am integrating with currently uses the Castle Windsor IoC container, however EPiServer uses the StructureMap IoC container internally. We  definitely  don&rsquo;t want two IoC containers and I can&rsquo;t see any evidence of the EPiServer container being swappable. So the only option here is to convert the current Windsor implementation to a StructureMap implementation. More information on Structure map can be found on the excellent <a href="http://docs.structuremap.net/">StructureMap documentation site</a>, however I think it is worth including an overview in this post as, whilst this isn&rsquo;t always going to be necessary for your site, I expect it will be a common problem.</p>
+
+<h4>Add StructureMap version 2.6.1.0</h4>
+
+
+<p><span style="font-size:13px;">This is available from NuGet (as this is the version used in the EPiServer 7 MVC templates package).
+The command to install is:  </span><span style="font-size:13px;">Install-Package StructureMap  -Version  2.6.1.0</span></p>
+
+<h4>Register your services with StructureMap</h4>
+
+
+
+
+<ul>
+    <li><span style="font-size:13px;">Copy the  StructureMapDependencyResolver and DependencyResolverInitialization  classes from the EPiServer MVC templates project.</span></li>
+    <li>Convert service registration calls to register services with StructureMap instead of Windsor. This is carried out in the  ConfigureContainer method of the  DependencyResolverInitialization class.</li>
+</ul>
+
+
+<p>For example here is a Windsor interface registration and its equivalent StructureMap registration:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">//Windsor registration - Here container is an implementation of IWindsorContainer
+var myConfig = WebConfigurationManager.GetSection("myConfig") as MyConfig;
+container.Register(Component.For(typeof(IMyConfig)).Instance(myConfig));</pre>
+
+
+
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">//StructureMap registration - Here container is of type ConfigurationExpression
+var myConfig = WebConfigurationManager.GetSection("myConfig") as MyConfig;
+container.For&lt;IMyConfig&gt;().Use(myConfig);</pre>
+
+
+<p>An example of a class registration with a singleton lifestyle:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">//Windsor registration
+container.Register(Component.For(typeof(Cache)).Instance(HttpContext.Current.Cache).LifestyleSingleton());</pre>
+
+
+
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">//StructureMap registration
+container.For(typeof(Cache)).Singleton().Use(HttpContext.Current.Cache);</pre>
+
+
+
+
+<ul>
+    <li><span style="font-size:13px;">Convert  </span><em style="font-size:13px;">IWindsorInstaller</em><span style="font-size:13px;">  implementations  to  </span><em style="font-size:13px;">Registry</em><span style="font-size:13px;">  subclasses.</span></li>
+</ul>
+
+
+
+
+<h4>Debugging your StructureMap registrations</h4>
+
+
+<p>You can debug structure map by adding this line:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">_container.AssertConfigurationIsValid();</pre>
+
+
+<p>Initially EPiServer was reporting many registration failures but you can delay the call until the InitComplete event is called in the DependencyResolverInitialization class. Then most of the EPiServer  registrations have completed and it is easier to see if there are any issues with your own services.</p>
+
+<h4>Manually retrieving a service</h4>
+
+
+<p>Generally my services are injected into constructors automatically, however I had a couple of calls to retrieve services manually from the IoC container. For example, to retrieve an implementation of an interface called IMyService:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">_var myService = DependencyResolver.Current.GetService&lt;IMyService&gt;();</pre>
+
+
+
+
+<h4>Last steps</h4>
+
+
+<p>Hopefully your site will be running now, there is some additional configuration work you may want to do for EPiServer 7 VPP folders. But if you&rsquo;ve made it this far you will probably need a break!</p>
+
+<h5>Updated on 9th April 2013</h5>
+
+
+<p>Updated the list of config files which must be copied to include EPiServerLog.config and FileSummary.config</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Footy Links Alpha Released]]></title>
+    <link href="http://MikeHook.github.io/2012/01/25/footy-links-alpha-released/"/>
+    <updated>2012-01-25T09:34:41+00:00</updated>
+    <id>http://MikeHook.github.io/2012/01/25/footy-links-alpha-released</id>
+    <content type="html"><![CDATA[<p><a href="http://bakingwebsites.files.wordpress.com/2012/01/footylinkslogo.jpg"><img class="size-full wp-image-332 alignleft" title="FootyLinksLogo" src="http://bakingwebsites.files.wordpress.com/2012/01/footylinkslogo.jpg" alt="" width="150" height="170" /></a>The very first version of Footy Links is now available for download from the Android Market.
+You can get the app by opening the following website on your android device and press the &lsquo;Install&rsquo; button:
+<a href="https://market.android.com/details?id=mhook.FootyLinks">Footy Links on the Android Market</a></p>
+
+<h2>What is Footy Links?</h2>
+
+
+<p>Footy links is a game designed to test your football knowledge by guessing clubs connecting premiership football players.  Make your guess by clicking on the blue text then selecting the club badge matching the answer.</p>
+
+<p>There is a basic scoring system following these rules:</p>
+
+<ul>
+    <li>+1 point for every correct guess of a 'top six' club</li>
+    <li>+2 points for a correct guess of any other club</li>
+    <li>-1 point each time you skip to another question without answering the previous one</li>
+</ul>
+
+
+
+
+<h2>Can I play it?</h2>
+
+
+<p>If you have an Android based mobile device I hope so, it should work on any device with Android OS version 2.2 or above. If you have any problems running the game feel free to contact me here on <a href="http://bakingwebsites.co.uk">my blog</a> or through <a href="https://twitter.com/#!/michael_hook">twitter</a></p>
+
+<h2>Is that it?</h2>
+
+
+<p>As you may be able to tell from the title, in the spirit of agile development (or maybe just because I&rsquo;m lazy), this is an early version with the absolute minimum set of features. I really wanted to just get a version out there in the wild to see if it will work on anyone&rsquo;s phone other than my own!</p>
+
+<p>But do not fear, more versions are planned with lots of exciting extra features, possibly including:</p>
+
+<ul>
+    <li>Harder difficulty levels - more links to guess between each of the players</li>
+    <li>More advanced scoring system</li>
+    <li>Multi-player games</li>
+    <li>Online high score board</li>
+    <li>Inclusion of all English leagues</li>
+    <li>Inclusion of  European  league clubs</li>
+</ul>
+
+
+<p>If you have any suggestions about Footy Links then please feel free to get in contact with me  here on  <a href="http://bakingwebsites.co.uk">my blog</a>  or through  <a href="https://twitter.com/#!/michael_hook">twitter</a></p>
+
+<h2>The Techy Bit</h2>
+
+
+<p>If you&rsquo;re interested in how the app works behind the scenes, the source is freely available for viewing on my github account here:
+<a href="https://github.com/MikeHook/FootyLinks">Footy  Links on github</a></p>
+
+<p>The source consists of two applications</p>
+
+<ul>
+    <li>A .NET application written to import the football club and player data into a Sqlite database</li>
+    <li>An android application for the game itself</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Developing Android Apps: Connect to an Existing SQLite Database]]></title>
+    <link href="http://MikeHook.github.io/2011/12/30/developing-android-apps-connect-to-an-existing-sqlite-database/"/>
+    <updated>2011-12-30T14:43:17+00:00</updated>
+    <id>http://MikeHook.github.io/2011/12/30/developing-android-apps-connect-to-an-existing-sqlite-database</id>
+    <content type="html"><![CDATA[<p>This post was drafted some time ago, so some of the details are lost in the mists of time. But I&rsquo;ll provide links to the source so anyone interested in doing something similar can start from there.</p>
+
+<p>The android app I&rsquo;m developing needs to be able to connect to an existing SQLite database, there are not many examples of how to achieve this in the Android tutorials, however I was able to find some guidance in a post from another Android developer on the <a href="http://www.reigndesign.com/blog/using-your-own-sqlite-database-in-android-applications/">reigndesign blog</a></p>
+
+<p>The key is that the database needs to be copied internally to the system directory on the device running the application before it can be accessed. This doesn&rsquo;t seem particularly efficient but I&rsquo;m sure Android had their reasons! My modified version of the code to do this is available from my github repository here:</p>
+
+<p><a href="https://github.com/MikeHook/FootyLinks/blob/master/AndroidApp/src/mhook/FootyLinks/Data/FootyLinksSQLLiteHelper.java">FootyLinksSQLLiteHelper.java</a></p>
+
+<p>I&rsquo;ve also encountered a couple of other snags since then while working with the SQLite database.</p>
+
+<h3>No password support</h3>
+
+
+<p>Passwords do not appear to be supported at all for the Android applications. I&rsquo;d automatically added password protection to the database when creating it and it took me a while to figure out why eclipse was refusing to read it!</p>
+
+<h3>Manually delete after schema changes</h3>
+
+
+<p>I&rsquo;ve added some additional fields to the database over time. However initially they were not being copied into the version of the database in my device emulator. I found it was necessary to browse the emulator files themselves, using the DDMS perspective in Eclipse, and delete the old database file directly in the emulator file system.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Nhibernate Generator Class for SQLite Databases]]></title>
+    <link href="http://MikeHook.github.io/2011/08/29/nhibernate-generator-class-for-sqlite-databases/"/>
+    <updated>2011-08-29T15:40:26+01:00</updated>
+    <id>http://MikeHook.github.io/2011/08/29/nhibernate-generator-class-for-sqlite-databases</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve been developing a mobile app for Android which needs to query data in an SQLite database. So the first task I needed to get done was to import data into the SQLite database. As I&rsquo;m more used to writing .NET applications which use the NHibernate ORM I decided to write an import program on this technology stack.</p>
+
+<p>For my first attempt at the import program I just wanted to focus on the import logic, so choose to use a &lsquo;known working&rsquo; NHibernate configuration with a MS SQL 2005 database. While this worked fine for me it did mean that I had to manually copy all of the data from the MS SQL database into the SQLite database before it could be used in the Android app. This was quite laborious so when I needed to modify the importer at a later date I decided to change the NHibernate configuration to point directly to the SQLite database instead. This was the updated config file used:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">&lt;hibernate-configuration  xmlns="urn:nhibernate-configuration-2.2" &gt;
+    &lt;session-factory&gt;
+        &lt;property name="connection.provider"&gt;NHibernate.Connection.DriverConnectionProvider&lt;/property&gt;
+        &lt;property name="connection.driver_class"&gt;NHibernate.Driver.SQLiteDriver&lt;/property&gt;
+        &lt;property name="connection.connection_string_name"&gt;FootyLinks&lt;/property&gt;
+        &lt;property name="dialect"&gt;NHibernate.Dialect.SQLiteDialect&lt;/property&gt;
+        &lt;property name="query.substitutions"&gt;true=1;false=0&lt;/property&gt;
+    &lt;/session-factory&gt;
+&lt;/hibernate-configuration&gt;</pre>
+
+
+<p>And this is an example of the connection string format:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">&lt;configuration&gt;
+    &lt;connectionStrings&gt;
+        &lt;add name="FootyLinks" connectionString="Data Source=C:\path_to_the_SQLite_database_file;Version=3"/&gt;
+    &lt;/connectionStrings&gt;
+&lt;/configuration&gt;</pre>
+
+
+<p>This configuration worked OK and the import program could connect to the SQLite database, however I hit a problem when trying to save new records to the database. This was the inner exception reported by NHibernate:</p>
+
+<blockquote>Abort due to constraint violation Club.Id may not be NULL</blockquote>
+
+
+<p>The problem was that the import program was using the default generator class of <em>identity  </em>for in the NHibernate entity mappings. So NHibernate was expecting the database to generate the identity keys for the new records being saved to the database, however SQLite does not appear to support this. After some reading up on the options available for the <a href="http://nhforge.org/doc/nh/en/index.html#mapping-declaration-id-generator">NHibernate generator setting</a>  I decided to try the  <em>native  </em>setting. As this should select the implementation supported by the database. However this didn&rsquo;t work either, I think because, of all the options <em>native</em> can select, none are actually supported by SQLite. So my next preferred selection was to use <em>increment,</em>  this setting comes with a disclaimer that it should not be used in a cluster, which is absolutely fine as its very unlikely that I will ever be deploy the importer to a load balanced environment.</p>
+
+<p>The <em>increment</em> setting worked fine with the SQLite database and should streamline my workflow nicely for updating the app data .</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Progress | baking websites]]></title>
+  <link href="http://MikeHook.github.io/blog/categories/progress/atom.xml" rel="self"/>
+  <link href="http://MikeHook.github.io/"/>
+  <updated>2014-01-11T18:09:45+00:00</updated>
+  <id>http://MikeHook.github.io/</id>
+  <author>
+    <name><![CDATA[Mike Hook]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Microsoft Jump on the Open Source Band Wagon]]></title>
+    <link href="http://MikeHook.github.io/2012/04/03/microsoft-jump-on-the-open-source-band-wagon/"/>
+    <updated>2012-04-03T12:35:04+01:00</updated>
+    <id>http://MikeHook.github.io/2012/04/03/microsoft-jump-on-the-open-source-band-wagon</id>
+    <content type="html"><![CDATA[<p><img class="alignright" title="Tux, the Linux Mascot" src="http://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Tux.png/220px-Tux.png" alt="" width="220" height="261" />
+A landmark decision was made last week by Microsoft&rsquo;s ASP.NET web development team. They announced that three key technologies used to develop web applications, <a href="http://weblogs.asp.net/scottgu/archive/2012/03/27/asp-net-mvc-web-api-razor-and-open-source.aspx">ASP.NET MVC, Web API and Razor would be made fully Open Source</a><sup>1</sup>. This is a big step for a company built on the sales of Closed Source software. I&rsquo;m going to have a look at what I think this decision means for the consumers, who use software built with these technologies, and the stakeholders who commission the software.</p>
+
+<h2>Open Sesame</h2>
+
+
+<p>For those those not involved directly in software development, the moniker &lsquo;Open Source&rsquo; may conjure up images of magicians pulling rabbits out of a hat<sup>2</sup>. However the reality could be viewed as the opposite of magic as Open source demystifies the software development process. In the traditional &lsquo;Closed Source&rsquo; licencing model, software is made by a company behind closed doors and the code is encrypted before release to the public. The traditional thinking is that this protects the company by preventing third parties from stealing their intellectual property. This is a subject of <a href="http://en.wikipedia.org/wiki/Software_patent_debate">some debate</a>  , which I won&rsquo;t go into here. However it is clear that many businesses are currently successful without relying on restrictive software patents.</p>
+
+<p>In an Open Source licencing model, the full unencrypted source code will be published at the same time as the software itself (indeed often before-hand in the case of preview and beta releases). Also, as in the case of this announcement, public contributions may be accepted to modify the original source code. Naturally the acceptance process is completely at the discretion of software company, so unhelpful or damaging contributions will not be accepted.</p>
+
+<p>A good example of the Open Source model working commercially is the Android operating system released by Google. A massive range of mobile devices run Android and it is not only the key competitor to Apple&rsquo;s iOS (iPhones &amp; iPad operating system but has helped ensure that most devices using Microsoft&rsquo;s Windows Mobile operating system are sitting on the scrap heap. I for one am glad that there is healthy competition to the world of Apple and its clone army of i-device accolytes.</p>
+
+<h2>Software that Just Works</h2>
+
+
+<p>From a consumer or stakeholder viewpoint the natural desire is to want software that &lsquo;just works&rsquo; and to reach that goal we just need to fix all the bugs in the software. Unfortunately the belief that all software bugs can be fixed is generally  infeasible  given time and budget restraints, due to the nature of programming the two go hand in hand. In each piece of code there are many paths that can be travelled, much like a maze in a country mansion garden. If you ask 10 different people to walk the maze the chances are each one will set off in a different direction. Most of them will hit a dead end before finding their way through and a nasty bug could be hiding at each of these dead ends!</p>
+
+<p>However Open Source software helps minimize the number bugs by accepting contributions to fix any that are found by the development community. In this way the software benefits from the knowledge of a much wider group of people than could be acheived if it was developed and maintained soley by a single company. Most software developers are driven by that itch to &lsquo;make stuff work&rsquo; and are only too happy to contribute to a project which helps make this happen. The end result is a product that is more reliable for the consumers and stakeholders and has the appearance of &lsquo;just working&rsquo;.</p>
+
+<h2>Security concerns</h2>
+
+
+<p>Typically the biggest obstruction to making software Open Source is the perceived risk to security. If anybody can view exactly how the software is operating then it is much easier for hackers to cause the software to break, exploit a vulnerability to propogate a virus or carry out other nefarious acts. The <a href="http://haacked.com/archive/2012/03/29/asp-net-mvc-now-accepting-pull-requests.aspx">indications by Phil Haack</a>, a former member of the MVC team, are that this decision by Mircosoft is no exception. So a great deal of credit should go to those involved at Microsoft for making change happen in their organization.</p>
+
+<p>Regarding the perceived risks to security, Open Source can actually reduce the risk for similar reasons to the improvement in relibility. Any security vulnerabilities will quickly be picked up by the community and fixed. The Open Source culture of continual improvement in the software makes for a much more secure product.</p>
+
+<p>Take the example of web browsers, a couple of years ago Microsoft&rsquo;s Internet Explorer browser had massive market share. However over time so many security vulnerabilities were exploited in the browser that the <a href="http://www.theinquirer.net/inquirer/news/1037530/us-government-warns-internet-explorer">US government themselves warned against using the software</a>!   Along came Mozilla&rsquo;s Firefox browser to save the day, with much improved security. Naturally Firefox has always been developed under an Open Source licence as explained in the <a href="http://www.mozilla.org/about/manifesto.html">Mozilla manifesto</a>.</p>
+
+<h2>Future developments</h2>
+
+
+<p>The likelyhood is that this announcement will not trigger a deluge of community updates and fixes to the frameworks in question. I anticipate that a minority of change submissions will make it back into the frameworks themselves. However it does demonstrate an important change in mindset from Microsoft and may well signal the beginnings of a new approach for the organisation. It is clear that in the fast moving world of software and digital media you need to adapt to survive and it is encouraging that even massive organisations such as Microsoft are able to do this.</p>
+
+<h5>Footnote</h5>
+
+
+<p><sup>1</sup>While the MVC framework has been open source since its original release, this announcement widens the license model to the Web API and Razor frameworks and also marks the first time that Microsoft will accept public contributions to the open source frameworks. If you are unfamiliar with these technologies then further information is available on the Microsoft blah blah (LINK).</p>
+
+<p><sup>2</sup>Or maybe thats just my fertile imagination!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Discovering the Original Inventors of the Internet]]></title>
+    <link href="http://MikeHook.github.io/2011/10/07/discovering-the-original-inventors-of-the-internet/"/>
+    <updated>2011-10-07T17:32:44+01:00</updated>
+    <id>http://MikeHook.github.io/2011/10/07/discovering-the-original-inventors-of-the-internet</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m sure many of you have heard about a chap called <a href="http://twitter.com/#!/timberners_lee">Tim Berners Lee</a> who is widely credited for inventing the world wide web as we know it today. The story is well known and I&rsquo;m not going to re-hash it here, however less is known about who may have come up with the first concept of the <a href="http://en.wikipedia.org/wiki/Internet">Internet</a>. You may be surprised to hear that the origins of the concept date back several centuries and take place on an entirely different continent, among a race of people commonly considered quite primitive and barbaric. Here&rsquo;s a little hint of who these people may have been.</p>
+
+<p><a href="http://bakingwebsites.files.wordpress.com/2011/10/machu_picchu_1.jpg"><img class="size-medium wp-image-257" title="Machu_Picchu_1" src="http://bakingwebsites.files.wordpress.com/2011/10/machu_picchu_1.jpg?w=300" alt="" width="300" height="225" /></a></p>
+
+<h2>The internet laid bare</h2>
+
+
+<p>You may well ask how the internet could exist centuries before computers had been invented or even the discovery of electricity. Naturally there was no way the internet as we know it today could be possible, however if we look at the abstract concept there are strong parallels. At it&rsquo;s heart the internet is a communications system made up of a group of connected devices. The power of the internet lies in its ability to efficiently send messages through the network from one node to another. When you open your web browser and type in www.google.co.uk your computer sends a message to the web server hosting google.co.uk asking for the web page. However this  message is not sent directly from your computer to the google web server, this would be very inefficient as each person that wanted to view the google web page would first need to establish a connection to their web server. As more people tried to connect to the same page the response would get slower and slower until the number of connections reached its limit.</p>
+
+<h2>Routing to the rescue</h2>
+
+
+<p>The internet has an elegant solution to this problem. Instead of attempting to establish a direct connection between the two end points, each of the nodes in the network just connects to their nearest nodes. So the end points are indirectly connected through the network in a similar way to this lovely node diagram:</p>
+
+<p><img class="size-full wp-image-252" title="onethousandpaintings_small1-300x300" src="http://bakingwebsites.files.wordpress.com/2011/10/onethousandpaintings_small1-300x300.gif" alt="Network nodes" width="300" height="300" /></p>
+
+<p>Each message is sent with the address of its final destination, each node only needs to know what direction to send the message in order to get it closer to its destination. In this way the message is naturally <a href="http://en.wikipedia.org/wiki/Routing">routed</a> on the most efficient path from its source to the destination. It is this concept if a nodal network and message routing that has strong parallels with a very old method of communications.</p>
+
+<p><span class="Apple-style-span" style="font-size:20px;"><strong>An ancient  Inca  network</strong></span></p>
+
+<p>I recently took a trip to Peru to hike the Inca trail to Machu Picchu. So this post is a (hopefully interesting) way to shoehorn some of my holiday snaps onto this blog!</p>
+
+<p><a href="http://bakingwebsites.files.wordpress.com/2011/10/machu_picchu.jpg"><img class="size-medium wp-image-255" title="Machu_Picchu" src="http://bakingwebsites.files.wordpress.com/2011/10/machu_picchu.jpg?w=225" alt="" width="225" height="300" /></a></p>
+
+<p>However quite apart from that I learnt a great deal about the fascinating Inca culture. Before the trip I had thought that there was essentially one Inca trail in Peru leading to Machu Picchu, how wrong I was! The Inca trails actually comprised of thousands of miles of pathways connected across the whole of the Inca empire. They were the key to enabling the Inca rulers establish and run the largest single empire in South America.</p>
+
+<p>One of the main uses of the trails was as a communications network. There were small guard posts dotted across the network, often high up in remote mountain areas. If the Inca ruler wanted to send a message they would encode it using a &lsquo;<a href="http://en.wikipedia.org/wiki/Quipus">quipus</a>&rsquo;, a device made up of multi-coloured plied rope, threads and knots.     The exact method of encoding has unfortunately been lost in time but it may well of been a binary system quite similar to one used by computers today. It would have been quite possible to encode fairly sophisticated messages in this way.</p>
+
+<p><a href="http://bakingwebsites.files.wordpress.com/2011/10/quipu2-150x150.jpg"><img class="size-full wp-image-259" title="quipu2-150x150" src="http://bakingwebsites.files.wordpress.com/2011/10/quipu2-150x150.jpg" alt="" width="150" height="150" /></a></p>
+
+<p>The ruler would then pass the quipus to a messenger to deliver the message. However the messenger would only take the message to the nearest checkpoint, then pass it onto another messenger who would carry the message to the next checkpoint. Each checkpoint would be around 5-10 KM apart, more distance for flat sections and less for mountainous terrain. In this way each of the messengers could run between the checkpoints as fast as possible and the message itself would reach its destination far quicker than would otherwise be possible.</p>
+
+<p>To give you some indication of how efficient this system was during Inca times the capital city was Cuzco, situated at around 3,300 metres in the middle of the Andes mountains, several hundred miles from the coast. However the Inca king was able to eat fresh fish in the capital because it was sent over the Inca trail network. It is estimated that the same delivery made by road transport today takes longer than an equivalent delivery made over the Inca network in the 15th century!</p>
+
+<p>So now all the pieces of the puzzle are in place we can see that the Inca trail network used the some communication method as today&rsquo;s internet. The trail checkpoints are equivalent to an internet router, the messengers have now been replaced with fibre optic cables and of course the quipus is directly equivalent to an <a href="http://en.wikipedia.org/wiki/Network_packet">IP network packet</a>. So there you have it, the Inca empire invented the alpha version of the internet.</p>
+]]></content>
+  </entry>
+  
+</feed>

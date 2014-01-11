@@ -1,0 +1,200 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Upgrading to Sharp Architecture 1.6 and MVC 2 - baking websites</title>
+	<meta name="author" content="Mike Hook">
+
+	
+	<meta name="description" content="Upgrading to Sharp Architecture 1.6 and MVC 2 After a good few months in hibernation the guilt of leaving my poor pet project half-finished has &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="baking websites" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://MikeHook.github.io/2010/08/22/upgrading-to-sharp-architecture-1-6-and-mvc-2/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<!--
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css"> 
+-->
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+	
+</div>
+<hgroup>
+  <h1><a href="/">baking websites</a></h1>
+  
+    <h2>adventures in software development</h2>
+  
+</hgroup>
+
+<nav id="main-nav"><h3>categories</h3>
+<ul class="main-navigation">
+<li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 19 ]</li>
+<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 2 ]</li>
+<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 11 ]</li>
+<li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
+<li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 8 ]</li>
+
+</ul>
+<br/>
+<a href="/blog/archives">Archives</a>
+
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		
+			<a class="twitter" href="http://twitter.com/michael_hook" title="Twitter">Twitter</a>
+		
+		
+			<a class="github" href="https://github.com/MikeHook" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">Upgrading to Sharp Architecture 1.6 and MVC 2</h1>
+	<div class="entry-content" itemprop="articleBody"><p>After a good few months in hibernation the guilt of leaving my poor pet project half-finished has finally got to me!</p>
+
+<p>I was also spurred on by several new (and not so new) software releases that I would like to try out:</p>
+
+<ul>
+    <li><a href="http://devlicio.us/blogs/billy_mccafferty/archive/2010/08/19/s-arp-architecture-1-6-released.aspx">S#arp Architecture 1.6</a></li>
+    <li><a href="http://weblogs.asp.net/scottgu/archive/2010/03/11/asp-net-mvc-2-released.aspx">MVC version 2</a></li>
+    <li><a href="http://www.techfortesco.com/forum/index.php?topic=265.0">Tesco API Beta</a></li>
+</ul>
+
+
+<p>The first step I needed to take was to upgrade the project to use the new release of Sharp Architecture and MVC 2. The Sharp Architecture wiki has   a <a href="http://wiki.sharparchitecture.net/1.5UpgradeGuide.ashx">decent upgrade guide</a> and I was able to get most of the way there by following this.   However there were a couple extra step I needed to take in my project:</p>
+
+<h3>Upgrade to Fluent NHibernate</h3>
+
+
+<p>I think my project may have been on an earlier version than that in the guide because I needed to upgrade the Data project to use Fluent NHibernate. The issues here were pretty obvious as there were several compilation errors. I found the easiest solution was to generate a new empty Sharp Architecture project from the 1.6 template, then copy across the amended files in the NHibernateMaps folder.</p>
+
+<p>This got the application to compile OK, however there were a couple of differences in the configuration from my project.</p>
+
+<h3>Primary Key Convention</h3>
+
+
+<p>One of the data unit tests was failing when trying to access an entity using the <em>.Get(id)</em> method. This was strange as the entity was being loaded OK in the setup method. I was also getting an exception from the website when trying to add an entity to the database:</p>
+
+<blockquote><em>Invalid object name &#8216;hibernate_unique_key&#8217;.</em></blockquote>
+
+
+<p>The problem was due to a change in the <em>PrimaryKeyConvention</em> class. The convention for generating primary keys has been changed from <em>Native()</em> to <em>HiLo(&ldquo;1000&rdquo;)</em>. So instead of the first record having a key of 0 it would now try to use 1000. Changing this setting back to <em>Native()</em> fixed the problem straight away.</p>
+
+<h3>Cascade Conventions</h3>
+
+
+<p>The other issue I encountered occurred when trying to add a new ingredient to a recipe:</p>
+
+<blockquote><em>Cannot insert the value NULL into column &#8216;IngredientFk&#8217;, table  &#8216;recipebook.dbo.RecipeIngredientDrafts&#8217;; column does not allow nulls. INSERT  fails.
+The statement has been terminated.</em></blockquote>
+
+
+<p>This error pointed to a problem with NHibernate not saving changes to associated entities; it was trying to save a new <em>RecipeIngredientDraft</em> record without first saving the new <em>Ingredient </em>record. This issue could be resolved by adding a call to <em>instance.Cascade.SaveUpdate() </em>in the <em>ReferenceConvention </em>and <em>HasManyConvention </em>classes.</p>
+
+<p>After fixing these issues the application worked just fine :)</p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2014 - Mike Hook -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer>
+			
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

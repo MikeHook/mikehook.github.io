@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://MikeHook.github.io/sitemap.xml 
