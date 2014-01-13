@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Hacking | baking websites]]></title>
   <link href="http://MikeHook.github.io/blog/categories/hacking/atom.xml" rel="self"/>
   <link href="http://MikeHook.github.io/"/>
-  <updated>2014-01-11T18:09:45+00:00</updated>
+  <updated>2014-01-13T20:19:52+00:00</updated>
   <id>http://MikeHook.github.io/</id>
   <author>
     <name><![CDATA[Mike Hook]]></name>
@@ -81,7 +81,7 @@
     <link href="http://MikeHook.github.io/2013/03/14/integrating-episerver-7-with-an-existing-mvc-site/"/>
     <updated>2013-03-14T15:54:57+00:00</updated>
     <id>http://MikeHook.github.io/2013/03/14/integrating-episerver-7-with-an-existing-mvc-site</id>
-    <content type="html"><![CDATA[<p><a href="http://bakingwebsites.files.wordpress.com/2013/03/custom_integration.jpg"><img class="alignright size-full wp-image-408" alt="custom_integration" src="http://bakingwebsites.files.wordpress.com/2013/03/custom_integration.jpg" width="300" height="220" /></a>This post assumes you have EPiServer 7 installed on your machine. If you don&rsquo;t have it then it is available from <a href="http://world.episerver.com/Download/Categories/Products/EPiServer-CMS/">EPiServer world</a>  (once you have created an account).</p>
+    <content type="html"><![CDATA[<p><img class="alignright size-full wp-image-408" alt="custom_integration" src="http://imageshack.com/a/img560/4853/3rqu.jpg" width="300" />This post assumes you have EPiServer 7 installed on your machine. If you don&rsquo;t have it then it is available from <a href="http://world.episerver.com/Download/Categories/Products/EPiServer-CMS/">EPiServer world</a>  (once you have created an account).</p>
 
 <p>There are 2 main options for creating a new EPiServer 7 MVC stylee site:</p>
 
@@ -214,7 +214,7 @@ container.For(typeof(Cache)).Singleton().Use(HttpContext.Current.Cache);</pre>
     <link href="http://MikeHook.github.io/2012/01/25/footy-links-alpha-released/"/>
     <updated>2012-01-25T09:34:41+00:00</updated>
     <id>http://MikeHook.github.io/2012/01/25/footy-links-alpha-released</id>
-    <content type="html"><![CDATA[<p><a href="http://bakingwebsites.files.wordpress.com/2012/01/footylinkslogo.jpg"><img class="size-full wp-image-332 alignleft" title="FootyLinksLogo" src="http://bakingwebsites.files.wordpress.com/2012/01/footylinkslogo.jpg" alt="" width="150" height="170" /></a>The very first version of Footy Links is now available for download from the Android Market.
+    <content type="html"><![CDATA[<p><img class="size-full wp-image-332 alignleft" title="FootyLinksLogo" src="http://imageshack.com/a/img834/6565/3iks.jpg" alt="" width="150" />The very first version of Footy Links is now available for download from the Android Market.
 You can get the app by opening the following website on your android device and press the &lsquo;Install&rsquo; button:
 <a href="https://market.android.com/details?id=mhook.FootyLinks">Footy Links on the Android Market</a></p>
 

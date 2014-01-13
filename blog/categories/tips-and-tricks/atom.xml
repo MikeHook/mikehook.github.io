@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tips and Tricks | baking websites]]></title>
   <link href="http://MikeHook.github.io/blog/categories/tips-and-tricks/atom.xml" rel="self"/>
   <link href="http://MikeHook.github.io/"/>
-  <updated>2014-01-11T18:09:45+00:00</updated>
+  <updated>2014-01-13T20:19:52+00:00</updated>
   <id>http://MikeHook.github.io/</id>
   <author>
     <name><![CDATA[Mike Hook]]></name>
@@ -18,7 +18,7 @@
     <link href="http://MikeHook.github.io/2013/01/18/become-a-git-contortionist-with-stash/"/>
     <updated>2013-01-18T19:16:05+00:00</updated>
     <id>http://MikeHook.github.io/2013/01/18/become-a-git-contortionist-with-stash</id>
-    <content type="html"><![CDATA[<p><a href="http://bakingwebsites.files.wordpress.com/2013/01/annie_the_contortionist.jpg"><img class="size-medium wp-image-364 alignright" alt="Annie the Contortionist" src="http://bakingwebsites.files.wordpress.com/2013/01/annie_the_contortionist.jpg?w=300" width="300" height="200" /></a>One of the great aspects of the Git source control system is its flexibility. Almost any sticky situation you may encounter  as a developer working with source control can be   solved with Git.</p>
+    <content type="html"><![CDATA[<p><img class="size-medium wp-image-364 alignright" alt="Annie the Contortionist" src="http://imageshack.com/a/img856/5731/jyt7.jpg" width="300" />One of the great aspects of the Git source control system is its flexibility. Almost any sticky situation you may encounter  as a developer working with source control can be   solved with Git.</p>
 
 <p>Take this scenario, you&rsquo;re halfway through writing a class for a new feature when you get a call.. the client has found a show stopping bug in the application and it needs to be fixed right away. To be able to fix the bug you will need to switch onto the live code branch but you can&rsquo;t go switching branches with a load of uncommitted changes.  Now you don&rsquo;t want to commit your code as its half done and won&rsquo;t even compile right now, but you don&rsquo;t want to lose the changes either&hellip; <a href="http://git-scm.com/book/en/Git-Tools-Stashing"><em>git stash</em></a> to the rescue!</p>
 

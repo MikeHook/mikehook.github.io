@@ -4,7 +4,7 @@
   <title><![CDATA[baking websites]]></title>
   <link href="http://MikeHook.github.io/atom.xml" rel="self"/>
   <link href="http://MikeHook.github.io/"/>
-  <updated>2014-01-11T18:09:45+00:00</updated>
+  <updated>2014-01-13T20:19:52+00:00</updated>
   <id>http://MikeHook.github.io/</id>
   <author>
     <name><![CDATA[Mike Hook]]></name>
@@ -50,7 +50,7 @@
 <blockquote>Ensure a class only has one instance and provide a global access point to it</blockquote>
 
 
-<p><a href="http://bakingwebsites.files.wordpress.com/2013/06/asparagus-shoot.jpg"><img class="alignright size-medium wp-image-460" alt="asparagus shoot from http://sandyspringcsa.com/" src="http://bakingwebsites.files.wordpress.com/2013/06/asparagus-shoot.jpg?w=300" width="300" height="200" /></a>
+<p><img class="alignright size-medium wp-image-460" alt="asparagus shoot from http://sandyspringcsa.com/" src="http://imageshack.com/a/img32/7137/uwa5.jpg" width="300" />
 This is a pattern which can be very useful in applications, however the implementation is so short that a coding kata would have little content. There are just a couple of pitfalls to watch out for when implementing this pattern:</p>
 
 <ul>
@@ -286,7 +286,7 @@ Using synchronization is expensive (ie. It takes the computer a relatively long 
     <link href="http://MikeHook.github.io/2013/03/14/integrating-episerver-7-with-an-existing-mvc-site/"/>
     <updated>2013-03-14T15:54:57+00:00</updated>
     <id>http://MikeHook.github.io/2013/03/14/integrating-episerver-7-with-an-existing-mvc-site</id>
-    <content type="html"><![CDATA[<p><a href="http://bakingwebsites.files.wordpress.com/2013/03/custom_integration.jpg"><img class="alignright size-full wp-image-408" alt="custom_integration" src="http://bakingwebsites.files.wordpress.com/2013/03/custom_integration.jpg" width="300" height="220" /></a>This post assumes you have EPiServer 7 installed on your machine. If you don&rsquo;t have it then it is available from <a href="http://world.episerver.com/Download/Categories/Products/EPiServer-CMS/">EPiServer world</a>  (once you have created an account).</p>
+    <content type="html"><![CDATA[<p><img class="alignright size-full wp-image-408" alt="custom_integration" src="http://imageshack.com/a/img560/4853/3rqu.jpg" width="300" />This post assumes you have EPiServer 7 installed on your machine. If you don&rsquo;t have it then it is available from <a href="http://world.episerver.com/Download/Categories/Products/EPiServer-CMS/">EPiServer world</a>  (once you have created an account).</p>
 
 <p>There are 2 main options for creating a new EPiServer 7 MVC stylee site:</p>
 
@@ -419,7 +419,7 @@ container.For(typeof(Cache)).Singleton().Use(HttpContext.Current.Cache);</pre>
     <link href="http://MikeHook.github.io/2013/01/18/become-a-git-contortionist-with-stash/"/>
     <updated>2013-01-18T19:16:05+00:00</updated>
     <id>http://MikeHook.github.io/2013/01/18/become-a-git-contortionist-with-stash</id>
-    <content type="html"><![CDATA[<p><a href="http://bakingwebsites.files.wordpress.com/2013/01/annie_the_contortionist.jpg"><img class="size-medium wp-image-364 alignright" alt="Annie the Contortionist" src="http://bakingwebsites.files.wordpress.com/2013/01/annie_the_contortionist.jpg?w=300" width="300" height="200" /></a>One of the great aspects of the Git source control system is its flexibility. Almost any sticky situation you may encounter  as a developer working with source control can be   solved with Git.</p>
+    <content type="html"><![CDATA[<p><img class="size-medium wp-image-364 alignright" alt="Annie the Contortionist" src="http://imageshack.com/a/img856/5731/jyt7.jpg" width="300" />One of the great aspects of the Git source control system is its flexibility. Almost any sticky situation you may encounter  as a developer working with source control can be   solved with Git.</p>
 
 <p>Take this scenario, you&rsquo;re halfway through writing a class for a new feature when you get a call.. the client has found a show stopping bug in the application and it needs to be fixed right away. To be able to fix the bug you will need to switch onto the live code branch but you can&rsquo;t go switching branches with a load of uncommitted changes.  Now you don&rsquo;t want to commit your code as its half done and won&rsquo;t even compile right now, but you don&rsquo;t want to lose the changes either&hellip; <a href="http://git-scm.com/book/en/Git-Tools-Stashing"><em>git stash</em></a> to the rescue!</p>
 
@@ -481,7 +481,7 @@ A landmark decision was made last week by Microsoft&rsquo;s ASP.NET web developm
     <link href="http://MikeHook.github.io/2012/01/25/footy-links-alpha-released/"/>
     <updated>2012-01-25T09:34:41+00:00</updated>
     <id>http://MikeHook.github.io/2012/01/25/footy-links-alpha-released</id>
-    <content type="html"><![CDATA[<p><a href="http://bakingwebsites.files.wordpress.com/2012/01/footylinkslogo.jpg"><img class="size-full wp-image-332 alignleft" title="FootyLinksLogo" src="http://bakingwebsites.files.wordpress.com/2012/01/footylinkslogo.jpg" alt="" width="150" height="170" /></a>The very first version of Footy Links is now available for download from the Android Market.
+    <content type="html"><![CDATA[<p><img class="size-full wp-image-332 alignleft" title="FootyLinksLogo" src="http://imageshack.com/a/img834/6565/3iks.jpg" alt="" width="150" />The very first version of Footy Links is now available for download from the Android Market.
 You can get the app by opening the following website on your android device and press the &lsquo;Install&rsquo; button:
 <a href="https://market.android.com/details?id=mhook.FootyLinks">Footy Links on the Android Market</a></p>
 
@@ -780,7 +780,7 @@ using (var excelPackage = new ExcelPackage())
     <id>http://MikeHook.github.io/2011/10/07/discovering-the-original-inventors-of-the-internet</id>
     <content type="html"><![CDATA[<p>I&rsquo;m sure many of you have heard about a chap called <a href="http://twitter.com/#!/timberners_lee">Tim Berners Lee</a> who is widely credited for inventing the world wide web as we know it today. The story is well known and I&rsquo;m not going to re-hash it here, however less is known about who may have come up with the first concept of the <a href="http://en.wikipedia.org/wiki/Internet">Internet</a>. You may be surprised to hear that the origins of the concept date back several centuries and take place on an entirely different continent, among a race of people commonly considered quite primitive and barbaric. Here&rsquo;s a little hint of who these people may have been.</p>
 
-<p><a href="http://bakingwebsites.files.wordpress.com/2011/10/machu_picchu_1.jpg"><img class="size-medium wp-image-257" title="Machu_Picchu_1" src="http://bakingwebsites.files.wordpress.com/2011/10/machu_picchu_1.jpg?w=300" alt="" width="300" height="225" /></a></p>
+<p><a href="http://imageshack.com/a/img835/4400/yrbq.jpg"><img class="size-medium wp-image-257" title="Machu_Picchu_1" src="http://imagizer.imageshack.us/v2/320x240q90/835/yrbq.jpg" alt="" width="320" /></a></p>
 
 <h2>The internet laid bare</h2>
 
@@ -792,7 +792,7 @@ using (var excelPackage = new ExcelPackage())
 
 <p>The internet has an elegant solution to this problem. Instead of attempting to establish a direct connection between the two end points, each of the nodes in the network just connects to their nearest nodes. So the end points are indirectly connected through the network in a similar way to this lovely node diagram:</p>
 
-<p><img class="size-full wp-image-252" title="onethousandpaintings_small1-300x300" src="http://bakingwebsites.files.wordpress.com/2011/10/onethousandpaintings_small1-300x300.gif" alt="Network nodes" width="300" height="300" /></p>
+<p><img class="size-full wp-image-252" title="onethousandpaintings_small1-300x300" src="http://imageshack.com/a/img834/8784/z6g.gif" alt="Network nodes" width="300" /></p>
 
 <p>Each message is sent with the address of its final destination, each node only needs to know what direction to send the message in order to get it closer to its destination. In this way the message is naturally <a href="http://en.wikipedia.org/wiki/Routing">routed</a> on the most efficient path from its source to the destination. It is this concept if a nodal network and message routing that has strong parallels with a very old method of communications.</p>
 
@@ -800,13 +800,13 @@ using (var excelPackage = new ExcelPackage())
 
 <p>I recently took a trip to Peru to hike the Inca trail to Machu Picchu. So this post is a (hopefully interesting) way to shoehorn some of my holiday snaps onto this blog!</p>
 
-<p><a href="http://bakingwebsites.files.wordpress.com/2011/10/machu_picchu.jpg"><img class="size-medium wp-image-255" title="Machu_Picchu" src="http://bakingwebsites.files.wordpress.com/2011/10/machu_picchu.jpg?w=225" alt="" width="225" height="300" /></a></p>
+<p><a href="http://imageshack.com/a/img703/8159/inq4.jpg"><img class="size-medium wp-image-255" title="Machu_Picchu" src="http://imagizer.imageshack.us/v2/320x240q90/703/inq4.jpg" alt="" /></a></p>
 
 <p>However quite apart from that I learnt a great deal about the fascinating Inca culture. Before the trip I had thought that there was essentially one Inca trail in Peru leading to Machu Picchu, how wrong I was! The Inca trails actually comprised of thousands of miles of pathways connected across the whole of the Inca empire. They were the key to enabling the Inca rulers establish and run the largest single empire in South America.</p>
 
 <p>One of the main uses of the trails was as a communications network. There were small guard posts dotted across the network, often high up in remote mountain areas. If the Inca ruler wanted to send a message they would encode it using a &lsquo;<a href="http://en.wikipedia.org/wiki/Quipus">quipus</a>&rsquo;, a device made up of multi-coloured plied rope, threads and knots.     The exact method of encoding has unfortunately been lost in time but it may well of been a binary system quite similar to one used by computers today. It would have been quite possible to encode fairly sophisticated messages in this way.</p>
 
-<p><a href="http://bakingwebsites.files.wordpress.com/2011/10/quipu2-150x150.jpg"><img class="size-full wp-image-259" title="quipu2-150x150" src="http://bakingwebsites.files.wordpress.com/2011/10/quipu2-150x150.jpg" alt="" width="150" height="150" /></a></p>
+<p><img class="size-full wp-image-259" title="quipus" src="http://imageshack.com/a/img14/4521/fqto.jpg" alt="" /></a></p>
 
 <p>The ruler would then pass the quipus to a messenger to deliver the message. However the messenger would only take the message to the nearest checkpoint, then pass it onto another messenger who would carry the message to the next checkpoint. Each checkpoint would be around 5-10 KM apart, more distance for flat sections and less for mountainous terrain. In this way each of the messengers could run between the checkpoints as fast as possible and the message itself would reach its destination far quicker than would otherwise be possible.</p>
 

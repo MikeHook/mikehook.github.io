@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Testing | baking websites]]></title>
   <link href="http://MikeHook.github.io/blog/categories/testing/atom.xml" rel="self"/>
   <link href="http://MikeHook.github.io/"/>
-  <updated>2014-01-11T18:09:45+00:00</updated>
+  <updated>2014-01-13T20:19:52+00:00</updated>
   <id>http://MikeHook.github.io/</id>
   <author>
     <name><![CDATA[Mike Hook]]></name>
@@ -36,7 +36,7 @@
 
 <p>The results of my first report are shown below:</p>
 
-<p><a href="http://bakingwebsites.files.wordpress.com/2009/12/ncoverreport1.jpg"><img class="alignnone size-full wp-image-31" title="NCover Report" src="http://bakingwebsites.files.wordpress.com/2009/12/ncoverreport1.jpg" alt="" width="745" height="698" /></a></p>
+<p><a href="http://imageshack.com/a/img268/8057/6zqn.jpg"><img class="alignnone size-full wp-image-31" title="NCover Report" src="http://imageshack.com/a/img268/8057/6zqn.jpg" alt="" /></a></p>
 
 <p>The prime candidates for improvement were:</p>
 
@@ -54,7 +54,7 @@
 
 <p>OK maybe I   m stretching the food analogy a little too far with my headings now! By red sauce I mean those nasty red bars that were blazed across nearly every line of the report. Below you can see the report looks much more healthy after adding some unit tests and trimming some unused code:</p>
 
-<p><a href="http://bakingwebsites.files.wordpress.com/2009/12/ncoverreport2.jpg"><img class="alignnone size-full wp-image-32" title="NCover Report - 80% coverage" src="http://bakingwebsites.files.wordpress.com/2009/12/ncoverreport2.jpg" alt="" width="790" height="790" /></a></p>
+<p><a href="http://imageshack.com/a/img163/5125/23o5.jpg"><img class="alignnone size-full wp-image-32" title="NCover Report - 80% coverage" src="http://imageshack.com/a/img163/5125/23o5.jpg" alt="" /></a></p>
 
 <p>I will endeavour to keep the coverage level at a minimum of 80% from now, and hopefully add some more tests to bump off those remaining pesky red bars!</p>
 
@@ -97,7 +97,7 @@ The ApplicationBase setting remains blank, however if you have saved the NUnit p
 
 <p>Below is an image of the settings for my project:</p>
 
-<p><a href="http://bakingwebsites.files.wordpress.com/2009/06/nunitprojecteditor.jpg"><img alt="" border="0" src="http://bakingwebsites.files.wordpress.com/2009/06/nunitprojecteditor.jpg?w=300" /></a>
+<p><a href="http://imageshack.com/a/img15/3503/csy7.jpg"><img alt="" border="0" src="http://imagizer.imageshack.us/v2/320x240q90/15/csy7.jpg" /></a>
 After updating these settings NUnit was able to read the settings for the config file and the GUI happily reported a lovely set of green ticks :)<br /></p>
 ]]></content>
   </entry>
