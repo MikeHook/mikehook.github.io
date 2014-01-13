@@ -10,6 +10,7 @@ status: publish
 type: post
 published: true
 date: 2011-01-04 19:43:12
+comments: true
 meta:
   _wpas_done_twitter: '1'
   _elasticsearch_indexed_on: '2011-01-04 19:43:12'

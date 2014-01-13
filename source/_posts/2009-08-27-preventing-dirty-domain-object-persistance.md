@@ -9,6 +9,7 @@ status: publish
 type: post
 published: true
 date: 2009-08-27 19:24:00
+comments: true
 meta:
   blogger_blog: bakingwebsites.blogspot.com
   blogger_author: Mike Hook

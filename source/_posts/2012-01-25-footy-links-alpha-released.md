@@ -10,6 +10,7 @@ status: publish
 type: post
 published: true
 date: 2012-01-25 09:34:41
+comments: true
 meta:
   _wpas_done_linkedin: '1'
   publicize_results: a:1:{s:7:"twitter";a:1:{i:33610861;a:2:{s:7:"user_id";s:12:"michael_hook";s:7:"post_id";s:18:"162106107958018048";}}}

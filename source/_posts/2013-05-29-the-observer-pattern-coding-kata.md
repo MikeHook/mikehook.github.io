@@ -10,6 +10,7 @@ status: publish
 type: post
 published: true
 date: 2013-05-29 07:53:06
+comments: true
 meta:
   _wpcom_is_markdown: '1'
   _wpas_done_327858: '1'

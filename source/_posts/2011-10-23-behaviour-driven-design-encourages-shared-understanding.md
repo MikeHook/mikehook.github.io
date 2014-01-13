@@ -10,6 +10,7 @@ status: publish
 type: post
 published: true
 date: 2011-10-23 11:21:38
+comments: true
 meta:
   _wpas_done_twitter: '1'
   _wpas_skip_yup: '1'

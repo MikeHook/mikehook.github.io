@@ -10,6 +10,7 @@ status: publish
 type: post
 published: true
 date: 2010-08-22 14:29:07
+comments: true
 meta:
   _wp_old_slug: ''
   _wpcom_is_markdown: '1'

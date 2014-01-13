@@ -10,6 +10,7 @@ status: publish
 type: post
 published: true
 date: 2013-04-09 16:40:42
+comments: true
 meta:
   publicize_twitter_user: michael_hook
   _publicize_done_external: a:1:{s:7:"twitter";a:1:{i:33610861;b:1;}}
