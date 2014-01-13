@@ -35,7 +35,7 @@ After running the tool you are provided with an interactive view of the assembli
 
 The results of my first report are shown below:
 
-<a href="http://bakingwebsites.files.wordpress.com/2009/12/ncoverreport1.jpg"><img class="alignnone size-full wp-image-31" title="NCover Report" src="http://bakingwebsites.files.wordpress.com/2009/12/ncoverreport1.jpg" alt="" width="745" height="698" /></a>
+<a href="http://imageshack.com/a/img268/8057/6zqn.jpg"><img class="alignnone size-full wp-image-31" title="NCover Report" src="http://imageshack.com/a/img268/8057/6zqn.jpg" alt="" /></a>
 
 The prime candidates for improvement were:
 
@@ -51,7 +51,7 @@ By default NCover sets the acceptable coverage level at 95%, however I felt that
 
 OK maybe I   m stretching the food analogy a little too far with my headings now! By red sauce I mean those nasty red bars that were blazed across nearly every line of the report. Below you can see the report looks much more healthy after adding some unit tests and trimming some unused code:
 
-<a href="http://bakingwebsites.files.wordpress.com/2009/12/ncoverreport2.jpg"><img class="alignnone size-full wp-image-32" title="NCover Report - 80% coverage" src="http://bakingwebsites.files.wordpress.com/2009/12/ncoverreport2.jpg" alt="" width="790" height="790" /></a>
+<a href="http://imageshack.com/a/img163/5125/23o5.jpg"><img class="alignnone size-full wp-image-32" title="NCover Report - 80% coverage" src="http://imageshack.com/a/img163/5125/23o5.jpg" alt="" /></a>
 
 I will endeavour to keep the coverage level at a minimum of 80% from now, and hopefully add some more tests to bump off those remaining pesky red bars!
 

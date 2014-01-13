@@ -45,5 +45,5 @@ The ApplicationBase setting remains blank, however if you have saved the NUnit p
 
 Below is an image of the settings for my project:
 
-<a href="http://bakingwebsites.files.wordpress.com/2009/06/nunitprojecteditor.jpg"><img alt="" border="0" src="http://bakingwebsites.files.wordpress.com/2009/06/nunitprojecteditor.jpg?w=300" /></a>
+<a href="http://imageshack.com/a/img15/3503/csy7.jpg"><img alt="" border="0" src="http://imagizer.imageshack.us/v2/320x240q90/15/csy7.jpg" /></a>
 After updating these settings NUnit was able to read the settings for the config file and the GUI happily reported a lovely set of green ticks :)<br />

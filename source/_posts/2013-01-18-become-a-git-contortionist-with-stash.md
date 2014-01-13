@@ -22,7 +22,7 @@ meta:
   _wpas_skip_327858: '1'
   _elasticsearch_indexed_on: '2013-01-18 19:16:05'
 ---
-<a href="http://bakingwebsites.files.wordpress.com/2013/01/annie_the_contortionist.jpg"><img class="size-medium wp-image-364 alignright" alt="Annie the Contortionist" src="http://bakingwebsites.files.wordpress.com/2013/01/annie_the_contortionist.jpg?w=300" width="300" height="200" /></a>One of the great aspects of the Git source control system is its flexibility. Almost any sticky situation you may encounter  as a developer working with source control can be   solved with Git.
+<img class="size-medium wp-image-364 alignright" alt="Annie the Contortionist" src="http://imageshack.com/a/img856/5731/jyt7.jpg" width="300" />One of the great aspects of the Git source control system is its flexibility. Almost any sticky situation you may encounter  as a developer working with source control can be   solved with Git.
 
 Take this scenario, you're halfway through writing a class for a new feature when you get a call.. the client has found a show stopping bug in the application and it needs to be fixed right away. To be able to fix the bug you will need to switch onto the live code branch but you can't go switching branches with a load of uncommitted changes.  Now you don't want to commit your code as its half done and won't even compile right now, but you don't want to lose the changes either... <a href="http://git-scm.com/book/en/Git-Tools-Stashing"><em>git stash</em></a> to the rescue!
 

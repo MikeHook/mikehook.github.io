@@ -42,7 +42,7 @@ Also one of the main issues the factory pattern tries to solve is centralising o
 
 <blockquote>Ensure a class only has one instance and provide a global access point to it</blockquote>
 
-<a href="http://bakingwebsites.files.wordpress.com/2013/06/asparagus-shoot.jpg"><img class="alignright size-medium wp-image-460" alt="asparagus shoot from http://sandyspringcsa.com/" src="http://bakingwebsites.files.wordpress.com/2013/06/asparagus-shoot.jpg?w=300" width="300" height="200" /></a>
+<img class="alignright size-medium wp-image-460" alt="asparagus shoot from http://sandyspringcsa.com/" src="http://imageshack.com/a/img32/7137/uwa5.jpg" width="300" />
 This is a pattern which can be very useful in applications, however the implementation is so short that a coding kata would have little content. There are just a couple of pitfalls to watch out for when implementing this pattern:
 
 <ul>

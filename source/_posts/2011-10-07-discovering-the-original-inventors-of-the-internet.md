@@ -21,7 +21,7 @@ meta:
 ---
 I'm sure many of you have heard about a chap called <a href="http://twitter.com/#!/timberners_lee">Tim Berners Lee</a> who is widely credited for inventing the world wide web as we know it today. The story is well known and I'm not going to re-hash it here, however less is known about who may have come up with the first concept of the <a href="http://en.wikipedia.org/wiki/Internet">Internet</a>. You may be surprised to hear that the origins of the concept date back several centuries and take place on an entirely different continent, among a race of people commonly considered quite primitive and barbaric. Here's a little hint of who these people may have been.
 
-<a href="http://bakingwebsites.files.wordpress.com/2011/10/machu_picchu_1.jpg"><img class="size-medium wp-image-257" title="Machu_Picchu_1" src="http://bakingwebsites.files.wordpress.com/2011/10/machu_picchu_1.jpg?w=300" alt="" width="300" height="225" /></a>
+<a href="http://imageshack.com/a/img835/4400/yrbq.jpg"><img class="size-medium wp-image-257" title="Machu_Picchu_1" src="http://imagizer.imageshack.us/v2/320x240q90/835/yrbq.jpg" alt="" width="320" /></a>
 
 <h2>The internet laid bare</h2>
 
@@ -31,7 +31,7 @@ You may well ask how the internet could exist centuries before computers had bee
 
 The internet has an elegant solution to this problem. Instead of attempting to establish a direct connection between the two end points, each of the nodes in the network just connects to their nearest nodes. So the end points are indirectly connected through the network in a similar way to this lovely node diagram:
 
-<img class="size-full wp-image-252" title="onethousandpaintings_small1-300x300" src="http://bakingwebsites.files.wordpress.com/2011/10/onethousandpaintings_small1-300x300.gif" alt="Network nodes" width="300" height="300" />
+<img class="size-full wp-image-252" title="onethousandpaintings_small1-300x300" src="http://imageshack.com/a/img834/8784/z6g.gif" alt="Network nodes" width="300" />
 
 Each message is sent with the address of its final destination, each node only needs to know what direction to send the message in order to get it closer to its destination. In this way the message is naturally <a href="http://en.wikipedia.org/wiki/Routing">routed</a> on the most efficient path from its source to the destination. It is this concept if a nodal network and message routing that has strong parallels with a very old method of communications.
 
@@ -39,13 +39,13 @@ Each message is sent with the address of its final destination, each node only n
 
 I recently took a trip to Peru to hike the Inca trail to Machu Picchu. So this post is a (hopefully interesting) way to shoehorn some of my holiday snaps onto this blog!
 
-<a href="http://bakingwebsites.files.wordpress.com/2011/10/machu_picchu.jpg"><img class="size-medium wp-image-255" title="Machu_Picchu" src="http://bakingwebsites.files.wordpress.com/2011/10/machu_picchu.jpg?w=225" alt="" width="225" height="300" /></a>
+<a href="http://imageshack.com/a/img703/8159/inq4.jpg"><img class="size-medium wp-image-255" title="Machu_Picchu" src="http://imagizer.imageshack.us/v2/320x240q90/703/inq4.jpg" alt="" /></a>
 
 However quite apart from that I learnt a great deal about the fascinating Inca culture. Before the trip I had thought that there was essentially one Inca trail in Peru leading to Machu Picchu, how wrong I was! The Inca trails actually comprised of thousands of miles of pathways connected across the whole of the Inca empire. They were the key to enabling the Inca rulers establish and run the largest single empire in South America.
 
 One of the main uses of the trails was as a communications network. There were small guard posts dotted across the network, often high up in remote mountain areas. If the Inca ruler wanted to send a message they would encode it using a '<a href="http://en.wikipedia.org/wiki/Quipus">quipus</a>', a device made up of multi-coloured plied rope, threads and knots.     The exact method of encoding has unfortunately been lost in time but it may well of been a binary system quite similar to one used by computers today. It would have been quite possible to encode fairly sophisticated messages in this way.
 
-<a href="http://bakingwebsites.files.wordpress.com/2011/10/quipu2-150x150.jpg"><img class="size-full wp-image-259" title="quipu2-150x150" src="http://bakingwebsites.files.wordpress.com/2011/10/quipu2-150x150.jpg" alt="" width="150" height="150" /></a>
+<img class="size-full wp-image-259" title="quipus" src="http://imageshack.com/a/img14/4521/fqto.jpg" alt="" /></a>
 
 The ruler would then pass the quipus to a messenger to deliver the message. However the messenger would only take the message to the nearest checkpoint, then pass it onto another messenger who would carry the message to the next checkpoint. Each checkpoint would be around 5-10 KM apart, more distance for flat sections and less for mountainous terrain. In this way each of the messengers could run between the checkpoints as fast as possible and the message itself would reach its destination far quicker than would otherwise be possible.
 

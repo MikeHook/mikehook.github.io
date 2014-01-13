@@ -22,7 +22,7 @@ meta:
   _elasticsearch_indexed_on: '2013-03-14 15:54:57'
   _wpcom_is_markdown: '1'
 ---
-<a href="http://bakingwebsites.files.wordpress.com/2013/03/custom_integration.jpg"><img class="alignright size-full wp-image-408" alt="custom_integration" src="http://bakingwebsites.files.wordpress.com/2013/03/custom_integration.jpg" width="300" height="220" /></a>This post assumes you have EPiServer 7 installed on your machine. If you don't have it then it is available from <a href="http://world.episerver.com/Download/Categories/Products/EPiServer-CMS/">EPiServer world</a>  (once you have created an account).
+<img class="alignright size-full wp-image-408" alt="custom_integration" src="http://imageshack.com/a/img560/4853/3rqu.jpg" width="300" />This post assumes you have EPiServer 7 installed on your machine. If you don't have it then it is available from <a href="http://world.episerver.com/Download/Categories/Products/EPiServer-CMS/">EPiServer world</a>  (once you have created an account).
 
 There are 2 main options for creating a new EPiServer 7 MVC stylee site:
 

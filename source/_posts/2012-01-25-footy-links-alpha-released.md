@@ -22,7 +22,7 @@ meta:
   _elasticsearch_indexed_on: '2012-01-25 09:34:41'
   _wpcom_is_markdown: '1'
 ---
-<a href="http://bakingwebsites.files.wordpress.com/2012/01/footylinkslogo.jpg"><img class="size-full wp-image-332 alignleft" title="FootyLinksLogo" src="http://bakingwebsites.files.wordpress.com/2012/01/footylinkslogo.jpg" alt="" width="150" height="170" /></a>The very first version of Footy Links is now available for download from the Android Market.
+<img class="size-full wp-image-332 alignleft" title="FootyLinksLogo" src="http://imageshack.com/a/img834/6565/3iks.jpg" alt="" width="150" />The very first version of Footy Links is now available for download from the Android Market.
 You can get the app by opening the following website on your android device and press the 'Install' button:
 <a href="https://market.android.com/details?id=mhook.FootyLinks">Footy Links on the Android Market</a>
 
