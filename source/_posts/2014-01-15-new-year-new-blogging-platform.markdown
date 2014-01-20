@@ -7,9 +7,11 @@ categories: progress
 published: false
 ---
 
+<img src="http://imageshack.com/a/img827/7426/w5v5.png " class="alignleft" alttext="Octopress Logo"  />
+
 ## Intro
 
-blah blah blah
+blah blah blah 
 
 ## No more Batman and Robin
 
@@ -31,7 +33,11 @@ Having settled on a new platform I needed to extract the content from my existin
 
 I got the blog running pretty easily (as it runs through Ruby, which is already setup on my machine) however the default theme wasn't really doing it for me. Fortunately there are a bunch of [alternative themes](http://opthemes.com/) available that a pretty straightforward to apply. I opted for a customised version of the [greyshade theme](https://github.com/shashankmehta/greyshade).
 
-## 
+## Images / Comments bit
+
+## Conclusion
+So there you have it, a freshly baked blogging site for your consumption pleasure, enjoy!
+
 
 
     
