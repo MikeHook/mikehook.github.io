@@ -3,7 +3,8 @@ layout: post
 title: "Dear Wordpress, you're dumped!"
 date: 2014-01-15 16:38:27 +0000
 comments: true
-categories: progress
+categories:
+- Progress
 published: true
 ---
 
