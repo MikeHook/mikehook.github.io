@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Event Storming a virtual solution"
+title: "Event Storming a distributed solution"
 date: 2014-01-29 17:38:27 +0000
 comments: true
 categories:
