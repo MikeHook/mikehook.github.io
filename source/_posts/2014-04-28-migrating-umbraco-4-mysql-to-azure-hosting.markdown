@@ -23,7 +23,7 @@ Things here
 
 - Click on the new website and go to the 'linked resources' tab. The MySql Database should be listed here
 - Click the name to open ClearDB (the third party provider of mysql databases support for Windows Azure)
-- Setup MySQL workbench to connect to ClearDB, [this article](https://github.com/CloudBees-community/tomcat-clickstack/wiki/ClearDB-::--MySQL-SSL-Connection-MySQL-Workbench) is useful!  
+- Setup MySQL workbench to connect to ClearDB, [this article](https://github.com/CloudBees-community/tomcat-clickstack/wiki/ClearDB-::--MySQL-SSL-Connection-MySQL-Workbench) is useful! Also may need to install OpenSSL to enable generation of the rsa key.  
 
 
 
