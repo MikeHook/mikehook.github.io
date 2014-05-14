@@ -1,0 +1,252 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Top 5 domain object optimisations - baking websites</title>
+	<meta name="author" content="Mike Hook">
+
+	
+	<meta name="description" content="Top 5 Domain Object Optimisations I&#8217;ve been working with domain objects for a while now and these are simple tips I automatically follow on &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="baking websites" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://bakingwebsites.co.uk/2011/01/30/top-5-domain-object-optimisations/">
+	<link href="http://bakingwebsites.co.uk/favicon.png" rel="shortcut icon">
+	<link href="http://bakingwebsites.co.uk/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="http://bakingwebsites.co.uk/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<!--
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css"> 
+-->
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700" rel="stylesheet" type="text/css">
+
+  
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-47738964-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<img src="/images/bread-Sq-zoom-150.jpg" alt="Profile Picture" style="width: 160px;" />
+</div>
+<hgroup>
+  <h1><a href="http://bakingwebsites.co.uk/">baking websites</a></h1>
+  
+    <h2>adventures in software development</h2>
+  
+</hgroup>
+
+<nav id="main-nav"><h3>categories</h3>
+<ul class="main-navigation">
+<li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 20 ]</li>
+<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 3 ]</li>
+<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 12 ]</li>
+<li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
+<li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 8 ]</li>
+
+</ul>
+<br/>
+<a href="http://bakingwebsites.co.uk/blog/archives">Archives</a>
+
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		
+			<a class="twitter" href="http://twitter.com/michael_hook" title="Twitter">Twitter</a>
+		
+		
+			<a class="github" href="https://github.com/MikeHook" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">Top 5 Domain Object Optimisations</h1>
+	<div class="entry-content" itemprop="articleBody"><div>I&#8217;ve been working with domain objects for a while now and these are simple tips I automatically follow on new objects. In my case the domain objects are setup to be mapped to a database by NHibernate, however most of these optimisations would be valid for a domain object used with any mapping tool.   I&#8217;ve found that these changes are quick to implement but can save a lot of hassle in the long run!</div>
+
+
+
+
+<h3>1. Make the parameterless constructor private</h3>
+
+
+<p>Obviously you will need a public constructor as well, however this should take parameters. These should be the minimum set of properties that make the domain object valid. In this way you can be sure that whenever you encounter one of these objects in your code it will not have random null properties and cause unexpected null references.</p>
+
+<pre style="background-color:#eeeeee;border:1px dashed #999999;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:60px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>private Customer() {}
+
+public Customer(string firstName, string lastName) {}
+</code></pre>
+
+
+
+
+<h3>2. Add precondition checks in the constructor</h3>
+
+
+<p>The main advantage of this is to ensure that the constructor is used as intended. The precondition checks can be used to make sure that no null or empty parameters are passed into the constructor. When used in tandem with the first tip, you can be sure that you will not encounter any invalid domain objects in your code.</p>
+
+<pre style="background-color:#eeeeee;border:1px dashed #999999;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:80px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>public Customer(string firstName, string lastName)
+{
+   Check.Require(string.IsNullOrEmpty(lastName) == false,
+      "lastName must be provided");
+}</code></pre>
+
+
+
+
+<h3>3. Initialise your lists properties in the constructor</h3>
+
+
+<p>This particular change may only be needed for NHibernate. A list property can be used to represent a one-to-many relationship between to different classes. For example, typically a  <em><strong>Customer </strong></em>object could be related to multiple  <em><strong>Order </strong></em>objects, so this would be represented in the Customer class as a list of Order objects. However, if the customer had not placed any orders yet and you tried to access the orders list, without first initialising it, you would get a null reference.</p>
+
+<pre style="background-color:#eeeeee;border:1px dashed #999999;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:60px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>private Customer()
+{
+   Orders = new List();
+}</code></pre>
+
+
+<p>You will not get this problem if the list is always initialised in the constructor. NHibernate populates the list after the constructor has been called so no actual data will be lost when the list is initialised.</p>
+
+<h3>4. Make any Status properties private</h3>
+
+
+<p>A convention we commonly use with domain objects is to represent its state with an enum property. For example an order could be New, Pending or Complete. If the Status property is private then it can only be changed by Methods in the domain object itself. This has two main advantages, firstly any logic that needs to be associated with the status change can be included in the same method. In this way you can be sure that all the required logic is run when the status is changed. For example, you may need to set the order completion date when the status changes from Pending to Complete.   Secondly it makes the code much easier to re-factor in future as there will not be calls to set the property spread around the code base.</p>
+
+<pre style="background-color:#eeeeee;border:1px dashed #999999;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:100px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>OrderStatus Status {get; private set; }
+
+public CompleteOrder()
+{
+   Status = OrderStatus.Complete;
+   CompletedDate = DateTime.Now();
+}</code></pre>
+
+
+
+
+<h3>5. Keep it simple!</h3>
+
+
+<p>OK I admit it, I ran out of tips after four! But I think this is a valid point. There is nothing worse than discovering a domain object of 500 plus lines of code in a project you need to maintain. It is best to keep it simple and if you find that too much behaviour is associated with one object then either split it into smaller domain objects or move the behaviour into a separate service class.</p>
+
+<p>So those are my top 5 tips for domain objects. I&rsquo;d be interested to hear opinions on these, along with  practices  that anyone else employs for domain objects so feel free to leave comments.</p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2014 - Mike Hook -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer>
+			
+
+<script type="text/javascript">
+      var disqus_shortname = 'bakingwebsites';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://bakingwebsites.co.uk/2011/01/30/top-5-domain-object-optimisations/';
+        var disqus_url = 'http://bakingwebsites.co.uk/2011/01/30/top-5-domain-object-optimisations/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

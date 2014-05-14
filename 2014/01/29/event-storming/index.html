@@ -1,0 +1,229 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Event Storming a distributed solution - baking websites</title>
+	<meta name="author" content="Mike Hook">
+
+	
+	<meta name="description" content="Event Storming a Distributed Solution Software design and development techniques are constantly evolving, making the discipline a fascinating area &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="baking websites" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://bakingwebsites.co.uk/2014/01/29/event-storming/">
+	<link href="http://bakingwebsites.co.uk/favicon.png" rel="shortcut icon">
+	<link href="http://bakingwebsites.co.uk/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="http://bakingwebsites.co.uk/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<!--
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css"> 
+-->
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700" rel="stylesheet" type="text/css">
+
+  
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-47738964-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<img src="/images/bread-Sq-zoom-150.jpg" alt="Profile Picture" style="width: 160px;" />
+</div>
+<hgroup>
+  <h1><a href="http://bakingwebsites.co.uk/">baking websites</a></h1>
+  
+    <h2>adventures in software development</h2>
+  
+</hgroup>
+
+<nav id="main-nav"><h3>categories</h3>
+<ul class="main-navigation">
+<li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 20 ]</li>
+<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 3 ]</li>
+<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 12 ]</li>
+<li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
+<li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 8 ]</li>
+
+</ul>
+<br/>
+<a href="http://bakingwebsites.co.uk/blog/archives">Archives</a>
+
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		
+			<a class="twitter" href="http://twitter.com/michael_hook" title="Twitter">Twitter</a>
+		
+		
+			<a class="github" href="https://github.com/MikeHook" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">Event Storming a Distributed Solution</h1>
+	<div class="entry-content" itemprop="articleBody"><p>Software design and development techniques are constantly evolving, making the discipline a fascinating area to work in. Over the time I&rsquo;ve been working as a developer I&rsquo;ve seen various approaches to design from Code First, Data Driven to Domain Driven (DDD). My preference is to consider the scope of the problem first and design a solution to match and DDD is a good fit for this. However when looking at enterprise level problems we need to give more consideration to how a problem will scale&hellip; enter Event Storming.</p>
+
+<h2>Distributed design</h2>
+
+<p>I work in a development team which is responsible for several key business capabilities, there are already some software solutions in place for these capabilities however they were designed several years ago to solve problems at a scale at least an order of magnitude below where we currently find ourselves. Our stakeholders have expressed a desire that we could redesign a solution which would meet our current needs better, basically it needs to work <strong>faster</strong>, do <em>just</em> what is needed and ideally <strong>scale</strong> so that it will still perform well at the next order of magnitude up.</p>
+
+<p>We decided to have an Event Storming session to help us analyse the problem and come up with a high level distributed solution. We carried out the session in a couple of phases, first we reviewed the current solution, then we looked at the primary goals for the redesign then finally we started event storming a solution. Here are the team hard at work mid-storm:</p>
+
+<p><img src="http://imageshack.com/a/img542/5968/1l37.jpg" class="alignleft" alttext="Octopress Logo"  /></p>
+
+<h2>Collaborative analysis</h2>
+
+<p>The session first involved us all writing down on post-it notes business events that had some relevance to the feature we were analysing. We then stuck all these onto a big board and de-duped them. It was a bit tricky to order the post-its at this stage so we went for a loose left to right time sequence.</p>
+
+<p>Following this we got the post-it stack back in action and wrote down each of the commands that could have some influence on the events on the board. Then we linked each of the commands to events on the board, this wasn&rsquo;t always a one-to-one relationship which presented some practical problems, however on the whole I think working with physical post-its was far better than using something like Visio as its more democratic. Finally we arranged the post-its into discrete pieces of behaviour and mapped out the interactions between them.</p>
+
+<p>It was important that we recognised the difference between an event and a command during the exercise. As a rule of thumb commands are carried out by users and events are raised by the system to indicate something has happened. For example the <em>Create Product</em> command is raised when the user saves a product entry, whereas <em>&lsquo;Product Created&rsquo;</em> event is raised after the transaction has finished and a product has been persisted in the system. As I alluded to earlier there is no hard one-to-one relationship here, a single command can often result in multiple events being raised and vice versa. Its important to make sure the distinction is clear to everyone before the session begins, it saves a lot of time in the long run!</p>
+
+<p>The results of our session can be seen in the picture below:
+<img src="http://imageshack.com/a/img34/1388/bbid.jpg" class="alignleft" alttext="Octopress Logo"  /></p>
+
+<h2>A virtual solution</h2>
+
+<p>By the end of the session we had a virtual solution figured out that could be implemented with discrete modules communicating exclusively via messaging. I was pleasantly surprised by the elegance of the solution, by focussing on the interactions between the systems and isolating responsibilities it was clear that we only needed to pass a small amount of data between each module and could effectively encapsulate the behaviour. However Event Storming is just one technique and I wouldn&rsquo;t suggest it is a magic bullet design technique, these are the main pros and cons as I see it.</p>
+
+<h3>Advantages</h3>
+
+<ul>
+<li>Helps focus on the interactions between elements of a distributed system</li>
+<li>The whole team is involved at the analysis stage and visualize the same proposed solution</li>
+<li>Encourages scalable solutions</li>
+</ul>
+
+
+<h3>Drawbacks</h3>
+
+<ul>
+<li>Reliant on domain knowledge of team members to surface events / commands</li>
+<li>Design can get lost in a sea of post-it notes!</li>
+<li>Need to transfer quickly to implementation tasks to avoid losing insights</li>
+</ul>
+
+
+<p>I&rsquo;d be interested to hear of your experiences of event storming and how effective you have found it to be?</p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2014 - Mike Hook -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer>
+			
+
+<script type="text/javascript">
+      var disqus_shortname = 'bakingwebsites';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://bakingwebsites.co.uk/2014/01/29/event-storming/';
+        var disqus_url = 'http://bakingwebsites.co.uk/2014/01/29/event-storming/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,240 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Integrating EPiServer 7 with MVC - Next Steps - baking websites</title>
+	<meta name="author" content="Mike Hook">
+
+	
+	<meta name="description" content="Integrating EPiServer 7 With MVC - Next Steps My previous blog post, Integrating EPiServer 7 with an existing MVC site, outlined the initial steps &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="baking websites" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://bakingwebsites.co.uk/2013/04/09/integrating-episerver-7-with-mvc-next-steps/">
+	<link href="http://bakingwebsites.co.uk/favicon.png" rel="shortcut icon">
+	<link href="http://bakingwebsites.co.uk/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="http://bakingwebsites.co.uk/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<!--
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css"> 
+-->
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700" rel="stylesheet" type="text/css">
+
+  
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-47738964-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<img src="/images/bread-Sq-zoom-150.jpg" alt="Profile Picture" style="width: 160px;" />
+</div>
+<hgroup>
+  <h1><a href="http://bakingwebsites.co.uk/">baking websites</a></h1>
+  
+    <h2>adventures in software development</h2>
+  
+</hgroup>
+
+<nav id="main-nav"><h3>categories</h3>
+<ul class="main-navigation">
+<li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 20 ]</li>
+<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 3 ]</li>
+<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 12 ]</li>
+<li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
+<li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 8 ]</li>
+
+</ul>
+<br/>
+<a href="http://bakingwebsites.co.uk/blog/archives">Archives</a>
+
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		
+			<a class="twitter" href="http://twitter.com/michael_hook" title="Twitter">Twitter</a>
+		
+		
+			<a class="github" href="https://github.com/MikeHook" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">Integrating EPiServer 7 With MVC - Next Steps</h1>
+	<div class="entry-content" itemprop="articleBody"><p>My previous blog post, <a title="Integrating EPiServer 7 with an existing MVC  site" href="http://bakingwebsites.co.uk/2013/03/14/integrating-episerver-7-with-an-existing-mvc-site/">Integrating EPiServer 7 with an existing MVC site</a>, outlined the initial steps to get EPiServer 7 running. However there are a number of additional steps you may need to take before your site is fully integrated.</p>
+
+<h3>Convert any Controllers not in Areas</h3>
+
+
+<p>If your site only contains controllers within Areas then you should not need to make any changes. However controllers in the root of the site will not work by default (at least for me). I found it was best to deal with these controllers on a case per case basis as the best course of action depended on the function of the controller. I implemented one of the following changes for each:</p>
+
+<ul>
+    <li><span style="line-height:13px;">Move the controller into an area. This option makes sense if the views for the controller do not have any CMS editable content</span></li>
+    <li>Convert the controller to be CMS managed. Makes sense if the views need to be CMS editable (inherit from  PageController&lt;T&gt; where T is a BasePage)</li>
+    <li>Convert the controller to an HttpHandler. In one case the controller did not have any views or models, it was really just a different entrypoint to the site which ran a bit of logic and redirected. In this case there was no point in retaining the controller as an HttpHanlder could do the same job more efficiently</li>
+</ul>
+
+
+
+
+<h3>Disable strict language routing</h3>
+
+
+<p>I encountered a further issue after patching my EPiServer.Core and EPiServer.Framework nuget packages to the latest versions. None of the controller actions in the home controller worked any more except for the Index. This was fairly easy to remedy by disabling the strict language routing, via the episerver/sites/site/strictLanguageRouting config setting.</p>
+
+<h3>Deployment Issues</h3>
+
+
+<p>While its all well and good having the site running on your machine, eventually it will need to be deployed somewhere. We handle configuration changes with file transforms and I was pleased to note that the config changes required for episerver deployments are now minimised. Here is a summary list of all the settings we changed per environment:</p>
+
+<ul>
+    <li><span style="line-height:13px;">connectionStrings
+</span></li>
+    <li>episerver/sites/site/siteSettings/siteUrl</li>
+    <li>episerver.framework/siteHostMapping/siteHosts</li>
+    <li>episerver.framework/appData/basePath</li>
+    <li>episerver.framework/licensing/licenseFilePath</li>
+    <li>episerver.search/namedIndexingServices/services/baseUri</li>
+</ul>
+
+
+<p>Note, you may need to transform further settings for a load balanced site.</p>
+
+<h5>EPiServer UI not deployed</h5>
+
+
+<p>Previously with EPiServer v6 all that was needed to run the CMS interface itself was to install the application on the web server. However the EPiServer 7 UI architecture also has a number of dependencies in the {VPP}\modules folder. So ensure that these files are also present in your deployed environment, otherwise you will probably encounter the following error:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">DirectoryNotFoundException: Could not find a part of the path '{Your site path} \Website\ClientResources\ClientResources\packages.config'</pre>
+
+
+
+
+<h5>Search service configuration</h5>
+
+
+<p>We have the search service configured on a local host name as the indexing service does not like to communicate over a public host name. However this caused a further issue with the service reporting that multiple hosts names could not be run for the service. Fortunately this could be remedied easily by setting the system.serviceModel/serviceHostingEnvironment/multipleSiteBindingsEnabled  setting to true.</p>
+
+<p>Those were all the steps we needed to take to deploy the site successfully. I&rsquo;d be interested to hear your experiences if you found any other settings that need to be changed. Feel free to reply in the comments below or contact me directly on twitter <a href="https://twitter.com/michael_hook">@michael_hook</a>.</p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2014 - Mike Hook -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer>
+			
+
+<script type="text/javascript">
+      var disqus_shortname = 'bakingwebsites';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://bakingwebsites.co.uk/2013/04/09/integrating-episerver-7-with-mvc-next-steps/';
+        var disqus_url = 'http://bakingwebsites.co.uk/2013/04/09/integrating-episerver-7-with-mvc-next-steps/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

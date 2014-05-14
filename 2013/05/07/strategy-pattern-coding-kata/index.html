@@ -1,0 +1,264 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Strategy pattern coding kata - baking websites</title>
+	<meta name="author" content="Mike Hook">
+
+	
+	<meta name="description" content="Strategy Pattern Coding Kata I&rsquo;ve been having a look at coding katas and design patterns over the last couple of weeks. If you are not &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="baking websites" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://bakingwebsites.co.uk/2013/05/07/strategy-pattern-coding-kata/">
+	<link href="http://bakingwebsites.co.uk/favicon.png" rel="shortcut icon">
+	<link href="http://bakingwebsites.co.uk/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="http://bakingwebsites.co.uk/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<!--
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css"> 
+-->
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700" rel="stylesheet" type="text/css">
+
+  
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-47738964-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<img src="/images/bread-Sq-zoom-150.jpg" alt="Profile Picture" style="width: 160px;" />
+</div>
+<hgroup>
+  <h1><a href="http://bakingwebsites.co.uk/">baking websites</a></h1>
+  
+    <h2>adventures in software development</h2>
+  
+</hgroup>
+
+<nav id="main-nav"><h3>categories</h3>
+<ul class="main-navigation">
+<li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 20 ]</li>
+<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 3 ]</li>
+<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 12 ]</li>
+<li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
+<li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 8 ]</li>
+
+</ul>
+<br/>
+<a href="http://bakingwebsites.co.uk/blog/archives">Archives</a>
+
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		
+			<a class="twitter" href="http://twitter.com/michael_hook" title="Twitter">Twitter</a>
+		
+		
+			<a class="github" href="https://github.com/MikeHook" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">Strategy Pattern Coding Kata</h1>
+	<div class="entry-content" itemprop="articleBody"><p>I&rsquo;ve been having a look at coding katas and design patterns over the last couple of weeks. If you are not familiar with either of these concepts then you can read <a href="http://butunclebob.com/ArticleS.UncleBob.TheBowlingGameKata">Uncle Bob&rsquo;s introduction to the Bowling Kata</a> and check out <a href="http://www.blackwasp.co.uk/GofPatterns.aspx">Richard Carr&rsquo;s great set of articles on design patterns</a>.</p>
+
+<p>My main goals are to:</p>
+
+<ul>
+    <li><span style="line-height:13px;">Increase my familiarity with design patterns</span></li>
+    <li>Understand how design patterns can be best applied in real life situations</li>
+    <li>Develop a repeatable method for memorizing the patterns</li>
+</ul>
+
+
+<p>A good way to cover off all of these goals will be to develop a set of code kata&rsquo;s which can be solved by applying a design pattern.  Sounds simple? Maybe but lets get started and see how it goes!</p>
+
+<h2>The Strategy Pattern</h2>
+
+
+<p>The strategy pattern is defined as<em>   </em></p>
+
+<blockquote><em>&#8220;a design pattern that allows a set of similar algorithms to be defined and encapsulated in their own classes.&#8221; </em></blockquote>
+
+
+<p>The aim of this pattern is to separate the parts of a system that may change from those which are unlikely to change, allowing for easier maintainability of the system in future.  This all sounds good in theory but you may be wondering how and where the pattern can be applied in practice. With this in mind I&rsquo;ve come up with a  fictitious brief that we can solve by utilising the Strategy Pattern.</p>
+
+<h4>The brief</h4>
+
+
+<p>A games company is developing a sports event simulator, to be built in iterations starting with simple requirements and building up to increase the complexity. The system design should allow for changes to be made by extending the existing system without changing what is already in place.</p>
+
+<ol>
+    <li>The simulator must support marathon and 10 km run events. The only requirement for these events is that the competitors can be displayed in some way (text is fine) and they can compete in the event. All competitors will compete by running.</li>
+    <li>After running some events they proved to be totally chaotic so each event should now include a marshal. The marshal can also be displayed but does not compete in events.</li>
+    <li>Since the glorious victory of team GB in the Olympic Triathlon the sport&#8217;s popularity has increased. So the games company would now like to also support triathlon events. Again competitors must be displayed and be able to compete, however a triathlon competitor will compete by swimming, cycling and running.</li>
+</ol>
+
+
+
+
+<h4>Designing the Solution</h4>
+
+
+<p>The starting point for this kata is available to clone from github here: <a href="https://github.com/MikeHook/DesignPatterns/tree/StrategyStart">Strategy Kata Start</a>  <a href="https://github.com/MikeHook/DesignPatterns/tree/StrategyStart">
+</a></p>
+
+<h5>Iteration 1</h5>
+
+
+<p>To meet the first requirement we only need a couple of objects as shown below:</p>
+
+<p><img class="alignnone" alt="Strategy Pattern - Design iteration 1" src="https://www.lucidchart.com/publicSegments/view/5180e984-cb84-4274-a415-68870a00005a/image.png" width="637" height="405" /></p>
+
+<p>We can create a couple of events for marathon and 10km runs and add some runners to those events. When the simulation runs the Compete() base method is called for each of the EventAttendees to simulate them taking part in the event. Each of the runners can be displayed by a call to their <em>Render()</em> method.</p>
+
+<h5><span style="line-height:13px;">Iteration 2</span></h5>
+
+
+<p>We now need to include Marshals as part of the event, so the model is extended as below:</p>
+
+<p><img class="alignnone" alt="Strategy Pattern - Design iteration 2" src="https://www.lucidchart.com/publicSegments/view/518380c3-ab34-42c9-a96e-71dc0a005c5f/image.png" width="707" height="492" /></p>
+
+<p>However, there is an obvious problem with this design, as noted in the diagram. One option would be for the Marshall to override the Compete method and make it do nothing. However this will store up more trouble for us as there may be other types of event attendee later which do not compete. We would have to ensure that each of these attendees also override that method with the same &lsquo;not compete&rsquo; behaviour. There is a better way to design for this issue (there is a clue in the name of this blog post!)</p>
+
+<h5>Iteration 3</h5>
+
+
+<p>It is clear that the Compete behaviour may change frequently depending on the attendee, we can leverage the Strategy pattern to extract this behaviour into separate classes as shown below.</p>
+
+<p><img class="alignnone" alt="Strategy Pattern - Iteration 3" src="https://www.lucidchart.com/publicSegments/view/51877f21-1fd8-4c3b-9f02-04510a0087f6/image.png" width="519" height="496" /></p>
+
+<p>The EventAttendee base class now contains a property of type ICompeteBehaviour. Any implementation of this interface can be assigned to each instance of an EventAttendee. So the <em>Runner</em> class is assigned the <em>Run </em>behaviour and the <em>Marshall</em> class is assigned the <em>DontCompete</em> behaviour.</p>
+
+<p>Iteration 4</p>
+
+<p>We have one more requirement to satisfy, the design needs to be extended to allow Triathlon events to take place. Thanks to our changes in the previous iteration we can add this new requirement without making any changes to the existing classes. Here is the final structure:</p>
+
+<p><img class="alignnone" alt="Strategy Pattern - Iteration 4" src="https://www.lucidchart.com/publicSegments/view/51878405-1770-4c88-b91a-761b0a000882/image.png" /></p>
+
+<p>We have extended the <em>EventAttendee</em> class with a new <em>Triathlete</em> class and created a new <em>RunCycleSwim</em> implementation of the <em>ICompeteBehaviour</em> interface. You may be thinking that the same could have been achieved with a method for the behaviour on the Triathlete class, while this is true it limits the flexibility of the design. We can see the advantage of this design by adding Spectators to the simulation. They will also be assigned the DontCompete behaviour, so we have effectively shared this part of the logic without repeating the implementation.</p>
+
+<p>The completed implementation for this kata is available on github here:  <a href="https://github.com/MikeHook/DesignPatterns/tree/StrategyEnd">Strategy Kata End</a></p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2014 - Mike Hook -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer>
+			
+
+<script type="text/javascript">
+      var disqus_shortname = 'bakingwebsites';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://bakingwebsites.co.uk/2013/05/07/strategy-pattern-coding-kata/';
+        var disqus_url = 'http://bakingwebsites.co.uk/2013/05/07/strategy-pattern-coding-kata/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

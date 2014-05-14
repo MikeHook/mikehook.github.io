@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Tips and Tricks | baking websites]]></title>
+  <link href="http://bakingwebsites.co.uk/blog/categories/tips-and-tricks/atom.xml" rel="self"/>
+  <link href="http://bakingwebsites.co.uk/"/>
+  <updated>2014-05-14T15:19:55+01:00</updated>
+  <id>http://bakingwebsites.co.uk/</id>
+  <author>
+    <name><![CDATA[Mike Hook]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Become a Git Contortionist With Stash]]></title>
+    <link href="http://bakingwebsites.co.uk/2013/01/18/become-a-git-contortionist-with-stash/"/>
+    <updated>2013-01-18T19:16:05+00:00</updated>
+    <id>http://bakingwebsites.co.uk/2013/01/18/become-a-git-contortionist-with-stash</id>
+    <content type="html"><![CDATA[<p><img class="size-medium wp-image-364 alignright" alt="Annie the Contortionist" src="http://imageshack.com/a/img856/5731/jyt7.jpg" width="300" />One of the great aspects of the Git source control system is its flexibility. Almost any sticky situation you may encounter  as a developer working with source control can be   solved with Git.</p>
+
+<p>Take this scenario, you&rsquo;re halfway through writing a class for a new feature when you get a call.. the client has found a show stopping bug in the application and it needs to be fixed right away. To be able to fix the bug you will need to switch onto the live code branch but you can&rsquo;t go switching branches with a load of uncommitted changes.  Now you don&rsquo;t want to commit your code as its half done and won&rsquo;t even compile right now, but you don&rsquo;t want to lose the changes either&hellip; <a href="http://git-scm.com/book/en/Git-Tools-Stashing"><em>git stash</em></a> to the rescue!</p>
+
+<p>When you issue the git stash command all your changes will be committed to a stack. Leaving you with no changes on your current working branch and free to branch where ever you want. So now you can switch to the live branch and do your bug fixing work. Once that is done you can simply move back to the feature branch and <em>apply</em> the stashed changes. Hey presto, you are back where you started with your uncommitted half complete work!</p>
+
+<p>If you really get into lots of parallel work you can stash multiple times, just be sure to remember that it is a stack and your last changes you have stashed will come back off stack first.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Beauty of Cherry Pick]]></title>
+    <link href="http://bakingwebsites.co.uk/2011/10/06/the-beauty-of-cherry-pick/"/>
+    <updated>2011-10-06T18:00:59+01:00</updated>
+    <id>http://bakingwebsites.co.uk/2011/10/06/the-beauty-of-cherry-pick</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m loving the <a href="http://gitready.com/intermediate/2009/03/04/pick-out-individual-commits.html">cherry pick command</a> in git right now, this is the scenario that it really helps me out for.</p>
+
+<p>I&rsquo;ve fixed a bug on the live branch, however before it can be published to the live website it needs to be tested. So I can first publish it to our UAT (user acceptance testing) site so the client can test the changes. However the UAT site already has a bunch of other unreleased features on it. If I merge my bug fix branch into the UAT branch it will overwrite some of the other feature changes.</p>
+
+<p>The solution here is to &lsquo;cherry pick&rsquo; just my changes from my bug fix branch and commit those to the UAT branch. In this way git doesn&rsquo;t merge all the other differences between the live and UAT branch.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Android Dev Tip - Fix the Eclipse Auto-complete]]></title>
+    <link href="http://bakingwebsites.co.uk/2011/03/10/android-dev-tip-fix-the-eclipse-auto-complete/"/>
+    <updated>2011-03-10T16:39:43+00:00</updated>
+    <id>http://bakingwebsites.co.uk/2011/03/10/android-dev-tip-fix-the-eclipse-auto-complete</id>
+    <content type="html"><![CDATA[<p>I recently had problems with the eclipse IDE auto-complete not working.</p>
+
+<p>After Googling the problem, I managed to resolve this by downloading the source for the version I was using and extracting into the Android SDK folder, as detailed in <a href="http://code.google.com/p/android/issues/detail?id=7850#c8">this google code issue</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to Handle the MVC HttpAntiForgeryException]]></title>
+    <link href="http://bakingwebsites.co.uk/2011/02/10/how-to-handle-the-mvc-httpantiforgeryexception/"/>
+    <updated>2011-02-10T21:24:16+00:00</updated>
+    <id>http://bakingwebsites.co.uk/2011/02/10/how-to-handle-the-mvc-httpantiforgeryexception</id>
+    <content type="html"><![CDATA[<p>When developing forms for websites it is good practice to guard against <a href="http://en.wikipedia.org/wiki/Cross-site_request_forgery">cross site request forgery</a> attacks. In MVC it is straightforward to do this using the <em>AntiForgeryToken()</em> helper method and the  <em>ValidateAntiForgeryToken </em>attribute (<a href="http://blog.stevensanderson.com/2008/09/01/prevent-cross-site-request-forgery-csrf-using-aspnet-mvcs-antiforgerytoken-helper/">as explained by Steve Sanderson</a>). However a side effect of this is that an  <em>HttpAntiForgeryException </em>like this will be thrown whenever a forgery attack is prevented:</p>
+
+<blockquote>System.Web.Mvc.HttpAntiForgeryException: A required anti-forgery token was not supplied or was invalid.</blockquote>
+
+
+<p>This is not generally a problem unless the site has been setup to notify you of any exceptions by email. Then you may find that your inbox quickly fills up with spam error reports and I think there is already quite enough spam in the world!
+The fix for this is to catch the exception before it makes it out of the application and into your inbox. The exception can be caught by adding the <em>HandleError </em>attribute to the controller class declaration as shown below:</p>
+
+<pre style="background-color:#eeeeee;border:1px dashed #999999;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:150px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>[HandleError(ExceptionType=typeof(HttpAntiForgeryException), View="Unauthorised")]
+public class MyController : Controller
+{
+  ...
+   public ActionResult Unauthorised()
+  {
+     return View("Unauthorised");
+  }
+}
+</code></pre>
+
+
+<p>Once the attribute has been added the <em>Unauthorised </em>view should be shown if a forgery attempt is intercepted. However in my case a different exception of the type shown below  was thrown instead:</p>
+
+<blockquote>The model item passed into the dictionary is of type 'System.Web.Mvc.HandleErrorInfo' but this dictionary requires a model item of type 'Core.Web.ViewModels.ISomeViewModel'.</blockquote>
+
+
+<p><span style="font-family:Georgia, 'Times New Roman', 'Bitstream Charter', Times, serif;line-height:19px;white-space:normal;font-size:13px;">This exception is thrown because (as described  <a href="http://aspnet.codeplex.com/workitem/1795">in this work item</a> on the MVC issue tracker) the default view model has been replaced by a <em>HandleErrorInfo </em>object and our master page is trying to access properties in the normal view model. So the straightforward fix for this is to remove the dependancy on the master page from the <em>Unauthorised </em>view. </span></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[EPiServer 6 Developer Exam Tips]]></title>
+    <link href="http://bakingwebsites.co.uk/2011/01/23/episerver-6-developer-exam-tips/"/>
+    <updated>2011-01-23T17:35:34+00:00</updated>
+    <id>http://bakingwebsites.co.uk/2011/01/23/episerver-6-developer-exam-tips</id>
+    <content type="html"><![CDATA[<p>Last Monday I made the trip to London to take the EPiServer CMS certification exam (version 6). I passed but it was quite a tricky exam so I thought I&rsquo;d post some tips that may be of help to others taking the test.</p>
+
+<p>The questions are randomised so you won   t get asked the same as me but the areas will probably be similar. There were 70 multiple choice questions split into four sections. I can&rsquo;t remember the exact breakdown but these numbers are close:</p>
+
+<h3>Installation / deployment (~10 questions)</h3>
+
+
+<p>These questions are not particularly difficult but if, like myself, you haven&rsquo;t needed to use the features much previously you might get stuck.</p>
+
+<ul>
+    <li>Deployment center     make sure you know everything you can do from here</li>
+    <li>Initialization module     What is it, when does it run etc (this is new to version 6, I missed the tech note and wished I'd read it)</li>
+    <li>Multi-Site installations</li>
+    <li>Upgrading to v6     What versions can you upgrade from, what is backed up / updated.</li>
+</ul>
+
+
+
+
+<h3>General Product Knowledge (~15 questions)</h3>
+
+
+<p>If you are familiar with the system and its features there is not much to worry about here</p>
+
+<ul>
+    <li><span style="font-weight:normal;font-size:13px;">Load balancing</span></li>
+    <li>Page type &amp; page template concepts</li>
+    <li>XForms - How to make one, how it works</li>
+    <li>Online center and gadgets</li>
+</ul>
+
+
+
+
+<h3>Standard Development (~25 questions)</h3>
+
+
+<p>Again, if you have developed a couple of sites then most of these are not too bad. However the customisation questions will be sticking points unless you are familiar with the tech notes.</p>
+
+<ul>
+    <li>Wiring up EPiServer / .NET web controls</li>
+    <li>Wiring up master pages</li>
+    <li>Custom membership provider</li>
+    <li>Custom virtual path provider</li>
+    <li>Globalization     What language is used in various scenarios</li>
+</ul>
+
+
+
+
+<h3>Advanced Development (~20 questions)</h3>
+
+
+<p>These questions are really tricky, and may involve quite a bit of guess work!</p>
+
+<ul>
+    <li>Mirroring     How is it setup / configured, what is mirrored</li>
+    <li>Scheduler service     What can and can   t be run</li>
+    <li>Dynamic data store</li>
+    <li>Page Objects (I missed this one completely)</li>
+    <li>Filters     adding code to a filter web control</li>
+    <li>Quick publishing configuration</li>
+    <li>Plugins / Modules     Installing</li>
+</ul>
+
+
+
+
+<h3>Preparing for the exam</h3>
+
+
+<p>To help pass I   d recommend in order of priority:</p>
+
+<ol>
+    <li>Install the example site and run everything you can in the deployment center</li>
+    <li>Try everything out in the CMS Online center (the Start page and menu bar) editor and admin sections while reading through the editor and admin manuals (particularly the admin manual)</li>
+    <li>Read all the tech notes and try to setup what they are describing. I wouldn't worry about spending too much time on each though as long as you understand the concepts.</li>
+</ol>
+
+
+<p>There are quite a lot of resources available online and it can be a bit overwhelming. But don&rsquo;t despair, Jonathan&rsquo;s handy  <a href="http://www.jonathansewell.co.uk/index.php/2010/12/06/episerver-6-exam-bookmarks/">exam bookmarks post</a> is a good place to start!</p>
+]]></content>
+  </entry>
+  
+</feed>

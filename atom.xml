@@ -1,0 +1,1063 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[baking websites]]></title>
+  <link href="http://bakingwebsites.co.uk/atom.xml" rel="self"/>
+  <link href="http://bakingwebsites.co.uk/"/>
+  <updated>2014-05-14T15:19:55+01:00</updated>
+  <id>http://bakingwebsites.co.uk/</id>
+  <author>
+    <name><![CDATA[Mike Hook]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[migrating umbraco 4 mysql to azure hosting]]></title>
+    <link href="http://bakingwebsites.co.uk/2014/04/28/migrating-umbraco-4-mysql-to-azure-hosting/"/>
+    <updated>2014-04-28T09:58:09+01:00</updated>
+    <id>http://bakingwebsites.co.uk/2014/04/28/migrating-umbraco-4-mysql-to-azure-hosting</id>
+    <content type="html"><![CDATA[<h2>Why Azure</h2>
+
+<p>I recently inherited an Umbraco version 4 site and need to setup web hosting for it. I decided that Azure would be a good option for hosting as it offers great benefits for future scalability and a good costing model. I also wanted to try it out and see what all the fuss is about!</p>
+
+<p>There were a few steps to carry out to get the site up and running in Azure, so I&rsquo;ve documented my experience here.</p>
+
+<h2>First steps</h2>
+
+<ul>
+<li>Obviously you need to sign up to a <a href="http://azure.microsoft.com/">Windows Azure account</a>. Its free to try but you do need a credit card. I guess this makes it nice and seamless for Microsoft to start charging you if you opt to continue past the 1 month trial!</li>
+<li>Now login to the portal and go to Websites &ndash;> new &ndash;> custom create &ndash;> enter details, selecting a mysql database from the drop down</li>
+</ul>
+
+
+<p><img src="http://imageshack.com/a/img834/4281/jf2b.png" class="alignleft" alttext="Azure create website dialog"  /></p>
+
+<h2>Migrating the database</h2>
+
+<ul>
+<li>Click on the new website and go to the &lsquo;linked resources&rsquo; tab. The MySql Database should be listed here</li>
+<li>Click the name to open ClearDB (the third party provider of MySql databases support for Windows Azure)</li>
+<li>Setup MySQL workbench to connect to ClearDB using an <a href="https://github.com/CloudBees-community/tomcat-clickstack/wiki/ClearDB-::--MySQL-SSL-Connection-MySQL-Workbench">SSL connection</a>. You may also need to install OpenSSL to enable generation of the rsa key.</li>
+<li>Reduce the database size to fit in the 20MB size limit by <a href="http://www.spyriadis.net/2012/07/umbraco-clear-old-document-versions-to-decrease-database-size-and-improve-performance/">removing old document versions and preview / log files.</a></li>
+</ul>
+
+
+<h2>Uploading the web site</h2>
+
+<ul>
+<li>Download the publish profile file from your azure account. It is available on the dashboard page of your website, under the &lsquo;quick glance&rsquo; menu</li>
+<li>Open the site in WebMatrix, press publish and browse to select the publish profile file you just downloaded.</li>
+<li>Web Matrix will now run a diff on the files and prompt you to upload any changes to Azure.</li>
+<li>In Azure go to the site configure tab and set the app settings for &lsquo;umbracoDbDSN&rsquo; and any other connection string values to the ClearDB database connection string. If you are not sure what the connection string you can get it from the &lsquo;quick glance&rsquo; menu.</li>
+</ul>
+
+
+<p>I like this ability to set your production connection strings / app settings in Azure. This will be help enable me to open source the code without storing these secure settings in the config files themselves.</p>
+
+<p>Hey presto, your site should be up and running!</p>
+
+<h2>So, what&rsquo;s the verdict?</h2>
+
+<p>Is Azure as nice a hue as promised or is it more murky in practice? Well from my experience its all worked pretty much as expected so far. Its clear the Microsoft has invested some serious resources into the platform and unlike some of their other products (ahem Windows 8) the usability is excellent.</p>
+
+<p>I think this is a decent work flow to initially get a site up and running. However in the long term I would want to hook up source control for the site to publish when merging to a branch. There is an option in Azure to &lsquo;Set up deployment from source control&rsquo; so I will be investigating how this works next.</p>
+
+<p>The main drawback I currently see with this setup is that the database has a limit on the number of connections. The free version has 4 which is fair enough, given it is just for trialling. However even the paid versions have low limits of 15, 30 or 40 for $10, $50 or $100 respectively. My feeling is that these limits may well cause problems when the site is running in production. I already hit the 4 connections limit just browsing the site myself and publishing a new page and it is bound to use more when real users are browsing at the same time.</p>
+
+<p>The SQL databases offered in Azure do not have this connections limit and would also be significantly cheaper in the long run, so I will be investigating the feasibility of migrating the Umbraco DB from MySQL into SQL.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Event Storming a distributed solution]]></title>
+    <link href="http://bakingwebsites.co.uk/2014/01/29/event-storming/"/>
+    <updated>2014-01-29T17:38:27+00:00</updated>
+    <id>http://bakingwebsites.co.uk/2014/01/29/event-storming</id>
+    <content type="html"><![CDATA[<p>Software design and development techniques are constantly evolving, making the discipline a fascinating area to work in. Over the time I&rsquo;ve been working as a developer I&rsquo;ve seen various approaches to design from Code First, Data Driven to Domain Driven (DDD). My preference is to consider the scope of the problem first and design a solution to match and DDD is a good fit for this. However when looking at enterprise level problems we need to give more consideration to how a problem will scale&hellip; enter Event Storming.</p>
+
+<h2>Distributed design</h2>
+
+<p>I work in a development team which is responsible for several key business capabilities, there are already some software solutions in place for these capabilities however they were designed several years ago to solve problems at a scale at least an order of magnitude below where we currently find ourselves. Our stakeholders have expressed a desire that we could redesign a solution which would meet our current needs better, basically it needs to work <strong>faster</strong>, do <em>just</em> what is needed and ideally <strong>scale</strong> so that it will still perform well at the next order of magnitude up.</p>
+
+<p>We decided to have an Event Storming session to help us analyse the problem and come up with a high level distributed solution. We carried out the session in a couple of phases, first we reviewed the current solution, then we looked at the primary goals for the redesign then finally we started event storming a solution. Here are the team hard at work mid-storm:</p>
+
+<p><img src="http://imageshack.com/a/img542/5968/1l37.jpg" class="alignleft" alttext="Octopress Logo"  /></p>
+
+<h2>Collaborative analysis</h2>
+
+<p>The session first involved us all writing down on post-it notes business events that had some relevance to the feature we were analysing. We then stuck all these onto a big board and de-duped them. It was a bit tricky to order the post-its at this stage so we went for a loose left to right time sequence.</p>
+
+<p>Following this we got the post-it stack back in action and wrote down each of the commands that could have some influence on the events on the board. Then we linked each of the commands to events on the board, this wasn&rsquo;t always a one-to-one relationship which presented some practical problems, however on the whole I think working with physical post-its was far better than using something like Visio as its more democratic. Finally we arranged the post-its into discrete pieces of behaviour and mapped out the interactions between them.</p>
+
+<p>It was important that we recognised the difference between an event and a command during the exercise. As a rule of thumb commands are carried out by users and events are raised by the system to indicate something has happened. For example the <em>Create Product</em> command is raised when the user saves a product entry, whereas <em>&lsquo;Product Created&rsquo;</em> event is raised after the transaction has finished and a product has been persisted in the system. As I alluded to earlier there is no hard one-to-one relationship here, a single command can often result in multiple events being raised and vice versa. Its important to make sure the distinction is clear to everyone before the session begins, it saves a lot of time in the long run!</p>
+
+<p>The results of our session can be seen in the picture below:
+<img src="http://imageshack.com/a/img34/1388/bbid.jpg" class="alignleft" alttext="Octopress Logo"  /></p>
+
+<h2>A virtual solution</h2>
+
+<p>By the end of the session we had a virtual solution figured out that could be implemented with discrete modules communicating exclusively via messaging. I was pleasantly surprised by the elegance of the solution, by focussing on the interactions between the systems and isolating responsibilities it was clear that we only needed to pass a small amount of data between each module and could effectively encapsulate the behaviour. However Event Storming is just one technique and I wouldn&rsquo;t suggest it is a magic bullet design technique, these are the main pros and cons as I see it.</p>
+
+<h3>Advantages</h3>
+
+<ul>
+<li>Helps focus on the interactions between elements of a distributed system</li>
+<li>The whole team is involved at the analysis stage and visualize the same proposed solution</li>
+<li>Encourages scalable solutions</li>
+</ul>
+
+
+<h3>Drawbacks</h3>
+
+<ul>
+<li>Reliant on domain knowledge of team members to surface events / commands</li>
+<li>Design can get lost in a sea of post-it notes!</li>
+<li>Need to transfer quickly to implementation tasks to avoid losing insights</li>
+</ul>
+
+
+<p>I&rsquo;d be interested to hear of your experiences of event storming and how effective you have found it to be?</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Dear Wordpress, you're dumped!]]></title>
+    <link href="http://bakingwebsites.co.uk/2014/01/15/dear-wordpress-youre-dumped/"/>
+    <updated>2014-01-15T16:38:27+00:00</updated>
+    <id>http://bakingwebsites.co.uk/2014/01/15/dear-wordpress-youre-dumped</id>
+    <content type="html"><![CDATA[<p><img src="http://imageshack.com/a/img827/7426/w5v5.png " class="alignleft" alttext="Octopress Logo"  />
+There comes a time in a developers life (every couple of years it seems) when you are dissatisfied with your existing blogging platform. What had started as a beautiful and fulfilled relationship has decayed to the point where you barely interact. What once seemed like a cutting edge editing interface has become stayed and obtuse. Your eyes begin to wander, other blogging platforms seem so slick and modern in comparison, you wonder  &ldquo;why can&rsquo;t I have some of that?&rdquo;</p>
+
+<p>But there is no need to fret, unlike <a href="http://www.sheknows.com/tags/celebrity-breakups">other breakups</a> this change should be quite painless for all parties involved. So as January is the peak month for relationship change, there is no better time to ring the changes and introduce a new blogging platform!</p>
+
+<h2>No more Batman and Robin</h2>
+
+<p>You may ask what my blog has to do with the dynamic crime fighting duo Batman and Robin? Well the new platform is based on <a href="http://jekyllrb.com/">Jekyll</a>, which is quite the opposite of dynamic. Using the power of Jekyll I can now generate all the static blog content (html, images, css) locally by running a couple of commands. Then I just push the changes up to <a href="https://github.com/">github</a> and boom, the updates are published.</p>
+
+<p>I really liked the simplicity of this approach as a blog is pretty much all about the content, there are no interactive features or dynamically changing content that would require a processing engine. The functionality can be met with good old static html. There are also a bunch of other great advantages to this approach:</p>
+
+<ul>
+<li>Use of <a href="https://github.com/NeQuissimus/MarkdownByExample/wiki/MarkdownSyntax">Markdown</a> for content editing</li>
+<li>Faster page load times</li>
+<li>More tolerant to high loads (although I doubt the traffic on this particular blog will ever cause a problem!)</li>
+<li>Free web hosting with <a href="http://octopress.org/docs/deploying/github/">github pages</a></li>
+<li>Scratches my developer itch for getting my hands dirty with the blogging platform</li>
+</ul>
+
+
+<p>There are some drawbacks to this approach such as a higher barrier to entry for editors, however as I&rsquo;m the only editor that isn&rsquo;t a problem for me.</p>
+
+<h2>Wordpress meet Octopress</h2>
+
+<p>Having settled on a new platform I needed to extract the content from my existing wordpress blog and convert it into a format suitable for Octopress (ie. Markdown). Fortunately this is a fairly <a href="http://import.jekyllrb.com/">well travelled road</a> and my posts were pretty basically formatted so the conversion process was pretty painless. The most important issues for me were to not lose formatting of the content and retain the same permalinks so existing google / bookmark links would still work.</p>
+
+<p>I got the blog running pretty easily (as it runs through Ruby, which is already setup on my machine) however the default theme wasn&rsquo;t really doing it for me. Fortunately there are a bunch of <a href="http://opthemes.com/">alternative themes</a> available that a pretty straightforward to apply. I opted to use the <a href="https://github.com/shashankmehta/greyshade">greyshade theme</a> as a base and tweak the fonts / layout to suit my needs.</p>
+
+<h2>Images / Comments</h2>
+
+<p>So at this point all the posts are in the blog nicely formatted but the images are still being served from Wordpress and even worse the comments have not been ported at all.</p>
+
+<p>I considered just dumping the images into the new blog platform itself, however I felt like there should be a better solution. Whilst my blog is pretty tiny at the moment the number of assets are bound to grow over time and I didn&rsquo;t want to cripple the blog hosting server itself with unnecessary load. Initially I tried uploading the images to <a href="http://picasa.google.com/">Picasa</a>, however it seems to require a desktop app to upload the images and refused to give me a proper URL for the image sources. A far better solution for me was <a href="https://imageshack.com/">ImageShack</a>, uploading is handled through a slick browser based interface and you can easily get direct links to the images. A nice bonus for the platform is built in support for image resizing, all you need to do is specify your required size in the image link.</p>
+
+<p>The final part to integrate was the comments. This turned out really straightforward using <a href="http://disqus.com/">Disqus</a>. All I needed to do was sign up for a new account and point it at my existing wordpress blog to pull the comments down. You can enable Disqus in Octopress through the config.yml file.
+Then, provided your post links are maintained, when the blog is switched across the comments are also kept, simples!</p>
+
+<h2>Conclusion</h2>
+
+<p>So there you have it, a freshly baked blogging site for your consumption pleasure, enjoy!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Design patterns without Katas]]></title>
+    <link href="http://bakingwebsites.co.uk/2013/06/13/design-patterns-without-katas/"/>
+    <updated>2013-06-13T09:05:05+01:00</updated>
+    <id>http://bakingwebsites.co.uk/2013/06/13/design-patterns-without-katas</id>
+    <content type="html"><![CDATA[<p>There are a number of design patterns which I have chosen not to implement a coding kata for. This is because I felt that I would either not use the pattern regularly in practice or they have alternative solutions that make the pattern redundant. However I think it is worth calling out these patterns and summarising how they work.</p>
+
+<h2>The decorator pattern</h2>
+
+
+<p>This pattern provides a way of extending a classes behaviour without using inheritance, it is defined as:</p>
+
+<blockquote>The decorator pattern extends the functionality of individual objects by wrapping them with one or more decorator classes. These decorators can modify existing members and add new methods and properties at run-time.</blockquote>
+
+
+<p>The main reason I won&rsquo;t be using this pattern much in practice is that the class structure it generates is not very clear and also the behaviour of   the classes can change depending on the order they are instantiated. So I think implementing this pattern could cause more problems than it solves, especially if the system may need to be maintained by different people at a later date.</p>
+
+<h2>The factory pattern</h2>
+
+
+
+
+<blockquote><em>The factory method pattern allows for the creation of objects without specifying the type of object that is to be created in code. A factory class contains a method that allows determination of the created type at run-time.</em></blockquote>
+
+
+<p>Whilst the factory method has its uses it is basically just an implementation of sub classing, where parameters are defined as base classes to allow different derived classes to be passed at runtime. It is a straightforward pattern and the coding kata would be pretty short to implement it.</p>
+
+<p>Also one of the main issues the factory pattern tries to solve is centralising object creation, however we generally use IoC containers which provide <a href="http://stackoverflow.com/questions/871405/why-do-i-need-an-ioc-container-as-opposed-to-straightforward-di-code">low maintenance dependency injection</a>  out of the box. So this removes the main need for the factory pattern.</p>
+
+<h2>The Singleton pattern</h2>
+
+
+
+
+<blockquote>Ensure a class only has one instance and provide a global access point to it</blockquote>
+
+
+<p><img class="alignright size-medium wp-image-460" alt="asparagus shoot from http://sandyspringcsa.com/" src="http://imageshack.com/a/img32/7137/uwa5.jpg" width="300" />
+This is a pattern which can be very useful in applications, however the implementation is so short that a coding kata would have little content. There are just a couple of pitfalls to watch out for when implementing this pattern:</p>
+
+<ul>
+    <li><span style="line-height:16px;">Ensure the implementation is  thread safe
+In Java the synchronized keyword can be used on the method which returns the singleton to ensure only a single thread ever has access to the class at once. However that can lead to the second pitfall</span></li>
+    <li>Consider whether you implementation offers the best performance
+Using synchronization is expensive (ie. It takes the computer a relatively long time to process)</li>
+</ul>
+
+
+<p>This implementation avoids both of these pitfalls by creating the <em>uniqueInstance</em> when the class is first loaded:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">public class Singleton {
+  private static Singleton uniqueInstance = new Singleton();
+
+  private Singleton() {}
+
+  public static Singleton getInstance()  {
+    return uniqueInstance;
+  }
+}</pre>
+
+
+<p>Finally, as with the factory pattern, if you are using an IoC container then they generally provide a way to configure a class as a singleton so there is rarely a need to implement this pattern manually yourself.</p>
+
+<h2>There may be more&#8230;</h2>
+
+
+<p>Stay tuned for more patterns to be added to this post!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Observer pattern coding kata]]></title>
+    <link href="http://bakingwebsites.co.uk/2013/05/29/the-observer-pattern-coding-kata/"/>
+    <updated>2013-05-29T08:53:06+01:00</updated>
+    <id>http://bakingwebsites.co.uk/2013/05/29/the-observer-pattern-coding-kata</id>
+    <content type="html"><![CDATA[<p>The second design pattern I will be looking at is the Observer pattern, which is useful for safely passing data between objects. The Observer pattern is defined as:</p>
+
+<blockquote>&#8220;a one-to-many relationship between objects so that when one object changes state all it  dependants  are notified and updated automatically&#8221;.</blockquote>
+
+
+<p>A good analogy for this pattern, described in the excellent <a href="http://www.headfirstlabs.com/books/hfdp/">Head First Design Patterns book</a>  is that of a magazine publisher and subscribers. Here the publisher is the <em>one</em>  in the relationship and the subscribers are the <em>many</em>. Typically the publisher will notify each of the subscribers of a new magazine edition by sending them the magazine in the post or through their e-book subscription.  Translated into the Observer pattern the Publisher is known as the Subject and the subscribers are the observers. The subject <em>notifies</em> the observers of changes in its state.</p>
+
+<p>Some important features to note about this pattern are:</p>
+
+<ul>
+    <li>Observers can not change the state of the subject and vice versa (ie. they are Loosely Coupled)</li>
+    <li>The state information can be either <em>pushed</em> out to the observers by the subject or <em>pulled</em> from the subject by the observers</li>
+    <li>Observers can be added and removed at any time</li>
+</ul>
+
+
+
+
+<h3>The brief</h3>
+
+
+<p>This is our  fictitious  brief for a new system which needs to be designed. It is election time and the polls are coming in. A local TV station would like us to design a system which can keep track of the results as they arrive. There are several hundred constituencies (areas of the country) which may declare for the Blue, Red, Yellow or Green party. The TV station wants to present this data in a number of ways:</p>
+
+<ul>
+    <li>As a leader board, showing the tally for each party</li>
+    <li>As a map, with each region coloured to the winning party</li>
+    <li>As a <a href="http://news.bbc.co.uk/1/hi/uk_politics/election_2010/8574653.stm">Swingometer</a>  showing the proportional change and overall result</li>
+</ul>
+
+
+<p>We don&rsquo;t need to worry about the implementation details of these display methods, the algorithms will be provided by the TV station. Our main concern is how to design a system to pass the data between the election object and the display objects.</p>
+
+<h3>Designing the Solution</h3>
+
+
+<p>Here is the class diagram for our solution, if you would like to try implementing the solution yourself the starting point for the kata is tagged here: <a href="https://github.com/MikeHook/DesignPatterns/tree/ObserverStart">Observer Pattern Kata Start</a>.</p>
+
+<p><img class="alignnone" alt="Observer pattern for election data" src="https://www.lucidchart.com/publicSegments/view/51892f26-05fc-4844-a25b-4c660a0087f6/image.png" width="579" height="597" /></p>
+
+<p>We have leveraged the Observer pattern in our solution. The Election object inherits from ISubject and each of the display methods inherit from IObserver. The Election object maintains a list of the observers, we can add or remove an observer to this list using the <em>Register</em> and <em>Unregister</em> methods. When the subjects <em>Notify</em> method is called it informs each of the observers that a change has occurred by calling their <em>Update</em> method. A completed implementation for the election scenario is tagged here: <a href="https://github.com/MikeHook/DesignPatterns/tree/ObserverEnd">Observer Pattern Kata End</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Strategy pattern coding kata]]></title>
+    <link href="http://bakingwebsites.co.uk/2013/05/07/strategy-pattern-coding-kata/"/>
+    <updated>2013-05-07T08:16:49+01:00</updated>
+    <id>http://bakingwebsites.co.uk/2013/05/07/strategy-pattern-coding-kata</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve been having a look at coding katas and design patterns over the last couple of weeks. If you are not familiar with either of these concepts then you can read <a href="http://butunclebob.com/ArticleS.UncleBob.TheBowlingGameKata">Uncle Bob&rsquo;s introduction to the Bowling Kata</a> and check out <a href="http://www.blackwasp.co.uk/GofPatterns.aspx">Richard Carr&rsquo;s great set of articles on design patterns</a>.</p>
+
+<p>My main goals are to:</p>
+
+<ul>
+    <li><span style="line-height:13px;">Increase my familiarity with design patterns</span></li>
+    <li>Understand how design patterns can be best applied in real life situations</li>
+    <li>Develop a repeatable method for memorizing the patterns</li>
+</ul>
+
+
+<p>A good way to cover off all of these goals will be to develop a set of code kata&rsquo;s which can be solved by applying a design pattern.  Sounds simple? Maybe but lets get started and see how it goes!</p>
+
+<h2>The Strategy Pattern</h2>
+
+
+<p>The strategy pattern is defined as<em>   </em></p>
+
+<blockquote><em>&#8220;a design pattern that allows a set of similar algorithms to be defined and encapsulated in their own classes.&#8221; </em></blockquote>
+
+
+<p>The aim of this pattern is to separate the parts of a system that may change from those which are unlikely to change, allowing for easier maintainability of the system in future.  This all sounds good in theory but you may be wondering how and where the pattern can be applied in practice. With this in mind I&rsquo;ve come up with a  fictitious brief that we can solve by utilising the Strategy Pattern.</p>
+
+<h4>The brief</h4>
+
+
+<p>A games company is developing a sports event simulator, to be built in iterations starting with simple requirements and building up to increase the complexity. The system design should allow for changes to be made by extending the existing system without changing what is already in place.</p>
+
+<ol>
+    <li>The simulator must support marathon and 10 km run events. The only requirement for these events is that the competitors can be displayed in some way (text is fine) and they can compete in the event. All competitors will compete by running.</li>
+    <li>After running some events they proved to be totally chaotic so each event should now include a marshal. The marshal can also be displayed but does not compete in events.</li>
+    <li>Since the glorious victory of team GB in the Olympic Triathlon the sport&#8217;s popularity has increased. So the games company would now like to also support triathlon events. Again competitors must be displayed and be able to compete, however a triathlon competitor will compete by swimming, cycling and running.</li>
+</ol>
+
+
+
+
+<h4>Designing the Solution</h4>
+
+
+<p>The starting point for this kata is available to clone from github here: <a href="https://github.com/MikeHook/DesignPatterns/tree/StrategyStart">Strategy Kata Start</a>  <a href="https://github.com/MikeHook/DesignPatterns/tree/StrategyStart">
+</a></p>
+
+<h5>Iteration 1</h5>
+
+
+<p>To meet the first requirement we only need a couple of objects as shown below:</p>
+
+<p><img class="alignnone" alt="Strategy Pattern - Design iteration 1" src="https://www.lucidchart.com/publicSegments/view/5180e984-cb84-4274-a415-68870a00005a/image.png" width="637" height="405" /></p>
+
+<p>We can create a couple of events for marathon and 10km runs and add some runners to those events. When the simulation runs the Compete() base method is called for each of the EventAttendees to simulate them taking part in the event. Each of the runners can be displayed by a call to their <em>Render()</em> method.</p>
+
+<h5><span style="line-height:13px;">Iteration 2</span></h5>
+
+
+<p>We now need to include Marshals as part of the event, so the model is extended as below:</p>
+
+<p><img class="alignnone" alt="Strategy Pattern - Design iteration 2" src="https://www.lucidchart.com/publicSegments/view/518380c3-ab34-42c9-a96e-71dc0a005c5f/image.png" width="707" height="492" /></p>
+
+<p>However, there is an obvious problem with this design, as noted in the diagram. One option would be for the Marshall to override the Compete method and make it do nothing. However this will store up more trouble for us as there may be other types of event attendee later which do not compete. We would have to ensure that each of these attendees also override that method with the same &lsquo;not compete&rsquo; behaviour. There is a better way to design for this issue (there is a clue in the name of this blog post!)</p>
+
+<h5>Iteration 3</h5>
+
+
+<p>It is clear that the Compete behaviour may change frequently depending on the attendee, we can leverage the Strategy pattern to extract this behaviour into separate classes as shown below.</p>
+
+<p><img class="alignnone" alt="Strategy Pattern - Iteration 3" src="https://www.lucidchart.com/publicSegments/view/51877f21-1fd8-4c3b-9f02-04510a0087f6/image.png" width="519" height="496" /></p>
+
+<p>The EventAttendee base class now contains a property of type ICompeteBehaviour. Any implementation of this interface can be assigned to each instance of an EventAttendee. So the <em>Runner</em> class is assigned the <em>Run </em>behaviour and the <em>Marshall</em> class is assigned the <em>DontCompete</em> behaviour.</p>
+
+<p>Iteration 4</p>
+
+<p>We have one more requirement to satisfy, the design needs to be extended to allow Triathlon events to take place. Thanks to our changes in the previous iteration we can add this new requirement without making any changes to the existing classes. Here is the final structure:</p>
+
+<p><img class="alignnone" alt="Strategy Pattern - Iteration 4" src="https://www.lucidchart.com/publicSegments/view/51878405-1770-4c88-b91a-761b0a000882/image.png" /></p>
+
+<p>We have extended the <em>EventAttendee</em> class with a new <em>Triathlete</em> class and created a new <em>RunCycleSwim</em> implementation of the <em>ICompeteBehaviour</em> interface. You may be thinking that the same could have been achieved with a method for the behaviour on the Triathlete class, while this is true it limits the flexibility of the design. We can see the advantage of this design by adding Spectators to the simulation. They will also be assigned the DontCompete behaviour, so we have effectively shared this part of the logic without repeating the implementation.</p>
+
+<p>The completed implementation for this kata is available on github here:  <a href="https://github.com/MikeHook/DesignPatterns/tree/StrategyEnd">Strategy Kata End</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Integrating EPiServer 7 with MVC - Next Steps]]></title>
+    <link href="http://bakingwebsites.co.uk/2013/04/09/integrating-episerver-7-with-mvc-next-steps/"/>
+    <updated>2013-04-09T17:40:42+01:00</updated>
+    <id>http://bakingwebsites.co.uk/2013/04/09/integrating-episerver-7-with-mvc-next-steps</id>
+    <content type="html"><![CDATA[<p>My previous blog post, <a title="Integrating EPiServer 7 with an existing MVC  site" href="http://bakingwebsites.co.uk/2013/03/14/integrating-episerver-7-with-an-existing-mvc-site/">Integrating EPiServer 7 with an existing MVC site</a>, outlined the initial steps to get EPiServer 7 running. However there are a number of additional steps you may need to take before your site is fully integrated.</p>
+
+<h3>Convert any Controllers not in Areas</h3>
+
+
+<p>If your site only contains controllers within Areas then you should not need to make any changes. However controllers in the root of the site will not work by default (at least for me). I found it was best to deal with these controllers on a case per case basis as the best course of action depended on the function of the controller. I implemented one of the following changes for each:</p>
+
+<ul>
+    <li><span style="line-height:13px;">Move the controller into an area. This option makes sense if the views for the controller do not have any CMS editable content</span></li>
+    <li>Convert the controller to be CMS managed. Makes sense if the views need to be CMS editable (inherit from  PageController&lt;T&gt; where T is a BasePage)</li>
+    <li>Convert the controller to an HttpHandler. In one case the controller did not have any views or models, it was really just a different entrypoint to the site which ran a bit of logic and redirected. In this case there was no point in retaining the controller as an HttpHanlder could do the same job more efficiently</li>
+</ul>
+
+
+
+
+<h3>Disable strict language routing</h3>
+
+
+<p>I encountered a further issue after patching my EPiServer.Core and EPiServer.Framework nuget packages to the latest versions. None of the controller actions in the home controller worked any more except for the Index. This was fairly easy to remedy by disabling the strict language routing, via the episerver/sites/site/strictLanguageRouting config setting.</p>
+
+<h3>Deployment Issues</h3>
+
+
+<p>While its all well and good having the site running on your machine, eventually it will need to be deployed somewhere. We handle configuration changes with file transforms and I was pleased to note that the config changes required for episerver deployments are now minimised. Here is a summary list of all the settings we changed per environment:</p>
+
+<ul>
+    <li><span style="line-height:13px;">connectionStrings
+</span></li>
+    <li>episerver/sites/site/siteSettings/siteUrl</li>
+    <li>episerver.framework/siteHostMapping/siteHosts</li>
+    <li>episerver.framework/appData/basePath</li>
+    <li>episerver.framework/licensing/licenseFilePath</li>
+    <li>episerver.search/namedIndexingServices/services/baseUri</li>
+</ul>
+
+
+<p>Note, you may need to transform further settings for a load balanced site.</p>
+
+<h5>EPiServer UI not deployed</h5>
+
+
+<p>Previously with EPiServer v6 all that was needed to run the CMS interface itself was to install the application on the web server. However the EPiServer 7 UI architecture also has a number of dependencies in the {VPP}\modules folder. So ensure that these files are also present in your deployed environment, otherwise you will probably encounter the following error:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">DirectoryNotFoundException: Could not find a part of the path '{Your site path} \Website\ClientResources\ClientResources\packages.config'</pre>
+
+
+
+
+<h5>Search service configuration</h5>
+
+
+<p>We have the search service configured on a local host name as the indexing service does not like to communicate over a public host name. However this caused a further issue with the service reporting that multiple hosts names could not be run for the service. Fortunately this could be remedied easily by setting the system.serviceModel/serviceHostingEnvironment/multipleSiteBindingsEnabled  setting to true.</p>
+
+<p>Those were all the steps we needed to take to deploy the site successfully. I&rsquo;d be interested to hear your experiences if you found any other settings that need to be changed. Feel free to reply in the comments below or contact me directly on twitter <a href="https://twitter.com/michael_hook">@michael_hook</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Integrating EPiServer 7 with an existing MVC site]]></title>
+    <link href="http://bakingwebsites.co.uk/2013/03/14/integrating-episerver-7-with-an-existing-mvc-site/"/>
+    <updated>2013-03-14T15:54:57+00:00</updated>
+    <id>http://bakingwebsites.co.uk/2013/03/14/integrating-episerver-7-with-an-existing-mvc-site</id>
+    <content type="html"><![CDATA[<p><img class="alignright size-full wp-image-408" alt="custom_integration" src="http://imageshack.com/a/img560/4853/3rqu.jpg" width="300" />This post assumes you have EPiServer 7 installed on your machine. If you don&rsquo;t have it then it is available from <a href="http://world.episerver.com/Download/Categories/Products/EPiServer-CMS/">EPiServer world</a>  (once you have created an account).</p>
+
+<p>There are 2 main options for creating a new EPiServer 7 MVC stylee site:</p>
+
+<ul>
+    <li><span style="font-size:13px;">Create a new Visual studio project (after installing &#8216;EPiServer 7 Visual Studio Integration&#8217;, available from </span><a style="font-size:13px;" href="http://world.episerver.com/Download/Categories/Products/EPiServer-CMS/">EPiServer world</a><span style="font-size:13px;">)</span></li>
+    <li><span style="font-size:13px;line-height:19px;">Use the </span><a style="font-size:13px;line-height:19px;" href="http://world.episerver.com/Articles/Items/ASPNET-MVC-Templates-for-EPiServer-7-CMS/">EPiServer 7 MVC templates package</a></li>
+</ul>
+
+
+<p>For integrating with an existing site I&rsquo;d recommend using option 1, as there are far less files to integrate. However it is well worth looking at the templates package as well as this demonstrates how models and views can be implemented with EPiServer 7.</p>
+
+<p>After creating the new Visual Studio project I remembered that EPiServer have a NuGet feed, and they do have the version 7 assemblies on NuGet. However the version numbers are slightly different to those used in the visual studio project, so make sure you specify the version numbers to NuGet when you install the packages (they are listed below). Here are the steps I followed in detail:</p>
+
+<ol>
+    <li><span style="line-height:13px;">Created a new Visual studio project using the EPiServer Web Site (MVC) template
+</span></li>
+    <li>Followed the EPiServer tutorial (<strong>link</strong>) to add a home page and set it to the &#8216;start page&#8217;</li>
+    <li>Upgraded my existing site to MVC 4 by installing the Microsoft ASP.NET MVC 4 nuget package (obviously not required if your existing site is already on MVC version 4.</li>
+    <li>Copy across the connectionStrings.config, episerver.config,  EPiServerFramework.config, EPiServerLog.Config and FileSummary.config files</li>
+    <li>Update the  siteUrl in  episserver.config.</li>
+    <li>Copy the AppData, IndexingService, modules and modules bin folders.</li>
+    <li>Merge the web.config files - ensure the  episerver.search baseUri is updated to point at your site address.</li>
+    <li>Installed EPiServer 7 from Nuget feeds using these commands to get the correct versions:
+<ul>
+    <li>Install-Package EPiServer.Framework -Version 7.0.859.1</li>
+    <li>Install-Package EPiServer.CMS.Core -Version 7.0.586.1</li>
+</ul>
+</li>
+    <li>Removed assembly references to Razor and System.WebPages.Razor (as was clashing with EPiServer versions)</li>
+    <li>Update Controllers to inherit from  PageController&lt;T&gt; where T is a PageData class.</li>
+    <li>Update Global.asax to inherit from  EPiServer.Global</li>
+</ol>
+
+
+
+
+<h2><strong>IoC containers clashing!</strong></h2>
+
+
+<p>OK, this is the tricky bit it gets quite involved but please stay with me!</p>
+
+<p>When I tried to run the site it now returned a &lsquo;No parameterless construct or defined for this object.&rsquo; message. Which in plainer  English  means the application can&rsquo;t create the Controller classes. This is because the site I am integrating with currently uses the Castle Windsor IoC container, however EPiServer uses the StructureMap IoC container internally. We  definitely  don&rsquo;t want two IoC containers and I can&rsquo;t see any evidence of the EPiServer container being swappable. So the only option here is to convert the current Windsor implementation to a StructureMap implementation. More information on Structure map can be found on the excellent <a href="http://docs.structuremap.net/">StructureMap documentation site</a>, however I think it is worth including an overview in this post as, whilst this isn&rsquo;t always going to be necessary for your site, I expect it will be a common problem.</p>
+
+<h4>Add StructureMap version 2.6.1.0</h4>
+
+
+<p><span style="font-size:13px;">This is available from NuGet (as this is the version used in the EPiServer 7 MVC templates package).
+The command to install is:  </span><span style="font-size:13px;">Install-Package StructureMap  -Version  2.6.1.0</span></p>
+
+<h4>Register your services with StructureMap</h4>
+
+
+
+
+<ul>
+    <li><span style="font-size:13px;">Copy the  StructureMapDependencyResolver and DependencyResolverInitialization  classes from the EPiServer MVC templates project.</span></li>
+    <li>Convert service registration calls to register services with StructureMap instead of Windsor. This is carried out in the  ConfigureContainer method of the  DependencyResolverInitialization class.</li>
+</ul>
+
+
+<p>For example here is a Windsor interface registration and its equivalent StructureMap registration:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">//Windsor registration - Here container is an implementation of IWindsorContainer
+var myConfig = WebConfigurationManager.GetSection("myConfig") as MyConfig;
+container.Register(Component.For(typeof(IMyConfig)).Instance(myConfig));</pre>
+
+
+
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">//StructureMap registration - Here container is of type ConfigurationExpression
+var myConfig = WebConfigurationManager.GetSection("myConfig") as MyConfig;
+container.For&lt;IMyConfig&gt;().Use(myConfig);</pre>
+
+
+<p>An example of a class registration with a singleton lifestyle:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">//Windsor registration
+container.Register(Component.For(typeof(Cache)).Instance(HttpContext.Current.Cache).LifestyleSingleton());</pre>
+
+
+
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">//StructureMap registration
+container.For(typeof(Cache)).Singleton().Use(HttpContext.Current.Cache);</pre>
+
+
+
+
+<ul>
+    <li><span style="font-size:13px;">Convert  </span><em style="font-size:13px;">IWindsorInstaller</em><span style="font-size:13px;">  implementations  to  </span><em style="font-size:13px;">Registry</em><span style="font-size:13px;">  subclasses.</span></li>
+</ul>
+
+
+
+
+<h4>Debugging your StructureMap registrations</h4>
+
+
+<p>You can debug structure map by adding this line:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">_container.AssertConfigurationIsValid();</pre>
+
+
+<p>Initially EPiServer was reporting many registration failures but you can delay the call until the InitComplete event is called in the DependencyResolverInitialization class. Then most of the EPiServer  registrations have completed and it is easier to see if there are any issues with your own services.</p>
+
+<h4>Manually retrieving a service</h4>
+
+
+<p>Generally my services are injected into constructors automatically, however I had a couple of calls to retrieve services manually from the IoC container. For example, to retrieve an implementation of an interface called IMyService:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">_var myService = DependencyResolver.Current.GetService&lt;IMyService&gt;();</pre>
+
+
+
+
+<h4>Last steps</h4>
+
+
+<p>Hopefully your site will be running now, there is some additional configuration work you may want to do for EPiServer 7 VPP folders. But if you&rsquo;ve made it this far you will probably need a break!</p>
+
+<h5>Updated on 9th April 2013</h5>
+
+
+<p>Updated the list of config files which must be copied to include EPiServerLog.config and FileSummary.config</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Become a Git contortionist with Stash]]></title>
+    <link href="http://bakingwebsites.co.uk/2013/01/18/become-a-git-contortionist-with-stash/"/>
+    <updated>2013-01-18T19:16:05+00:00</updated>
+    <id>http://bakingwebsites.co.uk/2013/01/18/become-a-git-contortionist-with-stash</id>
+    <content type="html"><![CDATA[<p><img class="size-medium wp-image-364 alignright" alt="Annie the Contortionist" src="http://imageshack.com/a/img856/5731/jyt7.jpg" width="300" />One of the great aspects of the Git source control system is its flexibility. Almost any sticky situation you may encounter  as a developer working with source control can be   solved with Git.</p>
+
+<p>Take this scenario, you&rsquo;re halfway through writing a class for a new feature when you get a call.. the client has found a show stopping bug in the application and it needs to be fixed right away. To be able to fix the bug you will need to switch onto the live code branch but you can&rsquo;t go switching branches with a load of uncommitted changes.  Now you don&rsquo;t want to commit your code as its half done and won&rsquo;t even compile right now, but you don&rsquo;t want to lose the changes either&hellip; <a href="http://git-scm.com/book/en/Git-Tools-Stashing"><em>git stash</em></a> to the rescue!</p>
+
+<p>When you issue the git stash command all your changes will be committed to a stack. Leaving you with no changes on your current working branch and free to branch where ever you want. So now you can switch to the live branch and do your bug fixing work. Once that is done you can simply move back to the feature branch and <em>apply</em> the stashed changes. Hey presto, you are back where you started with your uncommitted half complete work!</p>
+
+<p>If you really get into lots of parallel work you can stash multiple times, just be sure to remember that it is a stack and your last changes you have stashed will come back off stack first.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Microsoft jump on the Open Source band wagon]]></title>
+    <link href="http://bakingwebsites.co.uk/2012/04/03/microsoft-jump-on-the-open-source-band-wagon/"/>
+    <updated>2012-04-03T12:35:04+01:00</updated>
+    <id>http://bakingwebsites.co.uk/2012/04/03/microsoft-jump-on-the-open-source-band-wagon</id>
+    <content type="html"><![CDATA[<p><img class="alignright" title="Tux, the Linux Mascot" src="http://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Tux.png/220px-Tux.png" alt="" width="220" height="261" />
+A landmark decision was made last week by Microsoft&rsquo;s ASP.NET web development team. They announced that three key technologies used to develop web applications, <a href="http://weblogs.asp.net/scottgu/archive/2012/03/27/asp-net-mvc-web-api-razor-and-open-source.aspx">ASP.NET MVC, Web API and Razor would be made fully Open Source</a><sup>1</sup>. This is a big step for a company built on the sales of Closed Source software. I&rsquo;m going to have a look at what I think this decision means for the consumers, who use software built with these technologies, and the stakeholders who commission the software.</p>
+
+<h2>Open Sesame</h2>
+
+
+<p>For those those not involved directly in software development, the moniker &lsquo;Open Source&rsquo; may conjure up images of magicians pulling rabbits out of a hat<sup>2</sup>. However the reality could be viewed as the opposite of magic as Open source demystifies the software development process. In the traditional &lsquo;Closed Source&rsquo; licencing model, software is made by a company behind closed doors and the code is encrypted before release to the public. The traditional thinking is that this protects the company by preventing third parties from stealing their intellectual property. This is a subject of <a href="http://en.wikipedia.org/wiki/Software_patent_debate">some debate</a>  , which I won&rsquo;t go into here. However it is clear that many businesses are currently successful without relying on restrictive software patents.</p>
+
+<p>In an Open Source licencing model, the full unencrypted source code will be published at the same time as the software itself (indeed often before-hand in the case of preview and beta releases). Also, as in the case of this announcement, public contributions may be accepted to modify the original source code. Naturally the acceptance process is completely at the discretion of software company, so unhelpful or damaging contributions will not be accepted.</p>
+
+<p>A good example of the Open Source model working commercially is the Android operating system released by Google. A massive range of mobile devices run Android and it is not only the key competitor to Apple&rsquo;s iOS (iPhones &amp; iPad operating system but has helped ensure that most devices using Microsoft&rsquo;s Windows Mobile operating system are sitting on the scrap heap. I for one am glad that there is healthy competition to the world of Apple and its clone army of i-device accolytes.</p>
+
+<h2>Software that Just Works</h2>
+
+
+<p>From a consumer or stakeholder viewpoint the natural desire is to want software that &lsquo;just works&rsquo; and to reach that goal we just need to fix all the bugs in the software. Unfortunately the belief that all software bugs can be fixed is generally  infeasible  given time and budget restraints, due to the nature of programming the two go hand in hand. In each piece of code there are many paths that can be travelled, much like a maze in a country mansion garden. If you ask 10 different people to walk the maze the chances are each one will set off in a different direction. Most of them will hit a dead end before finding their way through and a nasty bug could be hiding at each of these dead ends!</p>
+
+<p>However Open Source software helps minimize the number bugs by accepting contributions to fix any that are found by the development community. In this way the software benefits from the knowledge of a much wider group of people than could be acheived if it was developed and maintained soley by a single company. Most software developers are driven by that itch to &lsquo;make stuff work&rsquo; and are only too happy to contribute to a project which helps make this happen. The end result is a product that is more reliable for the consumers and stakeholders and has the appearance of &lsquo;just working&rsquo;.</p>
+
+<h2>Security concerns</h2>
+
+
+<p>Typically the biggest obstruction to making software Open Source is the perceived risk to security. If anybody can view exactly how the software is operating then it is much easier for hackers to cause the software to break, exploit a vulnerability to propogate a virus or carry out other nefarious acts. The <a href="http://haacked.com/archive/2012/03/29/asp-net-mvc-now-accepting-pull-requests.aspx">indications by Phil Haack</a>, a former member of the MVC team, are that this decision by Mircosoft is no exception. So a great deal of credit should go to those involved at Microsoft for making change happen in their organization.</p>
+
+<p>Regarding the perceived risks to security, Open Source can actually reduce the risk for similar reasons to the improvement in relibility. Any security vulnerabilities will quickly be picked up by the community and fixed. The Open Source culture of continual improvement in the software makes for a much more secure product.</p>
+
+<p>Take the example of web browsers, a couple of years ago Microsoft&rsquo;s Internet Explorer browser had massive market share. However over time so many security vulnerabilities were exploited in the browser that the <a href="http://www.theinquirer.net/inquirer/news/1037530/us-government-warns-internet-explorer">US government themselves warned against using the software</a>!   Along came Mozilla&rsquo;s Firefox browser to save the day, with much improved security. Naturally Firefox has always been developed under an Open Source licence as explained in the <a href="http://www.mozilla.org/about/manifesto.html">Mozilla manifesto</a>.</p>
+
+<h2>Future developments</h2>
+
+
+<p>The likelyhood is that this announcement will not trigger a deluge of community updates and fixes to the frameworks in question. I anticipate that a minority of change submissions will make it back into the frameworks themselves. However it does demonstrate an important change in mindset from Microsoft and may well signal the beginnings of a new approach for the organisation. It is clear that in the fast moving world of software and digital media you need to adapt to survive and it is encouraging that even massive organisations such as Microsoft are able to do this.</p>
+
+<h5>Footnote</h5>
+
+
+<p><sup>1</sup>While the MVC framework has been open source since its original release, this announcement widens the license model to the Web API and Razor frameworks and also marks the first time that Microsoft will accept public contributions to the open source frameworks. If you are unfamiliar with these technologies then further information is available on the Microsoft blah blah (LINK).</p>
+
+<p><sup>2</sup>Or maybe thats just my fertile imagination!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Footy Links Alpha released]]></title>
+    <link href="http://bakingwebsites.co.uk/2012/01/25/footy-links-alpha-released/"/>
+    <updated>2012-01-25T09:34:41+00:00</updated>
+    <id>http://bakingwebsites.co.uk/2012/01/25/footy-links-alpha-released</id>
+    <content type="html"><![CDATA[<p><img class="size-full wp-image-332 alignleft" title="FootyLinksLogo" src="http://imageshack.com/a/img834/6565/3iks.jpg" alt="" width="150" />The very first version of Footy Links is now available for download from the Android Market.
+You can get the app by opening the following website on your android device and press the &lsquo;Install&rsquo; button:
+<a href="https://market.android.com/details?id=mhook.FootyLinks">Footy Links on the Android Market</a></p>
+
+<h2>What is Footy Links?</h2>
+
+
+<p>Footy links is a game designed to test your football knowledge by guessing clubs connecting premiership football players.  Make your guess by clicking on the blue text then selecting the club badge matching the answer.</p>
+
+<p>There is a basic scoring system following these rules:</p>
+
+<ul>
+    <li>+1 point for every correct guess of a &#8216;top six&#8217; club</li>
+    <li>+2 points for a correct guess of any other club</li>
+    <li>-1 point each time you skip to another question without answering the previous one</li>
+</ul>
+
+
+
+
+<h2>Can I play it?</h2>
+
+
+<p>If you have an Android based mobile device I hope so, it should work on any device with Android OS version 2.2 or above. If you have any problems running the game feel free to contact me here on <a href="http://bakingwebsites.co.uk">my blog</a> or through <a href="https://twitter.com/#!/michael_hook">twitter</a></p>
+
+<h2>Is that it?</h2>
+
+
+<p>As you may be able to tell from the title, in the spirit of agile development (or maybe just because I&rsquo;m lazy), this is an early version with the absolute minimum set of features. I really wanted to just get a version out there in the wild to see if it will work on anyone&rsquo;s phone other than my own!</p>
+
+<p>But do not fear, more versions are planned with lots of exciting extra features, possibly including:</p>
+
+<ul>
+    <li>Harder difficulty levels - more links to guess between each of the players</li>
+    <li>More advanced scoring system</li>
+    <li>Multi-player games</li>
+    <li>Online high score board</li>
+    <li>Inclusion of all English leagues</li>
+    <li>Inclusion of  European  league clubs</li>
+</ul>
+
+
+<p>If you have any suggestions about Footy Links then please feel free to get in contact with me  here on  <a href="http://bakingwebsites.co.uk">my blog</a>  or through  <a href="https://twitter.com/#!/michael_hook">twitter</a></p>
+
+<h2>The Techy Bit</h2>
+
+
+<p>If you&rsquo;re interested in how the app works behind the scenes, the source is freely available for viewing on my github account here:
+<a href="https://github.com/MikeHook/FootyLinks">Footy  Links on github</a></p>
+
+<p>The source consists of two applications</p>
+
+<ul>
+    <li>A .NET application written to import the football club and player data into a Sqlite database</li>
+    <li>An android application for the game itself</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Developing Android Apps: Connect to an existing SQLite database]]></title>
+    <link href="http://bakingwebsites.co.uk/2011/12/30/developing-android-apps-connect-to-an-existing-sqlite-database/"/>
+    <updated>2011-12-30T14:43:17+00:00</updated>
+    <id>http://bakingwebsites.co.uk/2011/12/30/developing-android-apps-connect-to-an-existing-sqlite-database</id>
+    <content type="html"><![CDATA[<p>This post was drafted some time ago, so some of the details are lost in the mists of time. But I&rsquo;ll provide links to the source so anyone interested in doing something similar can start from there.</p>
+
+<p>The android app I&rsquo;m developing needs to be able to connect to an existing SQLite database, there are not many examples of how to achieve this in the Android tutorials, however I was able to find some guidance in a post from another Android developer on the <a href="http://www.reigndesign.com/blog/using-your-own-sqlite-database-in-android-applications/">reigndesign blog</a></p>
+
+<p>The key is that the database needs to be copied internally to the system directory on the device running the application before it can be accessed. This doesn&rsquo;t seem particularly efficient but I&rsquo;m sure Android had their reasons! My modified version of the code to do this is available from my github repository here:</p>
+
+<p><a href="https://github.com/MikeHook/FootyLinks/blob/master/AndroidApp/src/mhook/FootyLinks/Data/FootyLinksSQLLiteHelper.java">FootyLinksSQLLiteHelper.java</a></p>
+
+<p>I&rsquo;ve also encountered a couple of other snags since then while working with the SQLite database.</p>
+
+<h3>No password support</h3>
+
+
+<p>Passwords do not appear to be supported at all for the Android applications. I&rsquo;d automatically added password protection to the database when creating it and it took me a while to figure out why eclipse was refusing to read it!</p>
+
+<h3>Manually delete after schema changes</h3>
+
+
+<p>I&rsquo;ve added some additional fields to the database over time. However initially they were not being copied into the version of the database in my device emulator. I found it was necessary to browse the emulator files themselves, using the DDMS perspective in Eclipse, and delete the old database file directly in the emulator file system.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Excel reporting from web apps using EPPlus]]></title>
+    <link href="http://bakingwebsites.co.uk/2011/11/20/excel-reporting-from-web-apps-using-epplus/"/>
+    <updated>2011-11-20T15:20:16+00:00</updated>
+    <id>http://bakingwebsites.co.uk/2011/11/20/excel-reporting-from-web-apps-using-epplus</id>
+    <content type="html"><![CDATA[<p>I have recently been working on a new feature request for the ability to generate excel reports dynamically from a web application. This kind of feature can add a lot of value to a system as it enables businesses to analyse crucial trends in data on demand.</p>
+
+<p>However it can be challenging to generate reports in an Excel spreadsheet format from a web application. Firstly you need to have the program itself installed on the web server, which can be difficult if you are using third party hosting. Also  coding the solution itself is difficult as you either need intimate knowledge of the Excel API or, for versions of office after 2007, in depth knowledge of the OpenXML file format. But fear not there is a third option, open source to the rescue! Some clever chaps have developed the <a href="http://epplus.codeplex.com/">EPPlus library</a> which abstracts away all the nasty low level OpenXML calls and provides a nice object oriented API for dealing with directly the spreadsheet.</p>
+
+<h2>Modelling the report data</h2>
+
+
+<p>I won&rsquo;t go into too much detail on the features of the library as you can read all about it on the <a href="http://epplus.codeplex.com/wikipage?title=FAQ">EPPlus FAQ page</a> and download the samples. However one of the methods that I found really useful was the <em>LoadFromArrays</em>  method. This enables a table of data to be output to the worksheet from a list of object arrays. So you can construct a model of the data you want to display then feed it straight to the worksheet through the list. It may sound quite complicated but here is a simple example that can be easily expanded with more columns / rows:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">string firstName = "Joe";
+string lastName = "Bloggs";
+var dateOfBirth = new DateTime(2000, 1, 1);
+var testData = new List&lt;object[]&gt;()
+                   {
+                       new object[] {"First name", firstName},
+                       new object[] {"Last name", lastName},
+                       new object[] {"Date of birth", dateOfBirth}
+                   };
+
+using (var excelPackage = new ExcelPackage())
+{
+    ExcelWorksheet excelWorksheet = excelPackage.Workbook.Worksheets.Add("Test worksheet");
+    //Loads the summary data into the sheet, starting from cell A1. Prints the column names on row 1
+    excelWorksheet.Cells["A1"].LoadFromArrays(testData);
+}</pre>
+
+
+
+
+<h2>Don&#8217;t get duped</h2>
+
+
+<p>I generally found that the EPPlus library was reliable, however I did hit a snag during the development. The file would get generated OK but when I tried to open it in Excel a nasty message was shown:</p>
+
+<blockquote>Excel found unreadable content in &#8216;Test export.xlsx&#8217;. Do you want to recover the contents of this workbook?</blockquote>
+
+
+<p>The file did open OK if you chose to recover, however this obviously isn&rsquo;t ideal and not acceptable for a client release. The tricky part was that no error was being thrown so I had to use a bit of guess work to track down the issue. Initially there wasn&rsquo;t much to go on, however after running some more tests on sample data I noticed that the export always worked fine if the file only included a single worksheet. However sometimes multiple worksheets would cause the &lsquo;unreadable content&rsquo; error. From there I examined each of the properties that were being set on the worksheets and narrowed the problem down to be the worksheet name itself.</p>
+
+<p>It turns out that excel requires each worksheet to have a unique name. This is backed up in excel itself if you try and manually name to worksheets the same you get a reasonably friendly error message saying:</p>
+
+<blockquote>Cannot rename a sheet to the same name as another sheet</blockquote>
+
+
+<p>After ensuring my worksheets were uniquely named the reports always opened up without a problem. As an aside I just tried to replicate this bug through EPPlus and this time it returned a much more helpful error message, I wish it had told me this when I was originally working on the feature!</p>
+
+<blockquote>Add worksheet Error: attempting to create worksheet with duplicate name</blockquote>
+
+
+
+
+<h2>EPPlus for the win</h2>
+
+
+<p>In conclusion I would recommend EPPlus to anybody who needs to generate an excel report from C# code and doesn&rsquo;t want to interface with the murky depths of the Excel API. It is a great open source library that does just what you need in the way you would expect it to work.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Quartz makes scheduling jobs easy with EPiServer Commerce]]></title>
+    <link href="http://bakingwebsites.co.uk/2011/11/07/quartz-makes-scheduling-jobs-easy-with-episerver-commerce/"/>
+    <updated>2011-11-07T19:30:00+00:00</updated>
+    <id>http://bakingwebsites.co.uk/2011/11/07/quartz-makes-scheduling-jobs-easy-with-episerver-commerce</id>
+    <content type="html"><![CDATA[<p><a href="http://quartznet.sourceforge.net/index.html"><img class="alignright" title="Quartz rock" src="http://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Quartz,_Tibet.jpg/240px-Quartz,_Tibet.jpg" alt="Quartz rock" width="168" height="169" /></a>A common requirement for e-commerce applications is the ability to schedule jobs or tasks. I am currently working on a project which uses EPiServer Commerce and I needed to schedule an order export job.</p>
+
+<p>I was pleasantly surprised to find that EPiServer Commerce is supplied bundled with the <a href="http://quartznet.sourceforge.net/index.html">Quartz.NET</a>  enterprise code library to facilitate these job scheduling requirements.</p>
+
+<h3>Gentlemen, choose your weapons</h3>
+
+
+<p>I had three main options available for implementing the export job, a separate windows service, an EPiServer CMS scheduled job or a Quartz job. I decided that the Quartz service was better than the option of a separate windows service because the framework was already there and available so would not increase the complexity of deployments. I also felt it was a better option than a EPiServer CMS scheduled job because Quartz runs  independently  to the website app pool so should not put the web application under greater load while it is running and potentially degrade the performance of the end user website.</p>
+
+<h3>A 1000 foot example</h3>
+
+
+<p>I&rsquo;m not going to go into a massively detailed explanation of how to implement the jobs as there is a already a good example available in the <a href="http://sdk.episerver.com/commerce/1.1.1/Content/Developers%20Guide/Architecture/LongRunProcessScheduling.htm">EPiServer Commerce dev guide</a>  along with a detailed <a href="http://quartznet.sourceforge.net/tutorial/index.html">tutorial on the Quartz .NET site</a>. However a quick overview demonstrates how intuitive it is to implement.</p>
+
+<p>The first thing you need to do is create your job class which will run when Quartz triggers the execution. The class must inherit from the IJob interface which just has a single Execute method to implement. Here is a sample skeleton class:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">    public class CommerceOrderExportJob : IStatefulJob
+    {
+        private readonly ILog _log;
+
+        public CommerceOrderExportJob()
+        {
+            _log = LogManager.GetLogger(base.GetType());
+            //Any other init code
+        }
+
+        public void Execute(JobExecutionContext context)
+        {
+            //Your export methods
+        }
+    }</pre>
+
+
+<p>You then need to extend the config file to configure Quartz to call your job. I think all the parameters are pretty self explanatory:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">&lt;job&gt;
+    &lt;job-detail&gt;
+      &lt;name&gt;OrderExportJob&lt;/name&gt;
+      &lt;group&gt;all&lt;/group&gt;
+      &lt;description&gt;This job exports orders from commerce&lt;/description&gt;
+      &lt;job-type&gt;Your.Assembly.CommerceOrderExportJob, Your.Assembly&lt;/job-type&gt;
+      &lt;volatile&gt;false&lt;/volatile&gt;
+      &lt;durable&gt;true&lt;/durable&gt;
+      &lt;recover&gt;false&lt;/recover&gt;
+    &lt;/job-detail&gt;
+    &lt;trigger&gt;
+      &lt;simple&gt;
+        &lt;name&gt;OrderExportJobTrigger&lt;/name&gt;
+        &lt;group&gt;eCommerceFramework&lt;/group&gt;
+        &lt;description&gt;Fires Order Export Job&lt;/description&gt;
+        &lt;misfire-instruction&gt;SmartPolicy&lt;/misfire-instruction&gt;
+        &lt;volatile&gt;false&lt;/volatile&gt;
+        &lt;job-name&gt;OrderExportJob&lt;/job-name&gt;
+        &lt;job-group&gt;eCommerceFramework&lt;/job-group&gt;
+        &lt;repeat-count&gt;RepeatIndefinitely&lt;/repeat-count&gt;
+        &lt;repeat-interval&gt;300000&lt;/repeat-interval&gt;
+      &lt;/simple&gt;
+    &lt;/trigger&gt;
+  &lt;/job&gt;</pre>
+
+
+<p>Hit run on the service and check the event log for any problems. Make sure to include some useful event/error logging in the job otherwise it will just be a mysterious black box! There are a couple of snags you may run into when running the job against EPiServer Commerce:</p>
+
+<div>
+<ul>
+    <li>ensure that your compiled assembly is actually available in the Quartz service directory, this is different from the main commerce site bin folder so it is not enough just to include it in the commerce app references</li>
+    <li>Make sure the data context has been initialised and the config file in the Quartz service directory is pointing to your database</li>
+</ul>
+</div>
+
+
+
+
+<h3>Mining for more gems</h3>
+
+
+<p>Ultimately only time will tell if Quartz was the best choice but I feel it has the best chance of high reliability and performance in the long term. I hope that, where appropriate, EPiServer can continue to expand the incorporation of proven open source libraries with their product offerings.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Behaviour Driven Design encourages shared understanding]]></title>
+    <link href="http://bakingwebsites.co.uk/2011/10/23/behaviour-driven-design-encourages-shared-understanding/"/>
+    <updated>2011-10-23T12:21:38+01:00</updated>
+    <id>http://bakingwebsites.co.uk/2011/10/23/behaviour-driven-design-encourages-shared-understanding</id>
+    <content type="html"><![CDATA[<p>Most recent projects I have worked on have used unit tests  to define the requirements of our code and ensure they are met. Typically the tests are written by the developer while they are coding the solution. However this means that the tests are based entirely on the developers understanding of the requirements, which may not always be the same as the stakeholders understanding.</p>
+
+<p>To combat this issue we are introducing <a href="http://dannorth.net/introducing-bdd/">behaviour driven development</a>, to agree on a set of requirements for each feature with the stakeholders before starting development. The requirements are captured using the Gherkin syntax (Given, When, Then) based on real world examples. These examples can then be wired up to the system directly as automated tests using <a href="http://specflow.org/">Specflow</a>.</p>
+
+<h2>OK, show me the example already</h2>
+
+
+<p>Here is a fictionalised scenario which demonstrates the value that BDD adds to a project. An abbreviated version of the initial scenarios drafted by the developer are as follows:</p>
+
+<pre style="font-size:small;font-family:Consolas, 'Courier New', Courier, Monospace;width:100%;overflow:auto;border:1px dashed #999999;background-color:#eeeeee;"><span style="color:#0000ff;font-weight:bold;">Feature</span>: Process 3D secure authentication response
+        As a logged in user
+        I would like to place a 3D secure authenticated order
+        so that I have assurance of the websites security
+
+<span style="color:#0000ff;font-weight:bold;">Scenario</span>: Handle a 3D secure response of AUTHORISED
+    <span style="color:#0000ff;"><strong>Given </strong></span>a 3D secure response of AUTHORISED
+        <span style="color:#0000ff;font-weight:bold;">When</span>  i view the order confirmation page
+        <span style="color:#0000ff;font-weight:bold;">Then</span>  the order status will be Complete
+
+<span style="color:#0000ff;font-weight:bold;">Scenario</span>: Handle a 3D secure response of NOT AUTHORISED
+    <span style="color:#0000ff;"><strong>Given </strong></span>a 3D secure response of NOT AUTHORISED
+        <span style="color:#0000ff;font-weight:bold;">When</span>  i view the order confirmation page
+        <span style="color:#0000ff;font-weight:bold;">Then</span>  the order status will be Cancelled
+
+<span style="color:#0000ff;font-weight:bold;">Scenario</span>: Handle a 3D response of NOT PROCESSED
+    <span style="color:#0000ff;"><strong>Given </strong></span>a 3D secure response of NOT PROCESSED
+        <span style="color:#0000ff;font-weight:bold;">When</span>  i view the order confirmation page
+        <span style="color:#0000ff;font-weight:bold;">Then</span>  the order status will be Cancelled</pre>
+
+
+
+
+<h2>Evolving the scenario</h2>
+
+
+<p>The assumptions shown in these scenarios are perfectly reasonable, an order will only be completed if the 3D secure security check returns an authorised response. However it should really be a decision for the stakeholder&rsquo;s business whether the system should behave in this way. There are several valid scenarios where all 3D responses should actually result in a completed order, for example:</p>
+
+<pre style="font-size:small;font-family:Consolas, 'Courier New', Courier, Monospace;width:100%;overflow:auto;border:1px dashed #999999;background-color:#eeeeee;"><span style="color:#0000ff;font-weight:bold;">Scenario</span>: Handle a 3D secure response of NOT AUTHORISED
+<span style="color:#0000ff;"><strong>Given</strong></span> a 3D secure response of NOT AUTHORISED
+<span style="color:#0000ff;"><strong>And</strong></span> a total order value order value under the following amount:   25
+<span style="color:#0000ff;font-weight:bold;">When</span>  i view the order confirmation page
+<span style="color:#0000ff;font-weight:bold;">Then</span>  the order status will be Complete</pre>
+
+
+<p>The stakeholders calculated that the risk of charge-backs was so low on orders under   25 that they could disregard the 3D secure response completely and allow &lsquo;not authorised&rsquo; transactions to be completed.</p>
+
+<p>Here we can see a clear benefit in the stakeholder sharing their understanding of the system requirements with the implementation team. Rules which are beneficial to their business can be incorporated into the system, resulting in a more effective solution from the outset.</p>
+
+<p>If you are interested in reading more about using BDD for web applications I can recommend <a href="http://blog.stevensanderson.com/2010/03/03/behavior-driven-development-bdd-with-specflow-and-aspnet-mvc/">Steven Sanderson&rsquo;s excellent blog post</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Discovering the original inventors of the internet]]></title>
+    <link href="http://bakingwebsites.co.uk/2011/10/07/discovering-the-original-inventors-of-the-internet/"/>
+    <updated>2011-10-07T17:32:44+01:00</updated>
+    <id>http://bakingwebsites.co.uk/2011/10/07/discovering-the-original-inventors-of-the-internet</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m sure many of you have heard about a chap called <a href="http://twitter.com/#!/timberners_lee">Tim Berners Lee</a> who is widely credited for inventing the world wide web as we know it today. The story is well known and I&rsquo;m not going to re-hash it here, however less is known about who may have come up with the first concept of the <a href="http://en.wikipedia.org/wiki/Internet">Internet</a>. You may be surprised to hear that the origins of the concept date back several centuries and take place on an entirely different continent, among a race of people commonly considered quite primitive and barbaric. Here&rsquo;s a little hint of who these people may have been.</p>
+
+<p><a href="http://imageshack.com/a/img835/4400/yrbq.jpg"><img class="size-medium wp-image-257" title="Machu_Picchu_1" src="http://imagizer.imageshack.us/v2/320x240q90/835/yrbq.jpg" alt="" width="320" /></a></p>
+
+<h2>The internet laid bare</h2>
+
+
+<p>You may well ask how the internet could exist centuries before computers had been invented or even the discovery of electricity. Naturally there was no way the internet as we know it today could be possible, however if we look at the abstract concept there are strong parallels. At it&rsquo;s heart the internet is a communications system made up of a group of connected devices. The power of the internet lies in its ability to efficiently send messages through the network from one node to another. When you open your web browser and type in www.google.co.uk your computer sends a message to the web server hosting google.co.uk asking for the web page. However this  message is not sent directly from your computer to the google web server, this would be very inefficient as each person that wanted to view the google web page would first need to establish a connection to their web server. As more people tried to connect to the same page the response would get slower and slower until the number of connections reached its limit.</p>
+
+<h2>Routing to the rescue</h2>
+
+
+<p>The internet has an elegant solution to this problem. Instead of attempting to establish a direct connection between the two end points, each of the nodes in the network just connects to their nearest nodes. So the end points are indirectly connected through the network in a similar way to this lovely node diagram:</p>
+
+<p><img class="size-full wp-image-252" title="onethousandpaintings_small1-300x300" src="http://imageshack.com/a/img834/8784/z6g.gif" alt="Network nodes" width="300" /></p>
+
+<p>Each message is sent with the address of its final destination, each node only needs to know what direction to send the message in order to get it closer to its destination. In this way the message is naturally <a href="http://en.wikipedia.org/wiki/Routing">routed</a> on the most efficient path from its source to the destination. It is this concept if a nodal network and message routing that has strong parallels with a very old method of communications.</p>
+
+<p><span class="Apple-style-span" style="font-size:20px;"><strong>An ancient  Inca  network</strong></span></p>
+
+<p>I recently took a trip to Peru to hike the Inca trail to Machu Picchu. So this post is a (hopefully interesting) way to shoehorn some of my holiday snaps onto this blog!</p>
+
+<p><a href="http://imageshack.com/a/img703/8159/inq4.jpg"><img class="size-medium wp-image-255" title="Machu_Picchu" src="http://imagizer.imageshack.us/v2/320x240q90/703/inq4.jpg" alt="" /></a></p>
+
+<p>However quite apart from that I learnt a great deal about the fascinating Inca culture. Before the trip I had thought that there was essentially one Inca trail in Peru leading to Machu Picchu, how wrong I was! The Inca trails actually comprised of thousands of miles of pathways connected across the whole of the Inca empire. They were the key to enabling the Inca rulers establish and run the largest single empire in South America.</p>
+
+<p>One of the main uses of the trails was as a communications network. There were small guard posts dotted across the network, often high up in remote mountain areas. If the Inca ruler wanted to send a message they would encode it using a &lsquo;<a href="http://en.wikipedia.org/wiki/Quipus">quipus</a>&rsquo;, a device made up of multi-coloured plied rope, threads and knots.     The exact method of encoding has unfortunately been lost in time but it may well of been a binary system quite similar to one used by computers today. It would have been quite possible to encode fairly sophisticated messages in this way.</p>
+
+<p><img class="size-full wp-image-259" title="quipus" src="http://imageshack.com/a/img14/4521/fqto.jpg" alt="" /></a></p>
+
+<p>The ruler would then pass the quipus to a messenger to deliver the message. However the messenger would only take the message to the nearest checkpoint, then pass it onto another messenger who would carry the message to the next checkpoint. Each checkpoint would be around 5-10 KM apart, more distance for flat sections and less for mountainous terrain. In this way each of the messengers could run between the checkpoints as fast as possible and the message itself would reach its destination far quicker than would otherwise be possible.</p>
+
+<p>To give you some indication of how efficient this system was during Inca times the capital city was Cuzco, situated at around 3,300 metres in the middle of the Andes mountains, several hundred miles from the coast. However the Inca king was able to eat fresh fish in the capital because it was sent over the Inca trail network. It is estimated that the same delivery made by road transport today takes longer than an equivalent delivery made over the Inca network in the 15th century!</p>
+
+<p>So now all the pieces of the puzzle are in place we can see that the Inca trail network used the some communication method as today&rsquo;s internet. The trail checkpoints are equivalent to an internet router, the messengers have now been replaced with fibre optic cables and of course the quipus is directly equivalent to an <a href="http://en.wikipedia.org/wiki/Network_packet">IP network packet</a>. So there you have it, the Inca empire invented the alpha version of the internet.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The beauty of cherry pick]]></title>
+    <link href="http://bakingwebsites.co.uk/2011/10/06/the-beauty-of-cherry-pick/"/>
+    <updated>2011-10-06T18:00:59+01:00</updated>
+    <id>http://bakingwebsites.co.uk/2011/10/06/the-beauty-of-cherry-pick</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m loving the <a href="http://gitready.com/intermediate/2009/03/04/pick-out-individual-commits.html">cherry pick command</a> in git right now, this is the scenario that it really helps me out for.</p>
+
+<p>I&rsquo;ve fixed a bug on the live branch, however before it can be published to the live website it needs to be tested. So I can first publish it to our UAT (user acceptance testing) site so the client can test the changes. However the UAT site already has a bunch of other unreleased features on it. If I merge my bug fix branch into the UAT branch it will overwrite some of the other feature changes.</p>
+
+<p>The solution here is to &lsquo;cherry pick&rsquo; just my changes from my bug fix branch and commit those to the UAT branch. In this way git doesn&rsquo;t merge all the other differences between the live and UAT branch.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Nhibernate generator class for SQLite databases]]></title>
+    <link href="http://bakingwebsites.co.uk/2011/08/29/nhibernate-generator-class-for-sqlite-databases/"/>
+    <updated>2011-08-29T15:40:26+01:00</updated>
+    <id>http://bakingwebsites.co.uk/2011/08/29/nhibernate-generator-class-for-sqlite-databases</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve been developing a mobile app for Android which needs to query data in an SQLite database. So the first task I needed to get done was to import data into the SQLite database. As I&rsquo;m more used to writing .NET applications which use the NHibernate ORM I decided to write an import program on this technology stack.</p>
+
+<p>For my first attempt at the import program I just wanted to focus on the import logic, so choose to use a &lsquo;known working&rsquo; NHibernate configuration with a MS SQL 2005 database. While this worked fine for me it did mean that I had to manually copy all of the data from the MS SQL database into the SQLite database before it could be used in the Android app. This was quite laborious so when I needed to modify the importer at a later date I decided to change the NHibernate configuration to point directly to the SQLite database instead. This was the updated config file used:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">&lt;hibernate-configuration  xmlns="urn:nhibernate-configuration-2.2" &gt;
+    &lt;session-factory&gt;
+        &lt;property name="connection.provider"&gt;NHibernate.Connection.DriverConnectionProvider&lt;/property&gt;
+        &lt;property name="connection.driver_class"&gt;NHibernate.Driver.SQLiteDriver&lt;/property&gt;
+        &lt;property name="connection.connection_string_name"&gt;FootyLinks&lt;/property&gt;
+        &lt;property name="dialect"&gt;NHibernate.Dialect.SQLiteDialect&lt;/property&gt;
+        &lt;property name="query.substitutions"&gt;true=1;false=0&lt;/property&gt;
+    &lt;/session-factory&gt;
+&lt;/hibernate-configuration&gt;</pre>
+
+
+<p>And this is an example of the connection string format:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">&lt;configuration&gt;
+    &lt;connectionStrings&gt;
+        &lt;add name="FootyLinks" connectionString="Data Source=C:\path_to_the_SQLite_database_file;Version=3"/&gt;
+    &lt;/connectionStrings&gt;
+&lt;/configuration&gt;</pre>
+
+
+<p>This configuration worked OK and the import program could connect to the SQLite database, however I hit a problem when trying to save new records to the database. This was the inner exception reported by NHibernate:</p>
+
+<blockquote>Abort due to constraint violation Club.Id may not be NULL</blockquote>
+
+
+<p>The problem was that the import program was using the default generator class of <em>identity  </em>for in the NHibernate entity mappings. So NHibernate was expecting the database to generate the identity keys for the new records being saved to the database, however SQLite does not appear to support this. After some reading up on the options available for the <a href="http://nhforge.org/doc/nh/en/index.html#mapping-declaration-id-generator">NHibernate generator setting</a>  I decided to try the  <em>native  </em>setting. As this should select the implementation supported by the database. However this didn&rsquo;t work either, I think because, of all the options <em>native</em> can select, none are actually supported by SQLite. So my next preferred selection was to use <em>increment,</em>  this setting comes with a disclaimer that it should not be used in a cluster, which is absolutely fine as its very unlikely that I will ever be deploy the importer to a load balanced environment.</p>
+
+<p>The <em>increment</em> setting worked fine with the SQLite database and should streamline my workflow nicely for updating the app data .</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[FootyLinks roadmap]]></title>
+    <link href="http://bakingwebsites.co.uk/2011/07/17/footylinks-roadmap/"/>
+    <updated>2011-07-17T17:29:21+01:00</updated>
+    <id>http://bakingwebsites.co.uk/2011/07/17/footylinks-roadmap</id>
+    <content type="html"><![CDATA[<ol>
+    <li>Make lowest difficulty level easier (squad numbers?, exclude older players?)</li>
+    <li>Correct answer page</li>
+    <li>Display score in game</li>
+    <li>Increment score on correct answer</li>
+    <li>Fix occasional crashing on view changes (db init to game startup event?)</li>
+    <li>Only allow user to select roles available at their level</li>
+    <li>Release one</li>
+    <li>Level up on score thresholds</li>
+    <li>Change game rules depending on difficulty level</li>
+    <li>Post scores to twitter</li>
+    <li>Update data with latest transfers</li>
+    <li>Release two</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Android Dev Tip - Fix the eclipse auto-complete]]></title>
+    <link href="http://bakingwebsites.co.uk/2011/03/10/android-dev-tip-fix-the-eclipse-auto-complete/"/>
+    <updated>2011-03-10T16:39:43+00:00</updated>
+    <id>http://bakingwebsites.co.uk/2011/03/10/android-dev-tip-fix-the-eclipse-auto-complete</id>
+    <content type="html"><![CDATA[<p>I recently had problems with the eclipse IDE auto-complete not working.</p>
+
+<p>After Googling the problem, I managed to resolve this by downloading the source for the version I was using and extracting into the Android SDK folder, as detailed in <a href="http://code.google.com/p/android/issues/detail?id=7850#c8">this google code issue</a>.</p>
+]]></content>
+  </entry>
+  
+</feed>
