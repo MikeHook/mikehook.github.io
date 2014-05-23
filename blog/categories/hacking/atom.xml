@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Hacking | baking websites]]></title>
   <link href="http://bakingwebsites.co.uk/blog/categories/hacking/atom.xml" rel="self"/>
   <link href="http://bakingwebsites.co.uk/"/>
-  <updated>2014-05-14T15:19:55+01:00</updated>
+  <updated>2014-05-23T17:49:04+01:00</updated>
   <id>http://bakingwebsites.co.uk/</id>
   <author>
     <name><![CDATA[Mike Hook]]></name>
@@ -12,6 +12,106 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Cloud Hosting for a Prototype Project]]></title>
+    <link href="http://bakingwebsites.co.uk/2014/05/23/cloud-hosting-for-prototype/"/>
+    <updated>2014-05-23T16:04:20+01:00</updated>
+    <id>http://bakingwebsites.co.uk/2014/05/23/cloud-hosting-for-prototype</id>
+    <content type="html"><![CDATA[<p><img src="http://imagizer.imageshack.us/v2/320x240q90/838/0fsb.jpg" class="alignleft" alttext="Square peg - Round hole"  /></p>
+
+<br/><br/>
+
+
+<p>Today I am investigating cloud hosting platforms for a green field web application, there are quite a few platforms out there now, however I&rsquo;ll be looking at some of the big hitters as they are tried and tested in the marketplace.</p>
+
+<p>The full technology stack is still under review so the hosting capabilities need to be fairly flexible however the requirements we know for sure are:</p>
+
+<ul>
+<li>Able to spin up multiple instances to run testing, staging and production environments</li>
+<li>Low cost, ideally zero for testing / staging as this is grass roots project!</li>
+<li>Flexibility to host a range of technologies</li>
+<li>High reliability / speed (this should be a given for any hosting environment)</li>
+</ul>
+
+
+<h2>Contenders ready!</h2>
+
+<p>I&rsquo;m going to investigate 3 platforms against the main requirements above, Windows Azure, Amazon Web Services and Heroku. Each have their advantages, so lets find out which will be the best fit for our project.</p>
+
+<h3>Azure</h3>
+
+<p>Azure is the Microsoft Cloud offering. As such it has a Microsoft technologies leaning but is by no means limited to their stack.</p>
+
+<h4>OS / Languages / DBs</h4>
+
+<ul>
+<li>Windows or Linux</li>
+<li>.NET, Node.js, Java, PHP, Python, Ruby</li>
+<li>Native DBs: Azure SQL Server</li>
+<li>Third party DBs: Neo4j, MySQL, MongoDB (fiddly)</li>
+</ul>
+
+
+<h4>Pricing</h4>
+
+<ul>
+<li>30 day free trial then,</li>
+<li>$10/month per site</li>
+<li>$2.50/month per DB</li>
+</ul>
+
+
+<h3>AWS</h3>
+
+<p>Amazon Web Services were one of the first cloud based hosting solutions out there. It is a mature platform with many options but lets see whether the acronyms compare favourably.</p>
+
+<h4>OS / Languages</h4>
+
+<ul>
+<li>Windows or Linux</li>
+<li>.NET, Java, PHP, Python, Ruby</li>
+<li>Native DBs: SQL Server, MySQL, Oracle, PostgreSQL</li>
+<li>Third party DBs: Neo4j, MongoDB, RavenDB (basically anything you can run on VM)</li>
+</ul>
+
+
+<h4>Pricing</h4>
+
+<ul>
+<li>12 months free for 1 instance / DB</li>
+<li>$15/month per site</li>
+<li>$40/month per DB</li>
+</ul>
+
+
+<h3>Heroku</h3>
+
+<p>Heroku is more of a grass roots developer led cloud platform. It is well suited to an open source license free stack but will this be suitable for our application?</p>
+
+<h4>OS / Languages</h4>
+
+<ul>
+<li>Windows or Linux</li>
+<li>Node.js, Java, Python, Ruby</li>
+<li>Native DBs: Postgres</li>
+<li>Third party FBs: neo4j, MySQL</li>
+</ul>
+
+
+<h4>Pricing</h4>
+
+<ul>
+<li>1 dyno free, $35/month per extra instance</li>
+<li>Dev DBs free (Up to 10K rows), Basic $9/month</li>
+</ul>
+
+
+<h2>And the winner is&hellip;</h2>
+
+<p>The technology stack hasn&rsquo;t been chosen yet so we will just need to wait to see you the winner is!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Migrating Umbraco 4 Mysql to Azure Hosting]]></title>
@@ -328,33 +428,6 @@ You can get the app by opening the following website on your android device and 
     <li>An android application for the game itself</li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Developing Android Apps: Connect to an Existing SQLite Database]]></title>
-    <link href="http://bakingwebsites.co.uk/2011/12/30/developing-android-apps-connect-to-an-existing-sqlite-database/"/>
-    <updated>2011-12-30T14:43:17+00:00</updated>
-    <id>http://bakingwebsites.co.uk/2011/12/30/developing-android-apps-connect-to-an-existing-sqlite-database</id>
-    <content type="html"><![CDATA[<p>This post was drafted some time ago, so some of the details are lost in the mists of time. But I&rsquo;ll provide links to the source so anyone interested in doing something similar can start from there.</p>
-
-<p>The android app I&rsquo;m developing needs to be able to connect to an existing SQLite database, there are not many examples of how to achieve this in the Android tutorials, however I was able to find some guidance in a post from another Android developer on the <a href="http://www.reigndesign.com/blog/using-your-own-sqlite-database-in-android-applications/">reigndesign blog</a></p>
-
-<p>The key is that the database needs to be copied internally to the system directory on the device running the application before it can be accessed. This doesn&rsquo;t seem particularly efficient but I&rsquo;m sure Android had their reasons! My modified version of the code to do this is available from my github repository here:</p>
-
-<p><a href="https://github.com/MikeHook/FootyLinks/blob/master/AndroidApp/src/mhook/FootyLinks/Data/FootyLinksSQLLiteHelper.java">FootyLinksSQLLiteHelper.java</a></p>
-
-<p>I&rsquo;ve also encountered a couple of other snags since then while working with the SQLite database.</p>
-
-<h3>No password support</h3>
-
-
-<p>Passwords do not appear to be supported at all for the Android applications. I&rsquo;d automatically added password protection to the database when creating it and it took me a while to figure out why eclipse was refusing to read it!</p>
-
-<h3>Manually delete after schema changes</h3>
-
-
-<p>I&rsquo;ve added some additional fields to the database over time. However initially they were not being copied into the version of the database in my device emulator. I found it was necessary to browse the emulator files themselves, using the DDMS perspective in Eclipse, and delete the old database file directly in the emulator file system.</p>
 ]]></content>
   </entry>
   

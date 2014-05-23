@@ -9,7 +9,7 @@
 	<meta name="author" content="Mike Hook">
 
 	
-	<meta name="description" content="Apr 28th, 2014 Hacking Comments Migrating Umbraco 4 Mysql to Azure Hosting Why Azure I recently inherited an Umbraco version 4 site and need to &hellip;">
+	<meta name="description" content="May 23rd, 2014 Hacking Comments Cloud Hosting for a Prototype Project Today I am investigating cloud hosting platforms for a green field web &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,7 +66,7 @@
 
 <nav id="main-nav"><h3>categories</h3>
 <ul class="main-navigation">
-<li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 20 ]</li>
+<li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 21 ]</li>
 <li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 3 ]</li>
 <li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 12 ]</li>
 <li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
@@ -111,6 +111,134 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-23T16:04:20+01:00" data-updated="true" itemprop="datePublished">May 23<span>rd</span>, 2014</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2014/05/23/cloud-hosting-for-prototype/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2014/05/23/cloud-hosting-for-prototype/" itemprop="url">Cloud Hosting for a Prototype Project</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><img src="http://imagizer.imageshack.us/v2/320x240q90/838/0fsb.jpg" class="alignleft" alttext="Square peg - Round hole"  /></p>
+
+<br/><br/>
+
+
+<p>Today I am investigating cloud hosting platforms for a green field web application, there are quite a few platforms out there now, however I&rsquo;ll be looking at some of the big hitters as they are tried and tested in the marketplace.</p>
+
+<p>The full technology stack is still under review so the hosting capabilities need to be fairly flexible however the requirements we know for sure are:</p>
+
+<ul>
+<li>Able to spin up multiple instances to run testing, staging and production environments</li>
+<li>Low cost, ideally zero for testing / staging as this is grass roots project!</li>
+<li>Flexibility to host a range of technologies</li>
+<li>High reliability / speed (this should be a given for any hosting environment)</li>
+</ul>
+
+
+<h2>Contenders ready!</h2>
+
+<p>I&rsquo;m going to investigate 3 platforms against the main requirements above, Windows Azure, Amazon Web Services and Heroku. Each have their advantages, so lets find out which will be the best fit for our project.</p>
+
+<h3>Azure</h3>
+
+<p>Azure is the Microsoft Cloud offering. As such it has a Microsoft technologies leaning but is by no means limited to their stack.</p>
+
+<h4>OS / Languages / DBs</h4>
+
+<ul>
+<li>Windows or Linux</li>
+<li>.NET, Node.js, Java, PHP, Python, Ruby</li>
+<li>Native DBs: Azure SQL Server</li>
+<li>Third party DBs: Neo4j, MySQL, MongoDB (fiddly)</li>
+</ul>
+
+
+<h4>Pricing</h4>
+
+<ul>
+<li>30 day free trial then,</li>
+<li>$10/month per site</li>
+<li>$2.50/month per DB</li>
+</ul>
+
+
+<h3>AWS</h3>
+
+<p>Amazon Web Services were one of the first cloud based hosting solutions out there. It is a mature platform with many options but lets see whether the acronyms compare favourably.</p>
+
+<h4>OS / Languages</h4>
+
+<ul>
+<li>Windows or Linux</li>
+<li>.NET, Java, PHP, Python, Ruby</li>
+<li>Native DBs: SQL Server, MySQL, Oracle, PostgreSQL</li>
+<li>Third party DBs: Neo4j, MongoDB, RavenDB (basically anything you can run on VM)</li>
+</ul>
+
+
+<h4>Pricing</h4>
+
+<ul>
+<li>12 months free for 1 instance / DB</li>
+<li>$15/month per site</li>
+<li>$40/month per DB</li>
+</ul>
+
+
+<h3>Heroku</h3>
+
+<p>Heroku is more of a grass roots developer led cloud platform. It is well suited to an open source license free stack but will this be suitable for our application?</p>
+
+<h4>OS / Languages</h4>
+
+<ul>
+<li>Windows or Linux</li>
+<li>Node.js, Java, Python, Ruby</li>
+<li>Native DBs: Postgres</li>
+<li>Third party FBs: neo4j, MySQL</li>
+</ul>
+
+
+<h4>Pricing</h4>
+
+<ul>
+<li>1 dyno free, $35/month per extra instance</li>
+<li>Dev DBs free (Up to 10K rows), Basic $9/month</li>
+</ul>
+
+
+<h2>And the winner is&hellip;</h2>
+
+<p>The technology stack hasn&rsquo;t been chosen yet so we will just need to wait to see you the winner is!</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -444,82 +572,6 @@ Using synchronization is expensive (ie. It takes the computer a relatively long 
 
 
 <p>Stay tuned for more patterns to be added to this post!</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-29T08:53:06+01:00" data-updated="true" itemprop="datePublished">May 29<span>th</span>, 2013</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/software-design/'>Software Design</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2013/05/29/the-observer-pattern-coding-kata/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2013/05/29/the-observer-pattern-coding-kata/" itemprop="url">The Observer Pattern Coding Kata</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>The second design pattern I will be looking at is the Observer pattern, which is useful for safely passing data between objects. The Observer pattern is defined as:</p>
-
-<blockquote>&#8220;a one-to-many relationship between objects so that when one object changes state all it  dependants  are notified and updated automatically&#8221;.</blockquote>
-
-
-<p>A good analogy for this pattern, described in the excellent <a href="http://www.headfirstlabs.com/books/hfdp/">Head First Design Patterns book</a>  is that of a magazine publisher and subscribers. Here the publisher is the <em>one</em>  in the relationship and the subscribers are the <em>many</em>. Typically the publisher will notify each of the subscribers of a new magazine edition by sending them the magazine in the post or through their e-book subscription.  Translated into the Observer pattern the Publisher is known as the Subject and the subscribers are the observers. The subject <em>notifies</em> the observers of changes in its state.</p>
-
-<p>Some important features to note about this pattern are:</p>
-
-<ul>
-    <li>Observers can not change the state of the subject and vice versa (ie. they are Loosely Coupled)</li>
-    <li>The state information can be either <em>pushed</em> out to the observers by the subject or <em>pulled</em> from the subject by the observers</li>
-    <li>Observers can be added and removed at any time</li>
-</ul>
-
-
-
-
-<h3>The brief</h3>
-
-
-<p>This is our  fictitious  brief for a new system which needs to be designed. It is election time and the polls are coming in. A local TV station would like us to design a system which can keep track of the results as they arrive. There are several hundred constituencies (areas of the country) which may declare for the Blue, Red, Yellow or Green party. The TV station wants to present this data in a number of ways:</p>
-
-<ul>
-    <li>As a leader board, showing the tally for each party</li>
-    <li>As a map, with each region coloured to the winning party</li>
-    <li>As a <a href="http://news.bbc.co.uk/1/hi/uk_politics/election_2010/8574653.stm">Swingometer</a>  showing the proportional change and overall result</li>
-</ul>
-
-
-<p>We don&rsquo;t need to worry about the implementation details of these display methods, the algorithms will be provided by the TV station. Our main concern is how to design a system to pass the data between the election object and the display objects.</p>
-
-<h3>Designing the Solution</h3>
-
-
-<p>Here is the class diagram for our solution, if you would like to try implementing the solution yourself the starting point for the kata is tagged here: <a href="https://github.com/MikeHook/DesignPatterns/tree/ObserverStart">Observer Pattern Kata Start</a>.</p>
-
-<p><img class="alignnone" alt="Observer pattern for election data" src="https://www.lucidchart.com/publicSegments/view/51892f26-05fc-4844-a25b-4c660a0087f6/image.png" width="579" height="597" /></p>
-
-<p>We have leveraged the Observer pattern in our solution. The Election object inherits from ISubject and each of the display methods inherit from IObserver. The Election object maintains a list of the observers, we can add or remove an observer to this list using the <em>Register</em> and <em>Unregister</em> methods. When the subjects <em>Notify</em> method is called it informs each of the observers that a change has occurred by calling their <em>Update</em> method. A completed implementation for the election scenario is tagged here: <a href="https://github.com/MikeHook/DesignPatterns/tree/ObserverEnd">Observer Pattern Kata End</a>.</p>
 
 		
 		

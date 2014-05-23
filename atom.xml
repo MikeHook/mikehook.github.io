@@ -4,7 +4,7 @@
   <title><![CDATA[baking websites]]></title>
   <link href="http://bakingwebsites.co.uk/atom.xml" rel="self"/>
   <link href="http://bakingwebsites.co.uk/"/>
-  <updated>2014-05-14T15:19:55+01:00</updated>
+  <updated>2014-05-23T17:49:04+01:00</updated>
   <id>http://bakingwebsites.co.uk/</id>
   <author>
     <name><![CDATA[Mike Hook]]></name>
@@ -12,6 +12,106 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Cloud hosting for a prototype project]]></title>
+    <link href="http://bakingwebsites.co.uk/2014/05/23/cloud-hosting-for-prototype/"/>
+    <updated>2014-05-23T16:04:20+01:00</updated>
+    <id>http://bakingwebsites.co.uk/2014/05/23/cloud-hosting-for-prototype</id>
+    <content type="html"><![CDATA[<p><img src="http://imagizer.imageshack.us/v2/320x240q90/838/0fsb.jpg" class="alignleft" alttext="Square peg - Round hole"  /></p>
+
+<br/><br/>
+
+
+<p>Today I am investigating cloud hosting platforms for a green field web application, there are quite a few platforms out there now, however I&rsquo;ll be looking at some of the big hitters as they are tried and tested in the marketplace.</p>
+
+<p>The full technology stack is still under review so the hosting capabilities need to be fairly flexible however the requirements we know for sure are:</p>
+
+<ul>
+<li>Able to spin up multiple instances to run testing, staging and production environments</li>
+<li>Low cost, ideally zero for testing / staging as this is grass roots project!</li>
+<li>Flexibility to host a range of technologies</li>
+<li>High reliability / speed (this should be a given for any hosting environment)</li>
+</ul>
+
+
+<h2>Contenders ready!</h2>
+
+<p>I&rsquo;m going to investigate 3 platforms against the main requirements above, Windows Azure, Amazon Web Services and Heroku. Each have their advantages, so lets find out which will be the best fit for our project.</p>
+
+<h3>Azure</h3>
+
+<p>Azure is the Microsoft Cloud offering. As such it has a Microsoft technologies leaning but is by no means limited to their stack.</p>
+
+<h4>OS / Languages / DBs</h4>
+
+<ul>
+<li>Windows or Linux</li>
+<li>.NET, Node.js, Java, PHP, Python, Ruby</li>
+<li>Native DBs: Azure SQL Server</li>
+<li>Third party DBs: Neo4j, MySQL, MongoDB (fiddly)</li>
+</ul>
+
+
+<h4>Pricing</h4>
+
+<ul>
+<li>30 day free trial then,</li>
+<li>$10/month per site</li>
+<li>$2.50/month per DB</li>
+</ul>
+
+
+<h3>AWS</h3>
+
+<p>Amazon Web Services were one of the first cloud based hosting solutions out there. It is a mature platform with many options but lets see whether the acronyms compare favourably.</p>
+
+<h4>OS / Languages</h4>
+
+<ul>
+<li>Windows or Linux</li>
+<li>.NET, Java, PHP, Python, Ruby</li>
+<li>Native DBs: SQL Server, MySQL, Oracle, PostgreSQL</li>
+<li>Third party DBs: Neo4j, MongoDB, RavenDB (basically anything you can run on VM)</li>
+</ul>
+
+
+<h4>Pricing</h4>
+
+<ul>
+<li>12 months free for 1 instance / DB</li>
+<li>$15/month per site</li>
+<li>$40/month per DB</li>
+</ul>
+
+
+<h3>Heroku</h3>
+
+<p>Heroku is more of a grass roots developer led cloud platform. It is well suited to an open source license free stack but will this be suitable for our application?</p>
+
+<h4>OS / Languages</h4>
+
+<ul>
+<li>Windows or Linux</li>
+<li>Node.js, Java, Python, Ruby</li>
+<li>Native DBs: Postgres</li>
+<li>Third party FBs: neo4j, MySQL</li>
+</ul>
+
+
+<h4>Pricing</h4>
+
+<ul>
+<li>1 dyno free, $35/month per extra instance</li>
+<li>Dev DBs free (Up to 10K rows), Basic $9/month</li>
+</ul>
+
+
+<h2>And the winner is&hellip;</h2>
+
+<p>The technology stack hasn&rsquo;t been chosen yet so we will just need to wait to see you the winner is!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[migrating umbraco 4 mysql to azure hosting]]></title>
@@ -1046,17 +1146,6 @@ using (var excelPackage = new ExcelPackage())
     <li>Release two</li>
 </ol>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Android Dev Tip - Fix the eclipse auto-complete]]></title>
-    <link href="http://bakingwebsites.co.uk/2011/03/10/android-dev-tip-fix-the-eclipse-auto-complete/"/>
-    <updated>2011-03-10T16:39:43+00:00</updated>
-    <id>http://bakingwebsites.co.uk/2011/03/10/android-dev-tip-fix-the-eclipse-auto-complete</id>
-    <content type="html"><![CDATA[<p>I recently had problems with the eclipse IDE auto-complete not working.</p>
-
-<p>After Googling the problem, I managed to resolve this by downloading the source for the version I was using and extracting into the Android SDK folder, as detailed in <a href="http://code.google.com/p/android/issues/detail?id=7850#c8">this google code issue</a>.</p>
 ]]></content>
   </entry>
   
