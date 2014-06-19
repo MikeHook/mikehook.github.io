@@ -5,12 +5,14 @@ date: 2014-06-19 16:57:57 +0100
 comments: true
 categories: 
 - Hacking
-published: false
+published: true
 ---
 
-<img src="http://imageshack.com/a/img843/5127/31nm.jpg" class="alignleft" alttext="Square peg - Round hole"  />
+<img src="http://imagizer.imageshack.us/v2/320x240q90/843/31nm.jpg" class="alignleft" alttext="Square peg - Round hole"  />
 
-If you have read my previous post on [Umbraco to Azure migration](/2014/04/28/migrating-umbraco-4-mysql-to-azure-hosting/) the topic of this post will be of no surprise. I've inherited an application using a MySQL database which I'd like to host in Azure. However the hosting support for a MySQL database in Azure is expensive. So I have investigated migrating the DB into an SQL Azure supported format. 
+If you have read my previous post on [Umbraco to Azure migration](/2014/04/28/migrating-umbraco-4-mysql-to-azure-hosting/) the topic of this post will be of no surprise. 
+
+I've inherited an application using a MySQL database which I'd like to host in Azure. However the hosting support for a MySQL database in Azure is expensive. So I have investigated migrating the DB into an SQL Azure supported format. 
 
 ##What about a VM?
 
@@ -57,7 +59,7 @@ Most of the changes could be made directly to the Azure tables by just changing 
 	drop table [cmstasktype]
 	EXECUTE sp_rename N'Tempcmstasktype', N'cmstasktype', 'OBJECT'
 	
-nmbn
+After ensuring all the data types matched I was able to fire up the azure website and hey presto everything functioned correctly! OK I admit it wasn't quite that smooth as I'd missed changing one column from an int to tinyint which broke the whole CMS admin UI but once I'd tracked that down everything worked fine, hooray!
 
 
 
