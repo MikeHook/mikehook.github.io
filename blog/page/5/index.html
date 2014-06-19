@@ -9,7 +9,7 @@
 	<meta name="author" content="Mike Hook">
 
 	
-	<meta name="description" content="Mar 10th, 2011 Tips and Tricks Comments Android Dev Tip - Fix the Eclipse Auto-complete I recently had problems with the eclipse IDE auto-complete &hellip;">
+	<meta name="description" content="Jul 17th, 2011 Hacking Comments FootyLinks Roadmap Make lowest difficulty level easier (squad numbers?, exclude older players?) Correct answer page &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,7 +66,7 @@
 
 <nav id="main-nav"><h3>categories</h3>
 <ul class="main-navigation">
-<li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 21 ]</li>
+<li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
 <li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 3 ]</li>
 <li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 12 ]</li>
 <li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
@@ -111,6 +111,57 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-17T17:29:21+01:00" data-updated="true" itemprop="datePublished">Jul 17<span>th</span>, 2011</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/07/17/footylinks-roadmap/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/07/17/footylinks-roadmap/" itemprop="url">FootyLinks Roadmap</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<ol>
+    <li>Make lowest difficulty level easier (squad numbers?, exclude older players?)</li>
+    <li>Correct answer page</li>
+    <li>Display score in game</li>
+    <li>Increment score on correct answer</li>
+    <li>Fix occasional crashing on view changes (db init to game startup event?)</li>
+    <li>Only allow user to select roles available at their level</li>
+    <li>Release one</li>
+    <li>Level up on score thresholds</li>
+    <li>Change game rules depending on difficulty level</li>
+    <li>Post scores to twitter</li>
+    <li>Update data with latest transfers</li>
+    <li>Release two</li>
+</ol>
+
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -360,109 +411,6 @@ public class MyController : Controller
 
 
 <p><span style="font-family:Georgia, 'Times New Roman', 'Bitstream Charter', Times, serif;line-height:19px;white-space:normal;font-size:13px;">This exception is thrown because (as described  <a href="http://aspnet.codeplex.com/workitem/1795">in this work item</a> on the MVC issue tracker) the default view model has been replaced by a <em>HandleErrorInfo </em>object and our master page is trying to access properties in the normal view model. So the straightforward fix for this is to remove the dependancy on the master page from the <em>Unauthorised </em>view. </span></p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-01-30T21:12:57+00:00" data-updated="true" itemprop="datePublished">Jan 30<span>th</span>, 2011</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/software-design/'>Software Design</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/01/30/top-5-domain-object-optimisations/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/01/30/top-5-domain-object-optimisations/" itemprop="url">Top 5 Domain Object Optimisations</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<div>I&#8217;ve been working with domain objects for a while now and these are simple tips I automatically follow on new objects. In my case the domain objects are setup to be mapped to a database by NHibernate, however most of these optimisations would be valid for a domain object used with any mapping tool.   I&#8217;ve found that these changes are quick to implement but can save a lot of hassle in the long run!</div>
-
-
-
-
-<h3>1. Make the parameterless constructor private</h3>
-
-
-<p>Obviously you will need a public constructor as well, however this should take parameters. These should be the minimum set of properties that make the domain object valid. In this way you can be sure that whenever you encounter one of these objects in your code it will not have random null properties and cause unexpected null references.</p>
-
-<pre style="background-color:#eeeeee;border:1px dashed #999999;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:60px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>private Customer() {}
-
-public Customer(string firstName, string lastName) {}
-</code></pre>
-
-
-
-
-<h3>2. Add precondition checks in the constructor</h3>
-
-
-<p>The main advantage of this is to ensure that the constructor is used as intended. The precondition checks can be used to make sure that no null or empty parameters are passed into the constructor. When used in tandem with the first tip, you can be sure that you will not encounter any invalid domain objects in your code.</p>
-
-<pre style="background-color:#eeeeee;border:1px dashed #999999;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:80px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>public Customer(string firstName, string lastName)
-{
-   Check.Require(string.IsNullOrEmpty(lastName) == false,
-      "lastName must be provided");
-}</code></pre>
-
-
-
-
-<h3>3. Initialise your lists properties in the constructor</h3>
-
-
-<p>This particular change may only be needed for NHibernate. A list property can be used to represent a one-to-many relationship between to different classes. For example, typically a  <em><strong>Customer </strong></em>object could be related to multiple  <em><strong>Order </strong></em>objects, so this would be represented in the Customer class as a list of Order objects. However, if the customer had not placed any orders yet and you tried to access the orders list, without first initialising it, you would get a null reference.</p>
-
-<pre style="background-color:#eeeeee;border:1px dashed #999999;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:60px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>private Customer()
-{
-   Orders = new List();
-}</code></pre>
-
-
-<p>You will not get this problem if the list is always initialised in the constructor. NHibernate populates the list after the constructor has been called so no actual data will be lost when the list is initialised.</p>
-
-<h3>4. Make any Status properties private</h3>
-
-
-<p>A convention we commonly use with domain objects is to represent its state with an enum property. For example an order could be New, Pending or Complete. If the Status property is private then it can only be changed by Methods in the domain object itself. This has two main advantages, firstly any logic that needs to be associated with the status change can be included in the same method. In this way you can be sure that all the required logic is run when the status is changed. For example, you may need to set the order completion date when the status changes from Pending to Complete.   Secondly it makes the code much easier to re-factor in future as there will not be calls to set the property spread around the code base.</p>
-
-<pre style="background-color:#eeeeee;border:1px dashed #999999;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:100px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>OrderStatus Status {get; private set; }
-
-public CompleteOrder()
-{
-   Status = OrderStatus.Complete;
-   CompletedDate = DateTime.Now();
-}</code></pre>
-
-
-
-
-<h3>5. Keep it simple!</h3>
-
-
-<p>OK I admit it, I ran out of tips after four! But I think this is a valid point. There is nothing worse than discovering a domain object of 500 plus lines of code in a project you need to maintain. It is best to keep it simple and if you find that too much behaviour is associated with one object then either split it into smaller domain objects or move the behaviour into a separate service class.</p>
-
-<p>So those are my top 5 tips for domain objects. I&rsquo;d be interested to hear opinions on these, along with  practices  that anyone else employs for domain objects so feel free to leave comments.</p>
 
 		
 		

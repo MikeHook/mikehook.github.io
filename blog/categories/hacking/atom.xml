@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Hacking | baking websites]]></title>
   <link href="http://bakingwebsites.co.uk/blog/categories/hacking/atom.xml" rel="self"/>
   <link href="http://bakingwebsites.co.uk/"/>
-  <updated>2014-05-23T17:49:04+01:00</updated>
+  <updated>2014-06-19T14:32:41+01:00</updated>
   <id>http://bakingwebsites.co.uk/</id>
   <author>
     <name><![CDATA[Mike Hook]]></name>
@@ -12,6 +12,70 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Mysql to Azure Database Migration]]></title>
+    <link href="http://bakingwebsites.co.uk/2014/06/19/mysql-to-azure-database-migration/"/>
+    <updated>2014-06-19T16:57:57+01:00</updated>
+    <id>http://bakingwebsites.co.uk/2014/06/19/mysql-to-azure-database-migration</id>
+    <content type="html"><![CDATA[<p><img src="http://imagizer.imageshack.us/v2/320x240q90/843/31nm.jpg" class="alignleft" alttext="Square peg - Round hole"  /></p>
+
+<p>If you have read my previous post on <a href="/2014/04/28/migrating-umbraco-4-mysql-to-azure-hosting/">Umbraco to Azure migration</a> the topic of this post will be of no surprise.</p>
+
+<p>I&rsquo;ve inherited an application using a MySQL database which I&rsquo;d like to host in Azure. However the hosting support for a MySQL database in Azure is expensive. So I have investigated migrating the DB into an SQL Azure supported format.</p>
+
+<h2>What about a VM?</h2>
+
+<p>That is a good question and one I didn&rsquo;t immediately consider. The Azure platform offers so many options that sometimes the most obvious can be missed. An easy way to keep the MySQL database without needing to fork out for the <a href="https://www.cleardb.com/">ClearDB</a> service is to just spin up an Azure VM, install MySQL on the VM and host everything from there.</p>
+
+<p>This option offers a low overhead entry to hosting the site in Azure, with a lower cost than ClearDB. However I decided not to pursue it as it negates some of the advantages of cloud hosting, one of the aspects of Azure that is attractive is how streamlined you can make the deployment process, you can either download a publish profile and deploy directly from visual studio or hook it directly into your source control and deploy on check in. Also I must admit all the shiny monitoring graphs for Azure websites are pretty cool and give you great visibility of how your hosting is performing. Granted all these features could be achieved with a VM but not nearly so easily. So, onwards with the database migration challenge!</p>
+
+<h2>Microsoft to the rescue! (nearly)</h2>
+
+<p>After a bit of research I decided to try using the <a href="http://blogs.msdn.com/b/ssma/">SQL Server Migration Assistant</a> to migrate the database. I was hoping this would automate all the tedious work and leave me just to press a few buttons, sit back and receive all the glory and admiration. Unfortunately it wasn&rsquo;t quite that simple as there are certain data types that just don&rsquo;t have a straight conversion between MySQL and SQL Server.</p>
+
+<h3>How many ways can you say Yes and No?</h3>
+
+<p>At last, a simple question, surely we can all agree what &lsquo;Yes&rsquo; and &lsquo;No&rsquo; look like, after all its the basis for all digital computing! Unfortunately when it comes to technology nothing is quite that straight forward. In the world of MS SQL we have a <a href="http://msdn.microsoft.com/en-us/library/ms177603.aspx">bit data type</a> for this function, 1 for Yes, 0 for No, simples. However the <a href="http://dev.mysql.com/doc/refman/5.7/en/bit-type.html">MySQL bit data type</a> also takes a length parameter so it is only equivalent to MS SQL if the length is set to 1.</p>
+
+<p>To complicate things further MySQL actually advise in their <a href="http://dev.mysql.com/doc/refman/5.7/en/numeric-type-overview.html">numeric types overview</a> that a TINYINT(1) data type should be used to represent a boolean value. However the actual values of this type can be anything from -128 to 127, pretty crazy huh! Unfortunately the database I am trying to migrate chose the MySQL recommended data type of TINYINT(1) and, quite understandably that is not supported by SSMA (SQL Server Migration Assistant) as a straight migration to bit. My solution for this was to craft a &lsquo;pre migration&rsquo; script to manually convert all the MySQL booleans into a bit(1) data type, which could then be migrated by SSMA by adding a custom type mapping.</p>
+
+<p>I also made a couple of other tweaks to the MySQL database before starting the conversion:</p>
+
+<ul>
+<li>Added primary keys to the identifying columns on the tables cmsmember, cmsstylesheet, cmsstylesheetproperty and umbracouserlogins</li>
+<li>Cleared out temporary data stored in the cmspreviewxml and umbracolog tables and run optimize on the tables to free up unused space</li>
+</ul>
+
+
+<p>I was then ready to fire up the SSMA tool and migrate the database to Azure. I won&rsquo;t go into details about this as there is already a <a href="http://blogs.msdn.com/b/ssma/archive/2011/02/07/mysql-to-sql-server-migration-how-to-use-ssma.aspx">decent guide for using SSMA</a>.</p>
+
+<h2>The Devil is in the detail</h2>
+
+<p>After the migration there was a final synchronisation step to carry out. I needed to manually check the data types for each of the columns in the Azure DB and update any that were not correct. I found out what the types were meant to be by <a href="http://our.umbraco.org/download">downloading the same umbraco version</a> I was working with and comparing the types. I expect there is a tool that can be used to do this but the database wasn&rsquo;t particularly large so it didn&rsquo;t take too long to carry out manually.</p>
+
+<p>Most of the changes could be made directly to the Azure tables by just changing the datatype in the management tool. However a couple of columns proved more difficult, if they were being used as primary keys in azure there was no way to change them in place so instead I copied the data into a new table which had the correct schema, removed the old table and renamed the new table. Here is an example script for the cmstasktype table:</p>
+
+<pre><code>EXECUTE sp_rename N'[PK_cmstasktype_ID]', N'[PK_cmstasktype_ID_old]',  'OBJECT'
+
+CREATE TABLE [Tempcmstasktype](
+    [ID] [tinyint] NOT NULL,
+    [ALIAS] [nvarchar](255) NOT NULL    
+    CONSTRAINT [PK_cmstasktype_ID] PRIMARY KEY CLUSTERED 
+    ([ID] ASC
+    )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ) 
+GO
+
+Insert INTO [Tempcmstasktype] ([ID], [ALIAS])
+    Select  [ID], [ALIAS]   From [cmstasktype]
+
+drop table [cmstasktype]
+EXECUTE sp_rename N'Tempcmstasktype', N'cmstasktype', 'OBJECT'
+</code></pre>
+
+<p>After ensuring all the data types matched I was able to fire up the azure website and hey presto everything functioned correctly! OK I admit it wasn&rsquo;t quite that smooth as I&rsquo;d missed changing one column from an int to tinyint which broke the whole CMS admin UI but once I&rsquo;d tracked that down everything worked fine, hooray!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Cloud Hosting for a Prototype Project]]></title>
@@ -363,71 +427,6 @@ container.For(typeof(Cache)).Singleton().Use(HttpContext.Current.Cache);</pre>
 
 
 <p>Updated the list of config files which must be copied to include EPiServerLog.config and FileSummary.config</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Footy Links Alpha Released]]></title>
-    <link href="http://bakingwebsites.co.uk/2012/01/25/footy-links-alpha-released/"/>
-    <updated>2012-01-25T09:34:41+00:00</updated>
-    <id>http://bakingwebsites.co.uk/2012/01/25/footy-links-alpha-released</id>
-    <content type="html"><![CDATA[<p><img class="size-full wp-image-332 alignleft" title="FootyLinksLogo" src="http://imageshack.com/a/img834/6565/3iks.jpg" alt="" width="150" />The very first version of Footy Links is now available for download from the Android Market.
-You can get the app by opening the following website on your android device and press the &lsquo;Install&rsquo; button:
-<a href="https://market.android.com/details?id=mhook.FootyLinks">Footy Links on the Android Market</a></p>
-
-<h2>What is Footy Links?</h2>
-
-
-<p>Footy links is a game designed to test your football knowledge by guessing clubs connecting premiership football players.  Make your guess by clicking on the blue text then selecting the club badge matching the answer.</p>
-
-<p>There is a basic scoring system following these rules:</p>
-
-<ul>
-    <li>+1 point for every correct guess of a 'top six' club</li>
-    <li>+2 points for a correct guess of any other club</li>
-    <li>-1 point each time you skip to another question without answering the previous one</li>
-</ul>
-
-
-
-
-<h2>Can I play it?</h2>
-
-
-<p>If you have an Android based mobile device I hope so, it should work on any device with Android OS version 2.2 or above. If you have any problems running the game feel free to contact me here on <a href="http://bakingwebsites.co.uk">my blog</a> or through <a href="https://twitter.com/#!/michael_hook">twitter</a></p>
-
-<h2>Is that it?</h2>
-
-
-<p>As you may be able to tell from the title, in the spirit of agile development (or maybe just because I&rsquo;m lazy), this is an early version with the absolute minimum set of features. I really wanted to just get a version out there in the wild to see if it will work on anyone&rsquo;s phone other than my own!</p>
-
-<p>But do not fear, more versions are planned with lots of exciting extra features, possibly including:</p>
-
-<ul>
-    <li>Harder difficulty levels - more links to guess between each of the players</li>
-    <li>More advanced scoring system</li>
-    <li>Multi-player games</li>
-    <li>Online high score board</li>
-    <li>Inclusion of all English leagues</li>
-    <li>Inclusion of  European  league clubs</li>
-</ul>
-
-
-<p>If you have any suggestions about Footy Links then please feel free to get in contact with me  here on  <a href="http://bakingwebsites.co.uk">my blog</a>  or through  <a href="https://twitter.com/#!/michael_hook">twitter</a></p>
-
-<h2>The Techy Bit</h2>
-
-
-<p>If you&rsquo;re interested in how the app works behind the scenes, the source is freely available for viewing on my github account here:
-<a href="https://github.com/MikeHook/FootyLinks">Footy  Links on github</a></p>
-
-<p>The source consists of two applications</p>
-
-<ul>
-    <li>A .NET application written to import the football club and player data into a Sqlite database</li>
-    <li>An android application for the game itself</li>
-</ul>
-
 ]]></content>
   </entry>
   

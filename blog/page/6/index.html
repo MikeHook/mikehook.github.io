@@ -9,7 +9,7 @@
 	<meta name="author" content="Mike Hook">
 
 	
-	<meta name="description" content="Jan 23rd, 2011 Tips and Tricks Comments EPiServer 6 Developer Exam Tips Last Monday I made the trip to London to take the EPiServer CMS &hellip;">
+	<meta name="description" content="Jan 30th, 2011 Software Design Comments Top 5 Domain Object Optimisations I&#8217;ve been working with domain objects for a while now and these are &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,7 +66,7 @@
 
 <nav id="main-nav"><h3>categories</h3>
 <ul class="main-navigation">
-<li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 21 ]</li>
+<li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
 <li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 3 ]</li>
 <li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 12 ]</li>
 <li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
@@ -111,6 +111,109 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-30T21:12:57+00:00" data-updated="true" itemprop="datePublished">Jan 30<span>th</span>, 2011</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/software-design/'>Software Design</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/01/30/top-5-domain-object-optimisations/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/01/30/top-5-domain-object-optimisations/" itemprop="url">Top 5 Domain Object Optimisations</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<div>I&#8217;ve been working with domain objects for a while now and these are simple tips I automatically follow on new objects. In my case the domain objects are setup to be mapped to a database by NHibernate, however most of these optimisations would be valid for a domain object used with any mapping tool.   I&#8217;ve found that these changes are quick to implement but can save a lot of hassle in the long run!</div>
+
+
+
+
+<h3>1. Make the parameterless constructor private</h3>
+
+
+<p>Obviously you will need a public constructor as well, however this should take parameters. These should be the minimum set of properties that make the domain object valid. In this way you can be sure that whenever you encounter one of these objects in your code it will not have random null properties and cause unexpected null references.</p>
+
+<pre style="background-color:#eeeeee;border:1px dashed #999999;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:60px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>private Customer() {}
+
+public Customer(string firstName, string lastName) {}
+</code></pre>
+
+
+
+
+<h3>2. Add precondition checks in the constructor</h3>
+
+
+<p>The main advantage of this is to ensure that the constructor is used as intended. The precondition checks can be used to make sure that no null or empty parameters are passed into the constructor. When used in tandem with the first tip, you can be sure that you will not encounter any invalid domain objects in your code.</p>
+
+<pre style="background-color:#eeeeee;border:1px dashed #999999;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:80px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>public Customer(string firstName, string lastName)
+{
+   Check.Require(string.IsNullOrEmpty(lastName) == false,
+      "lastName must be provided");
+}</code></pre>
+
+
+
+
+<h3>3. Initialise your lists properties in the constructor</h3>
+
+
+<p>This particular change may only be needed for NHibernate. A list property can be used to represent a one-to-many relationship between to different classes. For example, typically a  <em><strong>Customer </strong></em>object could be related to multiple  <em><strong>Order </strong></em>objects, so this would be represented in the Customer class as a list of Order objects. However, if the customer had not placed any orders yet and you tried to access the orders list, without first initialising it, you would get a null reference.</p>
+
+<pre style="background-color:#eeeeee;border:1px dashed #999999;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:60px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>private Customer()
+{
+   Orders = new List();
+}</code></pre>
+
+
+<p>You will not get this problem if the list is always initialised in the constructor. NHibernate populates the list after the constructor has been called so no actual data will be lost when the list is initialised.</p>
+
+<h3>4. Make any Status properties private</h3>
+
+
+<p>A convention we commonly use with domain objects is to represent its state with an enum property. For example an order could be New, Pending or Complete. If the Status property is private then it can only be changed by Methods in the domain object itself. This has two main advantages, firstly any logic that needs to be associated with the status change can be included in the same method. In this way you can be sure that all the required logic is run when the status is changed. For example, you may need to set the order completion date when the status changes from Pending to Complete.   Secondly it makes the code much easier to re-factor in future as there will not be calls to set the property spread around the code base.</p>
+
+<pre style="background-color:#eeeeee;border:1px dashed #999999;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:100px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>OrderStatus Status {get; private set; }
+
+public CompleteOrder()
+{
+   Status = OrderStatus.Complete;
+   CompletedDate = DateTime.Now();
+}</code></pre>
+
+
+
+
+<h3>5. Keep it simple!</h3>
+
+
+<p>OK I admit it, I ran out of tips after four! But I think this is a valid point. There is nothing worse than discovering a domain object of 500 plus lines of code in a project you need to maintain. It is best to keep it simple and if you find that too much behaviour is associated with one object then either split it into smaller domain objects or move the behaviour into a separate service class.</p>
+
+<p>So those are my top 5 tips for domain objects. I&rsquo;d be interested to hear opinions on these, along with  practices  that anyone else employs for domain objects so feel free to leave comments.</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -411,84 +514,6 @@ It was also necessary to wrap the command in a CDATA element because the delete 
 
 <p>I&rsquo;m aware that this is not the most efficient way to implement this, an alternative would be to add a scheduled task to the SQL Server Agent, however we do not have access to this on the database server.
 Also I prefer how the maintenance is built into the log4net configuration here so it will now work immediately on any database server without the need for separate configuration steps.</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-08-22T15:29:07+01:00" data-updated="true" itemprop="datePublished">Aug 22<span>nd</span>, 2010</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2010/08/22/upgrading-to-sharp-architecture-1-6-and-mvc-2/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2010/08/22/upgrading-to-sharp-architecture-1-6-and-mvc-2/" itemprop="url">Upgrading to Sharp Architecture 1.6 and MVC 2</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>After a good few months in hibernation the guilt of leaving my poor pet project half-finished has finally got to me!</p>
-
-<p>I was also spurred on by several new (and not so new) software releases that I would like to try out:</p>
-
-<ul>
-    <li><a href="http://devlicio.us/blogs/billy_mccafferty/archive/2010/08/19/s-arp-architecture-1-6-released.aspx">S#arp Architecture 1.6</a></li>
-    <li><a href="http://weblogs.asp.net/scottgu/archive/2010/03/11/asp-net-mvc-2-released.aspx">MVC version 2</a></li>
-    <li><a href="http://www.techfortesco.com/forum/index.php?topic=265.0">Tesco API Beta</a></li>
-</ul>
-
-
-<p>The first step I needed to take was to upgrade the project to use the new release of Sharp Architecture and MVC 2. The Sharp Architecture wiki has   a <a href="http://wiki.sharparchitecture.net/1.5UpgradeGuide.ashx">decent upgrade guide</a> and I was able to get most of the way there by following this.   However there were a couple extra step I needed to take in my project:</p>
-
-<h3>Upgrade to Fluent NHibernate</h3>
-
-
-<p>I think my project may have been on an earlier version than that in the guide because I needed to upgrade the Data project to use Fluent NHibernate. The issues here were pretty obvious as there were several compilation errors. I found the easiest solution was to generate a new empty Sharp Architecture project from the 1.6 template, then copy across the amended files in the NHibernateMaps folder.</p>
-
-<p>This got the application to compile OK, however there were a couple of differences in the configuration from my project.</p>
-
-<h3>Primary Key Convention</h3>
-
-
-<p>One of the data unit tests was failing when trying to access an entity using the <em>.Get(id)</em> method. This was strange as the entity was being loaded OK in the setup method. I was also getting an exception from the website when trying to add an entity to the database:</p>
-
-<blockquote><em>Invalid object name &#8216;hibernate_unique_key&#8217;.</em></blockquote>
-
-
-<p>The problem was due to a change in the <em>PrimaryKeyConvention</em> class. The convention for generating primary keys has been changed from <em>Native()</em> to <em>HiLo(&ldquo;1000&rdquo;)</em>. So instead of the first record having a key of 0 it would now try to use 1000. Changing this setting back to <em>Native()</em> fixed the problem straight away.</p>
-
-<h3>Cascade Conventions</h3>
-
-
-<p>The other issue I encountered occurred when trying to add a new ingredient to a recipe:</p>
-
-<blockquote><em>Cannot insert the value NULL into column &#8216;IngredientFk&#8217;, table  &#8216;recipebook.dbo.RecipeIngredientDrafts&#8217;; column does not allow nulls. INSERT  fails.
-The statement has been terminated.</em></blockquote>
-
-
-<p>This error pointed to a problem with NHibernate not saving changes to associated entities; it was trying to save a new <em>RecipeIngredientDraft</em> record without first saving the new <em>Ingredient </em>record. This issue could be resolved by adding a call to <em>instance.Cascade.SaveUpdate() </em>in the <em>ReferenceConvention </em>and <em>HasManyConvention </em>classes.</p>
-
-<p>After fixing these issues the application worked just fine :)</p>
 
 		
 		

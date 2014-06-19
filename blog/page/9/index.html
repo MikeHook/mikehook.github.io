@@ -9,7 +9,7 @@
 	<meta name="author" content="Mike Hook">
 
 	
-	<meta name="description" content="Aug 23rd, 2009 Hacking Comments Branching the Project I have used an SVN repository for the project, hosted on unfuddle, enabling versioned source &hellip;">
+	<meta name="description" content="Aug 27th, 2009 Software Design Comments Preventing Dirty Domain Object Persistance The add recipes feature has currently been implemented in a way &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,7 +66,7 @@
 
 <nav id="main-nav"><h3>categories</h3>
 <ul class="main-navigation">
-<li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 21 ]</li>
+<li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
 <li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 3 ]</li>
 <li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 12 ]</li>
 <li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
@@ -111,6 +111,106 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-08-27T20:24:00+01:00" data-updated="true" itemprop="datePublished">Aug 27<span>th</span>, 2009</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/software-design/'>Software Design</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2009/08/27/preventing-dirty-domain-object-persistance/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2009/08/27/preventing-dirty-domain-object-persistance/" itemprop="url">Preventing Dirty Domain Object Persistance</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>The add recipes feature has currently been implemented in a way that does not allow for dirty domain objects to be persisted (saved to the database). The recipe object constructor must be passed all the essential object properties to prevent a partial object from being persisted, as shown below:<br /></p>
+
+<br />
+
+
+
+
+<pre style="background-color:#eeeeee;border:1px dashed rgb(153,153,153);color:black;font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;font-size:12px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>        public Recipe(string title, IList recipeIngredients, string cookingMethod) : this()
+        {
+            //TODO - Add the recipe creator (ie. user) to the domain signature
+            Check.Require(title != null &amp;&amp; title.Trim() != string.Empty, "title must be provided.");
+            Check.Require(recipeIngredients != null, "recipeIngredients must be provided.");
+            Check.Require(cookingMethod != null &amp;&amp; cookingMethod.Trim() != string.Empty, "method must be provided.");
+            Title = title;
+            Ingredients = recipeIngredients;
+            CookingMethod = cookingMethod;        
+        }
+</code></pre>
+
+
+
+
+<br />
+
+
+<p>However this means that the state of the recipe object must be maintained across the 3 separate add recipe views. I&rsquo;ve had to use both hidden fields on the views and the TempDataDictionary to maintain this state. It has become clear to me that there may be a better way to implement this if I use a RecipeDraft domain object in addition to the Recipe object. However making this change will take a while so I need to weigh up whether I think it is worth while.<br /></p>
+
+<br />
+
+
+<p><b><span style="font-size:small;">Advantages</span></b><br /></p>
+
+<ul><li>Users can add draft recipes and return later to complete them</li>
+<li>More readable controller methods (RecipeIngredientDtos is a nasty object name!) <br />
+</li>
+<li>No need to maintain temporary state across views (using hidden fields and the TempDataDictionary)</li>
+<li>Simplifed View Models</li>
+</ul>
+
+
+<p><b>Disadvantages</b><br /></p>
+
+<ul><li>Time to refactor the code and unit tests</li>
+<li>More records in the database (potentially higher cost)<br />
+</li>
+<li>More I/O operations on the database (slower website page loads)</li>
+</ul>
+
+
+<p>On balance I think the advantages are outweigh the disadvantages, so I will be refactoring the code to use a RecipeDraft object. This will be the constructor of the RecipeDraft object:<br /></p>
+
+<br />
+
+
+
+
+<pre style="background-color:#eeeeee;border:1px dashed rgb(153,153,153);color:black;font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;font-size:12px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>        public RecipeDraft(string title) : this()
+        {
+            //TODO - Add the recipe creator (ie. user) to the domain signature
+            Check.Require(title != null &amp;&amp; title.Trim() != string.Empty, "title must be provided.");
+            Title = title;      
+        }
+</code></pre>
+
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -419,65 +519,6 @@ Will need to make sure that the Rich Text editor options are limited here to pre
 Each of the above steps will be reused for the edit interface with the controls pre-populated with data.</p>
 
 <p>Now I&rsquo;m almost ready to fire up Visual Studio (finally!) however before that I will need to sort out an overall layout and styling to tie the site together. If I was American (and whooped <span id="SPELLING_ERROR_11">a lot</span>) I&rsquo;d probably says that the templates could do with some jazzing up to make them more punchy. As I&rsquo;m English and hardly ever whoop (intentionally) I&rsquo;d say that the site could do with some prettifying. I will most likely customise an existing CSS template (open source of course) which is close to what I am looking for.<br /></p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-06-15T21:04:00+01:00" data-updated="true" itemprop="datePublished">Jun 15<span>th</span>, 2009</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2009/06/15/initial-website-features/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2009/06/15/initial-website-features/" itemprop="url">Initial Website Features</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>I will be looking to develop the website iteratively and introduce fully working features 0ne at a time. With this in mind I have drawn up list of the <span style="font-weight:bold;">minimum set of features</span> the site will need for it to work:</p>
-
-<ul>
-    <li>Add / Edit ingredients</li>
-    <li>Add / Edit recipes</li>
-    <li>Search for recipes + bookmark</li>
-    <li>User registration / authentication</li>
-    <li>Recipe book (View own recipes + bookmarked)</li>
-</ul>
-
-
-<p>I will first be focusing on developing these features to try and keep some momentum on the development. Once these features are completed I can either further develop the initial feature set or introduce more. Some ideas for more <span style="font-weight:bold;">advanced features</span> are:</p>
-
-<ul>
-    <li>Recipes reviews and ratings</li>
-    <li>New recipes &#8216;you might like&#8217; notifications by email / rss feed</li>
-    <li>Generation of shopping lists from a set of recipes</li>
-    <li>Multiple region support (different languages)</li>
-</ul>
-
-
-<p>Thats quite enough to keep me busy for now!
-Next up are the wireframes.</p>
 
 		
 		
