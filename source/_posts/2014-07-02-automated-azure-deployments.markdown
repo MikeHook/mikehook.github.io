@@ -27,6 +27,8 @@ My website was not in the root folder of the repository, it is in a 'website' fo
 
 Simples, the deployment worked fine after adding that file... well it did when I just tried it but previously it didn't seem to work. Either I made some stupid syntax error previously or kudu got fixed since last time I tried! 
 
+## A robot to build a robot
+
 The actual website is running a different configuration based on a custom deployment script, while this is a little OTT to just change the folder path going the extra mile paid dividends later on when I needed to make some other customisations during the deployment. It was pretty straightforward to set up, thanks to the azure-cli tool which generates a deployment script for you based on a set of parameters. Instructions on how to do this are on the [kudu wiki deployment hooks page]("https://github.com/projectkudu/kudu/wiki/Deployment-hooks"). In my case I just needed to run the following command from my repository root to generate a working .deployment and deploy.cmd file. 
 
     azure site deploymentscript --aspWebSite -r website
