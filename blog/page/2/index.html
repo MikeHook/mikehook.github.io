@@ -9,7 +9,7 @@
 	<meta name="author" content="Mike Hook">
 
 	
-	<meta name="description" content="Jun 13th, 2013 Software Design Comments Design Patterns Without Katas There are a number of design patterns which I have chosen not to implement a &hellip;">
+	<meta name="description" content="Jan 15th, 2014 Progress Comments Dear Wordpress, You&#8217;re Dumped! There comes a time in a developers life (every couple of years it seems) when &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,7 +67,7 @@
 <nav id="main-nav"><h3>categories</h3>
 <ul class="main-navigation">
 <li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
-<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 3 ]</li>
+<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 4 ]</li>
 <li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 12 ]</li>
 <li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
 <li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 8 ]</li>
@@ -111,6 +111,82 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-15T16:38:27+00:00" data-updated="true" itemprop="datePublished">Jan 15<span>th</span>, 2014</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/progress/'>Progress</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2014/01/15/dear-wordpress-youre-dumped/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2014/01/15/dear-wordpress-youre-dumped/" itemprop="url">Dear Wordpress, You&#8217;re Dumped!</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><img src="http://imageshack.com/a/img827/7426/w5v5.png " class="alignleft" alttext="Octopress Logo"  />
+There comes a time in a developers life (every couple of years it seems) when you are dissatisfied with your existing blogging platform. What had started as a beautiful and fulfilled relationship has decayed to the point where you barely interact. What once seemed like a cutting edge editing interface has become stayed and obtuse. Your eyes begin to wander, other blogging platforms seem so slick and modern in comparison, you wonder  &ldquo;why can&rsquo;t I have some of that?&rdquo;</p>
+
+<p>But there is no need to fret, unlike <a href="http://www.sheknows.com/tags/celebrity-breakups">other breakups</a> this change should be quite painless for all parties involved. So as January is the peak month for relationship change, there is no better time to ring the changes and introduce a new blogging platform!</p>
+
+<h2>No more Batman and Robin</h2>
+
+<p>You may ask what my blog has to do with the dynamic crime fighting duo Batman and Robin? Well the new platform is based on <a href="http://jekyllrb.com/">Jekyll</a>, which is quite the opposite of dynamic. Using the power of Jekyll I can now generate all the static blog content (html, images, css) locally by running a couple of commands. Then I just push the changes up to <a href="https://github.com/">github</a> and boom, the updates are published.</p>
+
+<p>I really liked the simplicity of this approach as a blog is pretty much all about the content, there are no interactive features or dynamically changing content that would require a processing engine. The functionality can be met with good old static html. There are also a bunch of other great advantages to this approach:</p>
+
+<ul>
+<li>Use of <a href="https://github.com/NeQuissimus/MarkdownByExample/wiki/MarkdownSyntax">Markdown</a> for content editing</li>
+<li>Faster page load times</li>
+<li>More tolerant to high loads (although I doubt the traffic on this particular blog will ever cause a problem!)</li>
+<li>Free web hosting with <a href="http://octopress.org/docs/deploying/github/">github pages</a></li>
+<li>Scratches my developer itch for getting my hands dirty with the blogging platform</li>
+</ul>
+
+
+<p>There are some drawbacks to this approach such as a higher barrier to entry for editors, however as I&rsquo;m the only editor that isn&rsquo;t a problem for me.</p>
+
+<h2>Wordpress meet Octopress</h2>
+
+<p>Having settled on a new platform I needed to extract the content from my existing wordpress blog and convert it into a format suitable for Octopress (ie. Markdown). Fortunately this is a fairly <a href="http://import.jekyllrb.com/">well travelled road</a> and my posts were pretty basically formatted so the conversion process was pretty painless. The most important issues for me were to not lose formatting of the content and retain the same permalinks so existing google / bookmark links would still work.</p>
+
+<p>I got the blog running pretty easily (as it runs through Ruby, which is already setup on my machine) however the default theme wasn&rsquo;t really doing it for me. Fortunately there are a bunch of <a href="http://opthemes.com/">alternative themes</a> available that a pretty straightforward to apply. I opted to use the <a href="https://github.com/shashankmehta/greyshade">greyshade theme</a> as a base and tweak the fonts / layout to suit my needs.</p>
+
+<h2>Images / Comments</h2>
+
+<p>So at this point all the posts are in the blog nicely formatted but the images are still being served from Wordpress and even worse the comments have not been ported at all.</p>
+
+<p>I considered just dumping the images into the new blog platform itself, however I felt like there should be a better solution. Whilst my blog is pretty tiny at the moment the number of assets are bound to grow over time and I didn&rsquo;t want to cripple the blog hosting server itself with unnecessary load. Initially I tried uploading the images to <a href="http://picasa.google.com/">Picasa</a>, however it seems to require a desktop app to upload the images and refused to give me a proper URL for the image sources. A far better solution for me was <a href="https://imageshack.com/">ImageShack</a>, uploading is handled through a slick browser based interface and you can easily get direct links to the images. A nice bonus for the platform is built in support for image resizing, all you need to do is specify your required size in the image link.</p>
+
+<p>The final part to integrate was the comments. This turned out really straightforward using <a href="http://disqus.com/">Disqus</a>. All I needed to do was sign up for a new account and point it at my existing wordpress blog to pull the comments down. You can enable Disqus in Octopress through the config.yml file.
+Then, provided your post links are maintained, when the blog is switched across the comments are also kept, simples!</p>
+
+<h2>Conclusion</h2>
+
+<p>So there you have it, a freshly baked blogging site for your consumption pleasure, enjoy!</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -485,167 +561,6 @@ Using synchronization is expensive (ie. It takes the computer a relatively long 
 <p>We have the search service configured on a local host name as the indexing service does not like to communicate over a public host name. However this caused a further issue with the service reporting that multiple hosts names could not be run for the service. Fortunately this could be remedied easily by setting the system.serviceModel/serviceHostingEnvironment/multipleSiteBindingsEnabled  setting to true.</p>
 
 <p>Those were all the steps we needed to take to deploy the site successfully. I&rsquo;d be interested to hear your experiences if you found any other settings that need to be changed. Feel free to reply in the comments below or contact me directly on twitter <a href="https://twitter.com/michael_hook">@michael_hook</a>.</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-14T15:54:57+00:00" data-updated="true" itemprop="datePublished">Mar 14<span>th</span>, 2013</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2013/03/14/integrating-episerver-7-with-an-existing-mvc-site/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2013/03/14/integrating-episerver-7-with-an-existing-mvc-site/" itemprop="url">Integrating EPiServer 7 With an Existing MVC Site</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p><img class="alignright size-full wp-image-408" alt="custom_integration" src="http://imageshack.com/a/img560/4853/3rqu.jpg" width="300" />This post assumes you have EPiServer 7 installed on your machine. If you don&rsquo;t have it then it is available from <a href="http://world.episerver.com/Download/Categories/Products/EPiServer-CMS/">EPiServer world</a>  (once you have created an account).</p>
-
-<p>There are 2 main options for creating a new EPiServer 7 MVC stylee site:</p>
-
-<ul>
-    <li><span style="font-size:13px;">Create a new Visual studio project (after installing &#8216;EPiServer 7 Visual Studio Integration&#8217;, available from </span><a style="font-size:13px;" href="http://world.episerver.com/Download/Categories/Products/EPiServer-CMS/">EPiServer world</a><span style="font-size:13px;">)</span></li>
-    <li><span style="font-size:13px;line-height:19px;">Use the </span><a style="font-size:13px;line-height:19px;" href="http://world.episerver.com/Articles/Items/ASPNET-MVC-Templates-for-EPiServer-7-CMS/">EPiServer 7 MVC templates package</a></li>
-</ul>
-
-
-<p>For integrating with an existing site I&rsquo;d recommend using option 1, as there are far less files to integrate. However it is well worth looking at the templates package as well as this demonstrates how models and views can be implemented with EPiServer 7.</p>
-
-<p>After creating the new Visual Studio project I remembered that EPiServer have a NuGet feed, and they do have the version 7 assemblies on NuGet. However the version numbers are slightly different to those used in the visual studio project, so make sure you specify the version numbers to NuGet when you install the packages (they are listed below). Here are the steps I followed in detail:</p>
-
-<ol>
-    <li><span style="line-height:13px;">Created a new Visual studio project using the EPiServer Web Site (MVC) template
-</span></li>
-    <li>Followed the EPiServer tutorial (<strong>link</strong>) to add a home page and set it to the &#8216;start page&#8217;</li>
-    <li>Upgraded my existing site to MVC 4 by installing the Microsoft ASP.NET MVC 4 nuget package (obviously not required if your existing site is already on MVC version 4.</li>
-    <li>Copy across the connectionStrings.config, episerver.config,  EPiServerFramework.config, EPiServerLog.Config and FileSummary.config files</li>
-    <li>Update the  siteUrl in  episserver.config.</li>
-    <li>Copy the AppData, IndexingService, modules and modules bin folders.</li>
-    <li>Merge the web.config files - ensure the  episerver.search baseUri is updated to point at your site address.</li>
-    <li>Installed EPiServer 7 from Nuget feeds using these commands to get the correct versions:
-<ul>
-    <li>Install-Package EPiServer.Framework -Version 7.0.859.1</li>
-    <li>Install-Package EPiServer.CMS.Core -Version 7.0.586.1</li>
-</ul>
-</li>
-    <li>Removed assembly references to Razor and System.WebPages.Razor (as was clashing with EPiServer versions)</li>
-    <li>Update Controllers to inherit from  PageController&lt;T&gt; where T is a PageData class.</li>
-    <li>Update Global.asax to inherit from  EPiServer.Global</li>
-</ol>
-
-
-
-
-<h2><strong>IoC containers clashing!</strong></h2>
-
-
-<p>OK, this is the tricky bit it gets quite involved but please stay with me!</p>
-
-<p>When I tried to run the site it now returned a &lsquo;No parameterless construct or defined for this object.&rsquo; message. Which in plainer  English  means the application can&rsquo;t create the Controller classes. This is because the site I am integrating with currently uses the Castle Windsor IoC container, however EPiServer uses the StructureMap IoC container internally. We  definitely  don&rsquo;t want two IoC containers and I can&rsquo;t see any evidence of the EPiServer container being swappable. So the only option here is to convert the current Windsor implementation to a StructureMap implementation. More information on Structure map can be found on the excellent <a href="http://docs.structuremap.net/">StructureMap documentation site</a>, however I think it is worth including an overview in this post as, whilst this isn&rsquo;t always going to be necessary for your site, I expect it will be a common problem.</p>
-
-<h4>Add StructureMap version 2.6.1.0</h4>
-
-
-<p><span style="font-size:13px;">This is available from NuGet (as this is the version used in the EPiServer 7 MVC templates package).
-The command to install is:  </span><span style="font-size:13px;">Install-Package StructureMap  -Version  2.6.1.0</span></p>
-
-<h4>Register your services with StructureMap</h4>
-
-
-
-
-<ul>
-    <li><span style="font-size:13px;">Copy the  StructureMapDependencyResolver and DependencyResolverInitialization  classes from the EPiServer MVC templates project.</span></li>
-    <li>Convert service registration calls to register services with StructureMap instead of Windsor. This is carried out in the  ConfigureContainer method of the  DependencyResolverInitialization class.</li>
-</ul>
-
-
-<p>For example here is a Windsor interface registration and its equivalent StructureMap registration:</p>
-
-<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">//Windsor registration - Here container is an implementation of IWindsorContainer
-var myConfig = WebConfigurationManager.GetSection("myConfig") as MyConfig;
-container.Register(Component.For(typeof(IMyConfig)).Instance(myConfig));</pre>
-
-
-
-
-<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">//StructureMap registration - Here container is of type ConfigurationExpression
-var myConfig = WebConfigurationManager.GetSection("myConfig") as MyConfig;
-container.For&lt;IMyConfig&gt;().Use(myConfig);</pre>
-
-
-<p>An example of a class registration with a singleton lifestyle:</p>
-
-<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">//Windsor registration
-container.Register(Component.For(typeof(Cache)).Instance(HttpContext.Current.Cache).LifestyleSingleton());</pre>
-
-
-
-
-<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">//StructureMap registration
-container.For(typeof(Cache)).Singleton().Use(HttpContext.Current.Cache);</pre>
-
-
-
-
-<ul>
-    <li><span style="font-size:13px;">Convert  </span><em style="font-size:13px;">IWindsorInstaller</em><span style="font-size:13px;">  implementations  to  </span><em style="font-size:13px;">Registry</em><span style="font-size:13px;">  subclasses.</span></li>
-</ul>
-
-
-
-
-<h4>Debugging your StructureMap registrations</h4>
-
-
-<p>You can debug structure map by adding this line:</p>
-
-<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">_container.AssertConfigurationIsValid();</pre>
-
-
-<p>Initially EPiServer was reporting many registration failures but you can delay the call until the InitComplete event is called in the DependencyResolverInitialization class. Then most of the EPiServer  registrations have completed and it is easier to see if there are any issues with your own services.</p>
-
-<h4>Manually retrieving a service</h4>
-
-
-<p>Generally my services are injected into constructors automatically, however I had a couple of calls to retrieve services manually from the IoC container. For example, to retrieve an implementation of an interface called IMyService:</p>
-
-<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">_var myService = DependencyResolver.Current.GetService&lt;IMyService&gt;();</pre>
-
-
-
-
-<h4>Last steps</h4>
-
-
-<p>Hopefully your site will be running now, there is some additional configuration work you may want to do for EPiServer 7 VPP folders. But if you&rsquo;ve made it this far you will probably need a break!</p>
-
-<h5>Updated on 9th April 2013</h5>
-
-
-<p>Updated the list of config files which must be copied to include EPiServerLog.config and FileSummary.config</p>
 
 		
 		

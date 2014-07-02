@@ -4,7 +4,7 @@
   <title><![CDATA[baking websites]]></title>
   <link href="http://bakingwebsites.co.uk/atom.xml" rel="self"/>
   <link href="http://bakingwebsites.co.uk/"/>
-  <updated>2014-06-19T14:32:41+01:00</updated>
+  <updated>2014-07-02T14:34:56+01:00</updated>
   <id>http://bakingwebsites.co.uk/</id>
   <author>
     <name><![CDATA[Mike Hook]]></name>
@@ -12,6 +12,40 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Automated Azure deployments]]></title>
+    <link href="http://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/"/>
+    <updated>2014-07-02T10:29:24+01:00</updated>
+    <id>http://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments</id>
+    <content type="html"><![CDATA[<p><img src="http://imagizer.imageshack.us/v2/320x240q90/850/r38o.jpg" class="alignleft" alttext="Wall-e the robot" /></p>
+
+<p>Azure web site hosting has a great built in feature for deployment automation. All you need to do is point Azure at the location of your website in your source control platform and it will automatically monitor for updates, pull them into Azure and deploy them, Boom! Well that is the theory anyway, turns out in my case I needed to do some tweaking to get the automation to work.</p>
+
+<h2>Tinkering under the hood</h2>
+
+<p>The first step to set up the automated deployment is involves going to your Azure website dashboard and selecting &lsquo;Setup up deployment from source control&rsquo;. There are a bunch of options for what source control services are supported and how they can be setup, this is all pretty well documented in the <a href="" title="https://azure.microsoft.com/en-us/documentation/articles/web-sites-publish-source-control/">Azure publishing from source control article</a> so I won&rsquo;t rehash all of that here. Suffice to say I pointed the website at my github repo and sorted out all the authentication, then Azure pulled through a fresh version to deploy.</p>
+
+<p>Unfortunately when I checked the shiny new &lsquo;Deployments&rsquo; tab I found that the deployment had failed, after looking in the error log the reason was clear enough:</p>
+
+<blockquote><p>&ldquo;Error: The site directory path should be the same as repository root or a sub-directory of it.&rdquo;</p></blockquote>
+
+<p>My website was not in the root folder of the repository, it is in a &lsquo;website&rsquo; folder as you can see in the <a href="" title="https://github.com/MikeHook/MSTC">repo here</a>. so I needed to tell whatever magic was running these deployments to check in that folder instead for the code changes. After a bit of googling I found out that the deployments are driven by an application called kudu which has some documenation on its <a href="" title="https://github.com/projectkudu/kudu/wiki">github wiki</a>. Turns out that it is pretty straight forward to modify the folder, as explained on the <a href="" title="https://github.com/projectkudu/kudu/wiki/Customizing-deployments">customising deployments wiki page</a> I just had to add a .deployment file to the repository root with these contents:</p>
+
+<pre><code>[config]
+project = website
+</code></pre>
+
+<p>Simples, the deployment worked fine after adding that file&hellip; well it did when I just tried it but previously it didn&rsquo;t seem to work. Either I made some stupid syntax error previously or kudu got fixed since last time I tried!</p>
+
+<p>The actual website is running a different configuration based on a custom deployment script, while this is a little OTT to just change the folder path going the extra mile paid dividends later on when I needed to make some other customisations during the deployment. It was pretty straightforward to set up, thanks to the azure-cli tool which generates a deployment script for you based on a set of parameters. Instructions on how to do this are on the <a href="" title="https://github.com/projectkudu/kudu/wiki/Deployment-hooks">kudu wiki deployment hooks page</a>. In my case I just needed to run the following command from my repository root to generate a working .deployment and deploy.cmd file.</p>
+
+<pre><code>azure site deploymentscript --aspWebSite -r website
+</code></pre>
+
+<p>Once checked in those files are used by kudu to control the automated deployment process. Check back in Azure and the deployment should now be showing as successful, awesome!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mysql to Azure database migration]]></title>
@@ -1147,46 +1181,6 @@ using (var excelPackage = new ExcelPackage())
 <p>I&rsquo;ve fixed a bug on the live branch, however before it can be published to the live website it needs to be tested. So I can first publish it to our UAT (user acceptance testing) site so the client can test the changes. However the UAT site already has a bunch of other unreleased features on it. If I merge my bug fix branch into the UAT branch it will overwrite some of the other feature changes.</p>
 
 <p>The solution here is to &lsquo;cherry pick&rsquo; just my changes from my bug fix branch and commit those to the UAT branch. In this way git doesn&rsquo;t merge all the other differences between the live and UAT branch.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Nhibernate generator class for SQLite databases]]></title>
-    <link href="http://bakingwebsites.co.uk/2011/08/29/nhibernate-generator-class-for-sqlite-databases/"/>
-    <updated>2011-08-29T15:40:26+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2011/08/29/nhibernate-generator-class-for-sqlite-databases</id>
-    <content type="html"><![CDATA[<p>I&rsquo;ve been developing a mobile app for Android which needs to query data in an SQLite database. So the first task I needed to get done was to import data into the SQLite database. As I&rsquo;m more used to writing .NET applications which use the NHibernate ORM I decided to write an import program on this technology stack.</p>
-
-<p>For my first attempt at the import program I just wanted to focus on the import logic, so choose to use a &lsquo;known working&rsquo; NHibernate configuration with a MS SQL 2005 database. While this worked fine for me it did mean that I had to manually copy all of the data from the MS SQL database into the SQLite database before it could be used in the Android app. This was quite laborious so when I needed to modify the importer at a later date I decided to change the NHibernate configuration to point directly to the SQLite database instead. This was the updated config file used:</p>
-
-<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">&lt;hibernate-configuration  xmlns="urn:nhibernate-configuration-2.2" &gt;
-    &lt;session-factory&gt;
-        &lt;property name="connection.provider"&gt;NHibernate.Connection.DriverConnectionProvider&lt;/property&gt;
-        &lt;property name="connection.driver_class"&gt;NHibernate.Driver.SQLiteDriver&lt;/property&gt;
-        &lt;property name="connection.connection_string_name"&gt;FootyLinks&lt;/property&gt;
-        &lt;property name="dialect"&gt;NHibernate.Dialect.SQLiteDialect&lt;/property&gt;
-        &lt;property name="query.substitutions"&gt;true=1;false=0&lt;/property&gt;
-    &lt;/session-factory&gt;
-&lt;/hibernate-configuration&gt;</pre>
-
-
-<p>And this is an example of the connection string format:</p>
-
-<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">&lt;configuration&gt;
-    &lt;connectionStrings&gt;
-        &lt;add name="FootyLinks" connectionString="Data Source=C:\path_to_the_SQLite_database_file;Version=3"/&gt;
-    &lt;/connectionStrings&gt;
-&lt;/configuration&gt;</pre>
-
-
-<p>This configuration worked OK and the import program could connect to the SQLite database, however I hit a problem when trying to save new records to the database. This was the inner exception reported by NHibernate:</p>
-
-<blockquote>Abort due to constraint violation Club.Id may not be NULL</blockquote>
-
-
-<p>The problem was that the import program was using the default generator class of <em>identity  </em>for in the NHibernate entity mappings. So NHibernate was expecting the database to generate the identity keys for the new records being saved to the database, however SQLite does not appear to support this. After some reading up on the options available for the <a href="http://nhforge.org/doc/nh/en/index.html#mapping-declaration-id-generator">NHibernate generator setting</a>  I decided to try the  <em>native  </em>setting. As this should select the implementation supported by the database. However this didn&rsquo;t work either, I think because, of all the options <em>native</em> can select, none are actually supported by SQLite. So my next preferred selection was to use <em>increment,</em>  this setting comes with a disclaimer that it should not be used in a cluster, which is absolutely fine as its very unlikely that I will ever be deploy the importer to a load balanced environment.</p>
-
-<p>The <em>increment</em> setting worked fine with the SQLite database and should streamline my workflow nicely for updating the app data .</p>
 ]]></content>
   </entry>
   

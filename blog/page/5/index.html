@@ -9,7 +9,7 @@
 	<meta name="author" content="Mike Hook">
 
 	
-	<meta name="description" content="Jul 17th, 2011 Hacking Comments FootyLinks Roadmap Make lowest difficulty level easier (squad numbers?, exclude older players?) Correct answer page &hellip;">
+	<meta name="description" content="Aug 29th, 2011 Hacking Comments Nhibernate Generator Class for SQLite Databases I&rsquo;ve been developing a mobile app for Android which needs to &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,7 +67,7 @@
 <nav id="main-nav"><h3>categories</h3>
 <ul class="main-navigation">
 <li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
-<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 3 ]</li>
+<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 4 ]</li>
 <li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 12 ]</li>
 <li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
 <li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 8 ]</li>
@@ -111,6 +111,74 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-29T15:40:26+01:00" data-updated="true" itemprop="datePublished">Aug 29<span>th</span>, 2011</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/08/29/nhibernate-generator-class-for-sqlite-databases/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/08/29/nhibernate-generator-class-for-sqlite-databases/" itemprop="url">Nhibernate Generator Class for SQLite Databases</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>I&rsquo;ve been developing a mobile app for Android which needs to query data in an SQLite database. So the first task I needed to get done was to import data into the SQLite database. As I&rsquo;m more used to writing .NET applications which use the NHibernate ORM I decided to write an import program on this technology stack.</p>
+
+<p>For my first attempt at the import program I just wanted to focus on the import logic, so choose to use a &lsquo;known working&rsquo; NHibernate configuration with a MS SQL 2005 database. While this worked fine for me it did mean that I had to manually copy all of the data from the MS SQL database into the SQLite database before it could be used in the Android app. This was quite laborious so when I needed to modify the importer at a later date I decided to change the NHibernate configuration to point directly to the SQLite database instead. This was the updated config file used:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">&lt;hibernate-configuration  xmlns="urn:nhibernate-configuration-2.2" &gt;
+    &lt;session-factory&gt;
+        &lt;property name="connection.provider"&gt;NHibernate.Connection.DriverConnectionProvider&lt;/property&gt;
+        &lt;property name="connection.driver_class"&gt;NHibernate.Driver.SQLiteDriver&lt;/property&gt;
+        &lt;property name="connection.connection_string_name"&gt;FootyLinks&lt;/property&gt;
+        &lt;property name="dialect"&gt;NHibernate.Dialect.SQLiteDialect&lt;/property&gt;
+        &lt;property name="query.substitutions"&gt;true=1;false=0&lt;/property&gt;
+    &lt;/session-factory&gt;
+&lt;/hibernate-configuration&gt;</pre>
+
+
+<p>And this is an example of the connection string format:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">&lt;configuration&gt;
+    &lt;connectionStrings&gt;
+        &lt;add name="FootyLinks" connectionString="Data Source=C:\path_to_the_SQLite_database_file;Version=3"/&gt;
+    &lt;/connectionStrings&gt;
+&lt;/configuration&gt;</pre>
+
+
+<p>This configuration worked OK and the import program could connect to the SQLite database, however I hit a problem when trying to save new records to the database. This was the inner exception reported by NHibernate:</p>
+
+<blockquote>Abort due to constraint violation Club.Id may not be NULL</blockquote>
+
+
+<p>The problem was that the import program was using the default generator class of <em>identity  </em>for in the NHibernate entity mappings. So NHibernate was expecting the database to generate the identity keys for the new records being saved to the database, however SQLite does not appear to support this. After some reading up on the options available for the <a href="http://nhforge.org/doc/nh/en/index.html#mapping-declaration-id-generator">NHibernate generator setting</a>  I decided to try the  <em>native  </em>setting. As this should select the implementation supported by the database. However this didn&rsquo;t work either, I think because, of all the options <em>native</em> can select, none are actually supported by SQLite. So my next preferred selection was to use <em>increment,</em>  this setting comes with a disclaimer that it should not be used in a cluster, which is absolutely fine as its very unlikely that I will ever be deploy the importer to a load balanced environment.</p>
+
+<p>The <em>increment</em> setting worked fine with the SQLite database and should streamline my workflow nicely for updating the app data .</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -349,68 +417,6 @@ public class StoredFileContents
 <p>You may have noticed that the StoredFileContents class above does not include a reference to the parent StoredFile object. Originally I had included this reference and attempted to map it following <a href="http://ayende.com/Blog/archive/2009/04/19/nhibernate-mapping-ltone-to-onegt.aspx">Ayende&rsquo;s one-to-one mapping blog post</a>. However I hit problems when trying to save, as each record needed to know the primary key of the other record. This was only workable if one of the foreign key tables was set to nullable. In this case, as I don&rsquo;t  foresee  there being a need to access a StoredFile from a StoredFileContents instance, I decided it was better to keep the foreign key as non nullable and only map the relationship in one direction.</p>
 
 <p>In case you&rsquo;re wondering what effect the change had on the application, the  page load time was reduced to a couple of seconds (and even less on a decent connection), sorted!</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-02-10T21:24:16+00:00" data-updated="true" itemprop="datePublished">Feb 10<span>th</span>, 2011</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/tips-and-tricks/'>Tips and Tricks</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/02/10/how-to-handle-the-mvc-httpantiforgeryexception/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/02/10/how-to-handle-the-mvc-httpantiforgeryexception/" itemprop="url">How to Handle the MVC HttpAntiForgeryException</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>When developing forms for websites it is good practice to guard against <a href="http://en.wikipedia.org/wiki/Cross-site_request_forgery">cross site request forgery</a> attacks. In MVC it is straightforward to do this using the <em>AntiForgeryToken()</em> helper method and the  <em>ValidateAntiForgeryToken </em>attribute (<a href="http://blog.stevensanderson.com/2008/09/01/prevent-cross-site-request-forgery-csrf-using-aspnet-mvcs-antiforgerytoken-helper/">as explained by Steve Sanderson</a>). However a side effect of this is that an  <em>HttpAntiForgeryException </em>like this will be thrown whenever a forgery attack is prevented:</p>
-
-<blockquote>System.Web.Mvc.HttpAntiForgeryException: A required anti-forgery token was not supplied or was invalid.</blockquote>
-
-
-<p>This is not generally a problem unless the site has been setup to notify you of any exceptions by email. Then you may find that your inbox quickly fills up with spam error reports and I think there is already quite enough spam in the world!
-The fix for this is to catch the exception before it makes it out of the application and into your inbox. The exception can be caught by adding the <em>HandleError </em>attribute to the controller class declaration as shown below:</p>
-
-<pre style="background-color:#eeeeee;border:1px dashed #999999;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:150px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>[HandleError(ExceptionType=typeof(HttpAntiForgeryException), View="Unauthorised")]
-public class MyController : Controller
-{
-  ...
-   public ActionResult Unauthorised()
-  {
-     return View("Unauthorised");
-  }
-}
-</code></pre>
-
-
-<p>Once the attribute has been added the <em>Unauthorised </em>view should be shown if a forgery attempt is intercepted. However in my case a different exception of the type shown below  was thrown instead:</p>
-
-<blockquote>The model item passed into the dictionary is of type &#8216;System.Web.Mvc.HandleErrorInfo&#8217; but this dictionary requires a model item of type &#8216;Core.Web.ViewModels.ISomeViewModel&#8217;.</blockquote>
-
-
-<p><span style="font-family:Georgia, 'Times New Roman', 'Bitstream Charter', Times, serif;line-height:19px;white-space:normal;font-size:13px;">This exception is thrown because (as described  <a href="http://aspnet.codeplex.com/workitem/1795">in this work item</a> on the MVC issue tracker) the default view model has been replaced by a <em>HandleErrorInfo </em>object and our master page is trying to access properties in the normal view model. So the straightforward fix for this is to remove the dependancy on the master page from the <em>Unauthorised </em>view. </span></p>
 
 		
 		

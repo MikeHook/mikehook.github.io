@@ -9,7 +9,7 @@
 	<meta name="author" content="Mike Hook">
 
 	
-	<meta name="description" content="Jan 30th, 2011 Software Design Comments Top 5 Domain Object Optimisations I&#8217;ve been working with domain objects for a while now and these are &hellip;">
+	<meta name="description" content="Feb 10th, 2011 Tips and Tricks Comments How to Handle the MVC HttpAntiForgeryException When developing forms for websites it is good practice to &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,7 +67,7 @@
 <nav id="main-nav"><h3>categories</h3>
 <ul class="main-navigation">
 <li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
-<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 3 ]</li>
+<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 4 ]</li>
 <li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 12 ]</li>
 <li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
 <li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 8 ]</li>
@@ -111,6 +111,68 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-02-10T21:24:16+00:00" data-updated="true" itemprop="datePublished">Feb 10<span>th</span>, 2011</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/tips-and-tricks/'>Tips and Tricks</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/02/10/how-to-handle-the-mvc-httpantiforgeryexception/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/02/10/how-to-handle-the-mvc-httpantiforgeryexception/" itemprop="url">How to Handle the MVC HttpAntiForgeryException</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>When developing forms for websites it is good practice to guard against <a href="http://en.wikipedia.org/wiki/Cross-site_request_forgery">cross site request forgery</a> attacks. In MVC it is straightforward to do this using the <em>AntiForgeryToken()</em> helper method and the  <em>ValidateAntiForgeryToken </em>attribute (<a href="http://blog.stevensanderson.com/2008/09/01/prevent-cross-site-request-forgery-csrf-using-aspnet-mvcs-antiforgerytoken-helper/">as explained by Steve Sanderson</a>). However a side effect of this is that an  <em>HttpAntiForgeryException </em>like this will be thrown whenever a forgery attack is prevented:</p>
+
+<blockquote>System.Web.Mvc.HttpAntiForgeryException: A required anti-forgery token was not supplied or was invalid.</blockquote>
+
+
+<p>This is not generally a problem unless the site has been setup to notify you of any exceptions by email. Then you may find that your inbox quickly fills up with spam error reports and I think there is already quite enough spam in the world!
+The fix for this is to catch the exception before it makes it out of the application and into your inbox. The exception can be caught by adding the <em>HandleError </em>attribute to the controller class declaration as shown below:</p>
+
+<pre style="background-color:#eeeeee;border:1px dashed #999999;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:150px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>[HandleError(ExceptionType=typeof(HttpAntiForgeryException), View="Unauthorised")]
+public class MyController : Controller
+{
+  ...
+   public ActionResult Unauthorised()
+  {
+     return View("Unauthorised");
+  }
+}
+</code></pre>
+
+
+<p>Once the attribute has been added the <em>Unauthorised </em>view should be shown if a forgery attempt is intercepted. However in my case a different exception of the type shown below  was thrown instead:</p>
+
+<blockquote>The model item passed into the dictionary is of type &#8216;System.Web.Mvc.HandleErrorInfo&#8217; but this dictionary requires a model item of type &#8216;Core.Web.ViewModels.ISomeViewModel&#8217;.</blockquote>
+
+
+<p><span style="font-family:Georgia, 'Times New Roman', 'Bitstream Charter', Times, serif;line-height:19px;white-space:normal;font-size:13px;">This exception is thrown because (as described  <a href="http://aspnet.codeplex.com/workitem/1795">in this work item</a> on the MVC issue tracker) the default view model has been replaced by a <em>HandleErrorInfo </em>object and our master page is trying to access properties in the normal view model. So the straightforward fix for this is to remove the dependancy on the master page from the <em>Unauthorised </em>view. </span></p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -449,71 +511,6 @@ The system has the web service addresses stored in a database and the applicatio
 
 
 <p>Note the <em>s </em>on the end of the service method name, one little character causing one pesky SOAP exception!</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-01-04T19:43:12+00:00" data-updated="true" itemprop="datePublished">Jan 4<span>th</span>, 2011</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/tips-and-tricks/'>Tips and Tricks</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/01/04/how-to-delete-old-log4net-database-records/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/01/04/how-to-delete-old-log4net-database-records/" itemprop="url">How to Delete Old Log4net Database Records</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>We have log4net setup to record events from a web application in a database.  However it had been running for a couple of weeks and the database table was getting rather large (144,000 records at last count).  This was causing performance issues when accessing the database table and also taking up quite a bit of disk space.  Obviously the database needed some kind of maintenance script to keep the size under control.</p>
-
-<p>I investigated the log4net support for maintaining the size of the database table  and there is none built in as such. However the configuration is fairly  verbose and it allows you to define the SQL script itself which is run to log the events. So with a fairly straightforward amendment to this script I was able to keep the database size in check:</p>
-
-<pre style="background-color:#eeeeee;border:1px dashed #999999;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:280px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>
-&lt;appender name="EventLogAdoNetAppender" type="log4net.Appender.AdoNetAppender"&gt;          
-  &lt;bufferSize value="0" /&gt;          
-  &lt;connectionType value="System.Data.SqlClient.SqlConnection, System.Data, Version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" /&gt;
-  &lt;connectionString value="{your conn string}" /&gt;
-  &lt;commandText&gt;
-    &lt;![CDATA[INSERT INTO EventLog ([Date],[Thread],[Level],[Logger],[Message],[Exception])
-             VALUES (@log_date, @thread, @log_level, @logger, @message, @exception);
-             DELETE FROM EventLog WHERE Date &lt; DATEADD(Day, -7, GETDATE())]]&gt;
-  &lt;/commandText&gt;
-</code><span style="font-family:monospace;">  &lt;parameter&gt;
-    &lt;parameterName value=&#8221;@log_date&#8221; /&gt;
-    &lt;dbType value=&#8221;DateTime&#8221; /&gt;             
-    &lt;layout type=&#8221;log4net.Layout.RawTimeStampLayout&#8221; /&gt;          
-  &lt;/parameter&gt;
-  &#8230;
-&lt;/appender&gt;</span></pre>
-
-
-<p>The key changes are to the commandText element. The default command just runs an insert query, this has been updated above to also run a delete query. This will remove any records in the EventLog table which are over 7 days old.
-It can easily be changed to a different record age by amending the second parameter of the DATEADD method.
-It was also necessary to wrap the command in a CDATA element because the delete query contains an reserved XML character (&lt;).</p>
-
-<p>I&rsquo;m aware that this is not the most efficient way to implement this, an alternative would be to add a scheduled task to the SQL Server Agent, however we do not have access to this on the database server.
-Also I prefer how the maintenance is built into the log4net configuration here so it will now work immediately on any database server without the need for separate configuration steps.</p>
 
 		
 		

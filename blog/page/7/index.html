@@ -9,7 +9,7 @@
 	<meta name="author" content="Mike Hook">
 
 	
-	<meta name="description" content="Aug 22nd, 2010 Hacking Comments Upgrading to Sharp Architecture 1.6 and MVC 2 After a good few months in hibernation the guilt of leaving my poor &hellip;">
+	<meta name="description" content="Jan 4th, 2011 Tips and Tricks Comments How to Delete Old Log4net Database Records We have log4net setup to record events from a web application in a &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,7 +67,7 @@
 <nav id="main-nav"><h3>categories</h3>
 <ul class="main-navigation">
 <li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
-<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 3 ]</li>
+<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 4 ]</li>
 <li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 12 ]</li>
 <li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
 <li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 8 ]</li>
@@ -111,6 +111,71 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-04T19:43:12+00:00" data-updated="true" itemprop="datePublished">Jan 4<span>th</span>, 2011</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/tips-and-tricks/'>Tips and Tricks</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/01/04/how-to-delete-old-log4net-database-records/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/01/04/how-to-delete-old-log4net-database-records/" itemprop="url">How to Delete Old Log4net Database Records</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>We have log4net setup to record events from a web application in a database.  However it had been running for a couple of weeks and the database table was getting rather large (144,000 records at last count).  This was causing performance issues when accessing the database table and also taking up quite a bit of disk space.  Obviously the database needed some kind of maintenance script to keep the size under control.</p>
+
+<p>I investigated the log4net support for maintaining the size of the database table  and there is none built in as such. However the configuration is fairly  verbose and it allows you to define the SQL script itself which is run to log the events. So with a fairly straightforward amendment to this script I was able to keep the database size in check:</p>
+
+<pre style="background-color:#eeeeee;border:1px dashed #999999;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:280px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>
+&lt;appender name="EventLogAdoNetAppender" type="log4net.Appender.AdoNetAppender"&gt;          
+  &lt;bufferSize value="0" /&gt;          
+  &lt;connectionType value="System.Data.SqlClient.SqlConnection, System.Data, Version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" /&gt;
+  &lt;connectionString value="{your conn string}" /&gt;
+  &lt;commandText&gt;
+    &lt;![CDATA[INSERT INTO EventLog ([Date],[Thread],[Level],[Logger],[Message],[Exception])
+             VALUES (@log_date, @thread, @log_level, @logger, @message, @exception);
+             DELETE FROM EventLog WHERE Date &lt; DATEADD(Day, -7, GETDATE())]]&gt;
+  &lt;/commandText&gt;
+</code><span style="font-family:monospace;">  &lt;parameter&gt;
+    &lt;parameterName value=&#8221;@log_date&#8221; /&gt;
+    &lt;dbType value=&#8221;DateTime&#8221; /&gt;             
+    &lt;layout type=&#8221;log4net.Layout.RawTimeStampLayout&#8221; /&gt;          
+  &lt;/parameter&gt;
+  &#8230;
+&lt;/appender&gt;</span></pre>
+
+
+<p>The key changes are to the commandText element. The default command just runs an insert query, this has been updated above to also run a delete query. This will remove any records in the EventLog table which are over 7 days old.
+It can easily be changed to a different record age by amending the second parameter of the DATEADD method.
+It was also necessary to wrap the command in a CDATA element because the delete query contains an reserved XML character (&lt;).</p>
+
+<p>I&rsquo;m aware that this is not the most efficient way to implement this, an alternative would be to add a scheduled task to the SQL Server Agent, however we do not have access to this on the database server.
+Also I prefer how the maintenance is built into the log4net configuration here so it will now work immediately on any database server without the need for separate configuration steps.</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -443,51 +508,6 @@ The statement has been terminated.</em></blockquote>
 <p>&lt;</p>
 
 <p>p&gt;Next up I will be looking to generate some HTML and CSS to match the mock-ups which can be used in the website views.</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-01-10T20:53:00+00:00" data-updated="true" itemprop="datePublished">Jan 10<span>th</span>, 2010</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2010/01/10/introducing-recipestash-net/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2010/01/10/introducing-recipestash-net/" itemprop="url">Introducing recipestash.net</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>With the turn of the year disappearing behind us, I thought it was about time that the site I   m developing got a proper identity. Initially I would of liked recipebook.com, but that is far too obvious a name to be left unclaimed, also I think its quite boring and sounds too similar to facebook. So my main criteria for the name were that it should be related to the content, engaging, easy to remember, not too derivative and of course available!</p></p>
-
-<p>After plugging some names into the lookup tool the two front runners were recipestore.net and recipestash.net. I liked recipestore as it conveys the main idea of the site as a storage place for your recipes. However it can also be interpreted as meaning a shop for recipes, which is not ideal as the recipes will all be freely available on the site. So I settled on recipestash, which I think meets all the criteria and is less derivative than recipestore. In virtual celebration of the new domain here   s a picture of a lovely looking muffin (Image shared under creative commons on Flickr by rachellake).</p>
-
-<p><a href="http://lh6.ggpht.com/_5hQeqbPSrks/S0pA-VC2-DI/AAAAAAAAACk/ApIIbuAxR84/s1600-h/muffin-rachellake%5B5%5D.jpg"><img title="muffin-rachellake" border="0" alt="muffin-rachellake" src="http://lh5.ggpht.com/_5hQeqbPSrks/S0pA-79n5tI/AAAAAAAAACo/vGJoHZjWy5A/muffin-rachellake_thumb%5B3%5D.jpg?imgmax=800" width="504" height="337" /></a>&#160;</p>
-
-<p>&lt;</p>
-
-<p>p&gt;Deciding on the domain also has a fringe benefit of motivating me to get on with the site! Its a bit of a waste not doing anything with the domain so I   m going to try and get the site up as soon as possible with the core features. The site can be refined and updated with extra features after the initial release.</p>
 
 		
 		
