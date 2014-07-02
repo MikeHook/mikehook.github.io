@@ -161,6 +161,8 @@ project = website
 
 <p>Simples, the deployment worked fine after adding that file&hellip; well it did when I just tried it but previously it didn&rsquo;t seem to work. Either I made some stupid syntax error previously or kudu got fixed since last time I tried!</p>
 
+<h2>A robot to build a robot</h2>
+
 <p>The actual website is running a different configuration based on a custom deployment script, while this is a little OTT to just change the folder path going the extra mile paid dividends later on when I needed to make some other customisations during the deployment. It was pretty straightforward to set up, thanks to the azure-cli tool which generates a deployment script for you based on a set of parameters. Instructions on how to do this are on the <a href="" title="https://github.com/projectkudu/kudu/wiki/Deployment-hooks">kudu wiki deployment hooks page</a>. In my case I just needed to run the following command from my repository root to generate a working .deployment and deploy.cmd file.</p>
 
 <pre><code>azure site deploymentscript --aspWebSite -r website
