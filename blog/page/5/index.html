@@ -9,7 +9,7 @@
 	<meta name="author" content="Mike Hook">
 
 	
-	<meta name="description" content="Aug 29th, 2011 Hacking Comments Nhibernate Generator Class for SQLite Databases I&rsquo;ve been developing a mobile app for Android which needs to &hellip;">
+	<meta name="description" content="Oct 6th, 2011 Tips and Tricks Comments The Beauty of Cherry Pick I&rsquo;m loving the cherry pick command in git right now, this is the scenario &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,7 +67,7 @@
 <nav id="main-nav"><h3>categories</h3>
 <ul class="main-navigation">
 <li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
-<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 4 ]</li>
+<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 5 ]</li>
 <li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 12 ]</li>
 <li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
 <li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 8 ]</li>
@@ -111,6 +111,47 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-10-06T18:00:59+01:00" data-updated="true" itemprop="datePublished">Oct 6<span>th</span>, 2011</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/tips-and-tricks/'>Tips and Tricks</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/10/06/the-beauty-of-cherry-pick/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/10/06/the-beauty-of-cherry-pick/" itemprop="url">The Beauty of Cherry Pick</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>I&rsquo;m loving the <a href="http://gitready.com/intermediate/2009/03/04/pick-out-individual-commits.html">cherry pick command</a> in git right now, this is the scenario that it really helps me out for.</p>
+
+<p>I&rsquo;ve fixed a bug on the live branch, however before it can be published to the live website it needs to be tested. So I can first publish it to our UAT (user acceptance testing) site so the client can test the changes. However the UAT site already has a bunch of other unreleased features on it. If I merge my bug fix branch into the UAT branch it will overwrite some of the other feature changes.</p>
+
+<p>The solution here is to &lsquo;cherry pick&rsquo; just my changes from my bug fix branch and commit those to the UAT branch. In this way git doesn&rsquo;t merge all the other differences between the live and UAT branch.</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -334,89 +375,6 @@
 <p>I also wanted to see an app actually running on my phone so followed the <a href="http://developer.android.com/guide/developing/device.html">developing on a device guide</a> to get this up and running. I did hit a snag here with the USB drivers, my phone is an HTC desire and there is no driver to download from the HTC site. However if you download the HTC sync software then plug your phone into the USB it should install the driver for you. I had to restart the phone afterwards before it would bring up the menu to select the connection type, eventually the sync software sorted itself out and recognised the phone.</p>
 
 <p>When you select to run the application in Eclipse, your phone should then appear under the &lsquo;Choose a running Android device&rsquo; section. The app can be installed on the phone then selected from the usual apps menu.</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-02-17T19:19:43+00:00" data-updated="true" itemprop="datePublished">Feb 17<span>th</span>, 2011</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/software-design/'>Software Design</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/02/17/optimising-page-load-performance-with-database-files/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/02/17/optimising-page-load-performance-with-database-files/" itemprop="url">Optimising Page Load Performance With Database Files</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>I recently ran into an issue with a newly released web application. The test version of the application was performing fine, however the live version kept reporting  time out  errors.
-The page that was generating the time outs included a list of links to files stored in a database. After some investigation it became clear that the issue was being caused by the application loading all of these files into memory during the page load (yikes!).</p>
-
-<p>It had worked fine on the test site because the bandwidth between the database and the website was a lot higher and also only a couple of small files had been stored. However the live site was hitting the HTTP request timeout (90 seconds by default) before all of the files had finished loading into memory. There was not actually any need for these files loaded at all during page load, so I set about re-factoring the domain structure to reflect this.</p>
-
-<h3>Hurry up and be more lazy!</h3>
-
-
-<p>The application uses NHibernate to map the domain objects to an SQL database, this is an example similar to the object that was causing the performance issue:</p>
-
-<pre style="background-color:#eeeeee;border:1px dashed #999999;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:100px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>public class StoredFile
-{
-    public virtual string Name { get; set; }
-    public virtual string Extension { get; set; }
-    public virtual bool Saved { get; set; }
-    public virtual byte[] Contents { get; set; }
-}
-</code></pre>
-
-
-<p>You can see here that the FileContents property is an array of bytes, which will be loaded into memory when the StoredFile object is initialised. However the only properties we need to access during the page load are the FileName, FileExtension and FileSaved properties.</p>
-
-<p>If the FileContents property is moved to a separate object and then NHibernates <a href="http://martinfowler.com/eaaCatalog/lazyLoad.html">lazy loading</a> feature can be leveraged to only load that object if it is accessed. The revised domain structure looks like this:</p>
-
-<pre style="background-color:#eeeeee;border:1px dashed #999999;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:170px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>public class StoredFile
-{
-    public virtual string Name { get; set; }
-    public virtual string Extension { get; set; }
-    public virtual bool Saved { get; set; }
-    public virtual StoredFileContents FileContents { get; set; }
-}
-
-public class StoredFileContents
-{
-    public virtual byte[] Contents { get; set; }
-}
-</code></pre>
-
-
-
-
-<h3>NHibernate Mapping Issues</h3>
-
-
-<p>You may have noticed that the StoredFileContents class above does not include a reference to the parent StoredFile object. Originally I had included this reference and attempted to map it following <a href="http://ayende.com/Blog/archive/2009/04/19/nhibernate-mapping-ltone-to-onegt.aspx">Ayende&rsquo;s one-to-one mapping blog post</a>. However I hit problems when trying to save, as each record needed to know the primary key of the other record. This was only workable if one of the foreign key tables was set to nullable. In this case, as I don&rsquo;t  foresee  there being a need to access a StoredFile from a StoredFileContents instance, I decided it was better to keep the foreign key as non nullable and only map the relationship in one direction.</p>
-
-<p>In case you&rsquo;re wondering what effect the change had on the application, the  page load time was reduced to a couple of seconds (and even less on a decent connection), sorted!</p>
 
 		
 		

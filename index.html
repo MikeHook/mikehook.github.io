@@ -9,7 +9,7 @@
 	<meta name="author" content="Mike Hook">
 
 	
-	<meta name="description" content="Jul 2nd, 2014 Progress Comments Automated Azure Deployments Azure web site hosting has a great built in feature for deployment automation. All you &hellip;">
+	<meta name="description" content="Aug 13th, 2014 Progress Comments Tin Can API Overview These are some notes from my reading on the Tin Can API, a specification for the transmission &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,7 +67,7 @@
 <nav id="main-nav"><h3>categories</h3>
 <ul class="main-navigation">
 <li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
-<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 4 ]</li>
+<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 5 ]</li>
 <li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 12 ]</li>
 <li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
 <li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 8 ]</li>
@@ -111,6 +111,118 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-13T10:10:43+01:00" data-updated="true" itemprop="datePublished">Aug 13<span>th</span>, 2014</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/progress/'>Progress</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2014/08/13/tin-can-api-overview/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2014/08/13/tin-can-api-overview/" itemprop="url">Tin Can API Overview</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><img src="http://imageshack.com/a/img539/1961/OgE8tH.jpg" class="alignleft" alttext="Tin Can API Logo" /></p>
+
+<p>These are some notes from my reading on the Tin Can API, a specification for the transmission and storage of messages related to learning activities. The specification has been developed by parties in the e-learning industry and aims to be an elegant solution to enable learning systems to communicate with one another.</p>
+
+<p>All this information is available on the <a href="http://tincanapi.com/">Tin Can API website</a>, this is just my own <a href="http://en.wikipedia.org/wiki/Wikipedia:Too_long;_didn't_read">tl;dr</a> type summary.</p>
+
+<h3>What is it?</h3>
+
+<ul>
+<li>A RESTful web service specification</li>
+<li>Defines the structure for JSON messages which represent learning activities (Or other types of activity)</li>
+<li>Each message is called a <strong>Statement</strong></li>
+<li>A statement consists of 3 parts: <strong>Actor</strong>, <strong>Verb</strong> and <strong>Object</strong> like &ldquo;Mike read the Tin Can Explained article&rdquo;</li>
+<li>Based on the <a href="http://activitystrea.ms/">activity streams</a> specification developed by/for social networks</li>
+</ul>
+
+
+<h3>Why is it good?</h3>
+
+<ul>
+<li>More flexible version of the old SCORM standard</li>
+<li>Device agnostic &ndash; anything that can send HTTP requests can use the API</li>
+<li>Almost any type of content can be stored</li>
+<li>Decouples content from the LMS (Learning management system) by storing in a separate LRS (Learning Record Store)</li>
+<li>A single <em>statement</em> can be stored in multiple learning record stores</li>
+<li>Allows potential for a learner owning their own content instead of their employers</li>
+<li>Data is accessible and easy to report on</li>
+</ul>
+
+
+<h3>A statement example</h3>
+
+<pre><code>{
+    "actor": {
+        "name": "Sally Glider",
+            "mbox": "mailto:sally@example.com"
+        },
+    "verb": {
+            "id": "http://adlnet.gov/expapi/verbs/experienced",
+            "display": {"en-US": "experienced"}
+     },
+    "object": {
+            "id": "http://example.com/activities/solo-hang-gliding",
+            "definition": {
+                "name": { "en-US": "Solo Hang Gliding" }
+            }
+    }
+}
+</code></pre>
+
+<p>You can generate test statements with valid syntax using the <a href="http://tincanapi.com/statement-generator/">Statement Generator</a></p>
+
+<p>Details of the valid message formats are given on the <a href="https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md">full xAPI specification</a>.</p>
+
+<h2>The registry</h2>
+
+<ul>
+<li>Contains definitions for verbs, activities, activity types, attachment types and extensions</li>
+<li>Should be referenced to in messages by URIs</li>
+<li>A shared domain language for agreed definitions of terms</li>
+<li>Anyone can add their own definitions to <a href="https://registry.tincanapi.com/">the registry</a></li>
+</ul>
+
+
+<h2>Recipes</h2>
+
+<ul>
+<li><a href="http://tincanapi.com/recipeshow-it-works/">Recipes</a> provide a standardised way for people to describe activities</li>
+<li>Simplifies reporting as the same terms should be used to describe things</li>
+<li>A few recipes exist now, for example the <a href="https://registry.tincanapi.com/#profile/19">video recipe</a></li>
+<li>More recipes can be added by the community</li>
+<li>Helps keep the API flexible and useful for future applications that may not even exist yet!</li>
+</ul>
+
+
+<p>Reading about the Tin Can API over the last few days and seeing it in action in the <a href="https://www.tessello.co.uk">Tessello application</a> has really whet my appetite to work more with the specification. I can see great potential for systems that leverage this specification as it provides a flexible framework for messaging without being restrictive and gives us the basis for a common technical language to use to enable our systems to talk to one another.</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -474,86 +586,6 @@ EXECUTE sp_rename N'Tempcmstasktype', N'cmstasktype', 'OBJECT'
 <p>The main drawback I currently see with this setup is that the database has a limit on the number of connections. The free version has 4 which is fair enough, given it is just for trialling. However even the paid versions have low limits of 15, 30 or 40 for $10, $50 or $100 respectively. My feeling is that these limits may well cause problems when the site is running in production. I already hit the 4 connections limit just browsing the site myself and publishing a new page and it is bound to use more when real users are browsing at the same time.</p>
 
 <p>The SQL databases offered in Azure do not have this connections limit and would also be significantly cheaper in the long run, so I will be investigating the feasibility of migrating the Umbraco DB from MySQL into SQL.</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-01-29T17:38:27+00:00" data-updated="true" itemprop="datePublished">Jan 29<span>th</span>, 2014</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/software-design/'>Software Design</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2014/01/29/event-storming/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2014/01/29/event-storming/" itemprop="url">Event Storming a Distributed Solution</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>Software design and development techniques are constantly evolving, making the discipline a fascinating area to work in. Over the time I&rsquo;ve been working as a developer I&rsquo;ve seen various approaches to design from Code First, Data Driven to Domain Driven (DDD). My preference is to consider the scope of the problem first and design a solution to match and DDD is a good fit for this. However when looking at enterprise level problems we need to give more consideration to how a problem will scale&hellip; enter Event Storming.</p>
-
-<h2>Distributed design</h2>
-
-<p>I work in a development team which is responsible for several key business capabilities, there are already some software solutions in place for these capabilities however they were designed several years ago to solve problems at a scale at least an order of magnitude below where we currently find ourselves. Our stakeholders have expressed a desire that we could redesign a solution which would meet our current needs better, basically it needs to work <strong>faster</strong>, do <em>just</em> what is needed and ideally <strong>scale</strong> so that it will still perform well at the next order of magnitude up.</p>
-
-<p>We decided to have an Event Storming session to help us analyse the problem and come up with a high level distributed solution. We carried out the session in a couple of phases, first we reviewed the current solution, then we looked at the primary goals for the redesign then finally we started event storming a solution. Here are the team hard at work mid-storm:</p>
-
-<p><img src="http://imageshack.com/a/img542/5968/1l37.jpg" class="alignleft" alttext="Octopress Logo"  /></p>
-
-<h2>Collaborative analysis</h2>
-
-<p>The session first involved us all writing down on post-it notes business events that had some relevance to the feature we were analysing. We then stuck all these onto a big board and de-duped them. It was a bit tricky to order the post-its at this stage so we went for a loose left to right time sequence.</p>
-
-<p>Following this we got the post-it stack back in action and wrote down each of the commands that could have some influence on the events on the board. Then we linked each of the commands to events on the board, this wasn&rsquo;t always a one-to-one relationship which presented some practical problems, however on the whole I think working with physical post-its was far better than using something like Visio as its more democratic. Finally we arranged the post-its into discrete pieces of behaviour and mapped out the interactions between them.</p>
-
-<p>It was important that we recognised the difference between an event and a command during the exercise. As a rule of thumb commands are carried out by users and events are raised by the system to indicate something has happened. For example the <em>Create Product</em> command is raised when the user saves a product entry, whereas <em>&lsquo;Product Created&rsquo;</em> event is raised after the transaction has finished and a product has been persisted in the system. As I alluded to earlier there is no hard one-to-one relationship here, a single command can often result in multiple events being raised and vice versa. Its important to make sure the distinction is clear to everyone before the session begins, it saves a lot of time in the long run!</p>
-
-<p>The results of our session can be seen in the picture below:
-<img src="http://imageshack.com/a/img34/1388/bbid.jpg" class="alignleft" alttext="Octopress Logo"  /></p>
-
-<h2>A virtual solution</h2>
-
-<p>By the end of the session we had a virtual solution figured out that could be implemented with discrete modules communicating exclusively via messaging. I was pleasantly surprised by the elegance of the solution, by focussing on the interactions between the systems and isolating responsibilities it was clear that we only needed to pass a small amount of data between each module and could effectively encapsulate the behaviour. However Event Storming is just one technique and I wouldn&rsquo;t suggest it is a magic bullet design technique, these are the main pros and cons as I see it.</p>
-
-<h3>Advantages</h3>
-
-<ul>
-<li>Helps focus on the interactions between elements of a distributed system</li>
-<li>The whole team is involved at the analysis stage and visualize the same proposed solution</li>
-<li>Encourages scalable solutions</li>
-</ul>
-
-
-<h3>Drawbacks</h3>
-
-<ul>
-<li>Reliant on domain knowledge of team members to surface events / commands</li>
-<li>Design can get lost in a sea of post-it notes!</li>
-<li>Need to transfer quickly to implementation tasks to avoid losing insights</li>
-</ul>
-
-
-<p>I&rsquo;d be interested to hear of your experiences of event storming and how effective you have found it to be?</p>
 
 		
 		

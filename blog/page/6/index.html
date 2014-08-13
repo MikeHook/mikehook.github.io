@@ -9,7 +9,7 @@
 	<meta name="author" content="Mike Hook">
 
 	
-	<meta name="description" content="Feb 10th, 2011 Tips and Tricks Comments How to Handle the MVC HttpAntiForgeryException When developing forms for websites it is good practice to &hellip;">
+	<meta name="description" content="Feb 17th, 2011 Software Design Comments Optimising Page Load Performance With Database Files I recently ran into an issue with a newly released web &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,7 +67,7 @@
 <nav id="main-nav"><h3>categories</h3>
 <ul class="main-navigation">
 <li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
-<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 4 ]</li>
+<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 5 ]</li>
 <li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 12 ]</li>
 <li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
 <li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 8 ]</li>
@@ -111,6 +111,89 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-02-17T19:19:43+00:00" data-updated="true" itemprop="datePublished">Feb 17<span>th</span>, 2011</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/software-design/'>Software Design</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/02/17/optimising-page-load-performance-with-database-files/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/02/17/optimising-page-load-performance-with-database-files/" itemprop="url">Optimising Page Load Performance With Database Files</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>I recently ran into an issue with a newly released web application. The test version of the application was performing fine, however the live version kept reporting  time out  errors.
+The page that was generating the time outs included a list of links to files stored in a database. After some investigation it became clear that the issue was being caused by the application loading all of these files into memory during the page load (yikes!).</p>
+
+<p>It had worked fine on the test site because the bandwidth between the database and the website was a lot higher and also only a couple of small files had been stored. However the live site was hitting the HTTP request timeout (90 seconds by default) before all of the files had finished loading into memory. There was not actually any need for these files loaded at all during page load, so I set about re-factoring the domain structure to reflect this.</p>
+
+<h3>Hurry up and be more lazy!</h3>
+
+
+<p>The application uses NHibernate to map the domain objects to an SQL database, this is an example similar to the object that was causing the performance issue:</p>
+
+<pre style="background-color:#eeeeee;border:1px dashed #999999;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:100px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>public class StoredFile
+{
+    public virtual string Name { get; set; }
+    public virtual string Extension { get; set; }
+    public virtual bool Saved { get; set; }
+    public virtual byte[] Contents { get; set; }
+}
+</code></pre>
+
+
+<p>You can see here that the FileContents property is an array of bytes, which will be loaded into memory when the StoredFile object is initialised. However the only properties we need to access during the page load are the FileName, FileExtension and FileSaved properties.</p>
+
+<p>If the FileContents property is moved to a separate object and then NHibernates <a href="http://martinfowler.com/eaaCatalog/lazyLoad.html">lazy loading</a> feature can be leveraged to only load that object if it is accessed. The revised domain structure looks like this:</p>
+
+<pre style="background-color:#eeeeee;border:1px dashed #999999;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:170px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>public class StoredFile
+{
+    public virtual string Name { get; set; }
+    public virtual string Extension { get; set; }
+    public virtual bool Saved { get; set; }
+    public virtual StoredFileContents FileContents { get; set; }
+}
+
+public class StoredFileContents
+{
+    public virtual byte[] Contents { get; set; }
+}
+</code></pre>
+
+
+
+
+<h3>NHibernate Mapping Issues</h3>
+
+
+<p>You may have noticed that the StoredFileContents class above does not include a reference to the parent StoredFile object. Originally I had included this reference and attempted to map it following <a href="http://ayende.com/Blog/archive/2009/04/19/nhibernate-mapping-ltone-to-onegt.aspx">Ayende&rsquo;s one-to-one mapping blog post</a>. However I hit problems when trying to save, as each record needed to know the primary key of the other record. This was only workable if one of the foreign key tables was set to nullable. In this case, as I don&rsquo;t  foresee  there being a need to access a StoredFile from a StoredFileContents instance, I decided it was better to keep the foreign key as non nullable and only map the relationship in one direction.</p>
+
+<p>In case you&rsquo;re wondering what effect the change had on the application, the  page load time was reduced to a couple of seconds (and even less on a decent connection), sorted!</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -454,63 +537,6 @@ public CompleteOrder()
 <p>Once we understood why the exception was occurring it was a straight forward re-factoring exercise to prevent it in future.  In our case the code could be updated so that the delete operation never needed to be called in the first place, so this was an effective fix.</p>
 
 <p>The detailed event logging on the web service proved invaluable in solving this issue, without this it probably would of taken much longer to figure out what was happening!</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-01-06T20:13:22+00:00" data-updated="true" itemprop="datePublished">Jan 6<span>th</span>, 2011</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/tips-and-tricks/'>Tips and Tricks</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/01/06/troubleshooting-a-web-service-soapexception/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/01/06/troubleshooting-a-web-service-soapexception/" itemprop="url">Troubleshooting a Web Service SoapException</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>I recently encountered this exception consuming a web service from an application:</p>
-
-<blockquote>System.Web.Services.Protocols.SoapException:  Server did not recognize the value of HTTP Header SOAPAction: http://service.foo.com/baa.asmx</blockquote>
-
-
-<p>The code ran fine locally and only caused an exception running on the web server. Initially I thought it could be to do with the web server running a newer version of the .NET framework. But this proved not to be the case.</p>
-
-<p>Eventually I got the issue tracked down and it was a simple typo in the settings on the live environment.
-The system has the web service addresses stored in a database and the application assigns these dynamically at runtime (via the <em>Url </em>property). We have it  set-up  this way to enable the test application to send to a different end point from the live application. However this does rely on the same service being available on the end point and in this case it wasn&rsquo;t.</p>
-
-<p>So we were changing the URL to be:</p>
-
-<blockquote>http://service.foo.com/baa.asmx</blockquote>
-
-
-<p>But it needed to point to here instead:</p>
-
-<blockquote>http://service.foo.com/baas.asmx</blockquote>
-
-
-<p>Note the <em>s </em>on the end of the service method name, one little character causing one pesky SOAP exception!</p>
 
 		
 		

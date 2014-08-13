@@ -9,7 +9,7 @@
 	<meta name="author" content="Mike Hook">
 
 	
-	<meta name="description" content="Nov 20th, 2011 Software Design Comments Excel Reporting From Web Apps Using EPPlus I have recently been working on a new feature request for the &hellip;">
+	<meta name="description" content="Dec 30th, 2011 Hacking Comments Developing Android Apps: Connect to an Existing SQLite Database This post was drafted some time ago, so some of the &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,7 +67,7 @@
 <nav id="main-nav"><h3>categories</h3>
 <ul class="main-navigation">
 <li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
-<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 4 ]</li>
+<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 5 ]</li>
 <li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 12 ]</li>
 <li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
 <li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 8 ]</li>
@@ -111,6 +111,61 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-30T14:43:17+00:00" data-updated="true" itemprop="datePublished">Dec 30<span>th</span>, 2011</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/12/30/developing-android-apps-connect-to-an-existing-sqlite-database/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/12/30/developing-android-apps-connect-to-an-existing-sqlite-database/" itemprop="url">Developing Android Apps: Connect to an Existing SQLite Database</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>This post was drafted some time ago, so some of the details are lost in the mists of time. But I&rsquo;ll provide links to the source so anyone interested in doing something similar can start from there.</p>
+
+<p>The android app I&rsquo;m developing needs to be able to connect to an existing SQLite database, there are not many examples of how to achieve this in the Android tutorials, however I was able to find some guidance in a post from another Android developer on the <a href="http://www.reigndesign.com/blog/using-your-own-sqlite-database-in-android-applications/">reigndesign blog</a></p>
+
+<p>The key is that the database needs to be copied internally to the system directory on the device running the application before it can be accessed. This doesn&rsquo;t seem particularly efficient but I&rsquo;m sure Android had their reasons! My modified version of the code to do this is available from my github repository here:</p>
+
+<p><a href="https://github.com/MikeHook/FootyLinks/blob/master/AndroidApp/src/mhook/FootyLinks/Data/FootyLinksSQLLiteHelper.java">FootyLinksSQLLiteHelper.java</a></p>
+
+<p>I&rsquo;ve also encountered a couple of other snags since then while working with the SQLite database.</p>
+
+<h3>No password support</h3>
+
+
+<p>Passwords do not appear to be supported at all for the Android applications. I&rsquo;d automatically added password protection to the database when creating it and it took me a while to figure out why eclipse was refusing to read it!</p>
+
+<h3>Manually delete after schema changes</h3>
+
+
+<p>I&rsquo;ve added some additional fields to the database over time. However initially they were not being copied into the version of the database in my device emulator. I found it was necessary to browse the emulator files themselves, using the DDMS perspective in Eclipse, and delete the old database file directly in the emulator file system.</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -465,47 +520,6 @@ using (var excelPackage = new ExcelPackage())
 <p>To give you some indication of how efficient this system was during Inca times the capital city was Cuzco, situated at around 3,300 metres in the middle of the Andes mountains, several hundred miles from the coast. However the Inca king was able to eat fresh fish in the capital because it was sent over the Inca trail network. It is estimated that the same delivery made by road transport today takes longer than an equivalent delivery made over the Inca network in the 15th century!</p>
 
 <p>So now all the pieces of the puzzle are in place we can see that the Inca trail network used the some communication method as today&rsquo;s internet. The trail checkpoints are equivalent to an internet router, the messengers have now been replaced with fibre optic cables and of course the quipus is directly equivalent to an <a href="http://en.wikipedia.org/wiki/Network_packet">IP network packet</a>. So there you have it, the Inca empire invented the alpha version of the internet.</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-10-06T18:00:59+01:00" data-updated="true" itemprop="datePublished">Oct 6<span>th</span>, 2011</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/tips-and-tricks/'>Tips and Tricks</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/10/06/the-beauty-of-cherry-pick/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/10/06/the-beauty-of-cherry-pick/" itemprop="url">The Beauty of Cherry Pick</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>I&rsquo;m loving the <a href="http://gitready.com/intermediate/2009/03/04/pick-out-individual-commits.html">cherry pick command</a> in git right now, this is the scenario that it really helps me out for.</p>
-
-<p>I&rsquo;ve fixed a bug on the live branch, however before it can be published to the live website it needs to be tested. So I can first publish it to our UAT (user acceptance testing) site so the client can test the changes. However the UAT site already has a bunch of other unreleased features on it. If I merge my bug fix branch into the UAT branch it will overwrite some of the other feature changes.</p>
-
-<p>The solution here is to &lsquo;cherry pick&rsquo; just my changes from my bug fix branch and commit those to the UAT branch. In this way git doesn&rsquo;t merge all the other differences between the live and UAT branch.</p>
 
 		
 		

@@ -9,7 +9,7 @@
 	<meta name="author" content="Mike Hook">
 
 	
-	<meta name="description" content="Mar 14th, 2013 Hacking Comments Integrating EPiServer 7 With an Existing MVC Site This post assumes you have EPiServer 7 installed on your machine. &hellip;">
+	<meta name="description" content="Apr 9th, 2013 Hacking Comments Integrating EPiServer 7 With MVC - Next Steps My previous blog post, Integrating EPiServer 7 with an existing MVC &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,7 +67,7 @@
 <nav id="main-nav"><h3>categories</h3>
 <ul class="main-navigation">
 <li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
-<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 4 ]</li>
+<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 5 ]</li>
 <li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 12 ]</li>
 <li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
 <li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 8 ]</li>
@@ -111,6 +111,97 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-09T17:40:42+01:00" data-updated="true" itemprop="datePublished">Apr 9<span>th</span>, 2013</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2013/04/09/integrating-episerver-7-with-mvc-next-steps/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2013/04/09/integrating-episerver-7-with-mvc-next-steps/" itemprop="url">Integrating EPiServer 7 With MVC - Next Steps</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>My previous blog post, <a title="Integrating EPiServer 7 with an existing MVC  site" href="http://bakingwebsites.co.uk/2013/03/14/integrating-episerver-7-with-an-existing-mvc-site/">Integrating EPiServer 7 with an existing MVC site</a>, outlined the initial steps to get EPiServer 7 running. However there are a number of additional steps you may need to take before your site is fully integrated.</p>
+
+<h3>Convert any Controllers not in Areas</h3>
+
+
+<p>If your site only contains controllers within Areas then you should not need to make any changes. However controllers in the root of the site will not work by default (at least for me). I found it was best to deal with these controllers on a case per case basis as the best course of action depended on the function of the controller. I implemented one of the following changes for each:</p>
+
+<ul>
+    <li><span style="line-height:13px;">Move the controller into an area. This option makes sense if the views for the controller do not have any CMS editable content</span></li>
+    <li>Convert the controller to be CMS managed. Makes sense if the views need to be CMS editable (inherit from  PageController&lt;T&gt; where T is a BasePage)</li>
+    <li>Convert the controller to an HttpHandler. In one case the controller did not have any views or models, it was really just a different entrypoint to the site which ran a bit of logic and redirected. In this case there was no point in retaining the controller as an HttpHanlder could do the same job more efficiently</li>
+</ul>
+
+
+
+
+<h3>Disable strict language routing</h3>
+
+
+<p>I encountered a further issue after patching my EPiServer.Core and EPiServer.Framework nuget packages to the latest versions. None of the controller actions in the home controller worked any more except for the Index. This was fairly easy to remedy by disabling the strict language routing, via the episerver/sites/site/strictLanguageRouting config setting.</p>
+
+<h3>Deployment Issues</h3>
+
+
+<p>While its all well and good having the site running on your machine, eventually it will need to be deployed somewhere. We handle configuration changes with file transforms and I was pleased to note that the config changes required for episerver deployments are now minimised. Here is a summary list of all the settings we changed per environment:</p>
+
+<ul>
+    <li><span style="line-height:13px;">connectionStrings
+</span></li>
+    <li>episerver/sites/site/siteSettings/siteUrl</li>
+    <li>episerver.framework/siteHostMapping/siteHosts</li>
+    <li>episerver.framework/appData/basePath</li>
+    <li>episerver.framework/licensing/licenseFilePath</li>
+    <li>episerver.search/namedIndexingServices/services/baseUri</li>
+</ul>
+
+
+<p>Note, you may need to transform further settings for a load balanced site.</p>
+
+<h5>EPiServer UI not deployed</h5>
+
+
+<p>Previously with EPiServer v6 all that was needed to run the CMS interface itself was to install the application on the web server. However the EPiServer 7 UI architecture also has a number of dependencies in the {VPP}\modules folder. So ensure that these files are also present in your deployed environment, otherwise you will probably encounter the following error:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">DirectoryNotFoundException: Could not find a part of the path '{Your site path} \Website\ClientResources\ClientResources\packages.config'</pre>
+
+
+
+
+<h5>Search service configuration</h5>
+
+
+<p>We have the search service configured on a local host name as the indexing service does not like to communicate over a public host name. However this caused a further issue with the service reporting that multiple hosts names could not be run for the service. Fortunately this could be remedied easily by setting the system.serviceModel/serviceHostingEnvironment/multipleSiteBindingsEnabled  setting to true.</p>
+
+<p>Those were all the steps we needed to take to deploy the site successfully. I&rsquo;d be interested to hear your experiences if you found any other settings that need to be changed. Feel free to reply in the comments below or contact me directly on twitter <a href="https://twitter.com/michael_hook">@michael_hook</a>.</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -477,61 +568,6 @@ You can get the app by opening the following website on your android device and 
     <li>An android application for the game itself</li>
 </ul>
 
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-30T14:43:17+00:00" data-updated="true" itemprop="datePublished">Dec 30<span>th</span>, 2011</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/12/30/developing-android-apps-connect-to-an-existing-sqlite-database/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/12/30/developing-android-apps-connect-to-an-existing-sqlite-database/" itemprop="url">Developing Android Apps: Connect to an Existing SQLite Database</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>This post was drafted some time ago, so some of the details are lost in the mists of time. But I&rsquo;ll provide links to the source so anyone interested in doing something similar can start from there.</p>
-
-<p>The android app I&rsquo;m developing needs to be able to connect to an existing SQLite database, there are not many examples of how to achieve this in the Android tutorials, however I was able to find some guidance in a post from another Android developer on the <a href="http://www.reigndesign.com/blog/using-your-own-sqlite-database-in-android-applications/">reigndesign blog</a></p>
-
-<p>The key is that the database needs to be copied internally to the system directory on the device running the application before it can be accessed. This doesn&rsquo;t seem particularly efficient but I&rsquo;m sure Android had their reasons! My modified version of the code to do this is available from my github repository here:</p>
-
-<p><a href="https://github.com/MikeHook/FootyLinks/blob/master/AndroidApp/src/mhook/FootyLinks/Data/FootyLinksSQLLiteHelper.java">FootyLinksSQLLiteHelper.java</a></p>
-
-<p>I&rsquo;ve also encountered a couple of other snags since then while working with the SQLite database.</p>
-
-<h3>No password support</h3>
-
-
-<p>Passwords do not appear to be supported at all for the Android applications. I&rsquo;d automatically added password protection to the database when creating it and it took me a while to figure out why eclipse was refusing to read it!</p>
-
-<h3>Manually delete after schema changes</h3>
-
-
-<p>I&rsquo;ve added some additional fields to the database over time. However initially they were not being copied into the version of the database in my device emulator. I found it was necessary to browse the emulator files themselves, using the DDMS perspective in Eclipse, and delete the old database file directly in the emulator file system.</p>
 
 		
 		

@@ -9,7 +9,7 @@
 	<meta name="author" content="Mike Hook">
 
 	
-	<meta name="description" content="Jun 15th, 2009 Hacking Comments Add/Edit Recipe - Wireframes I&rsquo;ve now generated some initial wire frames for the site&hellip; mere minutes &hellip;">
+	<meta name="description" content="Jun 28th, 2009 Testing Comments Setting Up the NUnit GUI I&rsquo;ve setup the project using the default &rsquo;S#arp architecture Application&#8217 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,7 +67,7 @@
 <nav id="main-nav"><h3>categories</h3>
 <ul class="main-navigation">
 <li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
-<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 4 ]</li>
+<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 5 ]</li>
 <li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 12 ]</li>
 <li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
 <li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 8 ]</li>
@@ -111,6 +111,74 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-06-28T13:30:00+01:00" data-updated="true" itemprop="datePublished">Jun 28<span>th</span>, 2009</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/testing/'>Testing</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2009/06/28/setting-up-the-nunit-gui/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2009/06/28/setting-up-the-nunit-gui/" itemprop="url">Setting Up the NUnit GUI</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>I&rsquo;ve setup the project using the default &rsquo;S#arp architecture Application&#8217; template. I won&rsquo;t go into detail about the steps taken to do this as it is all covered in the Sharp Architecture documentation. However I did hit a snag setting up the <a href="http://www.nunit.org/index.php">NUnit</a> project so I&rsquo;ll expand on that in this post.</p>
+
+<p>The Sharp Architecture template is setup for <a href="http://www.agiledata.org/essays/tdd.html">TDD</a> (Test Driven Design) and this is the approach I will be taking to the development. Having installed <a href="http://www.testdriven.net/">TestDriven.Net</a>, the tests can be run through visual studio, however I prefer the interface of the NUnit GUI. After each test run the results are displayed as a set of pleasing green ticks and/or nasty red crosses. Once you have a nice set of green ticks it becomes a bit of a fixation to keep it that way!</p>
+
+<p>The unit tests for the visual studio project can be easily loaded into the NUnit GUI. All you need to do is go to File &ndash;&gt; Open Project and navigate to the bin folder of the test project. Opening the compiled assembly (dll) of the test project will load all the unit tests into the GUI. Hitting the run button returns a nice list of green ticks as expected. However after saving the NUnit test project something alarming happens on the next test run. The standard Sharp Architecture Data tests all fail and nasty set of red ticks appear!</p>
+
+<p>The following error message is reported:</p>
+
+<br />
+
+
+
+
+<blockquote style="font-style:italic;">
+SharpArch.Core.PreconditionException : Please add an AppSetting to your app.config for &#8216;nhibernate.mapping.assembly.&#8217; This setting takes a comma delimited list of assemblies containing NHibernate mapping files. Including &#8216;.dll&#8217; at the end of each is optional.<br />
+</blockquote>
+
+
+<p>The error is pointing to a missing setting in the app.config file, however on checking the file the setting is present. Also the tests worked just fine before saving the NUnit project so why would they suddenly start to fail?</p>
+
+<p>The cause of the test failures appears to have been saving the NUnit project, this pointed to some settings changes which NUnit may have made during the save. Taking a look at the NUnit project settings the possible cause of the problem became clear. There are a couple of directory and file paths in the settings, of particular interest are a &lsquo;Configuration File Name&rsquo; and &lsquo;ApplicationBase&rsquo; settings.</p>
+
+<p><span style="font-size:100%;font-weight:bold;">Configuration File Name</span>
+When the test project assembly is first loaded this setting has a value of <span style="font-style:italic;">RecipeBook.Tests.dll.config</span>, however after saving the NUnit project the <span style="font-style:italic;">.dll </span>part of the filename disappears. So NUnit is no longer able to find the config file and read the settings from it.</p>
+
+<p><span style="font-weight:bold;">ApplicationBase</span>
+The ApplicationBase setting remains blank, however if you have saved the NUnit project in a different directory to the test project assembly you will need to change this. The path needs to be the relative path from your test project base to the test assembly location.</p>
+
+<p>Below is an image of the settings for my project:</p>
+
+<p><a href="http://imageshack.com/a/img15/3503/csy7.jpg"><img alt="" border="0" src="http://imagizer.imageshack.us/v2/320x240q90/15/csy7.jpg" /></a>
+After updating these settings NUnit was able to read the settings for the config file and the GUI happily reported a lovely set of green ticks :)<br /></p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">

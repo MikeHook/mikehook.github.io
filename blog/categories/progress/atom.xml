@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Progress | baking websites]]></title>
   <link href="http://bakingwebsites.co.uk/blog/categories/progress/atom.xml" rel="self"/>
   <link href="http://bakingwebsites.co.uk/"/>
-  <updated>2014-07-02T14:50:04+01:00</updated>
+  <updated>2014-08-13T10:33:03+01:00</updated>
   <id>http://bakingwebsites.co.uk/</id>
   <author>
     <name><![CDATA[Mike Hook]]></name>
@@ -12,6 +12,90 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Tin Can API Overview]]></title>
+    <link href="http://bakingwebsites.co.uk/2014/08/13/tin-can-api-overview/"/>
+    <updated>2014-08-13T10:10:43+01:00</updated>
+    <id>http://bakingwebsites.co.uk/2014/08/13/tin-can-api-overview</id>
+    <content type="html"><![CDATA[<p><img src="http://imageshack.com/a/img539/1961/OgE8tH.jpg" class="alignleft" alttext="Tin Can API Logo" /></p>
+
+<p>These are some notes from my reading on the Tin Can API, a specification for the transmission and storage of messages related to learning activities. The specification has been developed by parties in the e-learning industry and aims to be an elegant solution to enable learning systems to communicate with one another.</p>
+
+<p>All this information is available on the <a href="http://tincanapi.com/">Tin Can API website</a>, this is just my own <a href="http://en.wikipedia.org/wiki/Wikipedia:Too_long;_didn't_read">tl;dr</a> type summary.</p>
+
+<h3>What is it?</h3>
+
+<ul>
+<li>A RESTful web service specification</li>
+<li>Defines the structure for JSON messages which represent learning activities (Or other types of activity)</li>
+<li>Each message is called a <strong>Statement</strong></li>
+<li>A statement consists of 3 parts: <strong>Actor</strong>, <strong>Verb</strong> and <strong>Object</strong> like &ldquo;Mike read the Tin Can Explained article&rdquo;</li>
+<li>Based on the <a href="http://activitystrea.ms/">activity streams</a> specification developed by/for social networks</li>
+</ul>
+
+
+<h3>Why is it good?</h3>
+
+<ul>
+<li>More flexible version of the old SCORM standard</li>
+<li>Device agnostic &ndash; anything that can send HTTP requests can use the API</li>
+<li>Almost any type of content can be stored</li>
+<li>Decouples content from the LMS (Learning management system) by storing in a separate LRS (Learning Record Store)</li>
+<li>A single <em>statement</em> can be stored in multiple learning record stores</li>
+<li>Allows potential for a learner owning their own content instead of their employers</li>
+<li>Data is accessible and easy to report on</li>
+</ul>
+
+
+<h3>A statement example</h3>
+
+<pre><code>{
+    "actor": {
+        "name": "Sally Glider",
+            "mbox": "mailto:sally@example.com"
+        },
+    "verb": {
+            "id": "http://adlnet.gov/expapi/verbs/experienced",
+            "display": {"en-US": "experienced"}
+     },
+    "object": {
+            "id": "http://example.com/activities/solo-hang-gliding",
+            "definition": {
+                "name": { "en-US": "Solo Hang Gliding" }
+            }
+    }
+}
+</code></pre>
+
+<p>You can generate test statements with valid syntax using the <a href="http://tincanapi.com/statement-generator/">Statement Generator</a></p>
+
+<p>Details of the valid message formats are given on the <a href="https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md">full xAPI specification</a>.</p>
+
+<h2>The registry</h2>
+
+<ul>
+<li>Contains definitions for verbs, activities, activity types, attachment types and extensions</li>
+<li>Should be referenced to in messages by URIs</li>
+<li>A shared domain language for agreed definitions of terms</li>
+<li>Anyone can add their own definitions to <a href="https://registry.tincanapi.com/">the registry</a></li>
+</ul>
+
+
+<h2>Recipes</h2>
+
+<ul>
+<li><a href="http://tincanapi.com/recipeshow-it-works/">Recipes</a> provide a standardised way for people to describe activities</li>
+<li>Simplifies reporting as the same terms should be used to describe things</li>
+<li>A few recipes exist now, for example the <a href="https://registry.tincanapi.com/#profile/19">video recipe</a></li>
+<li>More recipes can be added by the community</li>
+<li>Helps keep the API flexible and useful for future applications that may not even exist yet!</li>
+</ul>
+
+
+<p>Reading about the Tin Can API over the last few days and seeing it in action in the <a href="https://www.tessello.co.uk">Tessello application</a> has really whet my appetite to work more with the specification. I can see great potential for systems that leverage this specification as it provides a flexible framework for messaging without being restrictive and gives us the basis for a common technical language to use to enable our systems to talk to one another.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Automated Azure Deployments]]></title>
