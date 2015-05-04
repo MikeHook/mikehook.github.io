@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Software Development Episode VI: A New Era
+title: Software Development Episode VI: A New Dawn
 comments: true
 categories: 
 - Progress
@@ -8,7 +8,7 @@ date: 2015-04-23 18:07:49 +01:00
 published: false
 ---
 
-#Software Development Episode VI: A New Era #
+#Software Development Episode VI: A New Dawn #
 
 As the somewhat cheesy title suggests, changes are afoot in the world of Baking Websites. Up to this point I've been working as a permanent employee for a number of companies (five actually, hence Episode VI). But I felt that it was time to shake things up so imminently I will be starting out as a contracting software developer. While in practice I expect I will be doing much the same thing from day to day it was still quite a leap to leave the cosy environs of a permanent position. But before we get too far into that, in the best tradition of episodic film, lets take a recap on the story so far. In a galaxy far far away...
 
@@ -34,11 +34,22 @@ The main program of work I was involved in was for [NetJets](https://www.netjets
 
 ##Episode IV - In a dark place we find ourselves, and a little more knowledge lights our way
 
+Wiggle
+
 
 ##Episode V - Difficult to see. Always in motion is the future...
 
+Working for Wiggle had given me a taste for working in a product team so I looked for a role in the same vein. Fortuitously Brightwave were looking to expand the development team for their tessello product so I jumped on board. The main product was quite a departure from all the applications I'd worked on previously, a 'single page application' with most of the code written in javascript to run client side directly in the users browser. 
 
-##Episode IV - Train yourself to let go of everything you fear to lose
+The benefits to this approach are obvious when you use the application as interactions are much smoother without full page reloads and the user experience is much better. There has been tremendous growth in this area over the last couple of years with the emergence of many front end frameworks such as Angular, Backbone, Ember, React (I could go on but you get the idea!). I expect that this approach will become the norm over the next few years as any applications without smooth interactions will not be able to attract users.    
+
+##Episode VI - Train yourself to let go of everything you fear to lose
+
+Working with the tessello product team was a great experience and we made some great improvements to the platform. However the pace of change in the technology industry is clearly not slowing down and I felt I needed to make a change to enable me to keep up with these rapid changes. 
+
+As a software developer (indeed any kind of knowledge worker) the most valuable commodity you possess is your time. Working for any company full time you effectively hand that commodity to the company and they apportion it as they see fit (quite rightly to, this is what we all sign up to when we join a company). However there is a problem with this model as opportunities to top up your knowledge bank are largely limited to concepts you encounter during your day to day work and whatever you can manage to cram in out of hours. 
+
+My hope is that contracting work will enable me to make a bigger investment into my knowledge bank between contracts. Also I may be able to explore other opportunities in my own time which may or may not be successful but I'm sure will be fun trying! Obviously this is all theoretical right now but there is only one way to properly test a theory and that is to give it a go, so watch this space!    
 
       
 
