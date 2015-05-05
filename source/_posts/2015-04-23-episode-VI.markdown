@@ -34,6 +34,8 @@ The main program of work I was involved in was for [NetJets](https://www.netjets
 
 ##Episode IV - In a dark place we find ourselves, and a little more knowledge lights our way
 
+Unfortunately market forces conspired against me continuing to work for Fortune Cookie (or [POSSIBLE](http://www.possible.com/) as they now were). The new projects were drying up and it was clear to me that long term the role would not be economical. So I decided to take action before someone made the decision for me. At the time the Test Driven Development movement was carrying a lot of influence in the industry and as I agreed with an approach to software development that put quality first I looked for a position that would align with my values.
+
 
 ##Episode V - Difficult to see. Always in motion is the future...
 
