@@ -8,24 +8,58 @@ date: 2015-04-23 18:07:49 +01:00
 published: false
 ---
 
-#Software Development Episode VI: A New Dawn #
-
-As the somewhat cheesy title suggests, changes are afoot in the world of Baking Websites. Up to this point I've been working as a permanent employee for a number of companies (five actually, hence Episode VI). But I felt that it was time to shake things up so imminently I will be starting out as a contracting software developer. While in practice I expect I will be doing much the same thing from day to day it was still quite a leap to leave the cosy environs of a permanent position. But before we get too far into that, in the best tradition of episodic film, lets take a recap on the story so far. In a galaxy far far away...
-
-##Episode I - A lone padawan ##
-
-The first company I worked for, [RF Solutions](http://www.rfsolutions.co.uk/), was where I made my start on the journey of software development. Fresh out of university my mind was full of theory but completely devoid of any  practical business knowledge, invoices and purchase orders were foreign concepts to me! However that soon changed and I learnt what elements went together to make a business work. 
-
-After a brief foray into the world of 'technical sales' I gravitated towards the IT systems and was given a pretty opened ended brief of 'build us a new website where we can sell our products.' So off I went and built a site leveraging an e-commerce product called [Actinic](http://www.actinic.co.uk/). It was a fun challenge and I learnt much about how online payments worked along with how a web application could be integrated with internal business systems. I'm pleased to see that both the site I built and Actinic themselves are still going strong today, all be it in evolved forms! 
-
-It gave me a taste for more and I set about learning all about the .Net framework and building my first custom application to process product returns. This was the first time I realized that the most difficult part can often be figuring out what you are meant to be making! It is one thing following tutorials to push data in and out of a database from a web page but quite another to apply that to a problem and come up with a solution that people will actually be able to use.
-
-My custom application worked but I knew I could do better, if only I had some way of learning the best way to approach these problems. This was when I made my first leap of faith...
+#How to make awesome software the Lean way #
 
 
+
+##Eliminate waste ##
+
+*Lean philosophy regards everything not adding value to the customer as waste*
+
+As I've been working on the project during my spare time I had great motivation to ensure that this aspect of lean software was development was applied. Its amazing what you can achieve in a short amount of time with a bit of planning. For example just last week I was able to add 2 new payment options to the site in an hour. The key techniques I've used to help ensure I only do what is needed is:
+
+- Make sure I understand what the key stakeholder wants to achieve from the feature before implementing it
+- Use third parties to do the heavy lifting or put in another way don't reinvent the wheel. For this project the key third party systems used are [Umbraco](http://umbraco.com/) for content management and [GoCardless](https://gocardless.com/) for online direct debit payments 
+
+##Amplify learning##
+
+*Software development is a continuous learning process with the additional challenge of development teams and end product sizes*
+
+Working in a development team of 1 person on this particular project obviously made knowledge sharing a non issue, however there were opportunities to apply this principle when dealing with stakeholders on the project.
+
+MORE BLAH HERE
+
+##Decide as late as possible##
+
+*As software development is always associated with some uncertainty, better results should be achieved with an options-based approach*
+
+???
+
+##Deliver as fast as possible##
+
+*In the era of rapid technology evolution, it is not the biggest that survives, but the fastest. The sooner the end product is delivered without major defects, the sooner feedback can be received, and incorporated into the next iteration.*
+
+I've seen the benefits of an iterative approach over and again throughout my professional life so I regarded this as an essential principle to apply to all software projects.
+
+Slick release process for the WIN! (link to previous blog post)
+
+##Empower the team##
       
+*The lean approach favors the aphorism "find good people and let them do their own job," encouraging progress, catching errors, and removing impediments, but not micro-managing.*
 
+I have been fortunate to be involved with an organisation that trusted me to make the technical decisions. I presented my ideas on the features to implement as suggestions and got feedback on any changes they thought may be needed. 
 
+IMPORTANT TO 'Bring the stakeholders with you' when making the changes
+
+##Build quality in##
+
+All new features are first tested on a staging environment. Would like some automated testing in the project in future
+
+##See the whole##
+
+*By decomposing the big tasks into smaller tasks, and by standardizing different stages of development, the root causes of defects should be found and eliminated.*
+
+Features fully implemented one at a time, used an issue tracker to keep on top of requests.
 
 
 
