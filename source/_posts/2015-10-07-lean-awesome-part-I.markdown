@@ -8,7 +8,7 @@ date: 2015-07-19 17:12:49
 published: true
 ---
 
-<a href="http://midsussextriclub.com"><img src="http://i49.photobucket.com/albums/f299/hookmike/MSTC%20_logo_yellow_240_zpsq4vwpfhz.jpg" class="alignleft" alttext="MSTC Logo" /></a>
+<a href="http://midsussextriclub.com"><img src="http://i49.photobucket.com/albums/f299/hookmike/MSTC%20_logo_yellow_280_zps4tnfm4qj.jpg" class="alignleft" alttext="MSTC Logo" /></a>
 
 I've been a keen amateur triathlete and member the [Mid Sussex Tri Club](http://midsussextriclub.com) for a couple of years. Its a relatively small club but there is a surprising amount of administration involved in running it and after chatting to some of the clubs committee members it was clear that the admin overheads were becoming a burden. I could see the potential for software to help lessen the burden so I offered to take on the club's website and add some features to it.
 

@@ -1,14 +1,12 @@
 ---
 layout: post
-title: Software Development Episode VI: A New Dawn
+title: Software Development Episode VI - A New Dawn
 comments: true
 categories: 
 - Progress
 date: 2015-04-23 18:07:49 +01:00
 published: false
 ---
-
-#Software Development Episode VI: A New Dawn #
 
 As the somewhat cheesy title suggests, changes are afoot in the world of Baking Websites. Up to this point I've been working as a permanent employee for a number of companies (five actually, hence Episode VI). But I felt that it was time to shake things up so imminently I will be starting out as a contracting software developer. While in practice I expect I will be doing much the same thing from day to day it was still quite a leap to leave the cosy environs of a permanent position. But before we get too far into that, in the best tradition of episodic film, lets take a recap on the story so far. In a galaxy far far away...
 
