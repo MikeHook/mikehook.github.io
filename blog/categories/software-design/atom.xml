@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Software Design | baking websites]]></title>
   <link href="http://bakingwebsites.co.uk/blog/categories/software-design/atom.xml" rel="self"/>
   <link href="http://bakingwebsites.co.uk/"/>
-  <updated>2015-07-19T18:12:08+01:00</updated>
+  <updated>2015-07-19T18:17:00+01:00</updated>
   <id>http://bakingwebsites.co.uk/</id>
   <author>
     <name><![CDATA[Mike Hook]]></name>
@@ -58,41 +58,6 @@
 <h2>Stay tuned for part II&hellip;</h2>
 
 <p>The first three principles of Lean development have really helped me deliver on this project but there are still four more principles to go, so if you&rsquo;ve found this interesting check back soon for part II in the series!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Making Awesome Software With Lean Principles - Part II]]></title>
-    <link href="http://bakingwebsites.co.uk/2015/07/19/lean-awesome-part-II/"/>
-    <updated>2015-07-19T18:07:49+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2015/07/19/lean-awesome-part-II</id>
-    <content type="html"><![CDATA[<p>Refer back to Part I&hellip;</p>
-
-<h2>Deliver as fast as possible</h2>
-
-<p><em>In the era of rapid technology evolution, it is not the biggest that survives, but the fastest. The sooner the end product is delivered without major defects, the sooner feedback can be received, and incorporated into the next iteration.</em></p>
-
-<p>I&rsquo;ve seen the benefits of an iterative approach over and again throughout my professional life so I regard this as an essential principle to apply to all software projects. I put in place a pretty slick release process as one of the first changes I made and have been reaping the benefits ever since. Basically any check-ins on the master branch of the source code repository are immediately deployed to the website. I&rsquo;ve already blogged about how I set-up this <a href="http://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/">&lsquo;zero-click&rsquo; deploy process</a> and it has worked largely without problems since set-up.</p>
-
-<p>The only problem I encountered was after deploying an update to automatically resize images, little did I know that there was some kind of memory leak in the Umbraco plugin which meant the site quickly went over its memory allocation and Azure automatically took it offline. That was a nasty surprise and in hindsight testing the feature in a separate environment first would have helped! I wouldn&rsquo;t advocate this release process for bigger teams as there would be an increased risk of deploying code by mistake however it is a good fit for my needs and has helped me deliver changes quickly and reliably.</p>
-
-<h2>Empower the team</h2>
-
-<p><em>The lean approach favors the aphorism &ldquo;find good people and let them do their own job,&rdquo; encouraging progress, catching errors, and removing impediments, but not micro-managing.</em></p>
-
-<p>I have been fortunate to be involved with an organisation that trusted me to make the technical decisions. I presented my ideas on the features to implement and got feedback on any changes they thought may be needed. So I was empowered to make the changes as and when they were needed. However I also think it is important &lsquo;bring the stakeholders with you&rsquo; when making the changes. This has several benefits, not only does it help ensure that the features are relevant, it also gives me some good candidates for people to test the system before it goes live, which brings me neatly onto the next principle!</p>
-
-<h2>Build quality in</h2>
-
-<p><em>Conceptual integrity means that the system’s separate components work well together as a whole with balance between flexibility, maintainability, efficiency, and responsiveness.</em></p>
-
-<p>All new features are first tested on a staging environment. Would like some automated testing in the project in future</p>
-
-<h2>See the whole</h2>
-
-<p><em>By decomposing the big tasks into smaller tasks, and by standardizing different stages of development, the root causes of defects should be found and eliminated.</em></p>
-
-<p>Features fully implemented one at a time, used an issue tracker to keep on top of requests.</p>
 ]]></content>
   </entry>
   

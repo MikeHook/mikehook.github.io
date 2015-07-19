@@ -4,7 +4,7 @@
   <title><![CDATA[baking websites]]></title>
   <link href="http://bakingwebsites.co.uk/atom.xml" rel="self"/>
   <link href="http://bakingwebsites.co.uk/"/>
-  <updated>2015-07-19T18:12:08+01:00</updated>
+  <updated>2015-07-19T18:17:00+01:00</updated>
   <id>http://bakingwebsites.co.uk/</id>
   <author>
     <name><![CDATA[Mike Hook]]></name>
@@ -61,92 +61,6 @@
 <h2>Stay tuned for part II&hellip;</h2>
 
 <p>The first three principles of Lean development have really helped me deliver on this project but there are still four more principles to go, so if you&rsquo;ve found this interesting check back soon for part II in the series!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Making awesome software with Lean principles - Part II]]></title>
-    <link href="http://bakingwebsites.co.uk/2015/07/19/lean-awesome-part-II/"/>
-    <updated>2015-07-19T18:07:49+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2015/07/19/lean-awesome-part-II</id>
-    <content type="html"><![CDATA[<p>Refer back to Part I&hellip;</p>
-
-<h2>Deliver as fast as possible</h2>
-
-<p><em>In the era of rapid technology evolution, it is not the biggest that survives, but the fastest. The sooner the end product is delivered without major defects, the sooner feedback can be received, and incorporated into the next iteration.</em></p>
-
-<p>I&rsquo;ve seen the benefits of an iterative approach over and again throughout my professional life so I regard this as an essential principle to apply to all software projects. I put in place a pretty slick release process as one of the first changes I made and have been reaping the benefits ever since. Basically any check-ins on the master branch of the source code repository are immediately deployed to the website. I&rsquo;ve already blogged about how I set-up this <a href="http://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/">&lsquo;zero-click&rsquo; deploy process</a> and it has worked largely without problems since set-up.</p>
-
-<p>The only problem I encountered was after deploying an update to automatically resize images, little did I know that there was some kind of memory leak in the Umbraco plugin which meant the site quickly went over its memory allocation and Azure automatically took it offline. That was a nasty surprise and in hindsight testing the feature in a separate environment first would have helped! I wouldn&rsquo;t advocate this release process for bigger teams as there would be an increased risk of deploying code by mistake however it is a good fit for my needs and has helped me deliver changes quickly and reliably.</p>
-
-<h2>Empower the team</h2>
-
-<p><em>The lean approach favors the aphorism &ldquo;find good people and let them do their own job,&rdquo; encouraging progress, catching errors, and removing impediments, but not micro-managing.</em></p>
-
-<p>I have been fortunate to be involved with an organisation that trusted me to make the technical decisions. I presented my ideas on the features to implement and got feedback on any changes they thought may be needed. So I was empowered to make the changes as and when they were needed. However I also think it is important &lsquo;bring the stakeholders with you&rsquo; when making the changes. This has several benefits, not only does it help ensure that the features are relevant, it also gives me some good candidates for people to test the system before it goes live, which brings me neatly onto the next principle!</p>
-
-<h2>Build quality in</h2>
-
-<p><em>Conceptual integrity means that the system’s separate components work well together as a whole with balance between flexibility, maintainability, efficiency, and responsiveness.</em></p>
-
-<p>All new features are first tested on a staging environment. Would like some automated testing in the project in future</p>
-
-<h2>See the whole</h2>
-
-<p><em>By decomposing the big tasks into smaller tasks, and by standardizing different stages of development, the root causes of defects should be found and eliminated.</em></p>
-
-<p>Features fully implemented one at a time, used an issue tracker to keep on top of requests.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Software Development Episode VI - A New Dawn]]></title>
-    <link href="http://bakingwebsites.co.uk/2015/04/23/episode-VI/"/>
-    <updated>2015-04-23T18:07:49+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2015/04/23/episode-VI</id>
-    <content type="html"><![CDATA[<p>As the somewhat cheesy title suggests, changes are afoot in the world of Baking Websites. Up to this point I&rsquo;ve been working as a permanent employee for a number of companies (five actually, hence Episode VI). But I felt that it was time to shake things up so imminently I will be starting out as a contracting software developer. While in practice I expect I will be doing much the same thing from day to day it was still quite a leap to leave the cosy environs of a permanent position. But before we get too far into that, in the best tradition of episodic film, lets take a recap on the story so far. In a galaxy far far away&hellip;</p>
-
-<h2>Episode I &ndash; A lone padawan</h2>
-
-<p>The first company I worked for, <a href="http://www.rfsolutions.co.uk/">RF Solutions</a>, was where I made my start on the journey of software development. Fresh out of university my mind was full of theory but completely devoid of any  practical business knowledge, invoices and purchase orders were foreign concepts to me! However that soon changed and I learnt what elements went together to make a business work.</p>
-
-<p>After a brief foray into the world of &lsquo;technical sales&rsquo; I gravitated towards the IT systems and was given a pretty opened ended brief of &lsquo;build us a new website where we can sell our products.&rsquo; So off I went and built a site leveraging an e-commerce product called <a href="http://www.actinic.co.uk/">Actinic</a>. It was a fun challenge and I learnt much about how online payments worked along with how a web application could be integrated with internal business systems. I&rsquo;m pleased to see that both the site I built and Actinic themselves are still going strong today, all be it in evolved forms!</p>
-
-<p>It gave me a taste for more and I set about learning all about the .Net framework and building my first custom application to process product returns. This was the first time I realized that the most difficult part can often be figuring out what you are meant to be making! It is one thing following tutorials to push data in and out of a database from a web page but quite another to apply that to a problem and come up with a solution that people will actually be able to use.</p>
-
-<p>My custom application worked but I knew I could do better, if only I had some way of learning the best way to approach these problems. This was when I made my first leap of faith&hellip;</p>
-
-<h2>Episode II &ndash; Yoda lives (in many forms!)</h2>
-
-<p>It was no good me being in an IT department of one so I had to move on but the trouble was no company would take me on as an experienced developer. I was well aware that my skill set was limited but knew I could learn so I started out as a junior developer at <a href="https://twitter.com/cubeworks">Cubeworks</a>. This turned out to be one of the best decisions I ever made, the company was full of talented developers, and I went into full sponge mode absorbing a great deal about best coding practices, new frameworks and collaborating. I owe a massive debt of thanks to the guys who were working there at the time for putting up with my endless questions! Sadly Cubeworks is no more, however it does live on as part of a larger agency <a href="http://www.mba.co.uk/">MBA</a> and many of the sites I helped build are still out there (Amongst others <a href="http://www.chichester.ac.uk/">Chichester college</a>, <a href="http://www.motoringassist.com/">GEM Motoring Assist</a> and <a href="http://www.changinghabbits.co.uk/">Changing Habbits</a>).</p>
-
-<h2>Episode III &ndash; Do or do not. There is no try</h2>
-
-<p>Like a bolt out of the blue a digital agency from &lsquo;the big smoke&rsquo; called <a href="http://www.fortunecookie.co.uk/">Fortune Cookie</a> contacted me directly, offering me a position. It was a wrench to leave Cubeworks but the opportunity to work on big projects for international clients was too good to turn down. Again this proved to be a period of learning, however much more in how to work in big multidisciplinary teams than how to develop solutions. The first project I worked on had about 8 developers, several designers, user experience experts, project managers and one poor overworked QA guy all trying to work together to deliver software. It was obvious that the overheads for organising and communicating in a large development team increased exponentially with size. Also maintaining code quality across the project became a real challenge but more on that later!</p>
-
-<p>The main program of work I was involved in was for <a href="https://www.netjets.com/">NetJets</a> a complete relaunch of their online presence, with a new flight booking engine thrown in for good measure! It was a great project to work on which involved close collaboration with the client across different time zones. It was soon clear that it was essential for us to maintain a &lsquo;mock&rsquo; version of the clients web services to enable us to work asynchronously, along with a suite of unit and integration tests to enable us to pin point the source of bugs. When a single user action is travelling through multiple layers of code across several applications debugging can be like going down the rabbit hole unless you have something to light your way!</p>
-
-<h2>Episode IV &ndash; In a dark place we find ourselves, and a little more knowledge lights our way</h2>
-
-<p>Unfortunately market forces conspired against me continuing to work for Fortune Cookie (or <a href="http://www.possible.com/">POSSIBLE</a> as they now were). The new projects were drying up and it was clear to me that long term the role would not be economical, so I decided to take action before someone made the decision for me. At the time the Test Driven Development movement was carrying a lot of influence in the industry and as I agreed with an approach to software development that put quality first I looked for a position that would align with my values.</p>
-
-<p>At the time <a href="http://www.wiggle.co.uk/">Wiggle</a>, an e-commerce sports retailer, were hiring TDD focussed agile developers and I jumped at the chance to work for a great company I already knew from competing in triathlons and cycling events in my spare time. I was again lucky to join a development team full of talented people and learnt a great deal about both automated testing, event driven architecture and true agile development processes.</p>
-
-<p>The whole team had a similar test first mindset and the benefits to a product of paired programming and code reviewing became clear. When members of a development team can freely collaborate then the solution benefits from their combined experience. Instead of a piecemeal code-base written from conflicting perspectives you produce a much more coherent product with consistent approaches to each particular problem.</p>
-
-<h2>Episode V &ndash; Difficult to see. Always in motion is the future&hellip;</h2>
-
-<p>Unfortunately events outside of my control once again forced me to look for alternative employment as the IT team was relocated. But working for Wiggle had given me a taste for working in a product team so I looked for a role in the same vein. Fortuitously Brightwave were looking to expand the development team for their tessello product so I jumped on board. The main product was quite a departure from all the applications I&rsquo;d worked on previously, a &lsquo;single page application&rsquo; with most of the code written in javascript to run client side directly in the users browser.</p>
-
-<p>The benefits to this approach are obvious when you use the application as interactions are much smoother without full page reloads and the user experience is much better. There has been tremendous growth in this area over the last couple of years with the emergence of many front end frameworks such as Angular, Backbone, Ember, React (I could go on but you get the idea!). I expect that this approach will become the norm over the next few years as any applications without smooth interactions will not be able to attract users.</p>
-
-<h2>Episode VI &ndash; Train yourself to let go of everything you fear to lose</h2>
-
-<p>Working with the tessello product team was a great experience and we made some great improvements to the platform. However the pace of change in the technology industry is clearly not slowing down and I felt I needed to make a change to enable me to keep up with these rapid changes.</p>
-
-<p>As a software developer (indeed any kind of knowledge worker) the most valuable commodity you possess is your time. Working for any company full time you effectively hand that commodity to the company and they apportion it as they see fit (quite rightly to, this is what we all sign up to when we join a company). However there is a problem with this model as opportunities to top up your knowledge bank are largely limited to concepts you encounter during your day to day work and whatever you can manage to cram in out of hours.</p>
-
-<p>My hope is that contracting work will enable me to make a bigger investment into my knowledge bank between contracts. Also I may be able to explore other opportunities in my own time which may or may not be successful but I&rsquo;m sure will be fun trying! Obviously this is all theoretical right now but there is only one way to properly test a theory and that is to give it a go, so watch this space!</p>
 ]]></content>
   </entry>
   
@@ -1206,6 +1120,148 @@ using (var excelPackage = new ExcelPackage())
 
 
 <p>In conclusion I would recommend EPPlus to anybody who needs to generate an excel report from C# code and doesn&rsquo;t want to interface with the murky depths of the Excel API. It is a great open source library that does just what you need in the way you would expect it to work.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Quartz makes scheduling jobs easy with EPiServer Commerce]]></title>
+    <link href="http://bakingwebsites.co.uk/2011/11/07/quartz-makes-scheduling-jobs-easy-with-episerver-commerce/"/>
+    <updated>2011-11-07T19:30:00+00:00</updated>
+    <id>http://bakingwebsites.co.uk/2011/11/07/quartz-makes-scheduling-jobs-easy-with-episerver-commerce</id>
+    <content type="html"><![CDATA[<p><a href="http://quartznet.sourceforge.net/index.html"><img class="alignright" title="Quartz rock" src="http://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Quartz,_Tibet.jpg/240px-Quartz,_Tibet.jpg" alt="Quartz rock" width="168" height="169" /></a>A common requirement for e-commerce applications is the ability to schedule jobs or tasks. I am currently working on a project which uses EPiServer Commerce and I needed to schedule an order export job.</p>
+
+<p>I was pleasantly surprised to find that EPiServer Commerce is supplied bundled with the <a href="http://quartznet.sourceforge.net/index.html">Quartz.NET</a>  enterprise code library to facilitate these job scheduling requirements.</p>
+
+<h3>Gentlemen, choose your weapons</h3>
+
+
+<p>I had three main options available for implementing the export job, a separate windows service, an EPiServer CMS scheduled job or a Quartz job. I decided that the Quartz service was better than the option of a separate windows service because the framework was already there and available so would not increase the complexity of deployments. I also felt it was a better option than a EPiServer CMS scheduled job because Quartz runs  independently  to the website app pool so should not put the web application under greater load while it is running and potentially degrade the performance of the end user website.</p>
+
+<h3>A 1000 foot example</h3>
+
+
+<p>I&rsquo;m not going to go into a massively detailed explanation of how to implement the jobs as there is a already a good example available in the <a href="http://sdk.episerver.com/commerce/1.1.1/Content/Developers%20Guide/Architecture/LongRunProcessScheduling.htm">EPiServer Commerce dev guide</a>  along with a detailed <a href="http://quartznet.sourceforge.net/tutorial/index.html">tutorial on the Quartz .NET site</a>. However a quick overview demonstrates how intuitive it is to implement.</p>
+
+<p>The first thing you need to do is create your job class which will run when Quartz triggers the execution. The class must inherit from the IJob interface which just has a single Execute method to implement. Here is a sample skeleton class:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">    public class CommerceOrderExportJob : IStatefulJob
+    {
+        private readonly ILog _log;
+
+        public CommerceOrderExportJob()
+        {
+            _log = LogManager.GetLogger(base.GetType());
+            //Any other init code
+        }
+
+        public void Execute(JobExecutionContext context)
+        {
+            //Your export methods
+        }
+    }</pre>
+
+
+<p>You then need to extend the config file to configure Quartz to call your job. I think all the parameters are pretty self explanatory:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">&lt;job&gt;
+    &lt;job-detail&gt;
+      &lt;name&gt;OrderExportJob&lt;/name&gt;
+      &lt;group&gt;all&lt;/group&gt;
+      &lt;description&gt;This job exports orders from commerce&lt;/description&gt;
+      &lt;job-type&gt;Your.Assembly.CommerceOrderExportJob, Your.Assembly&lt;/job-type&gt;
+      &lt;volatile&gt;false&lt;/volatile&gt;
+      &lt;durable&gt;true&lt;/durable&gt;
+      &lt;recover&gt;false&lt;/recover&gt;
+    &lt;/job-detail&gt;
+    &lt;trigger&gt;
+      &lt;simple&gt;
+        &lt;name&gt;OrderExportJobTrigger&lt;/name&gt;
+        &lt;group&gt;eCommerceFramework&lt;/group&gt;
+        &lt;description&gt;Fires Order Export Job&lt;/description&gt;
+        &lt;misfire-instruction&gt;SmartPolicy&lt;/misfire-instruction&gt;
+        &lt;volatile&gt;false&lt;/volatile&gt;
+        &lt;job-name&gt;OrderExportJob&lt;/job-name&gt;
+        &lt;job-group&gt;eCommerceFramework&lt;/job-group&gt;
+        &lt;repeat-count&gt;RepeatIndefinitely&lt;/repeat-count&gt;
+        &lt;repeat-interval&gt;300000&lt;/repeat-interval&gt;
+      &lt;/simple&gt;
+    &lt;/trigger&gt;
+  &lt;/job&gt;</pre>
+
+
+<p>Hit run on the service and check the event log for any problems. Make sure to include some useful event/error logging in the job otherwise it will just be a mysterious black box! There are a couple of snags you may run into when running the job against EPiServer Commerce:</p>
+
+<div>
+<ul>
+    <li>ensure that your compiled assembly is actually available in the Quartz service directory, this is different from the main commerce site bin folder so it is not enough just to include it in the commerce app references</li>
+    <li>Make sure the data context has been initialised and the config file in the Quartz service directory is pointing to your database</li>
+</ul>
+</div>
+
+
+
+
+<h3>Mining for more gems</h3>
+
+
+<p>Ultimately only time will tell if Quartz was the best choice but I feel it has the best chance of high reliability and performance in the long term. I hope that, where appropriate, EPiServer can continue to expand the incorporation of proven open source libraries with their product offerings.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Behaviour Driven Design encourages shared understanding]]></title>
+    <link href="http://bakingwebsites.co.uk/2011/10/23/behaviour-driven-design-encourages-shared-understanding/"/>
+    <updated>2011-10-23T12:21:38+01:00</updated>
+    <id>http://bakingwebsites.co.uk/2011/10/23/behaviour-driven-design-encourages-shared-understanding</id>
+    <content type="html"><![CDATA[<p>Most recent projects I have worked on have used unit tests  to define the requirements of our code and ensure they are met. Typically the tests are written by the developer while they are coding the solution. However this means that the tests are based entirely on the developers understanding of the requirements, which may not always be the same as the stakeholders understanding.</p>
+
+<p>To combat this issue we are introducing <a href="http://dannorth.net/introducing-bdd/">behaviour driven development</a>, to agree on a set of requirements for each feature with the stakeholders before starting development. The requirements are captured using the Gherkin syntax (Given, When, Then) based on real world examples. These examples can then be wired up to the system directly as automated tests using <a href="http://specflow.org/">Specflow</a>.</p>
+
+<h2>OK, show me the example already</h2>
+
+
+<p>Here is a fictionalised scenario which demonstrates the value that BDD adds to a project. An abbreviated version of the initial scenarios drafted by the developer are as follows:</p>
+
+<pre style="font-size:small;font-family:Consolas, 'Courier New', Courier, Monospace;width:100%;overflow:auto;border:1px dashed #999999;background-color:#eeeeee;"><span style="color:#0000ff;font-weight:bold;">Feature</span>: Process 3D secure authentication response
+        As a logged in user
+        I would like to place a 3D secure authenticated order
+        so that I have assurance of the websites security
+
+<span style="color:#0000ff;font-weight:bold;">Scenario</span>: Handle a 3D secure response of AUTHORISED
+    <span style="color:#0000ff;"><strong>Given </strong></span>a 3D secure response of AUTHORISED
+        <span style="color:#0000ff;font-weight:bold;">When</span>  i view the order confirmation page
+        <span style="color:#0000ff;font-weight:bold;">Then</span>  the order status will be Complete
+
+<span style="color:#0000ff;font-weight:bold;">Scenario</span>: Handle a 3D secure response of NOT AUTHORISED
+    <span style="color:#0000ff;"><strong>Given </strong></span>a 3D secure response of NOT AUTHORISED
+        <span style="color:#0000ff;font-weight:bold;">When</span>  i view the order confirmation page
+        <span style="color:#0000ff;font-weight:bold;">Then</span>  the order status will be Cancelled
+
+<span style="color:#0000ff;font-weight:bold;">Scenario</span>: Handle a 3D response of NOT PROCESSED
+    <span style="color:#0000ff;"><strong>Given </strong></span>a 3D secure response of NOT PROCESSED
+        <span style="color:#0000ff;font-weight:bold;">When</span>  i view the order confirmation page
+        <span style="color:#0000ff;font-weight:bold;">Then</span>  the order status will be Cancelled</pre>
+
+
+
+
+<h2>Evolving the scenario</h2>
+
+
+<p>The assumptions shown in these scenarios are perfectly reasonable, an order will only be completed if the 3D secure security check returns an authorised response. However it should really be a decision for the stakeholder&rsquo;s business whether the system should behave in this way. There are several valid scenarios where all 3D responses should actually result in a completed order, for example:</p>
+
+<pre style="font-size:small;font-family:Consolas, 'Courier New', Courier, Monospace;width:100%;overflow:auto;border:1px dashed #999999;background-color:#eeeeee;"><span style="color:#0000ff;font-weight:bold;">Scenario</span>: Handle a 3D secure response of NOT AUTHORISED
+<span style="color:#0000ff;"><strong>Given</strong></span> a 3D secure response of NOT AUTHORISED
+<span style="color:#0000ff;"><strong>And</strong></span> a total order value order value under the following amount:   25
+<span style="color:#0000ff;font-weight:bold;">When</span>  i view the order confirmation page
+<span style="color:#0000ff;font-weight:bold;">Then</span>  the order status will be Complete</pre>
+
+
+<p>The stakeholders calculated that the risk of charge-backs was so low on orders under   25 that they could disregard the 3D secure response completely and allow &lsquo;not authorised&rsquo; transactions to be completed.</p>
+
+<p>Here we can see a clear benefit in the stakeholder sharing their understanding of the system requirements with the implementation team. Rules which are beneficial to their business can be incorporated into the system, resulting in a more effective solution from the outset.</p>
+
+<p>If you are interested in reading more about using BDD for web applications I can recommend <a href="http://blog.stevensanderson.com/2010/03/03/behavior-driven-development-bdd-with-specflow-and-aspnet-mvc/">Steven Sanderson&rsquo;s excellent blog post</a>.</p>
 ]]></content>
   </entry>
   

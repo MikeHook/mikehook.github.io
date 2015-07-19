@@ -9,7 +9,7 @@
 	<meta name="author" content="Mike Hook">
 
 	
-	<meta name="description" content="Jan 30th, 2011 Software Design Comments Top 5 Domain Object Optimisations I&#8217;ve been working with domain objects for a while now and these are &hellip;">
+	<meta name="description" content="Jan 16th, 2011 Tips and Tricks Comments Investigating an NHibernate &#8216;Stale State&#8217; Exception I recently needed to investigate and fix &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,9 +67,9 @@
 <nav id="main-nav"><h3>categories</h3>
 <ul class="main-navigation">
 <li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
-<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 6 ]</li>
+<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 5 ]</li>
 <li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 12 ]</li>
-<li class='category'><a href='/blog/categories/software-design/'>Software design</a>[ 2 ]</li>
+<li class='category'><a href='/blog/categories/software-design/'>Software design</a>[ 1 ]</li>
 <li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
 <li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 8 ]</li>
 
@@ -112,226 +112,6 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-01-30T21:12:57+00:00" data-updated="true" itemprop="datePublished">Jan 30<span>th</span>, 2011</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/software-design/'>Software Design</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/01/30/top-5-domain-object-optimisations/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/01/30/top-5-domain-object-optimisations/" itemprop="url">Top 5 Domain Object Optimisations</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<div>I&#8217;ve been working with domain objects for a while now and these are simple tips I automatically follow on new objects. In my case the domain objects are setup to be mapped to a database by NHibernate, however most of these optimisations would be valid for a domain object used with any mapping tool.   I&#8217;ve found that these changes are quick to implement but can save a lot of hassle in the long run!</div>
-
-
-
-
-<h3>1. Make the parameterless constructor private</h3>
-
-
-<p>Obviously you will need a public constructor as well, however this should take parameters. These should be the minimum set of properties that make the domain object valid. In this way you can be sure that whenever you encounter one of these objects in your code it will not have random null properties and cause unexpected null references.</p>
-
-<pre style="background-color:#eeeeee;border:1px dashed #999999;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:60px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>private Customer() {}
-
-public Customer(string firstName, string lastName) {}
-</code></pre>
-
-
-
-
-<h3>2. Add precondition checks in the constructor</h3>
-
-
-<p>The main advantage of this is to ensure that the constructor is used as intended. The precondition checks can be used to make sure that no null or empty parameters are passed into the constructor. When used in tandem with the first tip, you can be sure that you will not encounter any invalid domain objects in your code.</p>
-
-<pre style="background-color:#eeeeee;border:1px dashed #999999;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:80px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>public Customer(string firstName, string lastName)
-{
-   Check.Require(string.IsNullOrEmpty(lastName) == false,
-      "lastName must be provided");
-}</code></pre>
-
-
-
-
-<h3>3. Initialise your lists properties in the constructor</h3>
-
-
-<p>This particular change may only be needed for NHibernate. A list property can be used to represent a one-to-many relationship between to different classes. For example, typically a  <em><strong>Customer </strong></em>object could be related to multiple  <em><strong>Order </strong></em>objects, so this would be represented in the Customer class as a list of Order objects. However, if the customer had not placed any orders yet and you tried to access the orders list, without first initialising it, you would get a null reference.</p>
-
-<pre style="background-color:#eeeeee;border:1px dashed #999999;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:60px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>private Customer()
-{
-   Orders = new List();
-}</code></pre>
-
-
-<p>You will not get this problem if the list is always initialised in the constructor. NHibernate populates the list after the constructor has been called so no actual data will be lost when the list is initialised.</p>
-
-<h3>4. Make any Status properties private</h3>
-
-
-<p>A convention we commonly use with domain objects is to represent its state with an enum property. For example an order could be New, Pending or Complete. If the Status property is private then it can only be changed by Methods in the domain object itself. This has two main advantages, firstly any logic that needs to be associated with the status change can be included in the same method. In this way you can be sure that all the required logic is run when the status is changed. For example, you may need to set the order completion date when the status changes from Pending to Complete.   Secondly it makes the code much easier to re-factor in future as there will not be calls to set the property spread around the code base.</p>
-
-<pre style="background-color:#eeeeee;border:1px dashed #999999;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:100px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>OrderStatus Status {get; private set; }
-
-public CompleteOrder()
-{
-   Status = OrderStatus.Complete;
-   CompletedDate = DateTime.Now();
-}</code></pre>
-
-
-
-
-<h3>5. Keep it simple!</h3>
-
-
-<p>OK I admit it, I ran out of tips after four! But I think this is a valid point. There is nothing worse than discovering a domain object of 500 plus lines of code in a project you need to maintain. It is best to keep it simple and if you find that too much behaviour is associated with one object then either split it into smaller domain objects or move the behaviour into a separate service class.</p>
-
-<p>So those are my top 5 tips for domain objects. I&rsquo;d be interested to hear opinions on these, along with  practices  that anyone else employs for domain objects so feel free to leave comments.</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-01-23T17:35:34+00:00" data-updated="true" itemprop="datePublished">Jan 23<span>rd</span>, 2011</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/tips-and-tricks/'>Tips and Tricks</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/01/23/episerver-6-developer-exam-tips/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/01/23/episerver-6-developer-exam-tips/" itemprop="url">EPiServer 6 Developer Exam Tips</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>Last Monday I made the trip to London to take the EPiServer CMS certification exam (version 6). I passed but it was quite a tricky exam so I thought I&rsquo;d post some tips that may be of help to others taking the test.</p>
-
-<p>The questions are randomised so you won   t get asked the same as me but the areas will probably be similar. There were 70 multiple choice questions split into four sections. I can&rsquo;t remember the exact breakdown but these numbers are close:</p>
-
-<h3>Installation / deployment (~10 questions)</h3>
-
-
-<p>These questions are not particularly difficult but if, like myself, you haven&rsquo;t needed to use the features much previously you might get stuck.</p>
-
-<ul>
-    <li>Deployment center     make sure you know everything you can do from here</li>
-    <li>Initialization module     What is it, when does it run etc (this is new to version 6, I missed the tech note and wished I&#8217;d read it)</li>
-    <li>Multi-Site installations</li>
-    <li>Upgrading to v6     What versions can you upgrade from, what is backed up / updated.</li>
-</ul>
-
-
-
-
-<h3>General Product Knowledge (~15 questions)</h3>
-
-
-<p>If you are familiar with the system and its features there is not much to worry about here</p>
-
-<ul>
-    <li><span style="font-weight:normal;font-size:13px;">Load balancing</span></li>
-    <li>Page type &amp; page template concepts</li>
-    <li>XForms - How to make one, how it works</li>
-    <li>Online center and gadgets</li>
-</ul>
-
-
-
-
-<h3>Standard Development (~25 questions)</h3>
-
-
-<p>Again, if you have developed a couple of sites then most of these are not too bad. However the customisation questions will be sticking points unless you are familiar with the tech notes.</p>
-
-<ul>
-    <li>Wiring up EPiServer / .NET web controls</li>
-    <li>Wiring up master pages</li>
-    <li>Custom membership provider</li>
-    <li>Custom virtual path provider</li>
-    <li>Globalization     What language is used in various scenarios</li>
-</ul>
-
-
-
-
-<h3>Advanced Development (~20 questions)</h3>
-
-
-<p>These questions are really tricky, and may involve quite a bit of guess work!</p>
-
-<ul>
-    <li>Mirroring     How is it setup / configured, what is mirrored</li>
-    <li>Scheduler service     What can and can   t be run</li>
-    <li>Dynamic data store</li>
-    <li>Page Objects (I missed this one completely)</li>
-    <li>Filters     adding code to a filter web control</li>
-    <li>Quick publishing configuration</li>
-    <li>Plugins / Modules     Installing</li>
-</ul>
-
-
-
-
-<h3>Preparing for the exam</h3>
-
-
-<p>To help pass I   d recommend in order of priority:</p>
-
-<ol>
-    <li>Install the example site and run everything you can in the deployment center</li>
-    <li>Try everything out in the CMS Online center (the Start page and menu bar) editor and admin sections while reading through the editor and admin manuals (particularly the admin manual)</li>
-    <li>Read all the tech notes and try to setup what they are describing. I wouldn&#8217;t worry about spending too much time on each though as long as you understand the concepts.</li>
-</ol>
-
-
-<p>There are quite a lot of resources available online and it can be a bit overwhelming. But don&rsquo;t despair, Jonathan&rsquo;s handy  <a href="http://www.jonathansewell.co.uk/index.php/2010/12/06/episerver-6-exam-bookmarks/">exam bookmarks post</a> is a good place to start!</p>
-
-		
-		
-	</div>
-
-</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -515,6 +295,180 @@ It was also necessary to wrap the command in a CDATA element because the delete 
 
 <p>I&rsquo;m aware that this is not the most efficient way to implement this, an alternative would be to add a scheduled task to the SQL Server Agent, however we do not have access to this on the database server.
 Also I prefer how the maintenance is built into the log4net configuration here so it will now work immediately on any database server without the need for separate configuration steps.</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-22T15:29:07+01:00" data-updated="true" itemprop="datePublished">Aug 22<span>nd</span>, 2010</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2010/08/22/upgrading-to-sharp-architecture-1-6-and-mvc-2/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2010/08/22/upgrading-to-sharp-architecture-1-6-and-mvc-2/" itemprop="url">Upgrading to Sharp Architecture 1.6 and MVC 2</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>After a good few months in hibernation the guilt of leaving my poor pet project half-finished has finally got to me!</p>
+
+<p>I was also spurred on by several new (and not so new) software releases that I would like to try out:</p>
+
+<ul>
+    <li><a href="http://devlicio.us/blogs/billy_mccafferty/archive/2010/08/19/s-arp-architecture-1-6-released.aspx">S#arp Architecture 1.6</a></li>
+    <li><a href="http://weblogs.asp.net/scottgu/archive/2010/03/11/asp-net-mvc-2-released.aspx">MVC version 2</a></li>
+    <li><a href="http://www.techfortesco.com/forum/index.php?topic=265.0">Tesco API Beta</a></li>
+</ul>
+
+
+<p>The first step I needed to take was to upgrade the project to use the new release of Sharp Architecture and MVC 2. The Sharp Architecture wiki has   a <a href="http://wiki.sharparchitecture.net/1.5UpgradeGuide.ashx">decent upgrade guide</a> and I was able to get most of the way there by following this.   However there were a couple extra step I needed to take in my project:</p>
+
+<h3>Upgrade to Fluent NHibernate</h3>
+
+
+<p>I think my project may have been on an earlier version than that in the guide because I needed to upgrade the Data project to use Fluent NHibernate. The issues here were pretty obvious as there were several compilation errors. I found the easiest solution was to generate a new empty Sharp Architecture project from the 1.6 template, then copy across the amended files in the NHibernateMaps folder.</p>
+
+<p>This got the application to compile OK, however there were a couple of differences in the configuration from my project.</p>
+
+<h3>Primary Key Convention</h3>
+
+
+<p>One of the data unit tests was failing when trying to access an entity using the <em>.Get(id)</em> method. This was strange as the entity was being loaded OK in the setup method. I was also getting an exception from the website when trying to add an entity to the database:</p>
+
+<blockquote><em>Invalid object name &#8216;hibernate_unique_key&#8217;.</em></blockquote>
+
+
+<p>The problem was due to a change in the <em>PrimaryKeyConvention</em> class. The convention for generating primary keys has been changed from <em>Native()</em> to <em>HiLo(&ldquo;1000&rdquo;)</em>. So instead of the first record having a key of 0 it would now try to use 1000. Changing this setting back to <em>Native()</em> fixed the problem straight away.</p>
+
+<h3>Cascade Conventions</h3>
+
+
+<p>The other issue I encountered occurred when trying to add a new ingredient to a recipe:</p>
+
+<blockquote><em>Cannot insert the value NULL into column &#8216;IngredientFk&#8217;, table  &#8216;recipebook.dbo.RecipeIngredientDrafts&#8217;; column does not allow nulls. INSERT  fails.
+The statement has been terminated.</em></blockquote>
+
+
+<p>This error pointed to a problem with NHibernate not saving changes to associated entities; it was trying to save a new <em>RecipeIngredientDraft</em> record without first saving the new <em>Ingredient </em>record. This issue could be resolved by adding a call to <em>instance.Cascade.SaveUpdate() </em>in the <em>ReferenceConvention </em>and <em>HasManyConvention </em>classes.</p>
+
+<p>After fixing these issues the application worked just fine :)</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-02-12T09:00:00+00:00" data-updated="true" itemprop="datePublished">Feb 12<span>th</span>, 2010</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2010/02/12/you-have-20-seconds-to-comply/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2010/02/12/you-have-20-seconds-to-comply/" itemprop="url">You Have 20 Seconds to Comply</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Its pretty straight forward to generate a simple web page, there are several software tools available that will generate the mark up code for you. However, even using these tools, it is easy to misuse tags and not conform to the <a href="http://www.w3.org/TR/xhtml11/">XHTML standards</a>. If you were unfortunate enough to follow the previous link, you may well be thinking,</p>
+
+<blockquote>   What does it all mean, my web page looks fine so does compliance really matter?   </blockquote>
+
+
+<p>This is a valid point, however compliance is widely regarded to be important for a number of reasons. These are pretty <a href="http://www.leemunroe.com/how-important-is-valid-html-web-standards/">well documented</a> around the web so I   ll just highlight a couple of the reasons that I think are most important.</p>
+
+<p>Firstly a compliant web page should be assured of displaying fairly consistently across all major browsers, both now and in the future. Unfortunately some browsers are more compliant than others, internet explorer still demands some extra attention but it is much improved since the days of IE6. The newer browsers which have come onto the market, such as Firefox and Chrome, generally display compliant pages very well. Secondly I think that compliance is important as it makes the content more accessible to machine readers. For example the readers used by search engines will be able to read and index the page content easier, which will help increase traffic to the site. This theory has actually been tested and there is some evidence to back up the claims that <a href="http://www.hobo-web.co.uk/seo-blog/index.php/official-google-prefers-valid-html-css/">Google prefers valid HTML and CSS</a>.</p>
+
+<h4>Keep it clean</h4>
+
+
+<p>The first step to compliance is to separate the HTML mark-up from the presentation using a CSS (Cascading Style Sheet) document. This helps ensure that the web page is short and the content is easy to find. Apparently search engines are busy guys and they just don   t have the time to be reading all that content on your site. So they only read up to a certain number of characters, if your important content is pushed too far down the document then there is a rick that it will never get indexed.</p>
+
+<p>I   ve gone for a fairly straight forward layout on the recipe stash site, with a fixed width page of 960 pixels to target resolution widths of 1024 and above. The header, footer and main content are all in a single column. This layout can be created in CSS without too much trouble. I   ve tried to use the HTML tags as they were intended originally, for example the menus are tagged as an unordered list of elements, then styled to display horizontally.</p>
+
+<p>There is an unfortunate limitation with HTML, it does not support curved corners. So I   ve used to <a href="http://www.html.it/articoli/niftycube/index.html">Nifty Corners</a> to create the curved effect on the top navigation menu and latest recipes section:</p>
+
+<p><a href="http://lh3.ggpht.com/_5hQeqbPSrks/S3SKU8XP19I/AAAAAAAAAEg/LyqqweIM2DE/s1600-h/recipestash-nav%5B4%5D.jpg"><img title="recipestash-nav" src="http://lh5.ggpht.com/_5hQeqbPSrks/S3SKVdVr1qI/AAAAAAAAAEk/xCnYOpYSNAI/recipestash-nav_thumb%5B2%5D.jpg?imgmax=800" border="0" alt="recipestash-nav" width="492" height="56" /></a></p>
+
+<p>Nifty Corners is a JavaScript based tool which adds HTML and CSS to the page when it is loaded to create the effect of curved corners. The other option I considered to create the curved corners was to cut out images of the corners themselves and position them in the corners of the HTML elements. However I decided to use Nifty corners for a number of reasons:</p>
+
+<ul>
+    <li>No images are required</li>
+    <li>The generated HTML mark-up is compliant</li>
+    <li>The implementation is fast     just one line of JavaScript to call!</li>
+    <li>It degrades gracefully (If JavaScript is not available then it does nothing)</li>
+</ul>
+
+
+
+
+<h4>Exceptions to the rule</h4>
+
+
+<p>I mentioned earlier that internet explorer interprets style sheets differently to other browsers. This is so pronounced for version six that a completely different style sheet would be needed to create the same visual layout. I   ve decided that this would take up too much of my time and have instead used the <a href="http://forabeautifulweb.com/blog/about/universal_internet_explorer_6_css/">universal ie6 style sheet</a>, along with an upgrade message for anyone that is using IE6.</p>
+
+<p>I   m currently running on Windows Vista and it is pretty tricky to test for all versions of internet explorer. There are two main methods that can be used to test, either install a virtual machine running Windows XP with IE6 installed natively or use the <a href="http://www.my-debugbar.com/wiki/IETester/HomePage">IETester</a> program. I   ve gone for the IETester program, mainly because it is quicker to install and doesn   t take up a huge chunk of my hard drive. I   ve tried it out and it displays the basically styled page I would expect to see in IE6 mode:</p>
+
+<p><a href="http://lh5.ggpht.com/_5hQeqbPSrks/S3SKV6LNNrI/AAAAAAAAAEo/-kTCMp0wAF0/s1600-h/IETester2%5B3%5D.jpg"><img style="border:0 none;" title="IETester2" src="http://lh4.ggpht.com/_5hQeqbPSrks/S3SKWZVC3DI/AAAAAAAAAEs/JO8fB75k_mA/IETester2_thumb%5B1%5D.jpg?imgmax=800" border="0" alt="IETester2" width="481" height="471" /></a></p>
+
+<p><span style="color:#ff0000;"><span style="color:#000000;">The deficiencies of Internet Explorer versions seven and eight are less pronounced and I only needed to modify a couple of elements to give the same appearance to the web page:</span></span></p>
+
+<ul>
+    <li>Added fixed widths to the main div elements so margins are applied</li>
+    <li>Extra div element wrapper on the so the margin is applied</li>
+    <li>Add fixed widths to the navigation menu elements to fix nifty corners in ie7</li>
+</ul>
+
+
+
+
+<h4>Validating the page</h4>
+
+
+<p>It would be difficult to judge when the mark up and styling of a web page is actually valid, fortunately there are many tools freely available on the web to help. During development I generally use the <a href="http://users.skynet.be/mgueury/mozilla/">HTML validator</a> Firefox extension. This provides a little icon in the bottom right corner of the web browser that indicates whether the current page is valid or not. Clicking the icon brings up a list of validation errors for the page. I like this tool as it is quick to browse through a site and check the validation on each page.</p>
+
+<p>I   ve also included links to the <a href="http://www.w3.org/">World Wide Web Consortiums</a> XHTML and CSS <a href="http://validator.w3.org/">validation services</a> in the page footer. This will submit the current page to their online validation tools and display a report with suggestions for any problems that are found.</p>
+
+<p>Well that   s just about all I   ve got on compliance, however if you   re after a more    hard line    message then you can <a href="http://www.entertonement.com/clips/fhzjhvmbgv--You-have-20-seconds-to-complyRobocop-Jon-Davison-Ed-209-">check this out</a>!</p>
 
 		
 		

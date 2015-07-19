@@ -9,7 +9,7 @@
 	<meta name="author" content="Mike Hook">
 
 	
-	<meta name="description" content="Aug 27th, 2009 Software Design Comments Preventing Dirty Domain Object Persistance The add recipes feature has currently been implemented in a way &hellip;">
+	<meta name="description" content="Aug 2nd, 2009 Hacking Comments Add Recipe Feature - Task Breakdown The add recipe feature is the first feature that will added to the site. This &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,9 +67,9 @@
 <nav id="main-nav"><h3>categories</h3>
 <ul class="main-navigation">
 <li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
-<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 6 ]</li>
+<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 5 ]</li>
 <li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 12 ]</li>
-<li class='category'><a href='/blog/categories/software-design/'>Software design</a>[ 2 ]</li>
+<li class='category'><a href='/blog/categories/software-design/'>Software design</a>[ 1 ]</li>
 <li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
 <li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 8 ]</li>
 
@@ -112,198 +112,6 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-08-27T20:24:00+01:00" data-updated="true" itemprop="datePublished">Aug 27<span>th</span>, 2009</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/software-design/'>Software Design</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2009/08/27/preventing-dirty-domain-object-persistance/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2009/08/27/preventing-dirty-domain-object-persistance/" itemprop="url">Preventing Dirty Domain Object Persistance</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>The add recipes feature has currently been implemented in a way that does not allow for dirty domain objects to be persisted (saved to the database). The recipe object constructor must be passed all the essential object properties to prevent a partial object from being persisted, as shown below:<br /></p>
-
-<br />
-
-
-
-
-<pre style="background-color:#eeeeee;border:1px dashed rgb(153,153,153);color:black;font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;font-size:12px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>        public Recipe(string title, IList recipeIngredients, string cookingMethod) : this()
-        {
-            //TODO - Add the recipe creator (ie. user) to the domain signature
-            Check.Require(title != null &amp;&amp; title.Trim() != string.Empty, "title must be provided.");
-            Check.Require(recipeIngredients != null, "recipeIngredients must be provided.");
-            Check.Require(cookingMethod != null &amp;&amp; cookingMethod.Trim() != string.Empty, "method must be provided.");
-            Title = title;
-            Ingredients = recipeIngredients;
-            CookingMethod = cookingMethod;        
-        }
-</code></pre>
-
-
-
-
-<br />
-
-
-<p>However this means that the state of the recipe object must be maintained across the 3 separate add recipe views. I&rsquo;ve had to use both hidden fields on the views and the TempDataDictionary to maintain this state. It has become clear to me that there may be a better way to implement this if I use a RecipeDraft domain object in addition to the Recipe object. However making this change will take a while so I need to weigh up whether I think it is worth while.<br /></p>
-
-<br />
-
-
-<p><b><span style="font-size:small;">Advantages</span></b><br /></p>
-
-<ul><li>Users can add draft recipes and return later to complete them</li>
-<li>More readable controller methods (RecipeIngredientDtos is a nasty object name!) <br />
-</li>
-<li>No need to maintain temporary state across views (using hidden fields and the TempDataDictionary)</li>
-<li>Simplifed View Models</li>
-</ul>
-
-
-<p><b>Disadvantages</b><br /></p>
-
-<ul><li>Time to refactor the code and unit tests</li>
-<li>More records in the database (potentially higher cost)<br />
-</li>
-<li>More I/O operations on the database (slower website page loads)</li>
-</ul>
-
-
-<p>On balance I think the advantages are outweigh the disadvantages, so I will be refactoring the code to use a RecipeDraft object. This will be the constructor of the RecipeDraft object:<br /></p>
-
-<br />
-
-
-
-
-<pre style="background-color:#eeeeee;border:1px dashed rgb(153,153,153);color:black;font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;font-size:12px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>        public RecipeDraft(string title) : this()
-        {
-            //TODO - Add the recipe creator (ie. user) to the domain signature
-            Check.Require(title != null &amp;&amp; title.Trim() != string.Empty, "title must be provided.");
-            Title = title;      
-        }
-</code></pre>
-
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-08-23T22:02:00+01:00" data-updated="true" itemprop="datePublished">Aug 23<span>rd</span>, 2009</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2009/08/23/branching-the-project/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2009/08/23/branching-the-project/" itemprop="url">Branching the Project</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>I have used an SVN repository for the project, hosted on <a href="http://www.unfuddle.com/">unfuddle</a>, enabling versioned source control on all files in the project. I can use the trusty <a href="http://tortoisesvn.net/">TortoiseSVN</a> Windows application to send and receive files to the remote repository directly from Windows Explorer. After each work session I commit the changes to source control. Apart from the obvious advantages of maintaining backups, if at any stage I realise that I have made a mistake, then the changes can be rolled back to the previous commit.<br />
-The source control recently came in useful when I needed to upgrade the version of Sharp Architecture used on the project. I won   t go into detail about the reasons for me upgrading, suffice to say most of the technology stack in Sharp Architecture had benefitted from version updates and I was limiting myself by using a pre version 1.0 release.<br />
-These are the steps I took to upgrade the Sharp Architecture version of the project:<br /></p>
-
-<ol><li>     <br />
-Use TortoiseSVN to Branch the code in source control from <i><span style="color:green;">/trunk</span></i> to <i><span style="color:green;">/branches/recipebookV1</span></i><br />
-</li>
-<li>     <br />
-Rename the working folder (ie. the local folder in Windows Explorer) to recipebookV1 and switch it to the branch.<br />
-</li>
-<li>     <br />
-Update the Sharp Architecture project to fetch v1.0 from source control and copy the new project template into the Visual Studio templates folder.<br />
-</li>
-<li>     <br />
-Generate a new Visual Studio project, named recipebook, from the v1.0  Sharp Architecture templates.<br />
-</li>
-<li>     <br />
-Use <a href="http://www.scootersoftware.com/">Beyond Compare</a> to copy all the files that I have manually added / changed in the recipebookV1 project to the new recipebook project<br />
-</li>
-<li>     <br />
-Add the files to the recipebook project in Visual Studio, cross fingers, compile and run!<br />
-</li>
-<li>     <br />
-Use the TortoiseSVN repo browser to delete all files from the Trunk    yes, I really deleted them all! <br />
-</li>
-<li>     <br />
-Import the new recipebook folder back into the trunk <br />
-</li>
-</ol>
-
-
-<p>After completing the upgrade I realised that there may be an easier way to upgrade, without the scary and somewhat bad practice of deleting all the old files from the trunk, only to upload most of them again. I will list them below so I can try them out later:<br /></p>
-
-<ol><li>     <br />
-Use TortoiseSVN to Branch the code in source control from <i><span style="color:green;">/trunk</span></i> to <i><span style="color:green;">/branches/recipebookV1</span></i><br />
-</li>
-<li>     <br />
-Rename the working folder (ie. the local folder in Windows Explorer) to recipebookN. <i>This enables a new visual studio project of the same name to be created, with namespaces which are the same as the working project.</i><br />
-</li>
-<li>     <br />
-Update the Sharp Architecture project to fetch v1.0 from source control and copy the new project template into the Visual Studio templates folder.<br />
-</li>
-<li>     <br />
-Generate a new Visual Studio project named recipebook from the V1.0 Sharp Architecture templates.<br />
-</li>
-<li>     <br />
-Use <a href="http://www.scootersoftware.com/">Beyond Compare</a> to copy all updated Sharp Architecture files from the new recipebook project to the working recipebookn folder<br />
-</li>
-<li>     <br />
-Add any extra files to the working recipebook project in Visual Studio, cross fingers, compile and run!<br />
-</li>
-<li>     <br />
-Commit the changes to the trunk, remove the new recipebook project and rename the existing recipebook project folder to recipebook.  <br />
-</li>
-</ol>
-
-
-		
-		
-	</div>
-
-</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -527,13 +335,127 @@ Each of the above steps will be reused for the edit interface with the controls 
 
 </article>
 
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-06-15T21:04:00+01:00" data-updated="true" itemprop="datePublished">Jun 15<span>th</span>, 2009</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2009/06/15/initial-website-features/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2009/06/15/initial-website-features/" itemprop="url">Initial Website Features</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>I will be looking to develop the website iteratively and introduce fully working features 0ne at a time. With this in mind I have drawn up list of the <span style="font-weight:bold;">minimum set of features</span> the site will need for it to work:</p>
+
+<ul>
+    <li>Add / Edit ingredients</li>
+    <li>Add / Edit recipes</li>
+    <li>Search for recipes + bookmark</li>
+    <li>User registration / authentication</li>
+    <li>Recipe book (View own recipes + bookmarked)</li>
+</ul>
+
+
+<p>I will first be focusing on developing these features to try and keep some momentum on the development. Once these features are completed I can either further develop the initial feature set or introduce more. Some ideas for more <span style="font-weight:bold;">advanced features</span> are:</p>
+
+<ul>
+    <li>Recipes reviews and ratings</li>
+    <li>New recipes &#8216;you might like&#8217; notifications by email / rss feed</li>
+    <li>Generation of shopping lists from a set of recipes</li>
+    <li>Multiple region support (different languages)</li>
+</ul>
+
+
+<p>Thats quite enough to keep me busy for now!
+Next up are the wireframes.</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-06-01T21:03:00+01:00" data-updated="true" itemprop="datePublished">Jun 1<span>st</span>, 2009</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2009/06/01/before-we-begin/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2009/06/01/before-we-begin/" itemprop="url">Before We Begin&#8230;</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>I&rsquo;ve started this blog to record my progress making a website in ASP.NET MVC. I am hoping that writing a blog about the experience will help keep the development moving forwards. The motivation for making the website is to get a better understanding of the technologies that are used to build it. Therefore it is not so important that the site is unique, more that I can implement interesting and challenging features on the site to stretch the framwork. I don&rsquo;t expect many people will read the blog but maybe one day it will have some interesting content!</p>
+
+<p>A summary of the progress so far:</p>
+
+<ul>
+    <li>Run through tutorials on <a href="http://www.asp.net/mvc/">ASP.NET MVC</a>, primarily the excellent <a href="http://nerddinnerbook.s3.amazonaws.com/Intro.htm">NerdDinner tutorial</a>.</li>
+    <li>Checked out <a href="http://code.google.com/p/sharp-architecture/">Sharp Architecture</a> to use as project architecture</li>
+    <li>Initial idea about making the site on an online recipe book, where users can add and store their own recipes</li>
+</ul>
+
+
+<p>Future targets:</p>
+
+<ul>
+    <li>Draft some wireframes for the website</li>
+    <li>Draft an initial class diagram for the project</li>
+    <li>Build a prototype using Sharp Architecture</li>
+</ul>
+
+
+<p>I think wireframes will be useful to help clarify what I want in terms of the sites appearance and functionality. So, I&rsquo;ll be putting on a designers hat (if I can find one) for a brief time and bash something out. It might not be pretty at this stage but I don&rsquo;t want it to delay me too much on starting the development.</p>
+
+		
+		
+	</div>
+
+</article>
+
 </div>
 <nav id="pagenavi">
     
         <a href="http://bakingwebsites.co.uk/blog/page/9/" class="prev">Prev</a>
     
-    
-        <a href="http://bakingwebsites.co.uk/blog/page/11/" class="next">Next</a>
     
     <div class="center"><a href="http://bakingwebsites.co.uk/blog/archives">Blog Archives</a></div>
 </nav></div>

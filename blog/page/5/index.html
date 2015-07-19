@@ -9,7 +9,7 @@
 	<meta name="author" content="Mike Hook">
 
 	
-	<meta name="description" content="Nov 7th, 2011 Software Design Comments Quartz Makes Scheduling Jobs Easy With EPiServer Commerce A common requirement for e-commerce applications is &hellip;">
+	<meta name="description" content="Oct 7th, 2011 Progress Comments Discovering the Original Inventors of the Internet I&rsquo;m sure many of you have heard about a chap called Tim &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,9 +67,9 @@
 <nav id="main-nav"><h3>categories</h3>
 <ul class="main-navigation">
 <li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
-<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 6 ]</li>
+<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 5 ]</li>
 <li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 12 ]</li>
-<li class='category'><a href='/blog/categories/software-design/'>Software design</a>[ 2 ]</li>
+<li class='category'><a href='/blog/categories/software-design/'>Software design</a>[ 1 ]</li>
 <li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
 <li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 8 ]</li>
 
@@ -112,204 +112,6 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-11-07T19:30:00+00:00" data-updated="true" itemprop="datePublished">Nov 7<span>th</span>, 2011</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/software-design/'>Software Design</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/11/07/quartz-makes-scheduling-jobs-easy-with-episerver-commerce/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/11/07/quartz-makes-scheduling-jobs-easy-with-episerver-commerce/" itemprop="url">Quartz Makes Scheduling Jobs Easy With EPiServer Commerce</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p><a href="http://quartznet.sourceforge.net/index.html"><img class="alignright" title="Quartz rock" src="http://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Quartz,_Tibet.jpg/240px-Quartz,_Tibet.jpg" alt="Quartz rock" width="168" height="169" /></a>A common requirement for e-commerce applications is the ability to schedule jobs or tasks. I am currently working on a project which uses EPiServer Commerce and I needed to schedule an order export job.</p>
-
-<p>I was pleasantly surprised to find that EPiServer Commerce is supplied bundled with the <a href="http://quartznet.sourceforge.net/index.html">Quartz.NET</a>  enterprise code library to facilitate these job scheduling requirements.</p>
-
-<h3>Gentlemen, choose your weapons</h3>
-
-
-<p>I had three main options available for implementing the export job, a separate windows service, an EPiServer CMS scheduled job or a Quartz job. I decided that the Quartz service was better than the option of a separate windows service because the framework was already there and available so would not increase the complexity of deployments. I also felt it was a better option than a EPiServer CMS scheduled job because Quartz runs  independently  to the website app pool so should not put the web application under greater load while it is running and potentially degrade the performance of the end user website.</p>
-
-<h3>A 1000 foot example</h3>
-
-
-<p>I&rsquo;m not going to go into a massively detailed explanation of how to implement the jobs as there is a already a good example available in the <a href="http://sdk.episerver.com/commerce/1.1.1/Content/Developers%20Guide/Architecture/LongRunProcessScheduling.htm">EPiServer Commerce dev guide</a>  along with a detailed <a href="http://quartznet.sourceforge.net/tutorial/index.html">tutorial on the Quartz .NET site</a>. However a quick overview demonstrates how intuitive it is to implement.</p>
-
-<p>The first thing you need to do is create your job class which will run when Quartz triggers the execution. The class must inherit from the IJob interface which just has a single Execute method to implement. Here is a sample skeleton class:</p>
-
-<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">    public class CommerceOrderExportJob : IStatefulJob
-    {
-        private readonly ILog _log;
-
-        public CommerceOrderExportJob()
-        {
-            _log = LogManager.GetLogger(base.GetType());
-            //Any other init code
-        }
-
-        public void Execute(JobExecutionContext context)
-        {
-            //Your export methods
-        }
-    }</pre>
-
-
-<p>You then need to extend the config file to configure Quartz to call your job. I think all the parameters are pretty self explanatory:</p>
-
-<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">&lt;job&gt;
-    &lt;job-detail&gt;
-      &lt;name&gt;OrderExportJob&lt;/name&gt;
-      &lt;group&gt;all&lt;/group&gt;
-      &lt;description&gt;This job exports orders from commerce&lt;/description&gt;
-      &lt;job-type&gt;Your.Assembly.CommerceOrderExportJob, Your.Assembly&lt;/job-type&gt;
-      &lt;volatile&gt;false&lt;/volatile&gt;
-      &lt;durable&gt;true&lt;/durable&gt;
-      &lt;recover&gt;false&lt;/recover&gt;
-    &lt;/job-detail&gt;
-    &lt;trigger&gt;
-      &lt;simple&gt;
-        &lt;name&gt;OrderExportJobTrigger&lt;/name&gt;
-        &lt;group&gt;eCommerceFramework&lt;/group&gt;
-        &lt;description&gt;Fires Order Export Job&lt;/description&gt;
-        &lt;misfire-instruction&gt;SmartPolicy&lt;/misfire-instruction&gt;
-        &lt;volatile&gt;false&lt;/volatile&gt;
-        &lt;job-name&gt;OrderExportJob&lt;/job-name&gt;
-        &lt;job-group&gt;eCommerceFramework&lt;/job-group&gt;
-        &lt;repeat-count&gt;RepeatIndefinitely&lt;/repeat-count&gt;
-        &lt;repeat-interval&gt;300000&lt;/repeat-interval&gt;
-      &lt;/simple&gt;
-    &lt;/trigger&gt;
-  &lt;/job&gt;</pre>
-
-
-<p>Hit run on the service and check the event log for any problems. Make sure to include some useful event/error logging in the job otherwise it will just be a mysterious black box! There are a couple of snags you may run into when running the job against EPiServer Commerce:</p>
-
-<div>
-<ul>
-    <li>ensure that your compiled assembly is actually available in the Quartz service directory, this is different from the main commerce site bin folder so it is not enough just to include it in the commerce app references</li>
-    <li>Make sure the data context has been initialised and the config file in the Quartz service directory is pointing to your database</li>
-</ul>
-</div>
-
-
-
-
-<h3>Mining for more gems</h3>
-
-
-<p>Ultimately only time will tell if Quartz was the best choice but I feel it has the best chance of high reliability and performance in the long term. I hope that, where appropriate, EPiServer can continue to expand the incorporation of proven open source libraries with their product offerings.</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-10-23T12:21:38+01:00" data-updated="true" itemprop="datePublished">Oct 23<span>rd</span>, 2011</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/software-design/'>Software Design</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/10/23/behaviour-driven-design-encourages-shared-understanding/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/10/23/behaviour-driven-design-encourages-shared-understanding/" itemprop="url">Behaviour Driven Design Encourages Shared Understanding</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>Most recent projects I have worked on have used unit tests  to define the requirements of our code and ensure they are met. Typically the tests are written by the developer while they are coding the solution. However this means that the tests are based entirely on the developers understanding of the requirements, which may not always be the same as the stakeholders understanding.</p>
-
-<p>To combat this issue we are introducing <a href="http://dannorth.net/introducing-bdd/">behaviour driven development</a>, to agree on a set of requirements for each feature with the stakeholders before starting development. The requirements are captured using the Gherkin syntax (Given, When, Then) based on real world examples. These examples can then be wired up to the system directly as automated tests using <a href="http://specflow.org/">Specflow</a>.</p>
-
-<h2>OK, show me the example already</h2>
-
-
-<p>Here is a fictionalised scenario which demonstrates the value that BDD adds to a project. An abbreviated version of the initial scenarios drafted by the developer are as follows:</p>
-
-<pre style="font-size:small;font-family:Consolas, 'Courier New', Courier, Monospace;width:100%;overflow:auto;border:1px dashed #999999;background-color:#eeeeee;"><span style="color:#0000ff;font-weight:bold;">Feature</span>: Process 3D secure authentication response
-        As a logged in user
-        I would like to place a 3D secure authenticated order
-        so that I have assurance of the websites security
-
-<span style="color:#0000ff;font-weight:bold;">Scenario</span>: Handle a 3D secure response of AUTHORISED
-    <span style="color:#0000ff;"><strong>Given </strong></span>a 3D secure response of AUTHORISED
-        <span style="color:#0000ff;font-weight:bold;">When</span>  i view the order confirmation page
-        <span style="color:#0000ff;font-weight:bold;">Then</span>  the order status will be Complete
-
-<span style="color:#0000ff;font-weight:bold;">Scenario</span>: Handle a 3D secure response of NOT AUTHORISED
-    <span style="color:#0000ff;"><strong>Given </strong></span>a 3D secure response of NOT AUTHORISED
-        <span style="color:#0000ff;font-weight:bold;">When</span>  i view the order confirmation page
-        <span style="color:#0000ff;font-weight:bold;">Then</span>  the order status will be Cancelled
-
-<span style="color:#0000ff;font-weight:bold;">Scenario</span>: Handle a 3D response of NOT PROCESSED
-    <span style="color:#0000ff;"><strong>Given </strong></span>a 3D secure response of NOT PROCESSED
-        <span style="color:#0000ff;font-weight:bold;">When</span>  i view the order confirmation page
-        <span style="color:#0000ff;font-weight:bold;">Then</span>  the order status will be Cancelled</pre>
-
-
-
-
-<h2>Evolving the scenario</h2>
-
-
-<p>The assumptions shown in these scenarios are perfectly reasonable, an order will only be completed if the 3D secure security check returns an authorised response. However it should really be a decision for the stakeholder&rsquo;s business whether the system should behave in this way. There are several valid scenarios where all 3D responses should actually result in a completed order, for example:</p>
-
-<pre style="font-size:small;font-family:Consolas, 'Courier New', Courier, Monospace;width:100%;overflow:auto;border:1px dashed #999999;background-color:#eeeeee;"><span style="color:#0000ff;font-weight:bold;">Scenario</span>: Handle a 3D secure response of NOT AUTHORISED
-<span style="color:#0000ff;"><strong>Given</strong></span> a 3D secure response of NOT AUTHORISED
-<span style="color:#0000ff;"><strong>And</strong></span> a total order value order value under the following amount:   25
-<span style="color:#0000ff;font-weight:bold;">When</span>  i view the order confirmation page
-<span style="color:#0000ff;font-weight:bold;">Then</span>  the order status will be Complete</pre>
-
-
-<p>The stakeholders calculated that the risk of charge-backs was so low on orders under   25 that they could disregard the 3D secure response completely and allow &lsquo;not authorised&rsquo; transactions to be completed.</p>
-
-<p>Here we can see a clear benefit in the stakeholder sharing their understanding of the system requirements with the implementation team. Rules which are beneficial to their business can be incorporated into the system, resulting in a more effective solution from the outset.</p>
-
-<p>If you are interested in reading more about using BDD for web applications I can recommend <a href="http://blog.stevensanderson.com/2010/03/03/behavior-driven-development-bdd-with-specflow-and-aspnet-mvc/">Steven Sanderson&rsquo;s excellent blog post</a>.</p>
-
-		
-		
-	</div>
-
-</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -484,6 +286,96 @@
 <p>The problem was that the import program was using the default generator class of <em>identity  </em>for in the NHibernate entity mappings. So NHibernate was expecting the database to generate the identity keys for the new records being saved to the database, however SQLite does not appear to support this. After some reading up on the options available for the <a href="http://nhforge.org/doc/nh/en/index.html#mapping-declaration-id-generator">NHibernate generator setting</a>  I decided to try the  <em>native  </em>setting. As this should select the implementation supported by the database. However this didn&rsquo;t work either, I think because, of all the options <em>native</em> can select, none are actually supported by SQLite. So my next preferred selection was to use <em>increment,</em>  this setting comes with a disclaimer that it should not be used in a cluster, which is absolutely fine as its very unlikely that I will ever be deploy the importer to a load balanced environment.</p>
 
 <p>The <em>increment</em> setting worked fine with the SQLite database and should streamline my workflow nicely for updating the app data .</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-17T17:29:21+01:00" data-updated="true" itemprop="datePublished">Jul 17<span>th</span>, 2011</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/07/17/footylinks-roadmap/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/07/17/footylinks-roadmap/" itemprop="url">FootyLinks Roadmap</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<ol>
+    <li>Make lowest difficulty level easier (squad numbers?, exclude older players?)</li>
+    <li>Correct answer page</li>
+    <li>Display score in game</li>
+    <li>Increment score on correct answer</li>
+    <li>Fix occasional crashing on view changes (db init to game startup event?)</li>
+    <li>Only allow user to select roles available at their level</li>
+    <li>Release one</li>
+    <li>Level up on score thresholds</li>
+    <li>Change game rules depending on difficulty level</li>
+    <li>Post scores to twitter</li>
+    <li>Update data with latest transfers</li>
+    <li>Release two</li>
+</ol>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-10T16:39:43+00:00" data-updated="true" itemprop="datePublished">Mar 10<span>th</span>, 2011</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/tips-and-tricks/'>Tips and Tricks</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/03/10/android-dev-tip-fix-the-eclipse-auto-complete/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/03/10/android-dev-tip-fix-the-eclipse-auto-complete/" itemprop="url">Android Dev Tip - Fix the Eclipse Auto-complete</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>I recently had problems with the eclipse IDE auto-complete not working.</p>
+
+<p>After Googling the problem, I managed to resolve this by downloading the source for the version I was using and extracting into the Android SDK folder, as detailed in <a href="http://code.google.com/p/android/issues/detail?id=7850#c8">this google code issue</a>.</p>
 
 		
 		
