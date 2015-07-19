@@ -16,7 +16,9 @@ Fast forward a year and we have a greatly enhanced website with new features tha
 
 ##Eliminate waste ##
 
-*Lean philosophy regards everything not adding value to the customer as waste**
+{% blockquote Wikipedia https://en.wikipedia.org/wiki/Lean_software_development Lean software development %}
+Lean philosophy regards everything not adding value to the customer as waste.
+{% endblockquote %}
 
 I had great motivation to ensure that this principle was applied as I've been making all the changes during my spare time. Its amazing what you can achieve in a short amount of time with a bit of planning. For example just last week I was able to add 2 new payment options to the site in an hour. The key techniques I've used to help eliminate waste are:
 
@@ -26,7 +28,9 @@ I had great motivation to ensure that this principle was applied as I've been ma
 
 ##Amplify learning##
 
-*Software development is a continuous learning process with the additional challenge of development teams and end product sizes**
+{% blockquote Wikipedia https://en.wikipedia.org/wiki/Lean_software_development Lean software development %}
+Software development is a continuous learning process with the additional challenge of development teams and end product sizes.
+{% endblockquote %}
 
 Working in a development team of one on this particular project obviously made knowledge sharing a non issue, however there were opportunities to ensure learning was applied instead of doing things the old way. Integrating the GoCardless payment system presented a great opportunity for learning. The club were reluctant to extend the existing paypal based solution due to the fees involved, with paypal charging nearly 4% per transaction.  So I did some research and found that the GoCardless direct debit service charged just 1% per transaction. 
 
@@ -36,7 +40,9 @@ The system has been up and running for around 6 months now and the only issue we
 
 ##Decide as late as possible##
 
-*As software development is always associated with some uncertainty, better results should be achieved with an options-based approach, delaying decisions as much as possible until they can be made based on facts and not on uncertain assumptions and predictions**
+{% blockquote Wikipedia https://en.wikipedia.org/wiki/Lean_software_development Lean software development %}
+As software development is always associated with some uncertainty, better results should be achieved with an options-based approach, delaying decisions as much as possible until they can be made based on facts and not on uncertain assumptions and predictions.
+{% endblockquote %}
 
 Taking this approach has helped me avoid the common 'analysis paralysis' problem whereby you try and solve too many problems at once, tie yourself in knots and deliver nothing! I deferred the implementation of several tricky  features and was pleasantly surprised that the solutions turned out to be more straight forward than I'd originally anticipated. 
 
@@ -45,9 +51,3 @@ For example we wanted to add an online entry system for several club events howe
 ##Stay tuned for part II...##
 
 The first three principles of Lean development have really helped me deliver on this project but there are still four more principles to go, so if you've found this interesting check back soon for part II in the series!
-
-*[The full Lean principle definitions are available on wikipedia](https://en.wikipedia.org/wiki/Lean_software_development)
-
-
-
-
