@@ -1,14 +1,12 @@
 ---
 layout: post
-title: xxx
+title: Making awesome software with Lean principles - Part II
 comments: true
 categories: 
-- Progress
+- Software design
 date: 2015-07-19 18:07:49 +01:00
 published: false
 ---
-
-#Making awesome software with Lean principles - Part II #
 
 Refer back to Part I...
 
