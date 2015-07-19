@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Progress | baking websites]]></title>
+  <link href="http://bakingwebsites.co.uk/blog/categories/progress/atom.xml" rel="self"/>
+  <link href="http://bakingwebsites.co.uk/"/>
+  <updated>2015-07-19T18:12:08+01:00</updated>
+  <id>http://bakingwebsites.co.uk/</id>
+  <author>
+    <name><![CDATA[Mike Hook]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Software Development Episode VI - a New Dawn]]></title>
+    <link href="http://bakingwebsites.co.uk/2015/04/23/episode-VI/"/>
+    <updated>2015-04-23T18:07:49+01:00</updated>
+    <id>http://bakingwebsites.co.uk/2015/04/23/episode-VI</id>
+    <content type="html"><![CDATA[<p>As the somewhat cheesy title suggests, changes are afoot in the world of Baking Websites. Up to this point I&rsquo;ve been working as a permanent employee for a number of companies (five actually, hence Episode VI). But I felt that it was time to shake things up so imminently I will be starting out as a contracting software developer. While in practice I expect I will be doing much the same thing from day to day it was still quite a leap to leave the cosy environs of a permanent position. But before we get too far into that, in the best tradition of episodic film, lets take a recap on the story so far. In a galaxy far far away&hellip;</p>
+
+<h2>Episode I &ndash; A lone padawan</h2>
+
+<p>The first company I worked for, <a href="http://www.rfsolutions.co.uk/">RF Solutions</a>, was where I made my start on the journey of software development. Fresh out of university my mind was full of theory but completely devoid of any  practical business knowledge, invoices and purchase orders were foreign concepts to me! However that soon changed and I learnt what elements went together to make a business work.</p>
+
+<p>After a brief foray into the world of &lsquo;technical sales&rsquo; I gravitated towards the IT systems and was given a pretty opened ended brief of &lsquo;build us a new website where we can sell our products.&rsquo; So off I went and built a site leveraging an e-commerce product called <a href="http://www.actinic.co.uk/">Actinic</a>. It was a fun challenge and I learnt much about how online payments worked along with how a web application could be integrated with internal business systems. I&rsquo;m pleased to see that both the site I built and Actinic themselves are still going strong today, all be it in evolved forms!</p>
+
+<p>It gave me a taste for more and I set about learning all about the .Net framework and building my first custom application to process product returns. This was the first time I realized that the most difficult part can often be figuring out what you are meant to be making! It is one thing following tutorials to push data in and out of a database from a web page but quite another to apply that to a problem and come up with a solution that people will actually be able to use.</p>
+
+<p>My custom application worked but I knew I could do better, if only I had some way of learning the best way to approach these problems. This was when I made my first leap of faith&hellip;</p>
+
+<h2>Episode II &ndash; Yoda lives (in many forms!)</h2>
+
+<p>It was no good me being in an IT department of one so I had to move on but the trouble was no company would take me on as an experienced developer. I was well aware that my skill set was limited but knew I could learn so I started out as a junior developer at <a href="https://twitter.com/cubeworks">Cubeworks</a>. This turned out to be one of the best decisions I ever made, the company was full of talented developers, and I went into full sponge mode absorbing a great deal about best coding practices, new frameworks and collaborating. I owe a massive debt of thanks to the guys who were working there at the time for putting up with my endless questions! Sadly Cubeworks is no more, however it does live on as part of a larger agency <a href="http://www.mba.co.uk/">MBA</a> and many of the sites I helped build are still out there (Amongst others <a href="http://www.chichester.ac.uk/">Chichester college</a>, <a href="http://www.motoringassist.com/">GEM Motoring Assist</a> and <a href="http://www.changinghabbits.co.uk/">Changing Habbits</a>).</p>
+
+<h2>Episode III &ndash; Do or do not. There is no try</h2>
+
+<p>Like a bolt out of the blue a digital agency from &lsquo;the big smoke&rsquo; called <a href="http://www.fortunecookie.co.uk/">Fortune Cookie</a> contacted me directly, offering me a position. It was a wrench to leave Cubeworks but the opportunity to work on big projects for international clients was too good to turn down. Again this proved to be a period of learning, however much more in how to work in big multidisciplinary teams than how to develop solutions. The first project I worked on had about 8 developers, several designers, user experience experts, project managers and one poor overworked QA guy all trying to work together to deliver software. It was obvious that the overheads for organising and communicating in a large development team increased exponentially with size. Also maintaining code quality across the project became a real challenge but more on that later!</p>
+
+<p>The main program of work I was involved in was for <a href="https://www.netjets.com/">NetJets</a> a complete relaunch of their online presence, with a new flight booking engine thrown in for good measure! It was a great project to work on which involved close collaboration with the client across different time zones. It was soon clear that it was essential for us to maintain a &lsquo;mock&rsquo; version of the clients web services to enable us to work asynchronously, along with a suite of unit and integration tests to enable us to pin point the source of bugs. When a single user action is travelling through multiple layers of code across several applications debugging can be like going down the rabbit hole unless you have something to light your way!</p>
+
+<h2>Episode IV &ndash; In a dark place we find ourselves, and a little more knowledge lights our way</h2>
+
+<p>Unfortunately market forces conspired against me continuing to work for Fortune Cookie (or <a href="http://www.possible.com/">POSSIBLE</a> as they now were). The new projects were drying up and it was clear to me that long term the role would not be economical, so I decided to take action before someone made the decision for me. At the time the Test Driven Development movement was carrying a lot of influence in the industry and as I agreed with an approach to software development that put quality first I looked for a position that would align with my values.</p>
+
+<p>At the time <a href="http://www.wiggle.co.uk/">Wiggle</a>, an e-commerce sports retailer, were hiring TDD focussed agile developers and I jumped at the chance to work for a great company I already knew from competing in triathlons and cycling events in my spare time. I was again lucky to join a development team full of talented people and learnt a great deal about both automated testing, event driven architecture and true agile development processes.</p>
+
+<p>The whole team had a similar test first mindset and the benefits to a product of paired programming and code reviewing became clear. When members of a development team can freely collaborate then the solution benefits from their combined experience. Instead of a piecemeal code-base written from conflicting perspectives you produce a much more coherent product with consistent approaches to each particular problem.</p>
+
+<h2>Episode V &ndash; Difficult to see. Always in motion is the future&hellip;</h2>
+
+<p>Unfortunately events outside of my control once again forced me to look for alternative employment as the IT team was relocated. But working for Wiggle had given me a taste for working in a product team so I looked for a role in the same vein. Fortuitously Brightwave were looking to expand the development team for their tessello product so I jumped on board. The main product was quite a departure from all the applications I&rsquo;d worked on previously, a &lsquo;single page application&rsquo; with most of the code written in javascript to run client side directly in the users browser.</p>
+
+<p>The benefits to this approach are obvious when you use the application as interactions are much smoother without full page reloads and the user experience is much better. There has been tremendous growth in this area over the last couple of years with the emergence of many front end frameworks such as Angular, Backbone, Ember, React (I could go on but you get the idea!). I expect that this approach will become the norm over the next few years as any applications without smooth interactions will not be able to attract users.</p>
+
+<h2>Episode VI &ndash; Train yourself to let go of everything you fear to lose</h2>
+
+<p>Working with the tessello product team was a great experience and we made some great improvements to the platform. However the pace of change in the technology industry is clearly not slowing down and I felt I needed to make a change to enable me to keep up with these rapid changes.</p>
+
+<p>As a software developer (indeed any kind of knowledge worker) the most valuable commodity you possess is your time. Working for any company full time you effectively hand that commodity to the company and they apportion it as they see fit (quite rightly to, this is what we all sign up to when we join a company). However there is a problem with this model as opportunities to top up your knowledge bank are largely limited to concepts you encounter during your day to day work and whatever you can manage to cram in out of hours.</p>
+
+<p>My hope is that contracting work will enable me to make a bigger investment into my knowledge bank between contracts. Also I may be able to explore other opportunities in my own time which may or may not be successful but I&rsquo;m sure will be fun trying! Obviously this is all theoretical right now but there is only one way to properly test a theory and that is to give it a go, so watch this space!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Tin Can API Overview]]></title>
+    <link href="http://bakingwebsites.co.uk/2014/08/13/tin-can-api-overview/"/>
+    <updated>2014-08-13T10:10:43+01:00</updated>
+    <id>http://bakingwebsites.co.uk/2014/08/13/tin-can-api-overview</id>
+    <content type="html"><![CDATA[<p><img src="http://imageshack.com/a/img539/1961/OgE8tH.jpg" class="alignleft" alttext="Tin Can API Logo" /></p>
+
+<p>These are some notes from my reading on the Tin Can API, a specification for the transmission and storage of messages related to learning activities. The specification has been developed by parties in the e-learning industry and aims to be an elegant solution to enable learning systems to communicate with one another.</p>
+
+<p>All this information is available on the <a href="http://tincanapi.com/">Tin Can API website</a>, this is just my own <a href="http://en.wikipedia.org/wiki/Wikipedia:Too_long;_didn't_read">tl;dr</a> type summary.</p>
+
+<h3>What is it?</h3>
+
+<ul>
+<li>A RESTful web service specification</li>
+<li>Defines the structure for JSON messages which represent learning activities (Or other types of activity)</li>
+<li>Each message is called a <strong>Statement</strong></li>
+<li>A statement consists of 3 parts: <strong>Actor</strong>, <strong>Verb</strong> and <strong>Object</strong> like &ldquo;Mike read the Tin Can Explained article&rdquo;</li>
+<li>Based on the <a href="http://activitystrea.ms/">activity streams</a> specification developed by/for social networks</li>
+</ul>
+
+
+<h3>Why is it good?</h3>
+
+<ul>
+<li>More flexible version of the old SCORM standard</li>
+<li>Device agnostic &ndash; anything that can send HTTP requests can use the API</li>
+<li>Almost any type of content can be stored</li>
+<li>Decouples content from the LMS (Learning management system) by storing in a separate LRS (Learning Record Store)</li>
+<li>A single <em>statement</em> can be stored in multiple learning record stores</li>
+<li>Allows potential for a learner owning their own content instead of their employers</li>
+<li>Data is accessible and easy to report on</li>
+</ul>
+
+
+<h3>A statement example</h3>
+
+<pre><code>{
+    "actor": {
+        "name": "Sally Glider",
+            "mbox": "mailto:sally@example.com"
+        },
+    "verb": {
+            "id": "http://adlnet.gov/expapi/verbs/experienced",
+            "display": {"en-US": "experienced"}
+     },
+    "object": {
+            "id": "http://example.com/activities/solo-hang-gliding",
+            "definition": {
+                "name": { "en-US": "Solo Hang Gliding" }
+            }
+    }
+}
+</code></pre>
+
+<p>You can generate test statements with valid syntax using the <a href="http://tincanapi.com/statement-generator/">Statement Generator</a></p>
+
+<p>Details of the valid message formats are given on the <a href="https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md">full xAPI specification</a>.</p>
+
+<h2>The registry</h2>
+
+<ul>
+<li>Contains definitions for verbs, activities, activity types, attachment types and extensions</li>
+<li>Should be referenced to in messages by URIs</li>
+<li>A shared domain language for agreed definitions of terms</li>
+<li>Anyone can add their own definitions to <a href="https://registry.tincanapi.com/">the registry</a></li>
+</ul>
+
+
+<h2>Recipes</h2>
+
+<ul>
+<li><a href="http://tincanapi.com/recipeshow-it-works/">Recipes</a> provide a standardised way for people to describe activities</li>
+<li>Simplifies reporting as the same terms should be used to describe things</li>
+<li>A few recipes exist now, for example the <a href="https://registry.tincanapi.com/#profile/19">video recipe</a></li>
+<li>More recipes can be added by the community</li>
+<li>Helps keep the API flexible and useful for future applications that may not even exist yet!</li>
+</ul>
+
+
+<p>Reading about the Tin Can API over the last few days and seeing it in action in the <a href="https://www.tessello.co.uk">Tessello application</a> has really whet my appetite to work more with the specification. I can see great potential for systems that leverage this specification as it provides a flexible framework for messaging without being restrictive and gives us the basis for a common technical language to use to enable our systems to talk to one another.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Automated Azure Deployments]]></title>
+    <link href="http://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/"/>
+    <updated>2014-07-02T10:29:24+01:00</updated>
+    <id>http://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments</id>
+    <content type="html"><![CDATA[<p><img src="http://imagizer.imageshack.us/v2/320x240q90/850/r38o.jpg" class="alignleft" alttext="Wall-e the robot" /></p>
+
+<p>Azure web site hosting has a great built in feature for deployment automation. All you need to do is point Azure at the location of your website in your source control platform and it will automatically monitor for updates, pull them into Azure and deploy them, Boom! Well that is the theory anyway, turns out in my case I needed to do some tweaking to get the automation to work.</p>
+
+<h2>Tinkering under the hood</h2>
+
+<p>The first step to set up the automated deployment is involves going to your Azure website dashboard and selecting &lsquo;Setup up deployment from source control&rsquo;. There are a bunch of options for what source control services are supported and how they can be setup, this is all pretty well documented in the <a href="" title="https://azure.microsoft.com/en-us/documentation/articles/web-sites-publish-source-control/">Azure publishing from source control article</a> so I won&rsquo;t rehash all of that here. Suffice to say I pointed the website at my github repo and sorted out all the authentication, then Azure pulled through a fresh version to deploy.</p>
+
+<p>Unfortunately when I checked the shiny new &lsquo;Deployments&rsquo; tab I found that the deployment had failed, after looking in the error log the reason was clear enough:</p>
+
+<blockquote><p>&ldquo;Error: The site directory path should be the same as repository root or a sub-directory of it.&rdquo;</p></blockquote>
+
+<p>My website was not in the root folder of the repository, it is in a &lsquo;website&rsquo; folder as you can see in the <a href="" title="https://github.com/MikeHook/MSTC">repo here</a>. so I needed to tell whatever magic was running these deployments to check in that folder instead for the code changes. After a bit of googling I found out that the deployments are driven by an application called kudu which has some documenation on its <a href="" title="https://github.com/projectkudu/kudu/wiki">github wiki</a>. Turns out that it is pretty straight forward to modify the folder, as explained on the <a href="" title="https://github.com/projectkudu/kudu/wiki/Customizing-deployments">customising deployments wiki page</a> I just had to add a .deployment file to the repository root with these contents:</p>
+
+<pre><code>[config]
+project = website
+</code></pre>
+
+<p>Simples, the deployment worked fine after adding that file&hellip; well it did when I just tried it but previously it didn&rsquo;t seem to work. Either I made some stupid syntax error previously or kudu got fixed since last time I tried!</p>
+
+<h2>A robot to build a robot</h2>
+
+<p>The actual website is running a different configuration based on a custom deployment script, while this is a little OTT to just change the folder path going the extra mile paid dividends later on when I needed to make some other customisations during the deployment. It was pretty straightforward to set up, thanks to the azure-cli tool which generates a deployment script for you based on a set of parameters. Instructions on how to do this are on the <a href="" title="https://github.com/projectkudu/kudu/wiki/Deployment-hooks">kudu wiki deployment hooks page</a>. In my case I just needed to run the following command from my repository root to generate a working .deployment and deploy.cmd file.</p>
+
+<pre><code>azure site deploymentscript --aspWebSite -r website
+</code></pre>
+
+<p>Once checked in those files are used by kudu to control the automated deployment process. Check back in Azure and the deployment should now be showing as successful, awesome!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Dear Wordpress, You're Dumped!]]></title>
+    <link href="http://bakingwebsites.co.uk/2014/01/15/dear-wordpress-youre-dumped/"/>
+    <updated>2014-01-15T16:38:27+00:00</updated>
+    <id>http://bakingwebsites.co.uk/2014/01/15/dear-wordpress-youre-dumped</id>
+    <content type="html"><![CDATA[<p><img src="http://imageshack.com/a/img827/7426/w5v5.png " class="alignleft" alttext="Octopress Logo"  />
+There comes a time in a developers life (every couple of years it seems) when you are dissatisfied with your existing blogging platform. What had started as a beautiful and fulfilled relationship has decayed to the point where you barely interact. What once seemed like a cutting edge editing interface has become stayed and obtuse. Your eyes begin to wander, other blogging platforms seem so slick and modern in comparison, you wonder  &ldquo;why can&rsquo;t I have some of that?&rdquo;</p>
+
+<p>But there is no need to fret, unlike <a href="http://www.sheknows.com/tags/celebrity-breakups">other breakups</a> this change should be quite painless for all parties involved. So as January is the peak month for relationship change, there is no better time to ring the changes and introduce a new blogging platform!</p>
+
+<h2>No more Batman and Robin</h2>
+
+<p>You may ask what my blog has to do with the dynamic crime fighting duo Batman and Robin? Well the new platform is based on <a href="http://jekyllrb.com/">Jekyll</a>, which is quite the opposite of dynamic. Using the power of Jekyll I can now generate all the static blog content (html, images, css) locally by running a couple of commands. Then I just push the changes up to <a href="https://github.com/">github</a> and boom, the updates are published.</p>
+
+<p>I really liked the simplicity of this approach as a blog is pretty much all about the content, there are no interactive features or dynamically changing content that would require a processing engine. The functionality can be met with good old static html. There are also a bunch of other great advantages to this approach:</p>
+
+<ul>
+<li>Use of <a href="https://github.com/NeQuissimus/MarkdownByExample/wiki/MarkdownSyntax">Markdown</a> for content editing</li>
+<li>Faster page load times</li>
+<li>More tolerant to high loads (although I doubt the traffic on this particular blog will ever cause a problem!)</li>
+<li>Free web hosting with <a href="http://octopress.org/docs/deploying/github/">github pages</a></li>
+<li>Scratches my developer itch for getting my hands dirty with the blogging platform</li>
+</ul>
+
+
+<p>There are some drawbacks to this approach such as a higher barrier to entry for editors, however as I&rsquo;m the only editor that isn&rsquo;t a problem for me.</p>
+
+<h2>Wordpress meet Octopress</h2>
+
+<p>Having settled on a new platform I needed to extract the content from my existing wordpress blog and convert it into a format suitable for Octopress (ie. Markdown). Fortunately this is a fairly <a href="http://import.jekyllrb.com/">well travelled road</a> and my posts were pretty basically formatted so the conversion process was pretty painless. The most important issues for me were to not lose formatting of the content and retain the same permalinks so existing google / bookmark links would still work.</p>
+
+<p>I got the blog running pretty easily (as it runs through Ruby, which is already setup on my machine) however the default theme wasn&rsquo;t really doing it for me. Fortunately there are a bunch of <a href="http://opthemes.com/">alternative themes</a> available that a pretty straightforward to apply. I opted to use the <a href="https://github.com/shashankmehta/greyshade">greyshade theme</a> as a base and tweak the fonts / layout to suit my needs.</p>
+
+<h2>Images / Comments</h2>
+
+<p>So at this point all the posts are in the blog nicely formatted but the images are still being served from Wordpress and even worse the comments have not been ported at all.</p>
+
+<p>I considered just dumping the images into the new blog platform itself, however I felt like there should be a better solution. Whilst my blog is pretty tiny at the moment the number of assets are bound to grow over time and I didn&rsquo;t want to cripple the blog hosting server itself with unnecessary load. Initially I tried uploading the images to <a href="http://picasa.google.com/">Picasa</a>, however it seems to require a desktop app to upload the images and refused to give me a proper URL for the image sources. A far better solution for me was <a href="https://imageshack.com/">ImageShack</a>, uploading is handled through a slick browser based interface and you can easily get direct links to the images. A nice bonus for the platform is built in support for image resizing, all you need to do is specify your required size in the image link.</p>
+
+<p>The final part to integrate was the comments. This turned out really straightforward using <a href="http://disqus.com/">Disqus</a>. All I needed to do was sign up for a new account and point it at my existing wordpress blog to pull the comments down. You can enable Disqus in Octopress through the config.yml file.
+Then, provided your post links are maintained, when the blog is switched across the comments are also kept, simples!</p>
+
+<h2>Conclusion</h2>
+
+<p>So there you have it, a freshly baked blogging site for your consumption pleasure, enjoy!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Microsoft Jump on the Open Source Band Wagon]]></title>
+    <link href="http://bakingwebsites.co.uk/2012/04/03/microsoft-jump-on-the-open-source-band-wagon/"/>
+    <updated>2012-04-03T12:35:04+01:00</updated>
+    <id>http://bakingwebsites.co.uk/2012/04/03/microsoft-jump-on-the-open-source-band-wagon</id>
+    <content type="html"><![CDATA[<p><img class="alignright" title="Tux, the Linux Mascot" src="http://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Tux.png/220px-Tux.png" alt="" width="220" height="261" />
+A landmark decision was made last week by Microsoft&rsquo;s ASP.NET web development team. They announced that three key technologies used to develop web applications, <a href="http://weblogs.asp.net/scottgu/archive/2012/03/27/asp-net-mvc-web-api-razor-and-open-source.aspx">ASP.NET MVC, Web API and Razor would be made fully Open Source</a><sup>1</sup>. This is a big step for a company built on the sales of Closed Source software. I&rsquo;m going to have a look at what I think this decision means for the consumers, who use software built with these technologies, and the stakeholders who commission the software.</p>
+
+<h2>Open Sesame</h2>
+
+
+<p>For those those not involved directly in software development, the moniker &lsquo;Open Source&rsquo; may conjure up images of magicians pulling rabbits out of a hat<sup>2</sup>. However the reality could be viewed as the opposite of magic as Open source demystifies the software development process. In the traditional &lsquo;Closed Source&rsquo; licencing model, software is made by a company behind closed doors and the code is encrypted before release to the public. The traditional thinking is that this protects the company by preventing third parties from stealing their intellectual property. This is a subject of <a href="http://en.wikipedia.org/wiki/Software_patent_debate">some debate</a>  , which I won&rsquo;t go into here. However it is clear that many businesses are currently successful without relying on restrictive software patents.</p>
+
+<p>In an Open Source licencing model, the full unencrypted source code will be published at the same time as the software itself (indeed often before-hand in the case of preview and beta releases). Also, as in the case of this announcement, public contributions may be accepted to modify the original source code. Naturally the acceptance process is completely at the discretion of software company, so unhelpful or damaging contributions will not be accepted.</p>
+
+<p>A good example of the Open Source model working commercially is the Android operating system released by Google. A massive range of mobile devices run Android and it is not only the key competitor to Apple&rsquo;s iOS (iPhones &amp; iPad operating system but has helped ensure that most devices using Microsoft&rsquo;s Windows Mobile operating system are sitting on the scrap heap. I for one am glad that there is healthy competition to the world of Apple and its clone army of i-device accolytes.</p>
+
+<h2>Software that Just Works</h2>
+
+
+<p>From a consumer or stakeholder viewpoint the natural desire is to want software that &lsquo;just works&rsquo; and to reach that goal we just need to fix all the bugs in the software. Unfortunately the belief that all software bugs can be fixed is generally  infeasible  given time and budget restraints, due to the nature of programming the two go hand in hand. In each piece of code there are many paths that can be travelled, much like a maze in a country mansion garden. If you ask 10 different people to walk the maze the chances are each one will set off in a different direction. Most of them will hit a dead end before finding their way through and a nasty bug could be hiding at each of these dead ends!</p>
+
+<p>However Open Source software helps minimize the number bugs by accepting contributions to fix any that are found by the development community. In this way the software benefits from the knowledge of a much wider group of people than could be acheived if it was developed and maintained soley by a single company. Most software developers are driven by that itch to &lsquo;make stuff work&rsquo; and are only too happy to contribute to a project which helps make this happen. The end result is a product that is more reliable for the consumers and stakeholders and has the appearance of &lsquo;just working&rsquo;.</p>
+
+<h2>Security concerns</h2>
+
+
+<p>Typically the biggest obstruction to making software Open Source is the perceived risk to security. If anybody can view exactly how the software is operating then it is much easier for hackers to cause the software to break, exploit a vulnerability to propogate a virus or carry out other nefarious acts. The <a href="http://haacked.com/archive/2012/03/29/asp-net-mvc-now-accepting-pull-requests.aspx">indications by Phil Haack</a>, a former member of the MVC team, are that this decision by Mircosoft is no exception. So a great deal of credit should go to those involved at Microsoft for making change happen in their organization.</p>
+
+<p>Regarding the perceived risks to security, Open Source can actually reduce the risk for similar reasons to the improvement in relibility. Any security vulnerabilities will quickly be picked up by the community and fixed. The Open Source culture of continual improvement in the software makes for a much more secure product.</p>
+
+<p>Take the example of web browsers, a couple of years ago Microsoft&rsquo;s Internet Explorer browser had massive market share. However over time so many security vulnerabilities were exploited in the browser that the <a href="http://www.theinquirer.net/inquirer/news/1037530/us-government-warns-internet-explorer">US government themselves warned against using the software</a>!   Along came Mozilla&rsquo;s Firefox browser to save the day, with much improved security. Naturally Firefox has always been developed under an Open Source licence as explained in the <a href="http://www.mozilla.org/about/manifesto.html">Mozilla manifesto</a>.</p>
+
+<h2>Future developments</h2>
+
+
+<p>The likelyhood is that this announcement will not trigger a deluge of community updates and fixes to the frameworks in question. I anticipate that a minority of change submissions will make it back into the frameworks themselves. However it does demonstrate an important change in mindset from Microsoft and may well signal the beginnings of a new approach for the organisation. It is clear that in the fast moving world of software and digital media you need to adapt to survive and it is encouraging that even massive organisations such as Microsoft are able to do this.</p>
+
+<h5>Footnote</h5>
+
+
+<p><sup>1</sup>While the MVC framework has been open source since its original release, this announcement widens the license model to the Web API and Razor frameworks and also marks the first time that Microsoft will accept public contributions to the open source frameworks. If you are unfamiliar with these technologies then further information is available on the Microsoft blah blah (LINK).</p>
+
+<p><sup>2</sup>Or maybe thats just my fertile imagination!</p>
+]]></content>
+  </entry>
+  
+</feed>

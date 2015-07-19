@@ -1,0 +1,217 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Investigating an NHibernate 'stale state' exception - baking websites</title>
+	<meta name="author" content="Mike Hook">
+
+	
+	<meta name="description" content="Investigating an NHibernate 'Stale State' Exception I recently needed to investigate and fix this rather unpleasant sounding issue. It was occurring &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="baking websites" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://bakingwebsites.co.uk/2011/01/16/investigating-an-nhibernate-stale-state-exception/">
+	<link href="http://bakingwebsites.co.uk/favicon.png" rel="shortcut icon">
+	<link href="http://bakingwebsites.co.uk/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="http://bakingwebsites.co.uk/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<!--
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css"> 
+-->
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700" rel="stylesheet" type="text/css">
+
+  
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-47738964-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<img src="/images/bread-Sq-zoom-150.jpg" alt="Profile Picture" style="width: 160px;" />
+</div>
+<hgroup>
+  <h1><a href="http://bakingwebsites.co.uk/">baking websites</a></h1>
+  
+    <h2>adventures in software development</h2>
+  
+</hgroup>
+
+<nav id="main-nav"><h3>categories</h3>
+<ul class="main-navigation">
+<li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
+<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 6 ]</li>
+<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 12 ]</li>
+<li class='category'><a href='/blog/categories/software-design/'>Software design</a>[ 2 ]</li>
+<li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
+<li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 8 ]</li>
+
+</ul>
+<br/>
+<a href="http://bakingwebsites.co.uk/blog/archives">Archives</a>
+
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		
+			<a class="twitter" href="http://twitter.com/michael_hook" title="Twitter">Twitter</a>
+		
+		
+			<a class="github" href="https://github.com/MikeHook" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">Investigating an NHibernate 'Stale State' Exception</h1>
+	<div class="entry-content" itemprop="articleBody"><p>I recently needed to investigate and fix this rather unpleasant sounding issue. It was  occurring, seemingly at random, on a live web service but could not be replicated in tests.  Occasionally the web service was throwing the exception when we made a call to delete a list of records from the database.</p>
+
+<p>The web service uses the NHibernate object relational mapper (ORM) tool to map our c# classes (domain objects ) to database tables. NHibernate was throwing this exception when we tried to delete the records:</p>
+
+<blockquote>NHibernate.StaleStateException: Unexpected row count: 0; expected: 1</blockquote>
+
+
+
+
+<h3>What is a stale state?</h3>
+
+
+<p>This issue was not one we had seen before and had us scratching our heads for a while. The first step was to understand what the exception itself meant.</p>
+
+<p>After some reading up in the <a href="http://nhforge.org/doc/nh/en/index.html">NHibernate documentation</a> it was more clear what the issue was.  NHibernate was complaining that the in-memory model of the database data had become stale, or in other words out of date.  So when NHibernate tried to persist the requested deletion to the database it was finding that it could not complete the operation.</p>
+
+<h3>Why was our state stale?</h3>
+
+
+<p>So, all well and good, we knew what the stale state was. However, it was rather more difficult to pin down why it was happening, especially because we were unable to reproduce the error during testing.</p>
+
+<p>It was only examining the event logs for the web service which enabled us to understand why this was happening.  The event logs showed that 2 separate instances of the web service were being called almost simultaneously on separate threads.  Both of those instances were basically calling the same delete operation on the same list of records.</p>
+
+<p>So the first instance would succeed in deleting the records, but the second instance would then also try to delete the records.  Of course the second instance would fail, as there were not longer any records to delete.</p>
+
+<h3>Preventing the stale state (odour  eaters?)</h3>
+
+
+<p>Once we understood why the exception was occurring it was a straight forward re-factoring exercise to prevent it in future.  In our case the code could be updated so that the delete operation never needed to be called in the first place, so this was an effective fix.</p>
+
+<p>The detailed event logging on the web service proved invaluable in solving this issue, without this it probably would of taken much longer to figure out what was happening!</p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2015 - Mike Hook -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer>
+			
+
+<script type="text/javascript">
+      var disqus_shortname = 'bakingwebsites';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://bakingwebsites.co.uk/2011/01/16/investigating-an-nhibernate-stale-state-exception/';
+        var disqus_url = 'http://bakingwebsites.co.uk/2011/01/16/investigating-an-nhibernate-stale-state-exception/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

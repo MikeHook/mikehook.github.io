@@ -1,0 +1,631 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>baking websites</title>
+	<meta name="author" content="Mike Hook">
+
+	
+	<meta name="description" content="Jun 19th, 2014 Hacking Comments Mysql to Azure Database Migration If you have read my previous post on Umbraco to Azure migration the topic of this &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="baking websites" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://bakingwebsites.co.uk/blog/page/2/">
+	<link href="http://bakingwebsites.co.uk/favicon.png" rel="shortcut icon">
+	<link href="http://bakingwebsites.co.uk/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="http://bakingwebsites.co.uk/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<!--
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css"> 
+-->
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700" rel="stylesheet" type="text/css">
+
+  
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-47738964-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<img src="/images/bread-Sq-zoom-150.jpg" alt="Profile Picture" style="width: 160px;" />
+</div>
+<hgroup>
+  <h1><a href="http://bakingwebsites.co.uk/">baking websites</a></h1>
+  
+    <h2>adventures in software development</h2>
+  
+</hgroup>
+
+<nav id="main-nav"><h3>categories</h3>
+<ul class="main-navigation">
+<li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
+<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 6 ]</li>
+<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 12 ]</li>
+<li class='category'><a href='/blog/categories/software-design/'>Software design</a>[ 2 ]</li>
+<li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
+<li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 8 ]</li>
+
+</ul>
+<br/>
+<a href="http://bakingwebsites.co.uk/blog/archives">Archives</a>
+
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		
+			<a class="twitter" href="http://twitter.com/michael_hook" title="Twitter">Twitter</a>
+		
+		
+			<a class="github" href="https://github.com/MikeHook" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner">
+<div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-19T16:57:57+01:00" data-updated="true" itemprop="datePublished">Jun 19<span>th</span>, 2014</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2014/06/19/mysql-to-azure-database-migration/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2014/06/19/mysql-to-azure-database-migration/" itemprop="url">Mysql to Azure Database Migration</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><img src="http://imagizer.imageshack.us/v2/320x240q90/843/31nm.jpg" class="alignleft" alttext="Square peg - Round hole"  /></p>
+
+<p>If you have read my previous post on <a href="http://bakingwebsites.co.uk/2014/04/28/migrating-umbraco-4-mysql-to-azure-hosting/">Umbraco to Azure migration</a> the topic of this post will be of no surprise.</p>
+
+<p>I&rsquo;ve inherited an application using a MySQL database which I&rsquo;d like to host in Azure. However the hosting support for a MySQL database in Azure is expensive. So I have investigated migrating the DB into an SQL Azure supported format.</p>
+
+<h2>What about a VM?</h2>
+
+<p>That is a good question and one I didn&rsquo;t immediately consider. The Azure platform offers so many options that sometimes the most obvious can be missed. An easy way to keep the MySQL database without needing to fork out for the <a href="https://www.cleardb.com/">ClearDB</a> service is to just spin up an Azure VM, install MySQL on the VM and host everything from there.</p>
+
+<p>This option offers a low overhead entry to hosting the site in Azure, with a lower cost than ClearDB. However I decided not to pursue it as it negates some of the advantages of cloud hosting, one of the aspects of Azure that is attractive is how streamlined you can make the deployment process, you can either download a publish profile and deploy directly from visual studio or hook it directly into your source control and deploy on check in. Also I must admit all the shiny monitoring graphs for Azure websites are pretty cool and give you great visibility of how your hosting is performing. Granted all these features could be achieved with a VM but not nearly so easily. So, onwards with the database migration challenge!</p>
+
+<h2>Microsoft to the rescue! (nearly)</h2>
+
+<p>After a bit of research I decided to try using the <a href="http://blogs.msdn.com/b/ssma/">SQL Server Migration Assistant</a> to migrate the database. I was hoping this would automate all the tedious work and leave me just to press a few buttons, sit back and receive all the glory and admiration. Unfortunately it wasn&rsquo;t quite that simple as there are certain data types that just don&rsquo;t have a straight conversion between MySQL and SQL Server.</p>
+
+<h3>How many ways can you say Yes and No?</h3>
+
+<p>At last, a simple question, surely we can all agree what &lsquo;Yes&rsquo; and &lsquo;No&rsquo; look like, after all its the basis for all digital computing! Unfortunately when it comes to technology nothing is quite that straight forward. In the world of MS SQL we have a <a href="http://msdn.microsoft.com/en-us/library/ms177603.aspx">bit data type</a> for this function, 1 for Yes, 0 for No, simples. However the <a href="http://dev.mysql.com/doc/refman/5.7/en/bit-type.html">MySQL bit data type</a> also takes a length parameter so it is only equivalent to MS SQL if the length is set to 1.</p>
+
+<p>To complicate things further MySQL actually advise in their <a href="http://dev.mysql.com/doc/refman/5.7/en/numeric-type-overview.html">numeric types overview</a> that a TINYINT(1) data type should be used to represent a boolean value. However the actual values of this type can be anything from -128 to 127, pretty crazy huh! Unfortunately the database I am trying to migrate chose the MySQL recommended data type of TINYINT(1) and, quite understandably that is not supported by SSMA (SQL Server Migration Assistant) as a straight migration to bit. My solution for this was to craft a &lsquo;pre migration&rsquo; script to manually convert all the MySQL booleans into a bit(1) data type, which could then be migrated by SSMA by adding a custom type mapping.</p>
+
+<p>I also made a couple of other tweaks to the MySQL database before starting the conversion:</p>
+
+<ul>
+<li>Added primary keys to the identifying columns on the tables cmsmember, cmsstylesheet, cmsstylesheetproperty and umbracouserlogins</li>
+<li>Cleared out temporary data stored in the cmspreviewxml and umbracolog tables and run optimize on the tables to free up unused space</li>
+</ul>
+
+
+<p>I was then ready to fire up the SSMA tool and migrate the database to Azure. I won&rsquo;t go into details about this as there is already a <a href="http://blogs.msdn.com/b/ssma/archive/2011/02/07/mysql-to-sql-server-migration-how-to-use-ssma.aspx">decent guide for using SSMA</a>.</p>
+
+<h2>The Devil is in the detail</h2>
+
+<p>After the migration there was a final synchronisation step to carry out. I needed to manually check the data types for each of the columns in the Azure DB and update any that were not correct. I found out what the types were meant to be by <a href="http://our.umbraco.org/download">downloading the same umbraco version</a> I was working with and comparing the types. I expect there is a tool that can be used to do this but the database wasn&rsquo;t particularly large so it didn&rsquo;t take too long to carry out manually.</p>
+
+<p>Most of the changes could be made directly to the Azure tables by just changing the datatype in the management tool. However a couple of columns proved more difficult, if they were being used as primary keys in azure there was no way to change them in place so instead I copied the data into a new table which had the correct schema, removed the old table and renamed the new table. Here is an example script for the cmstasktype table:</p>
+
+<pre><code>EXECUTE sp_rename N'[PK_cmstasktype_ID]', N'[PK_cmstasktype_ID_old]',  'OBJECT'
+
+CREATE TABLE [Tempcmstasktype](
+    [ID] [tinyint] NOT NULL,
+    [ALIAS] [nvarchar](255) NOT NULL    
+    CONSTRAINT [PK_cmstasktype_ID] PRIMARY KEY CLUSTERED 
+    ([ID] ASC
+    )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ) 
+GO
+
+Insert INTO [Tempcmstasktype] ([ID], [ALIAS])
+    Select  [ID], [ALIAS]   From [cmstasktype]
+
+drop table [cmstasktype]
+EXECUTE sp_rename N'Tempcmstasktype', N'cmstasktype', 'OBJECT'
+</code></pre>
+
+<p>After ensuring all the data types matched I was able to fire up the azure website and hey presto everything functioned correctly! OK I admit it wasn&rsquo;t quite that smooth as I&rsquo;d missed changing one column from an int to tinyint which broke the whole CMS admin UI but once I&rsquo;d tracked that down everything worked fine, hooray!</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-23T16:04:20+01:00" data-updated="true" itemprop="datePublished">May 23<span>rd</span>, 2014</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2014/05/23/cloud-hosting-for-prototype/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2014/05/23/cloud-hosting-for-prototype/" itemprop="url">Cloud Hosting for a Prototype Project</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><img src="http://imagizer.imageshack.us/v2/320x240q90/838/0fsb.jpg" class="alignleft" alttext="Square peg - Round hole"  /></p>
+
+<br/><br/>
+
+
+<p>Today I am investigating cloud hosting platforms for a green field web application, there are quite a few platforms out there now, however I&rsquo;ll be looking at some of the big hitters as they are tried and tested in the marketplace.</p>
+
+<p>The full technology stack is still under review so the hosting capabilities need to be fairly flexible however the requirements we know for sure are:</p>
+
+<ul>
+<li>Able to spin up multiple instances to run testing, staging and production environments</li>
+<li>Low cost, ideally zero for testing / staging as this is grass roots project!</li>
+<li>Flexibility to host a range of technologies</li>
+<li>High reliability / speed (this should be a given for any hosting environment)</li>
+</ul>
+
+
+<h2>Contenders ready!</h2>
+
+<p>I&rsquo;m going to investigate 3 platforms against the main requirements above, Windows Azure, Amazon Web Services and Heroku. Each have their advantages, so lets find out which will be the best fit for our project.</p>
+
+<h3>Azure</h3>
+
+<p>Azure is the Microsoft Cloud offering. As such it has a Microsoft technologies leaning but is by no means limited to their stack.</p>
+
+<h4>OS / Languages / DBs</h4>
+
+<ul>
+<li>Windows or Linux</li>
+<li>.NET, Node.js, Java, PHP, Python, Ruby</li>
+<li>Native DBs: Azure SQL Server</li>
+<li>Third party DBs: Neo4j, MySQL, MongoDB (fiddly)</li>
+</ul>
+
+
+<h4>Pricing</h4>
+
+<ul>
+<li>30 day free trial then,</li>
+<li>$10/month per site</li>
+<li>$2.50/month per DB</li>
+</ul>
+
+
+<h3>AWS</h3>
+
+<p>Amazon Web Services were one of the first cloud based hosting solutions out there. It is a mature platform with many options but lets see whether the acronyms compare favourably.</p>
+
+<h4>OS / Languages</h4>
+
+<ul>
+<li>Windows or Linux</li>
+<li>.NET, Java, PHP, Python, Ruby</li>
+<li>Native DBs: SQL Server, MySQL, Oracle, PostgreSQL</li>
+<li>Third party DBs: Neo4j, MongoDB, RavenDB (basically anything you can run on VM)</li>
+</ul>
+
+
+<h4>Pricing</h4>
+
+<ul>
+<li>12 months free for 1 instance / DB</li>
+<li>$15/month per site</li>
+<li>$40/month per DB</li>
+</ul>
+
+
+<h3>Heroku</h3>
+
+<p>Heroku is more of a grass roots developer led cloud platform. It is well suited to an open source license free stack but will this be suitable for our application?</p>
+
+<h4>OS / Languages</h4>
+
+<ul>
+<li>Windows or Linux</li>
+<li>Node.js, Java, Python, Ruby</li>
+<li>Native DBs: Postgres</li>
+<li>Third party FBs: neo4j, MySQL</li>
+</ul>
+
+
+<h4>Pricing</h4>
+
+<ul>
+<li>1 dyno free, $35/month per extra instance</li>
+<li>Dev DBs free (Up to 10K rows), Basic $9/month</li>
+</ul>
+
+
+<h2>And the winner is&hellip;</h2>
+
+<p>The technology stack hasn&rsquo;t been chosen yet so we will just need to wait to see you the winner is!</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-28T09:58:09+01:00" data-updated="true" itemprop="datePublished">Apr 28<span>th</span>, 2014</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2014/04/28/migrating-umbraco-4-mysql-to-azure-hosting/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2014/04/28/migrating-umbraco-4-mysql-to-azure-hosting/" itemprop="url">Migrating Umbraco 4 Mysql to Azure Hosting</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<h2>Why Azure</h2>
+
+<p>I recently inherited an Umbraco version 4 site and need to setup web hosting for it. I decided that Azure would be a good option for hosting as it offers great benefits for future scalability and a good costing model. I also wanted to try it out and see what all the fuss is about!</p>
+
+<p>There were a few steps to carry out to get the site up and running in Azure, so I&rsquo;ve documented my experience here.</p>
+
+<h2>First steps</h2>
+
+<ul>
+<li>Obviously you need to sign up to a <a href="http://azure.microsoft.com/">Windows Azure account</a>. Its free to try but you do need a credit card. I guess this makes it nice and seamless for Microsoft to start charging you if you opt to continue past the 1 month trial!</li>
+<li>Now login to the portal and go to Websites &ndash;> new &ndash;> custom create &ndash;> enter details, selecting a mysql database from the drop down</li>
+</ul>
+
+
+<p><img src="http://imageshack.com/a/img834/4281/jf2b.png" class="alignleft" alttext="Azure create website dialog"  /></p>
+
+<h2>Migrating the database</h2>
+
+<ul>
+<li>Click on the new website and go to the &lsquo;linked resources&rsquo; tab. The MySql Database should be listed here</li>
+<li>Click the name to open ClearDB (the third party provider of MySql databases support for Windows Azure)</li>
+<li>Setup MySQL workbench to connect to ClearDB using an <a href="https://github.com/CloudBees-community/tomcat-clickstack/wiki/ClearDB-::--MySQL-SSL-Connection-MySQL-Workbench">SSL connection</a>. You may also need to install OpenSSL to enable generation of the rsa key.</li>
+<li>Reduce the database size to fit in the 20MB size limit by <a href="http://www.spyriadis.net/2012/07/umbraco-clear-old-document-versions-to-decrease-database-size-and-improve-performance/">removing old document versions and preview / log files.</a></li>
+</ul>
+
+
+<h2>Uploading the web site</h2>
+
+<ul>
+<li>Download the publish profile file from your azure account. It is available on the dashboard page of your website, under the &lsquo;quick glance&rsquo; menu</li>
+<li>Open the site in WebMatrix, press publish and browse to select the publish profile file you just downloaded.</li>
+<li>Web Matrix will now run a diff on the files and prompt you to upload any changes to Azure.</li>
+<li>In Azure go to the site configure tab and set the app settings for &lsquo;umbracoDbDSN&rsquo; and any other connection string values to the ClearDB database connection string. If you are not sure what the connection string you can get it from the &lsquo;quick glance&rsquo; menu.</li>
+</ul>
+
+
+<p>I like this ability to set your production connection strings / app settings in Azure. This will be help enable me to open source the code without storing these secure settings in the config files themselves.</p>
+
+<p>Hey presto, your site should be up and running!</p>
+
+<h2>So, what&rsquo;s the verdict?</h2>
+
+<p>Is Azure as nice a hue as promised or is it more murky in practice? Well from my experience its all worked pretty much as expected so far. Its clear the Microsoft has invested some serious resources into the platform and unlike some of their other products (ahem Windows 8) the usability is excellent.</p>
+
+<p>I think this is a decent work flow to initially get a site up and running. However in the long term I would want to hook up source control for the site to publish when merging to a branch. There is an option in Azure to &lsquo;Set up deployment from source control&rsquo; so I will be investigating how this works next.</p>
+
+<p>The main drawback I currently see with this setup is that the database has a limit on the number of connections. The free version has 4 which is fair enough, given it is just for trialling. However even the paid versions have low limits of 15, 30 or 40 for $10, $50 or $100 respectively. My feeling is that these limits may well cause problems when the site is running in production. I already hit the 4 connections limit just browsing the site myself and publishing a new page and it is bound to use more when real users are browsing at the same time.</p>
+
+<p>The SQL databases offered in Azure do not have this connections limit and would also be significantly cheaper in the long run, so I will be investigating the feasibility of migrating the Umbraco DB from MySQL into SQL.</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-29T17:38:27+00:00" data-updated="true" itemprop="datePublished">Jan 29<span>th</span>, 2014</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/software-design/'>Software Design</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2014/01/29/event-storming/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2014/01/29/event-storming/" itemprop="url">Event Storming a Distributed Solution</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Software design and development techniques are constantly evolving, making the discipline a fascinating area to work in. Over the time I&rsquo;ve been working as a developer I&rsquo;ve seen various approaches to design from Code First, Data Driven to Domain Driven (DDD). My preference is to consider the scope of the problem first and design a solution to match and DDD is a good fit for this. However when looking at enterprise level problems we need to give more consideration to how a problem will scale&hellip; enter Event Storming.</p>
+
+<h2>Distributed design</h2>
+
+<p>I work in a development team which is responsible for several key business capabilities, there are already some software solutions in place for these capabilities however they were designed several years ago to solve problems at a scale at least an order of magnitude below where we currently find ourselves. Our stakeholders have expressed a desire that we could redesign a solution which would meet our current needs better, basically it needs to work <strong>faster</strong>, do <em>just</em> what is needed and ideally <strong>scale</strong> so that it will still perform well at the next order of magnitude up.</p>
+
+<p>We decided to have an Event Storming session to help us analyse the problem and come up with a high level distributed solution. We carried out the session in a couple of phases, first we reviewed the current solution, then we looked at the primary goals for the redesign then finally we started event storming a solution. Here are the team hard at work mid-storm:</p>
+
+<p><img src="http://imageshack.com/a/img542/5968/1l37.jpg" class="alignleft" alttext="Octopress Logo"  /></p>
+
+<h2>Collaborative analysis</h2>
+
+<p>The session first involved us all writing down on post-it notes business events that had some relevance to the feature we were analysing. We then stuck all these onto a big board and de-duped them. It was a bit tricky to order the post-its at this stage so we went for a loose left to right time sequence.</p>
+
+<p>Following this we got the post-it stack back in action and wrote down each of the commands that could have some influence on the events on the board. Then we linked each of the commands to events on the board, this wasn&rsquo;t always a one-to-one relationship which presented some practical problems, however on the whole I think working with physical post-its was far better than using something like Visio as its more democratic. Finally we arranged the post-its into discrete pieces of behaviour and mapped out the interactions between them.</p>
+
+<p>It was important that we recognised the difference between an event and a command during the exercise. As a rule of thumb commands are carried out by users and events are raised by the system to indicate something has happened. For example the <em>Create Product</em> command is raised when the user saves a product entry, whereas <em>&lsquo;Product Created&rsquo;</em> event is raised after the transaction has finished and a product has been persisted in the system. As I alluded to earlier there is no hard one-to-one relationship here, a single command can often result in multiple events being raised and vice versa. Its important to make sure the distinction is clear to everyone before the session begins, it saves a lot of time in the long run!</p>
+
+<p>The results of our session can be seen in the picture below:
+<img src="http://imageshack.com/a/img34/1388/bbid.jpg" class="alignleft" alttext="Octopress Logo"  /></p>
+
+<h2>A virtual solution</h2>
+
+<p>By the end of the session we had a virtual solution figured out that could be implemented with discrete modules communicating exclusively via messaging. I was pleasantly surprised by the elegance of the solution, by focussing on the interactions between the systems and isolating responsibilities it was clear that we only needed to pass a small amount of data between each module and could effectively encapsulate the behaviour. However Event Storming is just one technique and I wouldn&rsquo;t suggest it is a magic bullet design technique, these are the main pros and cons as I see it.</p>
+
+<h3>Advantages</h3>
+
+<ul>
+<li>Helps focus on the interactions between elements of a distributed system</li>
+<li>The whole team is involved at the analysis stage and visualize the same proposed solution</li>
+<li>Encourages scalable solutions</li>
+</ul>
+
+
+<h3>Drawbacks</h3>
+
+<ul>
+<li>Reliant on domain knowledge of team members to surface events / commands</li>
+<li>Design can get lost in a sea of post-it notes!</li>
+<li>Need to transfer quickly to implementation tasks to avoid losing insights</li>
+</ul>
+
+
+<p>I&rsquo;d be interested to hear of your experiences of event storming and how effective you have found it to be?</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-15T16:38:27+00:00" data-updated="true" itemprop="datePublished">Jan 15<span>th</span>, 2014</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/progress/'>Progress</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2014/01/15/dear-wordpress-youre-dumped/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2014/01/15/dear-wordpress-youre-dumped/" itemprop="url">Dear Wordpress, You&#8217;re Dumped!</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><img src="http://imageshack.com/a/img827/7426/w5v5.png " class="alignleft" alttext="Octopress Logo"  />
+There comes a time in a developers life (every couple of years it seems) when you are dissatisfied with your existing blogging platform. What had started as a beautiful and fulfilled relationship has decayed to the point where you barely interact. What once seemed like a cutting edge editing interface has become stayed and obtuse. Your eyes begin to wander, other blogging platforms seem so slick and modern in comparison, you wonder  &ldquo;why can&rsquo;t I have some of that?&rdquo;</p>
+
+<p>But there is no need to fret, unlike <a href="http://www.sheknows.com/tags/celebrity-breakups">other breakups</a> this change should be quite painless for all parties involved. So as January is the peak month for relationship change, there is no better time to ring the changes and introduce a new blogging platform!</p>
+
+<h2>No more Batman and Robin</h2>
+
+<p>You may ask what my blog has to do with the dynamic crime fighting duo Batman and Robin? Well the new platform is based on <a href="http://jekyllrb.com/">Jekyll</a>, which is quite the opposite of dynamic. Using the power of Jekyll I can now generate all the static blog content (html, images, css) locally by running a couple of commands. Then I just push the changes up to <a href="https://github.com/">github</a> and boom, the updates are published.</p>
+
+<p>I really liked the simplicity of this approach as a blog is pretty much all about the content, there are no interactive features or dynamically changing content that would require a processing engine. The functionality can be met with good old static html. There are also a bunch of other great advantages to this approach:</p>
+
+<ul>
+<li>Use of <a href="https://github.com/NeQuissimus/MarkdownByExample/wiki/MarkdownSyntax">Markdown</a> for content editing</li>
+<li>Faster page load times</li>
+<li>More tolerant to high loads (although I doubt the traffic on this particular blog will ever cause a problem!)</li>
+<li>Free web hosting with <a href="http://octopress.org/docs/deploying/github/">github pages</a></li>
+<li>Scratches my developer itch for getting my hands dirty with the blogging platform</li>
+</ul>
+
+
+<p>There are some drawbacks to this approach such as a higher barrier to entry for editors, however as I&rsquo;m the only editor that isn&rsquo;t a problem for me.</p>
+
+<h2>Wordpress meet Octopress</h2>
+
+<p>Having settled on a new platform I needed to extract the content from my existing wordpress blog and convert it into a format suitable for Octopress (ie. Markdown). Fortunately this is a fairly <a href="http://import.jekyllrb.com/">well travelled road</a> and my posts were pretty basically formatted so the conversion process was pretty painless. The most important issues for me were to not lose formatting of the content and retain the same permalinks so existing google / bookmark links would still work.</p>
+
+<p>I got the blog running pretty easily (as it runs through Ruby, which is already setup on my machine) however the default theme wasn&rsquo;t really doing it for me. Fortunately there are a bunch of <a href="http://opthemes.com/">alternative themes</a> available that a pretty straightforward to apply. I opted to use the <a href="https://github.com/shashankmehta/greyshade">greyshade theme</a> as a base and tweak the fonts / layout to suit my needs.</p>
+
+<h2>Images / Comments</h2>
+
+<p>So at this point all the posts are in the blog nicely formatted but the images are still being served from Wordpress and even worse the comments have not been ported at all.</p>
+
+<p>I considered just dumping the images into the new blog platform itself, however I felt like there should be a better solution. Whilst my blog is pretty tiny at the moment the number of assets are bound to grow over time and I didn&rsquo;t want to cripple the blog hosting server itself with unnecessary load. Initially I tried uploading the images to <a href="http://picasa.google.com/">Picasa</a>, however it seems to require a desktop app to upload the images and refused to give me a proper URL for the image sources. A far better solution for me was <a href="https://imageshack.com/">ImageShack</a>, uploading is handled through a slick browser based interface and you can easily get direct links to the images. A nice bonus for the platform is built in support for image resizing, all you need to do is specify your required size in the image link.</p>
+
+<p>The final part to integrate was the comments. This turned out really straightforward using <a href="http://disqus.com/">Disqus</a>. All I needed to do was sign up for a new account and point it at my existing wordpress blog to pull the comments down. You can enable Disqus in Octopress through the config.yml file.
+Then, provided your post links are maintained, when the blog is switched across the comments are also kept, simples!</p>
+
+<h2>Conclusion</h2>
+
+<p>So there you have it, a freshly baked blogging site for your consumption pleasure, enjoy!</p>
+
+		
+		
+	</div>
+
+</article>
+
+</div>
+<nav id="pagenavi">
+    
+        <a href="http://bakingwebsites.co.uk/" class="prev">Prev</a>
+    
+    
+        <a href="http://bakingwebsites.co.uk/blog/page/3/" class="next">Next</a>
+    
+    <div class="center"><a href="http://bakingwebsites.co.uk/blog/archives">Blog Archives</a></div>
+</nav></div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2015 - Mike Hook -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer>
+			
+
+<script type="text/javascript">
+      var disqus_shortname = 'bakingwebsites';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

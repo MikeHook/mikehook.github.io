@@ -1,0 +1,711 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>baking websites</title>
+	<meta name="author" content="Mike Hook">
+
+	
+	<meta name="description" content="Jun 13th, 2013 Software Design Comments Design Patterns Without Katas There are a number of design patterns which I have chosen not to implement a &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="baking websites" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://bakingwebsites.co.uk/blog/page/3/">
+	<link href="http://bakingwebsites.co.uk/favicon.png" rel="shortcut icon">
+	<link href="http://bakingwebsites.co.uk/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="http://bakingwebsites.co.uk/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<!--
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css"> 
+-->
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700" rel="stylesheet" type="text/css">
+
+  
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-47738964-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<img src="/images/bread-Sq-zoom-150.jpg" alt="Profile Picture" style="width: 160px;" />
+</div>
+<hgroup>
+  <h1><a href="http://bakingwebsites.co.uk/">baking websites</a></h1>
+  
+    <h2>adventures in software development</h2>
+  
+</hgroup>
+
+<nav id="main-nav"><h3>categories</h3>
+<ul class="main-navigation">
+<li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
+<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 6 ]</li>
+<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 12 ]</li>
+<li class='category'><a href='/blog/categories/software-design/'>Software design</a>[ 2 ]</li>
+<li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
+<li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 8 ]</li>
+
+</ul>
+<br/>
+<a href="http://bakingwebsites.co.uk/blog/archives">Archives</a>
+
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		
+			<a class="twitter" href="http://twitter.com/michael_hook" title="Twitter">Twitter</a>
+		
+		
+			<a class="github" href="https://github.com/MikeHook" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner">
+<div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-13T09:05:05+01:00" data-updated="true" itemprop="datePublished">Jun 13<span>th</span>, 2013</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/software-design/'>Software Design</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2013/06/13/design-patterns-without-katas/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2013/06/13/design-patterns-without-katas/" itemprop="url">Design Patterns Without Katas</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>There are a number of design patterns which I have chosen not to implement a coding kata for. This is because I felt that I would either not use the pattern regularly in practice or they have alternative solutions that make the pattern redundant. However I think it is worth calling out these patterns and summarising how they work.</p>
+
+<h2>The decorator pattern</h2>
+
+
+<p>This pattern provides a way of extending a classes behaviour without using inheritance, it is defined as:</p>
+
+<blockquote>The decorator pattern extends the functionality of individual objects by wrapping them with one or more decorator classes. These decorators can modify existing members and add new methods and properties at run-time.</blockquote>
+
+
+<p>The main reason I won&rsquo;t be using this pattern much in practice is that the class structure it generates is not very clear and also the behaviour of   the classes can change depending on the order they are instantiated. So I think implementing this pattern could cause more problems than it solves, especially if the system may need to be maintained by different people at a later date.</p>
+
+<h2>The factory pattern</h2>
+
+
+
+
+<blockquote><em>The factory method pattern allows for the creation of objects without specifying the type of object that is to be created in code. A factory class contains a method that allows determination of the created type at run-time.</em></blockquote>
+
+
+<p>Whilst the factory method has its uses it is basically just an implementation of sub classing, where parameters are defined as base classes to allow different derived classes to be passed at runtime. It is a straightforward pattern and the coding kata would be pretty short to implement it.</p>
+
+<p>Also one of the main issues the factory pattern tries to solve is centralising object creation, however we generally use IoC containers which provide <a href="http://stackoverflow.com/questions/871405/why-do-i-need-an-ioc-container-as-opposed-to-straightforward-di-code">low maintenance dependency injection</a>  out of the box. So this removes the main need for the factory pattern.</p>
+
+<h2>The Singleton pattern</h2>
+
+
+
+
+<blockquote>Ensure a class only has one instance and provide a global access point to it</blockquote>
+
+
+<p><img class="alignright size-medium wp-image-460" alt="asparagus shoot from http://sandyspringcsa.com/" src="http://imageshack.com/a/img32/7137/uwa5.jpg" width="300" />
+This is a pattern which can be very useful in applications, however the implementation is so short that a coding kata would have little content. There are just a couple of pitfalls to watch out for when implementing this pattern:</p>
+
+<ul>
+    <li><span style="line-height:16px;">Ensure the implementation is  thread safe
+In Java the synchronized keyword can be used on the method which returns the singleton to ensure only a single thread ever has access to the class at once. However that can lead to the second pitfall</span></li>
+    <li>Consider whether you implementation offers the best performance
+Using synchronization is expensive (ie. It takes the computer a relatively long time to process)</li>
+</ul>
+
+
+<p>This implementation avoids both of these pitfalls by creating the <em>uniqueInstance</em> when the class is first loaded:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">public class Singleton {
+  private static Singleton uniqueInstance = new Singleton();
+
+  private Singleton() {}
+
+  public static Singleton getInstance()  {
+    return uniqueInstance;
+  }
+}</pre>
+
+
+<p>Finally, as with the factory pattern, if you are using an IoC container then they generally provide a way to configure a class as a singleton so there is rarely a need to implement this pattern manually yourself.</p>
+
+<h2>There may be more&#8230;</h2>
+
+
+<p>Stay tuned for more patterns to be added to this post!</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-29T08:53:06+01:00" data-updated="true" itemprop="datePublished">May 29<span>th</span>, 2013</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/software-design/'>Software Design</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2013/05/29/the-observer-pattern-coding-kata/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2013/05/29/the-observer-pattern-coding-kata/" itemprop="url">The Observer Pattern Coding Kata</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>The second design pattern I will be looking at is the Observer pattern, which is useful for safely passing data between objects. The Observer pattern is defined as:</p>
+
+<blockquote>&#8220;a one-to-many relationship between objects so that when one object changes state all it  dependants  are notified and updated automatically&#8221;.</blockquote>
+
+
+<p>A good analogy for this pattern, described in the excellent <a href="http://www.headfirstlabs.com/books/hfdp/">Head First Design Patterns book</a>  is that of a magazine publisher and subscribers. Here the publisher is the <em>one</em>  in the relationship and the subscribers are the <em>many</em>. Typically the publisher will notify each of the subscribers of a new magazine edition by sending them the magazine in the post or through their e-book subscription.  Translated into the Observer pattern the Publisher is known as the Subject and the subscribers are the observers. The subject <em>notifies</em> the observers of changes in its state.</p>
+
+<p>Some important features to note about this pattern are:</p>
+
+<ul>
+    <li>Observers can not change the state of the subject and vice versa (ie. they are Loosely Coupled)</li>
+    <li>The state information can be either <em>pushed</em> out to the observers by the subject or <em>pulled</em> from the subject by the observers</li>
+    <li>Observers can be added and removed at any time</li>
+</ul>
+
+
+
+
+<h3>The brief</h3>
+
+
+<p>This is our  fictitious  brief for a new system which needs to be designed. It is election time and the polls are coming in. A local TV station would like us to design a system which can keep track of the results as they arrive. There are several hundred constituencies (areas of the country) which may declare for the Blue, Red, Yellow or Green party. The TV station wants to present this data in a number of ways:</p>
+
+<ul>
+    <li>As a leader board, showing the tally for each party</li>
+    <li>As a map, with each region coloured to the winning party</li>
+    <li>As a <a href="http://news.bbc.co.uk/1/hi/uk_politics/election_2010/8574653.stm">Swingometer</a>  showing the proportional change and overall result</li>
+</ul>
+
+
+<p>We don&rsquo;t need to worry about the implementation details of these display methods, the algorithms will be provided by the TV station. Our main concern is how to design a system to pass the data between the election object and the display objects.</p>
+
+<h3>Designing the Solution</h3>
+
+
+<p>Here is the class diagram for our solution, if you would like to try implementing the solution yourself the starting point for the kata is tagged here: <a href="https://github.com/MikeHook/DesignPatterns/tree/ObserverStart">Observer Pattern Kata Start</a>.</p>
+
+<p><img class="alignnone" alt="Observer pattern for election data" src="https://www.lucidchart.com/publicSegments/view/51892f26-05fc-4844-a25b-4c660a0087f6/image.png" width="579" height="597" /></p>
+
+<p>We have leveraged the Observer pattern in our solution. The Election object inherits from ISubject and each of the display methods inherit from IObserver. The Election object maintains a list of the observers, we can add or remove an observer to this list using the <em>Register</em> and <em>Unregister</em> methods. When the subjects <em>Notify</em> method is called it informs each of the observers that a change has occurred by calling their <em>Update</em> method. A completed implementation for the election scenario is tagged here: <a href="https://github.com/MikeHook/DesignPatterns/tree/ObserverEnd">Observer Pattern Kata End</a>.</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-07T08:16:49+01:00" data-updated="true" itemprop="datePublished">May 7<span>th</span>, 2013</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/software-design/'>Software Design</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2013/05/07/strategy-pattern-coding-kata/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2013/05/07/strategy-pattern-coding-kata/" itemprop="url">Strategy Pattern Coding Kata</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>I&rsquo;ve been having a look at coding katas and design patterns over the last couple of weeks. If you are not familiar with either of these concepts then you can read <a href="http://butunclebob.com/ArticleS.UncleBob.TheBowlingGameKata">Uncle Bob&rsquo;s introduction to the Bowling Kata</a> and check out <a href="http://www.blackwasp.co.uk/GofPatterns.aspx">Richard Carr&rsquo;s great set of articles on design patterns</a>.</p>
+
+<p>My main goals are to:</p>
+
+<ul>
+    <li><span style="line-height:13px;">Increase my familiarity with design patterns</span></li>
+    <li>Understand how design patterns can be best applied in real life situations</li>
+    <li>Develop a repeatable method for memorizing the patterns</li>
+</ul>
+
+
+<p>A good way to cover off all of these goals will be to develop a set of code kata&rsquo;s which can be solved by applying a design pattern.  Sounds simple? Maybe but lets get started and see how it goes!</p>
+
+<h2>The Strategy Pattern</h2>
+
+
+<p>The strategy pattern is defined as<em>   </em></p>
+
+<blockquote><em>&#8220;a design pattern that allows a set of similar algorithms to be defined and encapsulated in their own classes.&#8221; </em></blockquote>
+
+
+<p>The aim of this pattern is to separate the parts of a system that may change from those which are unlikely to change, allowing for easier maintainability of the system in future.  This all sounds good in theory but you may be wondering how and where the pattern can be applied in practice. With this in mind I&rsquo;ve come up with a  fictitious brief that we can solve by utilising the Strategy Pattern.</p>
+
+<h4>The brief</h4>
+
+
+<p>A games company is developing a sports event simulator, to be built in iterations starting with simple requirements and building up to increase the complexity. The system design should allow for changes to be made by extending the existing system without changing what is already in place.</p>
+
+<ol>
+    <li>The simulator must support marathon and 10 km run events. The only requirement for these events is that the competitors can be displayed in some way (text is fine) and they can compete in the event. All competitors will compete by running.</li>
+    <li>After running some events they proved to be totally chaotic so each event should now include a marshal. The marshal can also be displayed but does not compete in events.</li>
+    <li>Since the glorious victory of team GB in the Olympic Triathlon the sport&#8217;s popularity has increased. So the games company would now like to also support triathlon events. Again competitors must be displayed and be able to compete, however a triathlon competitor will compete by swimming, cycling and running.</li>
+</ol>
+
+
+
+
+<h4>Designing the Solution</h4>
+
+
+<p>The starting point for this kata is available to clone from github here: <a href="https://github.com/MikeHook/DesignPatterns/tree/StrategyStart">Strategy Kata Start</a>  <a href="https://github.com/MikeHook/DesignPatterns/tree/StrategyStart">
+</a></p>
+
+<h5>Iteration 1</h5>
+
+
+<p>To meet the first requirement we only need a couple of objects as shown below:</p>
+
+<p><img class="alignnone" alt="Strategy Pattern - Design iteration 1" src="https://www.lucidchart.com/publicSegments/view/5180e984-cb84-4274-a415-68870a00005a/image.png" width="637" height="405" /></p>
+
+<p>We can create a couple of events for marathon and 10km runs and add some runners to those events. When the simulation runs the Compete() base method is called for each of the EventAttendees to simulate them taking part in the event. Each of the runners can be displayed by a call to their <em>Render()</em> method.</p>
+
+<h5><span style="line-height:13px;">Iteration 2</span></h5>
+
+
+<p>We now need to include Marshals as part of the event, so the model is extended as below:</p>
+
+<p><img class="alignnone" alt="Strategy Pattern - Design iteration 2" src="https://www.lucidchart.com/publicSegments/view/518380c3-ab34-42c9-a96e-71dc0a005c5f/image.png" width="707" height="492" /></p>
+
+<p>However, there is an obvious problem with this design, as noted in the diagram. One option would be for the Marshall to override the Compete method and make it do nothing. However this will store up more trouble for us as there may be other types of event attendee later which do not compete. We would have to ensure that each of these attendees also override that method with the same &lsquo;not compete&rsquo; behaviour. There is a better way to design for this issue (there is a clue in the name of this blog post!)</p>
+
+<h5>Iteration 3</h5>
+
+
+<p>It is clear that the Compete behaviour may change frequently depending on the attendee, we can leverage the Strategy pattern to extract this behaviour into separate classes as shown below.</p>
+
+<p><img class="alignnone" alt="Strategy Pattern - Iteration 3" src="https://www.lucidchart.com/publicSegments/view/51877f21-1fd8-4c3b-9f02-04510a0087f6/image.png" width="519" height="496" /></p>
+
+<p>The EventAttendee base class now contains a property of type ICompeteBehaviour. Any implementation of this interface can be assigned to each instance of an EventAttendee. So the <em>Runner</em> class is assigned the <em>Run </em>behaviour and the <em>Marshall</em> class is assigned the <em>DontCompete</em> behaviour.</p>
+
+<p>Iteration 4</p>
+
+<p>We have one more requirement to satisfy, the design needs to be extended to allow Triathlon events to take place. Thanks to our changes in the previous iteration we can add this new requirement without making any changes to the existing classes. Here is the final structure:</p>
+
+<p><img class="alignnone" alt="Strategy Pattern - Iteration 4" src="https://www.lucidchart.com/publicSegments/view/51878405-1770-4c88-b91a-761b0a000882/image.png" /></p>
+
+<p>We have extended the <em>EventAttendee</em> class with a new <em>Triathlete</em> class and created a new <em>RunCycleSwim</em> implementation of the <em>ICompeteBehaviour</em> interface. You may be thinking that the same could have been achieved with a method for the behaviour on the Triathlete class, while this is true it limits the flexibility of the design. We can see the advantage of this design by adding Spectators to the simulation. They will also be assigned the DontCompete behaviour, so we have effectively shared this part of the logic without repeating the implementation.</p>
+
+<p>The completed implementation for this kata is available on github here:  <a href="https://github.com/MikeHook/DesignPatterns/tree/StrategyEnd">Strategy Kata End</a></p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-09T17:40:42+01:00" data-updated="true" itemprop="datePublished">Apr 9<span>th</span>, 2013</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2013/04/09/integrating-episerver-7-with-mvc-next-steps/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2013/04/09/integrating-episerver-7-with-mvc-next-steps/" itemprop="url">Integrating EPiServer 7 With MVC - Next Steps</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>My previous blog post, <a title="Integrating EPiServer 7 with an existing MVC  site" href="http://bakingwebsites.co.uk/2013/03/14/integrating-episerver-7-with-an-existing-mvc-site/">Integrating EPiServer 7 with an existing MVC site</a>, outlined the initial steps to get EPiServer 7 running. However there are a number of additional steps you may need to take before your site is fully integrated.</p>
+
+<h3>Convert any Controllers not in Areas</h3>
+
+
+<p>If your site only contains controllers within Areas then you should not need to make any changes. However controllers in the root of the site will not work by default (at least for me). I found it was best to deal with these controllers on a case per case basis as the best course of action depended on the function of the controller. I implemented one of the following changes for each:</p>
+
+<ul>
+    <li><span style="line-height:13px;">Move the controller into an area. This option makes sense if the views for the controller do not have any CMS editable content</span></li>
+    <li>Convert the controller to be CMS managed. Makes sense if the views need to be CMS editable (inherit from  PageController&lt;T&gt; where T is a BasePage)</li>
+    <li>Convert the controller to an HttpHandler. In one case the controller did not have any views or models, it was really just a different entrypoint to the site which ran a bit of logic and redirected. In this case there was no point in retaining the controller as an HttpHanlder could do the same job more efficiently</li>
+</ul>
+
+
+
+
+<h3>Disable strict language routing</h3>
+
+
+<p>I encountered a further issue after patching my EPiServer.Core and EPiServer.Framework nuget packages to the latest versions. None of the controller actions in the home controller worked any more except for the Index. This was fairly easy to remedy by disabling the strict language routing, via the episerver/sites/site/strictLanguageRouting config setting.</p>
+
+<h3>Deployment Issues</h3>
+
+
+<p>While its all well and good having the site running on your machine, eventually it will need to be deployed somewhere. We handle configuration changes with file transforms and I was pleased to note that the config changes required for episerver deployments are now minimised. Here is a summary list of all the settings we changed per environment:</p>
+
+<ul>
+    <li><span style="line-height:13px;">connectionStrings
+</span></li>
+    <li>episerver/sites/site/siteSettings/siteUrl</li>
+    <li>episerver.framework/siteHostMapping/siteHosts</li>
+    <li>episerver.framework/appData/basePath</li>
+    <li>episerver.framework/licensing/licenseFilePath</li>
+    <li>episerver.search/namedIndexingServices/services/baseUri</li>
+</ul>
+
+
+<p>Note, you may need to transform further settings for a load balanced site.</p>
+
+<h5>EPiServer UI not deployed</h5>
+
+
+<p>Previously with EPiServer v6 all that was needed to run the CMS interface itself was to install the application on the web server. However the EPiServer 7 UI architecture also has a number of dependencies in the {VPP}\modules folder. So ensure that these files are also present in your deployed environment, otherwise you will probably encounter the following error:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">DirectoryNotFoundException: Could not find a part of the path '{Your site path} \Website\ClientResources\ClientResources\packages.config'</pre>
+
+
+
+
+<h5>Search service configuration</h5>
+
+
+<p>We have the search service configured on a local host name as the indexing service does not like to communicate over a public host name. However this caused a further issue with the service reporting that multiple hosts names could not be run for the service. Fortunately this could be remedied easily by setting the system.serviceModel/serviceHostingEnvironment/multipleSiteBindingsEnabled  setting to true.</p>
+
+<p>Those were all the steps we needed to take to deploy the site successfully. I&rsquo;d be interested to hear your experiences if you found any other settings that need to be changed. Feel free to reply in the comments below or contact me directly on twitter <a href="https://twitter.com/michael_hook">@michael_hook</a>.</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-14T15:54:57+00:00" data-updated="true" itemprop="datePublished">Mar 14<span>th</span>, 2013</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2013/03/14/integrating-episerver-7-with-an-existing-mvc-site/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2013/03/14/integrating-episerver-7-with-an-existing-mvc-site/" itemprop="url">Integrating EPiServer 7 With an Existing MVC Site</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><img class="alignright size-full wp-image-408" alt="custom_integration" src="http://imageshack.com/a/img560/4853/3rqu.jpg" width="300" />This post assumes you have EPiServer 7 installed on your machine. If you don&rsquo;t have it then it is available from <a href="http://world.episerver.com/Download/Categories/Products/EPiServer-CMS/">EPiServer world</a>  (once you have created an account).</p>
+
+<p>There are 2 main options for creating a new EPiServer 7 MVC stylee site:</p>
+
+<ul>
+    <li><span style="font-size:13px;">Create a new Visual studio project (after installing &#8216;EPiServer 7 Visual Studio Integration&#8217;, available from </span><a style="font-size:13px;" href="http://world.episerver.com/Download/Categories/Products/EPiServer-CMS/">EPiServer world</a><span style="font-size:13px;">)</span></li>
+    <li><span style="font-size:13px;line-height:19px;">Use the </span><a style="font-size:13px;line-height:19px;" href="http://world.episerver.com/Articles/Items/ASPNET-MVC-Templates-for-EPiServer-7-CMS/">EPiServer 7 MVC templates package</a></li>
+</ul>
+
+
+<p>For integrating with an existing site I&rsquo;d recommend using option 1, as there are far less files to integrate. However it is well worth looking at the templates package as well as this demonstrates how models and views can be implemented with EPiServer 7.</p>
+
+<p>After creating the new Visual Studio project I remembered that EPiServer have a NuGet feed, and they do have the version 7 assemblies on NuGet. However the version numbers are slightly different to those used in the visual studio project, so make sure you specify the version numbers to NuGet when you install the packages (they are listed below). Here are the steps I followed in detail:</p>
+
+<ol>
+    <li><span style="line-height:13px;">Created a new Visual studio project using the EPiServer Web Site (MVC) template
+</span></li>
+    <li>Followed the EPiServer tutorial (<strong>link</strong>) to add a home page and set it to the &#8216;start page&#8217;</li>
+    <li>Upgraded my existing site to MVC 4 by installing the Microsoft ASP.NET MVC 4 nuget package (obviously not required if your existing site is already on MVC version 4.</li>
+    <li>Copy across the connectionStrings.config, episerver.config,  EPiServerFramework.config, EPiServerLog.Config and FileSummary.config files</li>
+    <li>Update the  siteUrl in  episserver.config.</li>
+    <li>Copy the AppData, IndexingService, modules and modules bin folders.</li>
+    <li>Merge the web.config files - ensure the  episerver.search baseUri is updated to point at your site address.</li>
+    <li>Installed EPiServer 7 from Nuget feeds using these commands to get the correct versions:
+<ul>
+    <li>Install-Package EPiServer.Framework -Version 7.0.859.1</li>
+    <li>Install-Package EPiServer.CMS.Core -Version 7.0.586.1</li>
+</ul>
+</li>
+    <li>Removed assembly references to Razor and System.WebPages.Razor (as was clashing with EPiServer versions)</li>
+    <li>Update Controllers to inherit from  PageController&lt;T&gt; where T is a PageData class.</li>
+    <li>Update Global.asax to inherit from  EPiServer.Global</li>
+</ol>
+
+
+
+
+<h2><strong>IoC containers clashing!</strong></h2>
+
+
+<p>OK, this is the tricky bit it gets quite involved but please stay with me!</p>
+
+<p>When I tried to run the site it now returned a &lsquo;No parameterless construct or defined for this object.&rsquo; message. Which in plainer  English  means the application can&rsquo;t create the Controller classes. This is because the site I am integrating with currently uses the Castle Windsor IoC container, however EPiServer uses the StructureMap IoC container internally. We  definitely  don&rsquo;t want two IoC containers and I can&rsquo;t see any evidence of the EPiServer container being swappable. So the only option here is to convert the current Windsor implementation to a StructureMap implementation. More information on Structure map can be found on the excellent <a href="http://docs.structuremap.net/">StructureMap documentation site</a>, however I think it is worth including an overview in this post as, whilst this isn&rsquo;t always going to be necessary for your site, I expect it will be a common problem.</p>
+
+<h4>Add StructureMap version 2.6.1.0</h4>
+
+
+<p><span style="font-size:13px;">This is available from NuGet (as this is the version used in the EPiServer 7 MVC templates package).
+The command to install is:  </span><span style="font-size:13px;">Install-Package StructureMap  -Version  2.6.1.0</span></p>
+
+<h4>Register your services with StructureMap</h4>
+
+
+
+
+<ul>
+    <li><span style="font-size:13px;">Copy the  StructureMapDependencyResolver and DependencyResolverInitialization  classes from the EPiServer MVC templates project.</span></li>
+    <li>Convert service registration calls to register services with StructureMap instead of Windsor. This is carried out in the  ConfigureContainer method of the  DependencyResolverInitialization class.</li>
+</ul>
+
+
+<p>For example here is a Windsor interface registration and its equivalent StructureMap registration:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">//Windsor registration - Here container is an implementation of IWindsorContainer
+var myConfig = WebConfigurationManager.GetSection("myConfig") as MyConfig;
+container.Register(Component.For(typeof(IMyConfig)).Instance(myConfig));</pre>
+
+
+
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">//StructureMap registration - Here container is of type ConfigurationExpression
+var myConfig = WebConfigurationManager.GetSection("myConfig") as MyConfig;
+container.For&lt;IMyConfig&gt;().Use(myConfig);</pre>
+
+
+<p>An example of a class registration with a singleton lifestyle:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">//Windsor registration
+container.Register(Component.For(typeof(Cache)).Instance(HttpContext.Current.Cache).LifestyleSingleton());</pre>
+
+
+
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">//StructureMap registration
+container.For(typeof(Cache)).Singleton().Use(HttpContext.Current.Cache);</pre>
+
+
+
+
+<ul>
+    <li><span style="font-size:13px;">Convert  </span><em style="font-size:13px;">IWindsorInstaller</em><span style="font-size:13px;">  implementations  to  </span><em style="font-size:13px;">Registry</em><span style="font-size:13px;">  subclasses.</span></li>
+</ul>
+
+
+
+
+<h4>Debugging your StructureMap registrations</h4>
+
+
+<p>You can debug structure map by adding this line:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">_container.AssertConfigurationIsValid();</pre>
+
+
+<p>Initially EPiServer was reporting many registration failures but you can delay the call until the InitComplete event is called in the DependencyResolverInitialization class. Then most of the EPiServer  registrations have completed and it is easier to see if there are any issues with your own services.</p>
+
+<h4>Manually retrieving a service</h4>
+
+
+<p>Generally my services are injected into constructors automatically, however I had a couple of calls to retrieve services manually from the IoC container. For example, to retrieve an implementation of an interface called IMyService:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">_var myService = DependencyResolver.Current.GetService&lt;IMyService&gt;();</pre>
+
+
+
+
+<h4>Last steps</h4>
+
+
+<p>Hopefully your site will be running now, there is some additional configuration work you may want to do for EPiServer 7 VPP folders. But if you&rsquo;ve made it this far you will probably need a break!</p>
+
+<h5>Updated on 9th April 2013</h5>
+
+
+<p>Updated the list of config files which must be copied to include EPiServerLog.config and FileSummary.config</p>
+
+		
+		
+	</div>
+
+</article>
+
+</div>
+<nav id="pagenavi">
+    
+        <a href="http://bakingwebsites.co.uk/blog/page/2/" class="prev">Prev</a>
+    
+    
+        <a href="http://bakingwebsites.co.uk/blog/page/4/" class="next">Next</a>
+    
+    <div class="center"><a href="http://bakingwebsites.co.uk/blog/archives">Blog Archives</a></div>
+</nav></div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2015 - Mike Hook -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer>
+			
+
+<script type="text/javascript">
+      var disqus_shortname = 'bakingwebsites';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>
