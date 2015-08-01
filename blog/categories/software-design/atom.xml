@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Software Design | baking websites]]></title>
   <link href="http://bakingwebsites.co.uk/blog/categories/software-design/atom.xml" rel="self"/>
   <link href="http://bakingwebsites.co.uk/"/>
-  <updated>2015-07-26T18:51:01+01:00</updated>
+  <updated>2015-08-01T10:15:13+01:00</updated>
   <id>http://bakingwebsites.co.uk/</id>
   <author>
     <name><![CDATA[Mike Hook]]></name>
@@ -107,6 +107,176 @@
 <h2>Stay tuned for part II&hellip;</h2>
 
 <p>The first three principles of Lean development have really helped me deliver on this project but there are still four more principles to go, so if you&rsquo;ve found this interesting check back soon for part II in the series!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Event Storming a Distributed Solution]]></title>
+    <link href="http://bakingwebsites.co.uk/2014/01/29/event-storming/"/>
+    <updated>2014-01-29T17:38:27+00:00</updated>
+    <id>http://bakingwebsites.co.uk/2014/01/29/event-storming</id>
+    <content type="html"><![CDATA[<p>Software design and development techniques are constantly evolving, making the discipline a fascinating area to work in. Over the time I&rsquo;ve been working as a developer I&rsquo;ve seen various approaches to design from Code First, Data Driven to Domain Driven (DDD). My preference is to consider the scope of the problem first and design a solution to match and DDD is a good fit for this. However when looking at enterprise level problems we need to give more consideration to how a problem will scale&hellip; enter Event Storming.</p>
+
+<h2>Distributed design</h2>
+
+<p>I work in a development team which is responsible for several key business capabilities, there are already some software solutions in place for these capabilities however they were designed several years ago to solve problems at a scale at least an order of magnitude below where we currently find ourselves. Our stakeholders have expressed a desire that we could redesign a solution which would meet our current needs better, basically it needs to work <strong>faster</strong>, do <em>just</em> what is needed and ideally <strong>scale</strong> so that it will still perform well at the next order of magnitude up.</p>
+
+<p>We decided to have an Event Storming session to help us analyse the problem and come up with a high level distributed solution. We carried out the session in a couple of phases, first we reviewed the current solution, then we looked at the primary goals for the redesign then finally we started event storming a solution. Here are the team hard at work mid-storm:</p>
+
+<p><img src="http://imageshack.com/a/img542/5968/1l37.jpg" class="alignleft" alttext="Octopress Logo"  /></p>
+
+<h2>Collaborative analysis</h2>
+
+<p>The session first involved us all writing down on post-it notes business events that had some relevance to the feature we were analysing. We then stuck all these onto a big board and de-duped them. It was a bit tricky to order the post-its at this stage so we went for a loose left to right time sequence.</p>
+
+<p>Following this we got the post-it stack back in action and wrote down each of the commands that could have some influence on the events on the board. Then we linked each of the commands to events on the board, this wasn&rsquo;t always a one-to-one relationship which presented some practical problems, however on the whole I think working with physical post-its was far better than using something like Visio as its more democratic. Finally we arranged the post-its into discrete pieces of behaviour and mapped out the interactions between them.</p>
+
+<p>It was important that we recognised the difference between an event and a command during the exercise. As a rule of thumb commands are carried out by users and events are raised by the system to indicate something has happened. For example the <em>Create Product</em> command is raised when the user saves a product entry, whereas <em>&lsquo;Product Created&rsquo;</em> event is raised after the transaction has finished and a product has been persisted in the system. As I alluded to earlier there is no hard one-to-one relationship here, a single command can often result in multiple events being raised and vice versa. Its important to make sure the distinction is clear to everyone before the session begins, it saves a lot of time in the long run!</p>
+
+<p>The results of our session can be seen in the picture below:
+<img src="http://imageshack.com/a/img34/1388/bbid.jpg" class="alignleft" alttext="Octopress Logo"  /></p>
+
+<h2>A virtual solution</h2>
+
+<p>By the end of the session we had a virtual solution figured out that could be implemented with discrete modules communicating exclusively via messaging. I was pleasantly surprised by the elegance of the solution, by focussing on the interactions between the systems and isolating responsibilities it was clear that we only needed to pass a small amount of data between each module and could effectively encapsulate the behaviour. However Event Storming is just one technique and I wouldn&rsquo;t suggest it is a magic bullet design technique, these are the main pros and cons as I see it.</p>
+
+<h3>Advantages</h3>
+
+<ul>
+<li>Helps focus on the interactions between elements of a distributed system</li>
+<li>The whole team is involved at the analysis stage and visualize the same proposed solution</li>
+<li>Encourages scalable solutions</li>
+</ul>
+
+
+<h3>Drawbacks</h3>
+
+<ul>
+<li>Reliant on domain knowledge of team members to surface events / commands</li>
+<li>Design can get lost in a sea of post-it notes!</li>
+<li>Need to transfer quickly to implementation tasks to avoid losing insights</li>
+</ul>
+
+
+<p>I&rsquo;d be interested to hear of your experiences of event storming and how effective you have found it to be?</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Design Patterns Without Katas]]></title>
+    <link href="http://bakingwebsites.co.uk/2013/06/13/design-patterns-without-katas/"/>
+    <updated>2013-06-13T09:05:05+01:00</updated>
+    <id>http://bakingwebsites.co.uk/2013/06/13/design-patterns-without-katas</id>
+    <content type="html"><![CDATA[<p>There are a number of design patterns which I have chosen not to implement a coding kata for. This is because I felt that I would either not use the pattern regularly in practice or they have alternative solutions that make the pattern redundant. However I think it is worth calling out these patterns and summarising how they work.</p>
+
+<h2>The decorator pattern</h2>
+
+
+<p>This pattern provides a way of extending a classes behaviour without using inheritance, it is defined as:</p>
+
+<blockquote>The decorator pattern extends the functionality of individual objects by wrapping them with one or more decorator classes. These decorators can modify existing members and add new methods and properties at run-time.</blockquote>
+
+
+<p>The main reason I won&rsquo;t be using this pattern much in practice is that the class structure it generates is not very clear and also the behaviour of   the classes can change depending on the order they are instantiated. So I think implementing this pattern could cause more problems than it solves, especially if the system may need to be maintained by different people at a later date.</p>
+
+<h2>The factory pattern</h2>
+
+
+
+
+<blockquote><em>The factory method pattern allows for the creation of objects without specifying the type of object that is to be created in code. A factory class contains a method that allows determination of the created type at run-time.</em></blockquote>
+
+
+<p>Whilst the factory method has its uses it is basically just an implementation of sub classing, where parameters are defined as base classes to allow different derived classes to be passed at runtime. It is a straightforward pattern and the coding kata would be pretty short to implement it.</p>
+
+<p>Also one of the main issues the factory pattern tries to solve is centralising object creation, however we generally use IoC containers which provide <a href="http://stackoverflow.com/questions/871405/why-do-i-need-an-ioc-container-as-opposed-to-straightforward-di-code">low maintenance dependency injection</a>  out of the box. So this removes the main need for the factory pattern.</p>
+
+<h2>The Singleton pattern</h2>
+
+
+
+
+<blockquote>Ensure a class only has one instance and provide a global access point to it</blockquote>
+
+
+<p><img class="alignright size-medium wp-image-460" alt="asparagus shoot from http://sandyspringcsa.com/" src="http://imageshack.com/a/img32/7137/uwa5.jpg" width="300" />
+This is a pattern which can be very useful in applications, however the implementation is so short that a coding kata would have little content. There are just a couple of pitfalls to watch out for when implementing this pattern:</p>
+
+<ul>
+    <li><span style="line-height:16px;">Ensure the implementation is  thread safe
+In Java the synchronized keyword can be used on the method which returns the singleton to ensure only a single thread ever has access to the class at once. However that can lead to the second pitfall</span></li>
+    <li>Consider whether you implementation offers the best performance
+Using synchronization is expensive (ie. It takes the computer a relatively long time to process)</li>
+</ul>
+
+
+<p>This implementation avoids both of these pitfalls by creating the <em>uniqueInstance</em> when the class is first loaded:</p>
+
+<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">public class Singleton {
+  private static Singleton uniqueInstance = new Singleton();
+
+  private Singleton() {}
+
+  public static Singleton getInstance()  {
+    return uniqueInstance;
+  }
+}</pre>
+
+
+<p>Finally, as with the factory pattern, if you are using an IoC container then they generally provide a way to configure a class as a singleton so there is rarely a need to implement this pattern manually yourself.</p>
+
+<h2>There may be more...</h2>
+
+
+<p>Stay tuned for more patterns to be added to this post!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Observer Pattern Coding Kata]]></title>
+    <link href="http://bakingwebsites.co.uk/2013/05/29/the-observer-pattern-coding-kata/"/>
+    <updated>2013-05-29T08:53:06+01:00</updated>
+    <id>http://bakingwebsites.co.uk/2013/05/29/the-observer-pattern-coding-kata</id>
+    <content type="html"><![CDATA[<p>The second design pattern I will be looking at is the Observer pattern, which is useful for safely passing data between objects. The Observer pattern is defined as:</p>
+
+<blockquote>"a one-to-many relationship between objects so that when one object changes state all it  dependants  are notified and updated automatically".</blockquote>
+
+
+<p>A good analogy for this pattern, described in the excellent <a href="http://www.headfirstlabs.com/books/hfdp/">Head First Design Patterns book</a>  is that of a magazine publisher and subscribers. Here the publisher is the <em>one</em>  in the relationship and the subscribers are the <em>many</em>. Typically the publisher will notify each of the subscribers of a new magazine edition by sending them the magazine in the post or through their e-book subscription.  Translated into the Observer pattern the Publisher is known as the Subject and the subscribers are the observers. The subject <em>notifies</em> the observers of changes in its state.</p>
+
+<p>Some important features to note about this pattern are:</p>
+
+<ul>
+    <li>Observers can not change the state of the subject and vice versa (ie. they are Loosely Coupled)</li>
+    <li>The state information can be either <em>pushed</em> out to the observers by the subject or <em>pulled</em> from the subject by the observers</li>
+    <li>Observers can be added and removed at any time</li>
+</ul>
+
+
+
+
+<h3>The brief</h3>
+
+
+<p>This is our  fictitious  brief for a new system which needs to be designed. It is election time and the polls are coming in. A local TV station would like us to design a system which can keep track of the results as they arrive. There are several hundred constituencies (areas of the country) which may declare for the Blue, Red, Yellow or Green party. The TV station wants to present this data in a number of ways:</p>
+
+<ul>
+    <li>As a leader board, showing the tally for each party</li>
+    <li>As a map, with each region coloured to the winning party</li>
+    <li>As a <a href="http://news.bbc.co.uk/1/hi/uk_politics/election_2010/8574653.stm">Swingometer</a>  showing the proportional change and overall result</li>
+</ul>
+
+
+<p>We don&rsquo;t need to worry about the implementation details of these display methods, the algorithms will be provided by the TV station. Our main concern is how to design a system to pass the data between the election object and the display objects.</p>
+
+<h3>Designing the Solution</h3>
+
+
+<p>Here is the class diagram for our solution, if you would like to try implementing the solution yourself the starting point for the kata is tagged here: <a href="https://github.com/MikeHook/DesignPatterns/tree/ObserverStart">Observer Pattern Kata Start</a>.</p>
+
+<p><img class="alignnone" alt="Observer pattern for election data" src="https://www.lucidchart.com/publicSegments/view/51892f26-05fc-4844-a25b-4c660a0087f6/image.png" width="579" height="597" /></p>
+
+<p>We have leveraged the Observer pattern in our solution. The Election object inherits from ISubject and each of the display methods inherit from IObserver. The Election object maintains a list of the observers, we can add or remove an observer to this list using the <em>Register</em> and <em>Unregister</em> methods. When the subjects <em>Notify</em> method is called it informs each of the observers that a change has occurred by calling their <em>Update</em> method. A completed implementation for the election scenario is tagged here: <a href="https://github.com/MikeHook/DesignPatterns/tree/ObserverEnd">Observer Pattern Kata End</a>.</p>
 ]]></content>
   </entry>
   
