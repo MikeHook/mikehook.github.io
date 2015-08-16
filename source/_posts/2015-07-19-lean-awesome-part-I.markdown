@@ -3,7 +3,7 @@ layout: post
 title: Making awesome software with Lean principles - Part 1 
 comments: true
 categories: 
-- Software design
+- Software Design
 date: 2015-07-19 17:12:49
 published: true
 ---
