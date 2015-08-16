@@ -5,11 +5,11 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Branching the Project - baking websites</title>
+	<title>Rebase your way to Git enlightenment - baking websites</title>
 	<meta name="author" content="Mike Hook">
 
 	
-	<meta name="description" content="Branching the Project I have used an SVN repository for the project, hosted on unfuddle, enabling versioned source control on all files in the &hellip;">
+	<meta name="description" content="Rebase Your Way to Git Enlightenment The path to Git enlightenment can be a long one for a developer used to centralized source control such as SVN &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
 
 	<link href="/atom.xml" rel="alternate" title="baking websites" type="application/atom+xml">
 	
-	<link rel="canonical" href="http://bakingwebsites.co.uk/2009/08/23/branching-the-project/">
+	<link rel="canonical" href="http://bakingwebsites.co.uk/2015/08/16/rebase-git-enlightenment/">
 	<link href="http://bakingwebsites.co.uk/favicon.png" rel="shortcut icon">
 	<link href="http://bakingwebsites.co.uk/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<link href="http://bakingwebsites.co.uk/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -110,63 +110,30 @@
 			
 			<div class="mid-col-container">
 				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-	<h1 class="title" itemprop="name">Branching the Project</h1>
-	<div class="entry-content" itemprop="articleBody"><p>I have used an SVN repository for the project, hosted on <a href="http://www.unfuddle.com/">unfuddle</a>, enabling versioned source control on all files in the project. I can use the trusty <a href="http://tortoisesvn.net/">TortoiseSVN</a> Windows application to send and receive files to the remote repository directly from Windows Explorer. After each work session I commit the changes to source control. Apart from the obvious advantages of maintaining backups, if at any stage I realise that I have made a mistake, then the changes can be rolled back to the previous commit.<br />
-The source control recently came in useful when I needed to upgrade the version of Sharp Architecture used on the project. I won   t go into detail about the reasons for me upgrading, suffice to say most of the technology stack in Sharp Architecture had benefitted from version updates and I was limiting myself by using a pre version 1.0 release.<br />
-These are the steps I took to upgrade the Sharp Architecture version of the project:<br /></p>
+	<h1 class="title" itemprop="name">Rebase Your Way to Git Enlightenment</h1>
+	<div class="entry-content" itemprop="articleBody"><p><img src="http://i49.photobucket.com/albums/f299/hookmike/Pat-Morita_Karate_Kid_200_zpscufzef0b.jpg" class="alignleft" title="Pat Morita" /></p>
 
-<ol><li>     <br />
-Use TortoiseSVN to Branch the code in source control from <i><span style="color:green;">/trunk</span></i> to <i><span style="color:green;">/branches/recipebookV1</span></i><br />
-</li>
-<li>     <br />
-Rename the working folder (ie. the local folder in Windows Explorer) to recipebookV1 and switch it to the branch.<br />
-</li>
-<li>     <br />
-Update the Sharp Architecture project to fetch v1.0 from source control and copy the new project template into the Visual Studio templates folder.<br />
-</li>
-<li>     <br />
-Generate a new Visual Studio project, named recipebook, from the v1.0  Sharp Architecture templates.<br />
-</li>
-<li>     <br />
-Use <a href="http://www.scootersoftware.com/">Beyond Compare</a> to copy all the files that I have manually added / changed in the recipebookV1 project to the new recipebook project<br />
-</li>
-<li>     <br />
-Add the files to the recipebook project in Visual Studio, cross fingers, compile and run!<br />
-</li>
-<li>     <br />
-Use the TortoiseSVN repo browser to delete all files from the Trunk    yes, I really deleted them all! <br />
-</li>
-<li>     <br />
-Import the new recipebook folder back into the trunk <br />
-</li>
-</ol>
+<p>The path to Git enlightenment can be a long one for a developer used to centralized source control such as SVN.</p>
+
+<p>The first signs of trouble usually occur when trying to apply changes from one branch of code to another. Some file change conflicts are likely if the same source file has been changed on both branches. The source control system has no way to know which changes should be kept so it will quite rightly ask the developer to choose, however this can cause some difficulty if the changes have been made by someone else who may not even be around to ask what has happened.</p>
+
+<p>I have a feeling that the great Mr Miyagi would have loved using Git, as patience and dedication to the ways of <a href="https://en.wikipedia.org/wiki/Distributed_revision_control">DVCS</a> are well rewarded in time. Indeed, dealing with branches is one situation where patience is important to avoid introducing regression bugs.</p>
+
+<blockquote><p>Patience, young grasshopper.</p><footer><strong>Wikipedia</strong> <cite><a href='https://en.wikipedia.org/wiki/Kesuke_Miyagi'>Kesuke Miyagi</a></cite></footer></blockquote>
 
 
-<p>After completing the upgrade I realised that there may be an easier way to upgrade, without the scary and somewhat bad practice of deleting all the old files from the trunk, only to upload most of them again. I will list them below so I can try them out later:<br /></p>
+<p>There are a couple of different techniques which can be used to bring the changes on two branches together and the Atlassian site has a great write up of these in it&rsquo;s <a href="https://www.atlassian.com/git/tutorials/merging-vs-rebasing/">merging vs rebasing article</a>. The article describes the following scenario, you have created a <strong>feature</strong> branch from the <strong>master</strong> and made some commits to your branch. Someone else has since made some changes to the master branch which you now need to include in your branch, to get these changes you can either merge or rebase.</p>
 
-<ol><li>     <br />
-Use TortoiseSVN to Branch the code in source control from <i><span style="color:green;">/trunk</span></i> to <i><span style="color:green;">/branches/recipebookV1</span></i><br />
-</li>
-<li>     <br />
-Rename the working folder (ie. the local folder in Windows Explorer) to recipebookN. <i>This enables a new visual studio project of the same name to be created, with namespaces which are the same as the working project.</i><br />
-</li>
-<li>     <br />
-Update the Sharp Architecture project to fetch v1.0 from source control and copy the new project template into the Visual Studio templates folder.<br />
-</li>
-<li>     <br />
-Generate a new Visual Studio project named recipebook from the V1.0 Sharp Architecture templates.<br />
-</li>
-<li>     <br />
-Use <a href="http://www.scootersoftware.com/">Beyond Compare</a> to copy all updated Sharp Architecture files from the new recipebook project to the working recipebookn folder<br />
-</li>
-<li>     <br />
-Add any extra files to the working recipebook project in Visual Studio, cross fingers, compile and run!<br />
-</li>
-<li>     <br />
-Commit the changes to the trunk, remove the new recipebook project and rename the existing recipebook project folder to recipebook.  <br />
-</li>
-</ol>
+<p>My personal preference is to use the rebase command where possible for one key reason, <strong>merge conflicts are easier to resolve!</strong> The reason for this is that when rebasing you apply <strong>your changes</strong> on top of the master changes. This is different to a merge which will apply the master changes on top of your feature changes. So effectively any conflicts which occur will be due to changes made by yourself instead of someone else. My memory may not be great but I stand roughly 100% more chance of remembering something I&rsquo;ve done as opposed to something someone else has done!</p>
 
+<p>Hopefully you can see the benefits of this and are thinking, &lsquo;great I&rsquo;m going to give that a go!&rsquo; But before you rush off a few words of warning, there is potential for things to go horribly wrong.</p>
+
+<blockquote><p>First learn stand, then learn fly</p><footer><strong>Wikipedia</strong> <cite><a href='https://en.wikipedia.org/wiki/Kesuke_Miyagi'>Kesuke Miyagi</a></cite></footer></blockquote>
+
+
+<p>The trouble comes if there are 2 people working on the feature branch who have both pushed changes to a remote repository. If you haven&rsquo;t fetched their changes before you push the rebased feature branch their changes will get overwritten and lost forever! That would be bad but Git does try to help you out by blocking the push, actually the only way you can push the rebased branch is by passing an extra parameter to <strong>force</strong> the push. So this acts as a nice reminder to think about what you are doing, only tick that &lsquo;force push&rsquo; box if you are sure your branch is fully up to date. Actually I&rsquo;d never use rebase if I had any doubt that anyone else might be working on the same branch as me.</p>
+
+<p>A final note about rebase, it may be difficult to carry out with some Git GUI tools. Some of my colleagues like using <a href="https://www.sourcetreeapp.com/">Source Tree</a> and I&rsquo;ll agree it does look nice, however it doesn&rsquo;t support this workflow well at all. After starting a rebase you get left in a weird limbo state and have to keep re-requesting to rebase the branches after each and every commit. Then once the rebase is complete there is no way to force the push through the UI, you have to drop down to the command line to complete the action. I&rsquo;d recommend giving <a href="https://code.google.com/p/gitextensions/">Git Extensions</a>, the reliable Ford Mondeo of Git GUIs, a go for this scenario, it work much more smoothly.</p>
 </div>
 
 </article>
@@ -204,8 +171,8 @@ Commit the changes to the trunk, remove the new recipebook project and rename th
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://bakingwebsites.co.uk/2009/08/23/branching-the-project/';
-        var disqus_url = 'http://bakingwebsites.co.uk/2009/08/23/branching-the-project/';
+        var disqus_identifier = 'http://bakingwebsites.co.uk/2015/08/16/rebase-git-enlightenment/';
+        var disqus_url = 'http://bakingwebsites.co.uk/2015/08/16/rebase-git-enlightenment/';
         var disqus_script = 'embed.js';
       
     (function () {

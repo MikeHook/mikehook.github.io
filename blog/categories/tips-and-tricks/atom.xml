@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tips and Tricks | baking websites]]></title>
   <link href="http://bakingwebsites.co.uk/blog/categories/tips-and-tricks/atom.xml" rel="self"/>
   <link href="http://bakingwebsites.co.uk/"/>
-  <updated>2015-08-01T10:15:13+01:00</updated>
+  <updated>2015-08-16T19:22:14+01:00</updated>
   <id>http://bakingwebsites.co.uk/</id>
   <author>
     <name><![CDATA[Mike Hook]]></name>
@@ -12,6 +12,35 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Rebase Your Way to Git Enlightenment]]></title>
+    <link href="http://bakingwebsites.co.uk/2015/08/16/rebase-git-enlightenment/"/>
+    <updated>2015-08-16T18:07:49+01:00</updated>
+    <id>http://bakingwebsites.co.uk/2015/08/16/rebase-git-enlightenment</id>
+    <content type="html"><![CDATA[<p><img src="http://i49.photobucket.com/albums/f299/hookmike/Pat-Morita_Karate_Kid_200_zpscufzef0b.jpg" class="alignleft" title="Pat Morita" /></p>
+
+<p>The path to Git enlightenment can be a long one for a developer used to centralized source control such as SVN.</p>
+
+<p>The first signs of trouble usually occur when trying to apply changes from one branch of code to another. Some file change conflicts are likely if the same source file has been changed on both branches. The source control system has no way to know which changes should be kept so it will quite rightly ask the developer to choose, however this can cause some difficulty if the changes have been made by someone else who may not even be around to ask what has happened.</p>
+
+<p>I have a feeling that the great Mr Miyagi would have loved using Git, as patience and dedication to the ways of <a href="https://en.wikipedia.org/wiki/Distributed_revision_control">DVCS</a> are well rewarded in time. Indeed, dealing with branches is one situation where patience is important to avoid introducing regression bugs.</p>
+
+<p><blockquote><p>Patience, young grasshopper.</p><footer><strong>Wikipedia <a href="https://en.wikipedia.org/wiki/Kesuke_Miyagi">https://en.wikipedia.org/wiki/Kesuke_Miyagi</a> Kesuke Miyagi</strong></footer></blockquote></p>
+
+<p>There are a couple of different techniques which can be used to bring the changes on two branches together and the Atlassian site has a great write up of these in it&rsquo;s <a href="https://www.atlassian.com/git/tutorials/merging-vs-rebasing/">merging vs rebasing article</a>. The article describes the following scenario, you have created a <strong>feature</strong> branch from the <strong>master</strong> and made some commits to your branch. Someone else has since made some changes to the master branch which you now need to include in your branch, to get these changes you can either merge or rebase.</p>
+
+<p>My personal preference is to use the rebase command where possible for one key reason, <strong>merge conflicts are easier to resolve!</strong> The reason for this is that when rebasing you apply <strong>your changes</strong> on top of the master changes. This is different to a merge which will apply the master changes on top of your feature changes. So effectively any conflicts which occur will be due to changes made by yourself instead of someone else. My memory may not be great but I stand roughly 100% more chance of remembering something I&rsquo;ve done as opposed to something someone else has done!</p>
+
+<p>Hopefully you can see the benefits of this and are thinking, &lsquo;great I&rsquo;m going to give that a go!&rsquo; But before you rush off a few words of warning, there is potential for things to go horribly wrong.</p>
+
+<p><blockquote><p>First learn stand, then learn fly</p><footer><strong>Wikipedia <a href="https://en.wikipedia.org/wiki/Kesuke_Miyagi">https://en.wikipedia.org/wiki/Kesuke_Miyagi</a> Kesuke Miyagi</strong></footer></blockquote></p>
+
+<p>The trouble comes if there are 2 people working on the feature branch who have both pushed changes to a remote repository. If you haven&rsquo;t fetched their changes before you push the rebased feature branch their changes will get overwritten and lost forever! That would be bad but Git does try to help you out by blocking the push, actually the only way you can push the rebased branch is by passing an extra parameter to <strong>force</strong> the push. So this acts as a nice reminder to think about what you are doing, only tick that &lsquo;force push&rsquo; box if you are sure your branch is fully up to date. Actually I&rsquo;d never use rebase if I had any doubt that anyone else might be working on the same branch as me.</p>
+
+<p>A final note about rebase, it may be difficult to carry out with some Git GUI tools. Some of my colleagues like using <a href="https://www.sourcetreeapp.com/">Source Tree</a> and I&rsquo;ll agree it does look nice, however it doesn&rsquo;t support this workflow well at all. After starting a rebase you get left in a weird limbo state and have to keep re-requesting to rebase the branches after each and every commit. Then once the rebase is complete there is no way to force the push through the UI, you have to drop down to the command line to complete the action. I&rsquo;d recommend giving <a href="https://code.google.com/p/gitextensions/">Git Extensions</a>, the reliable Ford Mondeo of Git GUIs, a go for this scenario, it work much more smoothly.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Become a Git Contortionist With Stash]]></title>
@@ -83,95 +112,6 @@ public class MyController : Controller
 
 
 <p><span style="font-family:Georgia, 'Times New Roman', 'Bitstream Charter', Times, serif;line-height:19px;white-space:normal;font-size:13px;">This exception is thrown because (as described  <a href="http://aspnet.codeplex.com/workitem/1795">in this work item</a> on the MVC issue tracker) the default view model has been replaced by a <em>HandleErrorInfo </em>object and our master page is trying to access properties in the normal view model. So the straightforward fix for this is to remove the dependancy on the master page from the <em>Unauthorised </em>view. </span></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[EPiServer 6 Developer Exam Tips]]></title>
-    <link href="http://bakingwebsites.co.uk/2011/01/23/episerver-6-developer-exam-tips/"/>
-    <updated>2011-01-23T17:35:34+00:00</updated>
-    <id>http://bakingwebsites.co.uk/2011/01/23/episerver-6-developer-exam-tips</id>
-    <content type="html"><![CDATA[<p>Last Monday I made the trip to London to take the EPiServer CMS certification exam (version 6). I passed but it was quite a tricky exam so I thought I&rsquo;d post some tips that may be of help to others taking the test.</p>
-
-<p>The questions are randomised so you won   t get asked the same as me but the areas will probably be similar. There were 70 multiple choice questions split into four sections. I can&rsquo;t remember the exact breakdown but these numbers are close:</p>
-
-<h3>Installation / deployment (~10 questions)</h3>
-
-
-<p>These questions are not particularly difficult but if, like myself, you haven&rsquo;t needed to use the features much previously you might get stuck.</p>
-
-<ul>
-    <li>Deployment center     make sure you know everything you can do from here</li>
-    <li>Initialization module     What is it, when does it run etc (this is new to version 6, I missed the tech note and wished I'd read it)</li>
-    <li>Multi-Site installations</li>
-    <li>Upgrading to v6     What versions can you upgrade from, what is backed up / updated.</li>
-</ul>
-
-
-
-
-<h3>General Product Knowledge (~15 questions)</h3>
-
-
-<p>If you are familiar with the system and its features there is not much to worry about here</p>
-
-<ul>
-    <li><span style="font-weight:normal;font-size:13px;">Load balancing</span></li>
-    <li>Page type &amp; page template concepts</li>
-    <li>XForms - How to make one, how it works</li>
-    <li>Online center and gadgets</li>
-</ul>
-
-
-
-
-<h3>Standard Development (~25 questions)</h3>
-
-
-<p>Again, if you have developed a couple of sites then most of these are not too bad. However the customisation questions will be sticking points unless you are familiar with the tech notes.</p>
-
-<ul>
-    <li>Wiring up EPiServer / .NET web controls</li>
-    <li>Wiring up master pages</li>
-    <li>Custom membership provider</li>
-    <li>Custom virtual path provider</li>
-    <li>Globalization     What language is used in various scenarios</li>
-</ul>
-
-
-
-
-<h3>Advanced Development (~20 questions)</h3>
-
-
-<p>These questions are really tricky, and may involve quite a bit of guess work!</p>
-
-<ul>
-    <li>Mirroring     How is it setup / configured, what is mirrored</li>
-    <li>Scheduler service     What can and can   t be run</li>
-    <li>Dynamic data store</li>
-    <li>Page Objects (I missed this one completely)</li>
-    <li>Filters     adding code to a filter web control</li>
-    <li>Quick publishing configuration</li>
-    <li>Plugins / Modules     Installing</li>
-</ul>
-
-
-
-
-<h3>Preparing for the exam</h3>
-
-
-<p>To help pass I   d recommend in order of priority:</p>
-
-<ol>
-    <li>Install the example site and run everything you can in the deployment center</li>
-    <li>Try everything out in the CMS Online center (the Start page and menu bar) editor and admin sections while reading through the editor and admin manuals (particularly the admin manual)</li>
-    <li>Read all the tech notes and try to setup what they are describing. I wouldn't worry about spending too much time on each though as long as you understand the concepts.</li>
-</ol>
-
-
-<p>There are quite a lot of resources available online and it can be a bit overwhelming. But don&rsquo;t despair, Jonathan&rsquo;s handy  <a href="http://www.jonathansewell.co.uk/index.php/2010/12/06/episerver-6-exam-bookmarks/">exam bookmarks post</a> is a good place to start!</p>
 ]]></content>
   </entry>
   

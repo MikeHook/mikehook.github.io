@@ -9,7 +9,7 @@
 	<meta name="author" content="Mike Hook">
 
 	
-	<meta name="description" content="Feb 12th, 2010 Hacking Comments You Have 20 Seconds to Comply Its pretty straight forward to generate a simple web page, there are several software &hellip;">
+	<meta name="description" content="Aug 22nd, 2010 Hacking Comments Upgrading to Sharp Architecture 1.6 and MVC 2 After a good few months in hibernation the guilt of leaving my poor &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -70,7 +70,7 @@
 <li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 5 ]</li>
 <li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 14 ]</li>
 <li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
-<li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 8 ]</li>
+<li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 9 ]</li>
 
 </ul>
 <br/>
@@ -111,6 +111,84 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-22T15:29:07+01:00" data-updated="true" itemprop="datePublished">Aug 22<span>nd</span>, 2010</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2010/08/22/upgrading-to-sharp-architecture-1-6-and-mvc-2/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2010/08/22/upgrading-to-sharp-architecture-1-6-and-mvc-2/" itemprop="url">Upgrading to Sharp Architecture 1.6 and MVC 2</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>After a good few months in hibernation the guilt of leaving my poor pet project half-finished has finally got to me!</p>
+
+<p>I was also spurred on by several new (and not so new) software releases that I would like to try out:</p>
+
+<ul>
+    <li><a href="http://devlicio.us/blogs/billy_mccafferty/archive/2010/08/19/s-arp-architecture-1-6-released.aspx">S#arp Architecture 1.6</a></li>
+    <li><a href="http://weblogs.asp.net/scottgu/archive/2010/03/11/asp-net-mvc-2-released.aspx">MVC version 2</a></li>
+    <li><a href="http://www.techfortesco.com/forum/index.php?topic=265.0">Tesco API Beta</a></li>
+</ul>
+
+
+<p>The first step I needed to take was to upgrade the project to use the new release of Sharp Architecture and MVC 2. The Sharp Architecture wiki has   a <a href="http://wiki.sharparchitecture.net/1.5UpgradeGuide.ashx">decent upgrade guide</a> and I was able to get most of the way there by following this.   However there were a couple extra step I needed to take in my project:</p>
+
+<h3>Upgrade to Fluent NHibernate</h3>
+
+
+<p>I think my project may have been on an earlier version than that in the guide because I needed to upgrade the Data project to use Fluent NHibernate. The issues here were pretty obvious as there were several compilation errors. I found the easiest solution was to generate a new empty Sharp Architecture project from the 1.6 template, then copy across the amended files in the NHibernateMaps folder.</p>
+
+<p>This got the application to compile OK, however there were a couple of differences in the configuration from my project.</p>
+
+<h3>Primary Key Convention</h3>
+
+
+<p>One of the data unit tests was failing when trying to access an entity using the <em>.Get(id)</em> method. This was strange as the entity was being loaded OK in the setup method. I was also getting an exception from the website when trying to add an entity to the database:</p>
+
+<blockquote><em>Invalid object name &#8216;hibernate_unique_key&#8217;.</em></blockquote>
+
+
+<p>The problem was due to a change in the <em>PrimaryKeyConvention</em> class. The convention for generating primary keys has been changed from <em>Native()</em> to <em>HiLo(&ldquo;1000&rdquo;)</em>. So instead of the first record having a key of 0 it would now try to use 1000. Changing this setting back to <em>Native()</em> fixed the problem straight away.</p>
+
+<h3>Cascade Conventions</h3>
+
+
+<p>The other issue I encountered occurred when trying to add a new ingredient to a recipe:</p>
+
+<blockquote><em>Cannot insert the value NULL into column &#8216;IngredientFk&#8217;, table  &#8216;recipebook.dbo.RecipeIngredientDrafts&#8217;; column does not allow nulls. INSERT  fails.
+The statement has been terminated.</em></blockquote>
+
+
+<p>This error pointed to a problem with NHibernate not saving changes to associated entities; it was trying to save a new <em>RecipeIngredientDraft</em> record without first saving the new <em>Ingredient </em>record. This issue could be resolved by adding a call to <em>instance.Cascade.SaveUpdate() </em>in the <em>ReferenceConvention </em>and <em>HasManyConvention </em>classes.</p>
+
+<p>After fixing these issues the application worked just fine :)</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -410,83 +488,6 @@
 <p>&lt;</p>
 
 <p>p&gt;Deciding on the domain also has a fringe benefit of motivating me to get on with the site! Its a bit of a waste not doing anything with the domain so I   m going to try and get the site up as soon as possible with the core features. The site can be refined and updated with extra features after the initial release.</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-12-07T21:47:00+00:00" data-updated="true" itemprop="datePublished">Dec 7<span>th</span>, 2009</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/testing/'>Testing</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2009/12/07/testing-code-coverage-with-ncover/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2009/12/07/testing-code-coverage-with-ncover/" itemprop="url">Testing Code Coverage With NCover</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>I   ve been developing the recipe book website mostly using TDD (Test Driven Design) and I thought it would be interesting to measure the code coverage of my unit tests. After researching what tools were available it looked like <a href="http://www.ncover.com/">NCover</a> was the best fit for the sites technology stack. The commercial version has some good features, such as measures for cyclomatic complexity, however it is a bit out of my budget (of approximately   0!). Fortunately a <a href="http://www.ncover.com/download/community">community edition of NCover</a> is also available for free and it stills works just fine for analysing current .NET assemblies.</p>
-
-<p>After installing NCover a console application is available for running code coverage analysis. I got this up and running but the command line interface isn   t exactly the most user friendly and the output is just a single summary report. I obviously wasn   t alone in these conclusions because back in 2006 Grant Drake developed the <a href="http://www.kiwidude.com/blog/2006/01/ncoverexplorer-debut.html">NCoverExplorer tool</a> to provide a GUI front end to NCover. This tool also has a community edition available (version 1.4) that works with the community edition of NCover.</p>
-
-<h4>Starters - Setting up NCover Explorer</h4>
-
-
-<p>The tool is fairly straight forward to setup, the NCover website includes instructions on how to setup the professional edition to <a href="http://docs.ncover.com/how-to/running-ncover-with-your-unit-testing-framework/nunit/">profile an NUnit test project</a>, and the settings are equivalent in the community edition. I also chose to specify which assemblies should be included in the coverage report as otherwise all the Sharp Architecture assemblies are included and the results are skewed.</p>
-
-<p>After running the tool you are provided with an interactive view of the assemblies with the uncovered lines displayed in red. You can see how easy it is to identify the offending lines in the screen grab below:</p>
-
-<p><a style="margin-bottom:1em;margin-right:1em;" href="http://4.bp.blogspot.com/_5hQeqbPSrks/Sx15F3sFlqI/AAAAAAAAAA8/yrLagOXdmxc/s1600/NCoverExplorer2.jpg"><img src="http://lh3.ggpht.com/_5hQeqbPSrks/Sx1745WamzI/AAAAAAAAAB4/PAdEtdGUeBE/s800/NCoverExplorer2.jpg" border="0" alt="" /></a></p>
-
-<h4>The Main Course     Improving code coverage</h4>
-
-
-<p>The results of my first report are shown below:</p>
-
-<p><a href="http://imageshack.com/a/img268/8057/6zqn.jpg"><img class="alignnone size-full wp-image-31" title="NCover Report" src="http://imageshack.com/a/img268/8057/6zqn.jpg" alt="" /></a></p>
-
-<p>The prime candidates for improvement were:</p>
-
-<ul>
-    <li>The RecipeBook.Data assembly. A couple of repository classes were not tested.</li>
-    <li>The RecipeBook.Web.Controllers assembly. Some of the code paths in the controller methods were not covered.</li>
-    <li>The RecipeBook.ApplicationServices assembly. Not tested at all, oops!</li>
-</ul>
-
-
-<p>By default NCover sets the acceptable coverage level at 95%, however I felt that this was overly strict. I would rather spend the time writing fewer tests that I ensure are of a high quality than writing tests just to cover every single line of code. So I reduced the threshold to 80% and added tests to cover the essential missing features. Below if my much more healthy looking report.</p>
-
-<h4>For Desert     A report without the red sauce</h4>
-
-
-<p>OK maybe I   m stretching the food analogy a little too far with my headings now! By red sauce I mean those nasty red bars that were blazed across nearly every line of the report. Below you can see the report looks much more healthy after adding some unit tests and trimming some unused code:</p>
-
-<p><a href="http://imageshack.com/a/img163/5125/23o5.jpg"><img class="alignnone size-full wp-image-32" title="NCover Report - 80% coverage" src="http://imageshack.com/a/img163/5125/23o5.jpg" alt="" /></a></p>
-
-<p>I will endeavour to keep the coverage level at a minimum of 80% from now, and hopefully add some more tests to bump off those remaining pesky red bars!</p>
-
-<p>As usual, any comments on this post are welcome. :)</p>
 
 		
 		

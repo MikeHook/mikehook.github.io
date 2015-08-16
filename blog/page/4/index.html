@@ -9,7 +9,7 @@
 	<meta name="author" content="Mike Hook">
 
 	
-	<meta name="description" content="Apr 3rd, 2012 Progress Comments Microsoft Jump on the Open Source Band Wagon A landmark decision was made last week by Microsoft&rsquo;s ASP.NET web &hellip;">
+	<meta name="description" content="Jan 18th, 2013 Tips and Tricks Comments Become a Git Contortionist With Stash One of the great aspects of the Git source control system is its &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -70,7 +70,7 @@
 <li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 5 ]</li>
 <li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 14 ]</li>
 <li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
-<li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 8 ]</li>
+<li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 9 ]</li>
 
 </ul>
 <br/>
@@ -111,6 +111,49 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-18T19:16:05+00:00" data-updated="true" itemprop="datePublished">Jan 18<span>th</span>, 2013</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/tips-and-tricks/'>Tips and Tricks</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2013/01/18/become-a-git-contortionist-with-stash/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2013/01/18/become-a-git-contortionist-with-stash/" itemprop="url">Become a Git Contortionist With Stash</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><img class="size-medium wp-image-364 alignright" alt="Annie the Contortionist" src="http://imageshack.com/a/img856/5731/jyt7.jpg" width="300" />One of the great aspects of the Git source control system is its flexibility. Almost any sticky situation you may encounter  as a developer working with source control can be   solved with Git.</p>
+
+<p>Take this scenario, you&rsquo;re halfway through writing a class for a new feature when you get a call.. the client has found a show stopping bug in the application and it needs to be fixed right away. To be able to fix the bug you will need to switch onto the live code branch but you can&rsquo;t go switching branches with a load of uncommitted changes.  Now you don&rsquo;t want to commit your code as its half done and won&rsquo;t even compile right now, but you don&rsquo;t want to lose the changes either&hellip; <a href="http://git-scm.com/book/en/Git-Tools-Stashing"><em>git stash</em></a> to the rescue!</p>
+
+<p>When you issue the git stash command all your changes will be committed to a stack. Leaving you with no changes on your current working branch and free to branch where ever you want. So now you can switch to the live branch and do your bug fixing work. Once that is done you can simply move back to the feature branch and <em>apply</em> the stashed changes. Hey presto, you are back where you started with your uncommitted half complete work!</p>
+
+<p>If you really get into lots of parallel work you can stash multiple times, just be sure to remember that it is a stack and your last changes you have stashed will come back off stack first.</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -419,119 +462,6 @@ using (var excelPackage = new ExcelPackage())
 
 
 <p>In conclusion I would recommend EPPlus to anybody who needs to generate an excel report from C# code and doesn&rsquo;t want to interface with the murky depths of the Excel API. It is a great open source library that does just what you need in the way you would expect it to work.</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-11-07T19:30:00+00:00" data-updated="true" itemprop="datePublished">Nov 7<span>th</span>, 2011</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/software-design/'>Software Design</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/11/07/quartz-makes-scheduling-jobs-easy-with-episerver-commerce/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/11/07/quartz-makes-scheduling-jobs-easy-with-episerver-commerce/" itemprop="url">Quartz Makes Scheduling Jobs Easy With EPiServer Commerce</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p><a href="http://quartznet.sourceforge.net/index.html"><img class="alignright" title="Quartz rock" src="http://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Quartz,_Tibet.jpg/240px-Quartz,_Tibet.jpg" alt="Quartz rock" width="168" height="169" /></a>A common requirement for e-commerce applications is the ability to schedule jobs or tasks. I am currently working on a project which uses EPiServer Commerce and I needed to schedule an order export job.</p>
-
-<p>I was pleasantly surprised to find that EPiServer Commerce is supplied bundled with the <a href="http://quartznet.sourceforge.net/index.html">Quartz.NET</a>  enterprise code library to facilitate these job scheduling requirements.</p>
-
-<h3>Gentlemen, choose your weapons</h3>
-
-
-<p>I had three main options available for implementing the export job, a separate windows service, an EPiServer CMS scheduled job or a Quartz job. I decided that the Quartz service was better than the option of a separate windows service because the framework was already there and available so would not increase the complexity of deployments. I also felt it was a better option than a EPiServer CMS scheduled job because Quartz runs  independently  to the website app pool so should not put the web application under greater load while it is running and potentially degrade the performance of the end user website.</p>
-
-<h3>A 1000 foot example</h3>
-
-
-<p>I&rsquo;m not going to go into a massively detailed explanation of how to implement the jobs as there is a already a good example available in the <a href="http://sdk.episerver.com/commerce/1.1.1/Content/Developers%20Guide/Architecture/LongRunProcessScheduling.htm">EPiServer Commerce dev guide</a>  along with a detailed <a href="http://quartznet.sourceforge.net/tutorial/index.html">tutorial on the Quartz .NET site</a>. However a quick overview demonstrates how intuitive it is to implement.</p>
-
-<p>The first thing you need to do is create your job class which will run when Quartz triggers the execution. The class must inherit from the IJob interface which just has a single Execute method to implement. Here is a sample skeleton class:</p>
-
-<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">    public class CommerceOrderExportJob : IStatefulJob
-    {
-        private readonly ILog _log;
-
-        public CommerceOrderExportJob()
-        {
-            _log = LogManager.GetLogger(base.GetType());
-            //Any other init code
-        }
-
-        public void Execute(JobExecutionContext context)
-        {
-            //Your export methods
-        }
-    }</pre>
-
-
-<p>You then need to extend the config file to configure Quartz to call your job. I think all the parameters are pretty self explanatory:</p>
-
-<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">&lt;job&gt;
-    &lt;job-detail&gt;
-      &lt;name&gt;OrderExportJob&lt;/name&gt;
-      &lt;group&gt;all&lt;/group&gt;
-      &lt;description&gt;This job exports orders from commerce&lt;/description&gt;
-      &lt;job-type&gt;Your.Assembly.CommerceOrderExportJob, Your.Assembly&lt;/job-type&gt;
-      &lt;volatile&gt;false&lt;/volatile&gt;
-      &lt;durable&gt;true&lt;/durable&gt;
-      &lt;recover&gt;false&lt;/recover&gt;
-    &lt;/job-detail&gt;
-    &lt;trigger&gt;
-      &lt;simple&gt;
-        &lt;name&gt;OrderExportJobTrigger&lt;/name&gt;
-        &lt;group&gt;eCommerceFramework&lt;/group&gt;
-        &lt;description&gt;Fires Order Export Job&lt;/description&gt;
-        &lt;misfire-instruction&gt;SmartPolicy&lt;/misfire-instruction&gt;
-        &lt;volatile&gt;false&lt;/volatile&gt;
-        &lt;job-name&gt;OrderExportJob&lt;/job-name&gt;
-        &lt;job-group&gt;eCommerceFramework&lt;/job-group&gt;
-        &lt;repeat-count&gt;RepeatIndefinitely&lt;/repeat-count&gt;
-        &lt;repeat-interval&gt;300000&lt;/repeat-interval&gt;
-      &lt;/simple&gt;
-    &lt;/trigger&gt;
-  &lt;/job&gt;</pre>
-
-
-<p>Hit run on the service and check the event log for any problems. Make sure to include some useful event/error logging in the job otherwise it will just be a mysterious black box! There are a couple of snags you may run into when running the job against EPiServer Commerce:</p>
-
-<div>
-<ul>
-    <li>ensure that your compiled assembly is actually available in the Quartz service directory, this is different from the main commerce site bin folder so it is not enough just to include it in the commerce app references</li>
-    <li>Make sure the data context has been initialised and the config file in the Quartz service directory is pointing to your database</li>
-</ul>
-</div>
-
-
-
-
-<h3>Mining for more gems</h3>
-
-
-<p>Ultimately only time will tell if Quartz was the best choice but I feel it has the best chance of high reliability and performance in the long term. I hope that, where appropriate, EPiServer can continue to expand the incorporation of proven open source libraries with their product offerings.</p>
 
 		
 		
