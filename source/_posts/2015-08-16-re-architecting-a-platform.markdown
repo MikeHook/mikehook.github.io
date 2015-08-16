@@ -8,13 +8,13 @@ date: 2015-08-16 18:07:49 +01:00
 published: false
 ---
 
-<img src="http://i49.photobucket.com/albums/f299/hookmike/74078639-2d6b-4179-883d-4be7d28c19c7_zpsbpo9illj.jpg" class="alignleft" title="Awesome image by Roberlan https://www.flickr.com/photos/roberlan" />
-
 Intro - explain the problem and goals for the re architecting
 
 ##High level plan##
 
 Diagrams for before and after, explain major changes
+
+<img src="http://i49.photobucket.com/albums/f299/hookmike/74078639-2d6b-4179-883d-4be7d28c19c7_zpsbpo9illj.jpg" class="alignleft" title="Awesome image by Roberlan https://www.flickr.com/photos/roberlan" />
 
 ##Implementing the changes##
       
