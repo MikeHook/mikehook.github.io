@@ -9,7 +9,7 @@
 	<meta name="author" content="Mike Hook">
 
 	
-	<meta name="description" content="Aug 16th, 2015 Tips and Tricks Comments Rebase Your Way to Git Enlightenment The path to Git enlightenment can be a long one for a developer used to &hellip;">
+	<meta name="description" content="Sep 6th, 2015 Software Design Comments Inspiring Software Design The software design process can sometimes be difficult to quantify. From an &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,7 +68,7 @@
 <ul class="main-navigation">
 <li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
 <li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 5 ]</li>
-<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 14 ]</li>
+<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 15 ]</li>
 <li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
 <li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 9 ]</li>
 
@@ -111,6 +111,81 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-09-06T18:07:49+01:00" data-updated="true" itemprop="datePublished">Sep 6<span>th</span>, 2015</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/software-design/'>Software Design</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2015/09/06/inspiration/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2015/09/06/inspiration/" itemprop="url">Inspiring Software Design</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><a href="http://www.603copywriting.co.uk/blog-post-ideas/"><img src="https://googledrive.com/host/0Bx-8nw9dhAQcN1lWbU1SLW91bEk/idea.jpg" class="alignleft" title="Ideas lightbulb" /></a></p>
+
+<p>The software design process can sometimes be difficult to quantify. From an external perspective of a development team, requirements go in and working software comes out. But what exactly happens in the middle to turn the stakeholders hopes and dreams into reliable, executable code?</p>
+
+<p>At its core software design is a methodical, incremental engineering process and there are no short cuts to this process if we want to produce good results. However making really great software that will stand the test of time often requires a little something extra, a bit of inspiration. So where exactly does that spark come from and how can we help create the conditions to nurture it?</p>
+
+<h2>A sticky design problem</h2>
+
+<p>I&rsquo;ve recently been working on a feature to enable users to update their profiles through a web application. This is a pretty standard problem however some extra complexities were introduced by the target platform. Chief among those was the user interface which needed to be asynchronous and fit in with the applications existing front end <a href="https://en.wikipedia.org/wiki/Single-page_application">SPA framework</a>.</p>
+
+<p>I like to implement using the &lsquo;<a href="http://programmers.stackexchange.com/questions/166409/tdd-outside-in-vs-inside-out">outside in</a>&rsquo; approach so began with the user interface, adding one section at a time then abstracting any common patterns to make them reusable. However, after a day at the coal face writing code I took a step back and wasn&rsquo;t pleased with my results. The code was reaching a point where I was struggling to keep track of the workflow in my own head which doesn&rsquo;t exactly bode well for the poor guy that would inevitably need to modify it 6 months down the line. The trouble was no matter how hard I stared at those lines of code a more elegant and simple solution would not present itself!</p>
+
+<p>The very next day I woke up feeling sick and not be able to get into the office to finish implementing the UI. However, it may well have been the most productive &lsquo;time off&rsquo; work I&rsquo;ve had in some time. As I recuperated watching Hobbits and Orcs do battle on a grand scale my mind drifted back to the problems I&rsquo;d been having yesterday. It suddenly became clear to me that I had been abstracting at too low a level and trying to fit all of the behaviour into a single javascript module. However if I just created a single module per user profile element I could create a common &lsquo;interface&rsquo; for each module and easily iterate over them in the main module.</p>
+
+<h2>Emergent architecture</h2>
+
+<p>This new approach had all the hallmarks of a good design as my own reaction was along the lines of &lsquo;that is so obviously better, why didn&rsquo;t I just do it like that in the first place?!&rsquo; That is a pertinent question, and one that has probably troubled many a software developer. However my feeling is that often it is not possible to skip the &lsquo;bad design&rsquo; and go straight to the better solution because you don&rsquo;t know what all the problems are going to be until you start implementing. Thomas Edison summed this up nicely in one of his most famous quotes:</p>
+
+<blockquote><p>What it boils down to is one per cent inspiration and ninety-nine per cent perspiration.</p><footer><strong>Wikiquote</strong> <cite><a href='https://en.wikiquote.org/wiki/Thomas_Edison'>Thomas Edison</a></cite></footer></blockquote>
+
+
+<p>While its certainly true that experience can help you see patterns and spot the problems earlier I think it is a mistake to try and design everything meticulously up front. There is bound to be some devil in the detail which makes you pivot on the design halfway through so a lot of that up front time will have been wasted.</p>
+
+<p>I find it is best to have a balance, with an initial high level draft plan for the implementation usually implemented through UML modelling. This helps guide lower level design decisions and keep one eye on the bigger picture. To make the lower level design decisions I try and stay agile, adapt the code as I&rsquo;m going along and keep complexity at a minimum.</p>
+
+<h2>Encouraging those aha! moments</h2>
+
+<p>Often my best ideas are formed away from the computer, hours or even days after the initial problem arose. The sub conscious mind is an amazing tool which can help you solve many intractable issues if you can give it the space and time to join up those dots. Despite what our employment contracts may say, software development really isn&rsquo;t a 9 to 5 job. In fact working &lsquo;harder&rsquo; during those office hours can sometimes be counter productive when it comes to making great software. Good decisions and great solutions are formed in relaxed and fresh minds, for that reason I&rsquo;d have to list my bike as one of my most essential software design tools!</p>
+
+<p>As developers we can encourage good software design by focussing on a couple of key elements:</p>
+
+<ul>
+<li>Collaborate on design, decisions should be guided by <a href="http://blog.codinghorror.com/the-ten-commandments-of-egoless-programming/">the ten commandments of egoless programming</a></li>
+<li>Ensure your estimates include enough contingency to allow for rapid prototyping and iterations during implementation.</li>
+<li>Stay pragmatic; aim high but know that perfection is subjective. Establishing coding standards can help guide when a design is good enough</li>
+</ul>
+
+
+<p>Do you have any particular techniques to help inspire your software designs? If so I&rsquo;d love to hear about them and try them out myself!</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -436,70 +511,6 @@
 
 
 <p>Reading about the Tin Can API over the last few days and seeing it in action in the <a href="https://www.tessello.co.uk">Tessello application</a> has really whet my appetite to work more with the specification. I can see great potential for systems that leverage this specification as it provides a flexible framework for messaging without being restrictive and gives us the basis for a common technical language to use to enable our systems to talk to one another.</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-07-02T10:29:24+01:00" data-updated="true" itemprop="datePublished">Jul 2<span>nd</span>, 2014</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/progress/'>Progress</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/" itemprop="url">Automated Azure Deployments</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p><img src="http://imagizer.imageshack.us/v2/320x240q90/850/r38o.jpg" class="alignleft" alttext="Wall-e the robot" /></p>
-
-<p>Azure web site hosting has a great built in feature for deployment automation. All you need to do is point Azure at the location of your website in your source control platform and it will automatically monitor for updates, pull them into Azure and deploy them, Boom! Well that is the theory anyway, turns out in my case I needed to do some tweaking to get the automation to work.</p>
-
-<h2>Tinkering under the hood</h2>
-
-<p>The first step to set up the automated deployment is involves going to your Azure website dashboard and selecting &lsquo;Setup up deployment from source control&rsquo;. There are a bunch of options for what source control services are supported and how they can be setup, this is all pretty well documented in the <a href="" title="https://azure.microsoft.com/en-us/documentation/articles/web-sites-publish-source-control/">Azure publishing from source control article</a> so I won&rsquo;t rehash all of that here. Suffice to say I pointed the website at my github repo and sorted out all the authentication, then Azure pulled through a fresh version to deploy.</p>
-
-<p>Unfortunately when I checked the shiny new &lsquo;Deployments&rsquo; tab I found that the deployment had failed, after looking in the error log the reason was clear enough:</p>
-
-<blockquote><p>&ldquo;Error: The site directory path should be the same as repository root or a sub-directory of it.&rdquo;</p></blockquote>
-
-<p>My website was not in the root folder of the repository, it is in a &lsquo;website&rsquo; folder as you can see in the <a href="" title="https://github.com/MikeHook/MSTC">repo here</a>. so I needed to tell whatever magic was running these deployments to check in that folder instead for the code changes. After a bit of googling I found out that the deployments are driven by an application called kudu which has some documenation on its <a href="" title="https://github.com/projectkudu/kudu/wiki">github wiki</a>. Turns out that it is pretty straight forward to modify the folder, as explained on the <a href="" title="https://github.com/projectkudu/kudu/wiki/Customizing-deployments">customising deployments wiki page</a> I just had to add a .deployment file to the repository root with these contents:</p>
-
-<pre><code>[config]
-project = website
-</code></pre>
-
-<p>Simples, the deployment worked fine after adding that file&hellip; well it did when I just tried it but previously it didn&rsquo;t seem to work. Either I made some stupid syntax error previously or kudu got fixed since last time I tried!</p>
-
-<h2>A robot to build a robot</h2>
-
-<p>The actual website is running a different configuration based on a custom deployment script, while this is a little OTT to just change the folder path going the extra mile paid dividends later on when I needed to make some other customisations during the deployment. It was pretty straightforward to set up, thanks to the azure-cli tool which generates a deployment script for you based on a set of parameters. Instructions on how to do this are on the <a href="" title="https://github.com/projectkudu/kudu/wiki/Deployment-hooks">kudu wiki deployment hooks page</a>. In my case I just needed to run the following command from my repository root to generate a working .deployment and deploy.cmd file.</p>
-
-<pre><code>azure site deploymentscript --aspWebSite -r website
-</code></pre>
-
-<p>Once checked in those files are used by kudu to control the automated deployment process. Check back in Azure and the deployment should now be showing as successful, awesome!</p>
 
 		
 		

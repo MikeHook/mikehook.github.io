@@ -9,7 +9,7 @@
 	<meta name="author" content="Mike Hook">
 
 	
-	<meta name="description" content="Dec 7th, 2009 Testing Comments Testing Code Coverage With NCover I ve been developing the recipe book website mostly using TDD (Test Driven Design) &hellip;">
+	<meta name="description" content="Jan 10th, 2010 Hacking Comments Introducing recipestash.net With the turn of the year disappearing behind us, I thought it was about time that the &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,7 +68,7 @@
 <ul class="main-navigation">
 <li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
 <li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 5 ]</li>
-<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 14 ]</li>
+<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 15 ]</li>
 <li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
 <li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 9 ]</li>
 
@@ -111,6 +111,51 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-01-10T20:53:00+00:00" data-updated="true" itemprop="datePublished">Jan 10<span>th</span>, 2010</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2010/01/10/introducing-recipestash-net/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2010/01/10/introducing-recipestash-net/" itemprop="url">Introducing recipestash.net</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>With the turn of the year disappearing behind us, I thought it was about time that the site I   m developing got a proper identity. Initially I would of liked recipebook.com, but that is far too obvious a name to be left unclaimed, also I think its quite boring and sounds too similar to facebook. So my main criteria for the name were that it should be related to the content, engaging, easy to remember, not too derivative and of course available!</p></p>
+
+<p>After plugging some names into the lookup tool the two front runners were recipestore.net and recipestash.net. I liked recipestore as it conveys the main idea of the site as a storage place for your recipes. However it can also be interpreted as meaning a shop for recipes, which is not ideal as the recipes will all be freely available on the site. So I settled on recipestash, which I think meets all the criteria and is less derivative than recipestore. In virtual celebration of the new domain here   s a picture of a lovely looking muffin (Image shared under creative commons on Flickr by rachellake).</p>
+
+<p><a href="http://lh6.ggpht.com/_5hQeqbPSrks/S0pA-VC2-DI/AAAAAAAAACk/ApIIbuAxR84/s1600-h/muffin-rachellake%5B5%5D.jpg"><img title="muffin-rachellake" border="0" alt="muffin-rachellake" src="http://lh5.ggpht.com/_5hQeqbPSrks/S0pA-79n5tI/AAAAAAAAACo/vGJoHZjWy5A/muffin-rachellake_thumb%5B3%5D.jpg?imgmax=800" width="504" height="337" /></a>&#160;</p>
+
+<p>&lt;</p>
+
+<p>p&gt;Deciding on the domain also has a fringe benefit of motivating me to get on with the site! Its a bit of a waste not doing anything with the domain so I   m going to try and get the site up as soon as possible with the core features. The site can be refined and updated with extra features after the initial release.</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -469,156 +514,6 @@ Implementing the Custom Repository </h4>
 
 
 <p>The custom repository method passes the unit test and returns the expected data. The original query is now optimised and will perform much better against larger data sets. I   ve improved the efficiency of the data access, however I   d also like to improve the functionality. So in the next post I will be looking at extending the ingredient repository with a new dynamic query. This will enable searching by an arbitrary number of keywords.<br /></p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-09-14T08:45:00+01:00" data-updated="true" itemprop="datePublished">Sep 14<span>th</span>, 2009</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2009/09/14/custom-routing-for-the-recipe-controllers-mvc/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2009/09/14/custom-routing-for-the-recipe-controllers-mvc/" itemprop="url">Custom Routing for the Recipe Controllers (MVC)</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>I&rsquo;ve been working on re-factoring the add recipe feature to include a draft recipe domain object. However the recipe controller has been steadily expanding, along with the number of unit tests to support it. This was causing me issues as it was getting difficult to scan through the files to find the methods I&rsquo;m interested in. So I&rsquo;ve introduced some custom routing and split up the recipe controller.<br /></p>
-
-<br />
-
-
-<p><b>Original recipe controller signature </b><br />
-This was the recipe controller signature before introducing the customer routing (for brevity in this post I&rsquo;ve extracted the controller signature to an interface, the interface is not actually used in the project):<br /></p>
-
-<br />
-
-
-
-
-<pre style="background-color:#eeeeee;border:1px dashed rgb(153,153,153);color:black;font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;font-size:12px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>    interface IRecipesController
-    {
-        ActionResult Index(string title);
-
-        ActionResult EditIngredients(string recipeTitle);
-        ActionResult EditIngredients(RecipeIngredientsModel ingredientsModel);
-
-        ActionResult EditMethod(string recipeTitle);
-        ActionResult AddRecipeIngredient(RecipeIngredientsModel ingredientsModel);
-        ActionResult SearchIngredients(RecipeIngredientsModel ingredientsModel);
-        ActionResult EditMethod(RecipeMethodModel methodModel);
-
-        ActionResult EditSummary(string recipeTitle);
-        ActionResult EditSummary(RecipeSummaryModel summaryModel);   
-    }
-</code></pre>
-
-
-
-
-<br />
-
-
-<p>So that&rsquo;s 9 public methods, along with some private methods, taking the total up to around 15. I thought that was too many for the class to be easily manageable.<br /></p>
-
-<br />
-
-
-<p><b>Custom Routing Implementation</b><br /></p>
-
-<br />
-
-
-<p>In Sharp Architecture projects the custom routing instructions need to be added in the RouteRegistrar.cs file, located in the Web.Controllers assembly. Handily, the Sharp architecture example project had an example similar to what I was trying to achieve, so I just needed to tweak the area and route URL&rsquo;s to make my customer routing:<br /></p>
-
-<br />
-
-
-
-
-<pre style="background-color:#eeeeee;border:1px dashed rgb(153,153,153);color:black;font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;font-size:12px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>    routes.CreateArea("Recipes", "RecipeBook.Web.Controllers.Recipes",
-        routes.MapRoute(null, "Recipes/{controller}/{action}", new { action = "Index" }),
-        routes.MapRoute(null, "Recipes/{controller}/{action}/{id}")
-    );
-</code></pre>
-
-
-
-
-<br />
-
-
-<p><b>Coding Tweaks<br />
-</b><br /></p>
-
-<br />
-
-
-<p>An interesting result of this routing change was the tweaks that needed to be made to the code:<br /></p>
-
-<ul><li>The action links in Views must now use the Html.ActionLinkForAreas() method instead of Html.ActionLink<i></i>()</li>
-<li>RedirectToAction calls in controllers must include the controller name </li>
-<li>Tests for Controller Actions, which redirect to another controller, should make use of the ToController(<i>controllerName</i>) MvcContrib TestHelper extension method.</li>
-</ul>
-
-
-<p><b>Revised controller signatures</b><br /></p>
-
-<br />
-
-
-<p>After implementing the custom routing the controllers and tests could be broken up into 4 separate files with the following method signatures:<br /></p>
-
-<br />
-
-
-
-
-<pre style="background-color:#eeeeee;border:1px dashed rgb(153,153,153);color:black;font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;font-size:12px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>    interface IRecipesController    
-    {
-        ActionResult Index(string title);
-    }
-    interface ISummaryController    
-    {
-        ActionResult Edit(string recipeTitle);              
-        ActionResult Edit(RecipeSummaryModel summaryModel); //Post        
-    }
-    interface IMethodController    
-    {
-        ActionResult Edit(string recipeTitle);
-        ActionResult Edit(RecipeMethodModel methodModel);   //Post
-    }
-    interface IRecipeIngredientsController
-    {
-        ActionResult Edit(string recipeTitle);
-        ActionResult AddRecipeIngredient(RecipeIngredientsModel ingredientsModel);  //Post
-        ActionResult Edit(RecipeIngredientsModel ingredientsModel);                 //Post    
-        ActionResult SearchIngredients(RecipeIngredientsModel ingredientsModel);    //Post
-    }
-</code></pre>
-
 
 		
 		

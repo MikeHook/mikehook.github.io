@@ -9,7 +9,7 @@
 	<meta name="author" content="Mike Hook">
 
 	
-	<meta name="description" content="Jun 19th, 2014 Hacking Comments Mysql to Azure Database Migration If you have read my previous post on Umbraco to Azure migration the topic of this &hellip;">
+	<meta name="description" content="Jul 2nd, 2014 Progress Comments Automated Azure Deployments Azure web site hosting has a great built in feature for deployment automation. All you &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,7 +68,7 @@
 <ul class="main-navigation">
 <li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
 <li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 5 ]</li>
-<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 14 ]</li>
+<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 15 ]</li>
 <li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
 <li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 9 ]</li>
 
@@ -111,6 +111,70 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-02T10:29:24+01:00" data-updated="true" itemprop="datePublished">Jul 2<span>nd</span>, 2014</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/progress/'>Progress</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/" itemprop="url">Automated Azure Deployments</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><img src="http://imagizer.imageshack.us/v2/320x240q90/850/r38o.jpg" class="alignleft" alttext="Wall-e the robot" /></p>
+
+<p>Azure web site hosting has a great built in feature for deployment automation. All you need to do is point Azure at the location of your website in your source control platform and it will automatically monitor for updates, pull them into Azure and deploy them, Boom! Well that is the theory anyway, turns out in my case I needed to do some tweaking to get the automation to work.</p>
+
+<h2>Tinkering under the hood</h2>
+
+<p>The first step to set up the automated deployment is involves going to your Azure website dashboard and selecting &lsquo;Setup up deployment from source control&rsquo;. There are a bunch of options for what source control services are supported and how they can be setup, this is all pretty well documented in the <a href="" title="https://azure.microsoft.com/en-us/documentation/articles/web-sites-publish-source-control/">Azure publishing from source control article</a> so I won&rsquo;t rehash all of that here. Suffice to say I pointed the website at my github repo and sorted out all the authentication, then Azure pulled through a fresh version to deploy.</p>
+
+<p>Unfortunately when I checked the shiny new &lsquo;Deployments&rsquo; tab I found that the deployment had failed, after looking in the error log the reason was clear enough:</p>
+
+<blockquote><p>&ldquo;Error: The site directory path should be the same as repository root or a sub-directory of it.&rdquo;</p></blockquote>
+
+<p>My website was not in the root folder of the repository, it is in a &lsquo;website&rsquo; folder as you can see in the <a href="" title="https://github.com/MikeHook/MSTC">repo here</a>. so I needed to tell whatever magic was running these deployments to check in that folder instead for the code changes. After a bit of googling I found out that the deployments are driven by an application called kudu which has some documenation on its <a href="" title="https://github.com/projectkudu/kudu/wiki">github wiki</a>. Turns out that it is pretty straight forward to modify the folder, as explained on the <a href="" title="https://github.com/projectkudu/kudu/wiki/Customizing-deployments">customising deployments wiki page</a> I just had to add a .deployment file to the repository root with these contents:</p>
+
+<pre><code>[config]
+project = website
+</code></pre>
+
+<p>Simples, the deployment worked fine after adding that file&hellip; well it did when I just tried it but previously it didn&rsquo;t seem to work. Either I made some stupid syntax error previously or kudu got fixed since last time I tried!</p>
+
+<h2>A robot to build a robot</h2>
+
+<p>The actual website is running a different configuration based on a custom deployment script, while this is a little OTT to just change the folder path going the extra mile paid dividends later on when I needed to make some other customisations during the deployment. It was pretty straightforward to set up, thanks to the azure-cli tool which generates a deployment script for you based on a set of parameters. Instructions on how to do this are on the <a href="" title="https://github.com/projectkudu/kudu/wiki/Deployment-hooks">kudu wiki deployment hooks page</a>. In my case I just needed to run the following command from my repository root to generate a working .deployment and deploy.cmd file.</p>
+
+<pre><code>azure site deploymentscript --aspWebSite -r website
+</code></pre>
+
+<p>Once checked in those files are used by kudu to control the automated deployment process. Check back in Azure and the deployment should now be showing as successful, awesome!</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -490,82 +554,6 @@ EXECUTE sp_rename N'Tempcmstasktype', N'cmstasktype', 'OBJECT'
 
 
 <p>I&rsquo;d be interested to hear of your experiences of event storming and how effective you have found it to be?</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-01-15T16:38:27+00:00" data-updated="true" itemprop="datePublished">Jan 15<span>th</span>, 2014</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/progress/'>Progress</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2014/01/15/dear-wordpress-youre-dumped/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2014/01/15/dear-wordpress-youre-dumped/" itemprop="url">Dear Wordpress, You&#8217;re Dumped!</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p><img src="http://imageshack.com/a/img827/7426/w5v5.png " class="alignleft" alttext="Octopress Logo"  />
-There comes a time in a developers life (every couple of years it seems) when you are dissatisfied with your existing blogging platform. What had started as a beautiful and fulfilled relationship has decayed to the point where you barely interact. What once seemed like a cutting edge editing interface has become stayed and obtuse. Your eyes begin to wander, other blogging platforms seem so slick and modern in comparison, you wonder  &ldquo;why can&rsquo;t I have some of that?&rdquo;</p>
-
-<p>But there is no need to fret, unlike <a href="http://www.sheknows.com/tags/celebrity-breakups">other breakups</a> this change should be quite painless for all parties involved. So as January is the peak month for relationship change, there is no better time to ring the changes and introduce a new blogging platform!</p>
-
-<h2>No more Batman and Robin</h2>
-
-<p>You may ask what my blog has to do with the dynamic crime fighting duo Batman and Robin? Well the new platform is based on <a href="http://jekyllrb.com/">Jekyll</a>, which is quite the opposite of dynamic. Using the power of Jekyll I can now generate all the static blog content (html, images, css) locally by running a couple of commands. Then I just push the changes up to <a href="https://github.com/">github</a> and boom, the updates are published.</p>
-
-<p>I really liked the simplicity of this approach as a blog is pretty much all about the content, there are no interactive features or dynamically changing content that would require a processing engine. The functionality can be met with good old static html. There are also a bunch of other great advantages to this approach:</p>
-
-<ul>
-<li>Use of <a href="https://github.com/NeQuissimus/MarkdownByExample/wiki/MarkdownSyntax">Markdown</a> for content editing</li>
-<li>Faster page load times</li>
-<li>More tolerant to high loads (although I doubt the traffic on this particular blog will ever cause a problem!)</li>
-<li>Free web hosting with <a href="http://octopress.org/docs/deploying/github/">github pages</a></li>
-<li>Scratches my developer itch for getting my hands dirty with the blogging platform</li>
-</ul>
-
-
-<p>There are some drawbacks to this approach such as a higher barrier to entry for editors, however as I&rsquo;m the only editor that isn&rsquo;t a problem for me.</p>
-
-<h2>Wordpress meet Octopress</h2>
-
-<p>Having settled on a new platform I needed to extract the content from my existing wordpress blog and convert it into a format suitable for Octopress (ie. Markdown). Fortunately this is a fairly <a href="http://import.jekyllrb.com/">well travelled road</a> and my posts were pretty basically formatted so the conversion process was pretty painless. The most important issues for me were to not lose formatting of the content and retain the same permalinks so existing google / bookmark links would still work.</p>
-
-<p>I got the blog running pretty easily (as it runs through Ruby, which is already setup on my machine) however the default theme wasn&rsquo;t really doing it for me. Fortunately there are a bunch of <a href="http://opthemes.com/">alternative themes</a> available that a pretty straightforward to apply. I opted to use the <a href="https://github.com/shashankmehta/greyshade">greyshade theme</a> as a base and tweak the fonts / layout to suit my needs.</p>
-
-<h2>Images / Comments</h2>
-
-<p>So at this point all the posts are in the blog nicely formatted but the images are still being served from Wordpress and even worse the comments have not been ported at all.</p>
-
-<p>I considered just dumping the images into the new blog platform itself, however I felt like there should be a better solution. Whilst my blog is pretty tiny at the moment the number of assets are bound to grow over time and I didn&rsquo;t want to cripple the blog hosting server itself with unnecessary load. Initially I tried uploading the images to <a href="http://picasa.google.com/">Picasa</a>, however it seems to require a desktop app to upload the images and refused to give me a proper URL for the image sources. A far better solution for me was <a href="https://imageshack.com/">ImageShack</a>, uploading is handled through a slick browser based interface and you can easily get direct links to the images. A nice bonus for the platform is built in support for image resizing, all you need to do is specify your required size in the image link.</p>
-
-<p>The final part to integrate was the comments. This turned out really straightforward using <a href="http://disqus.com/">Disqus</a>. All I needed to do was sign up for a new account and point it at my existing wordpress blog to pull the comments down. You can enable Disqus in Octopress through the config.yml file.
-Then, provided your post links are maintained, when the blog is switched across the comments are also kept, simples!</p>
-
-<h2>Conclusion</h2>
-
-<p>So there you have it, a freshly baked blogging site for your consumption pleasure, enjoy!</p>
 
 		
 		

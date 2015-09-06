@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Software Design | baking websites]]></title>
   <link href="http://bakingwebsites.co.uk/blog/categories/software-design/atom.xml" rel="self"/>
   <link href="http://bakingwebsites.co.uk/"/>
-  <updated>2015-08-16T19:22:14+01:00</updated>
+  <updated>2015-09-06T12:07:07+01:00</updated>
   <id>http://bakingwebsites.co.uk/</id>
   <author>
     <name><![CDATA[Mike Hook]]></name>
@@ -12,6 +12,52 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Inspiring Software Design]]></title>
+    <link href="http://bakingwebsites.co.uk/2015/09/06/inspiration/"/>
+    <updated>2015-09-06T18:07:49+01:00</updated>
+    <id>http://bakingwebsites.co.uk/2015/09/06/inspiration</id>
+    <content type="html"><![CDATA[<p><a href="http://www.603copywriting.co.uk/blog-post-ideas/"><img src="https://googledrive.com/host/0Bx-8nw9dhAQcN1lWbU1SLW91bEk/idea.jpg" class="alignleft" title="Ideas lightbulb" /></a></p>
+
+<p>The software design process can sometimes be difficult to quantify. From an external perspective of a development team, requirements go in and working software comes out. But what exactly happens in the middle to turn the stakeholders hopes and dreams into reliable, executable code?</p>
+
+<p>At its core software design is a methodical, incremental engineering process and there are no short cuts to this process if we want to produce good results. However making really great software that will stand the test of time often requires a little something extra, a bit of inspiration. So where exactly does that spark come from and how can we help create the conditions to nurture it?</p>
+
+<h2>A sticky design problem</h2>
+
+<p>I&rsquo;ve recently been working on a feature to enable users to update their profiles through a web application. This is a pretty standard problem however some extra complexities were introduced by the target platform. Chief among those was the user interface which needed to be asynchronous and fit in with the applications existing front end <a href="https://en.wikipedia.org/wiki/Single-page_application">SPA framework</a>.</p>
+
+<p>I like to implement using the &lsquo;<a href="http://programmers.stackexchange.com/questions/166409/tdd-outside-in-vs-inside-out">outside in</a>&rsquo; approach so began with the user interface, adding one section at a time then abstracting any common patterns to make them reusable. However, after a day at the coal face writing code I took a step back and wasn&rsquo;t pleased with my results. The code was reaching a point where I was struggling to keep track of the workflow in my own head which doesn&rsquo;t exactly bode well for the poor guy that would inevitably need to modify it 6 months down the line. The trouble was no matter how hard I stared at those lines of code a more elegant and simple solution would not present itself!</p>
+
+<p>The very next day I woke up feeling sick and not be able to get into the office to finish implementing the UI. However, it may well have been the most productive &lsquo;time off&rsquo; work I&rsquo;ve had in some time. As I recuperated watching Hobbits and Orcs do battle on a grand scale my mind drifted back to the problems I&rsquo;d been having yesterday. It suddenly became clear to me that I had been abstracting at too low a level and trying to fit all of the behaviour into a single javascript module. However if I just created a single module per user profile element I could create a common &lsquo;interface&rsquo; for each module and easily iterate over them in the main module.</p>
+
+<h2>Emergent architecture</h2>
+
+<p>This new approach had all the hallmarks of a good design as my own reaction was along the lines of &lsquo;that is so obviously better, why didn&rsquo;t I just do it like that in the first place?!&rsquo; That is a pertinent question, and one that has probably troubled many a software developer. However my feeling is that often it is not possible to skip the &lsquo;bad design&rsquo; and go straight to the better solution because you don&rsquo;t know what all the problems are going to be until you start implementing. Thomas Edison summed this up nicely in one of his most famous quotes:</p>
+
+<p><blockquote><p>What it boils down to is one per cent inspiration and ninety-nine per cent perspiration.</p><footer><strong>Wikiquote <a href="https://en.wikiquote.org/wiki/Thomas_Edison">https://en.wikiquote.org/wiki/Thomas_Edison</a> Thomas Edison</strong></footer></blockquote></p>
+
+<p>While its certainly true that experience can help you see patterns and spot the problems earlier I think it is a mistake to try and design everything meticulously up front. There is bound to be some devil in the detail which makes you pivot on the design halfway through so a lot of that up front time will have been wasted.</p>
+
+<p>I find it is best to have a balance, with an initial high level draft plan for the implementation usually implemented through UML modelling. This helps guide lower level design decisions and keep one eye on the bigger picture. To make the lower level design decisions I try and stay agile, adapt the code as I&rsquo;m going along and keep complexity at a minimum.</p>
+
+<h2>Encouraging those aha! moments</h2>
+
+<p>Often my best ideas are formed away from the computer, hours or even days after the initial problem arose. The sub conscious mind is an amazing tool which can help you solve many intractable issues if you can give it the space and time to join up those dots. Despite what our employment contracts may say, software development really isn&rsquo;t a 9 to 5 job. In fact working &lsquo;harder&rsquo; during those office hours can sometimes be counter productive when it comes to making great software. Good decisions and great solutions are formed in relaxed and fresh minds, for that reason I&rsquo;d have to list my bike as one of my most essential software design tools!</p>
+
+<p>As developers we can encourage good software design by focussing on a couple of key elements:</p>
+
+<ul>
+<li>Collaborate on design, decisions should be guided by <a href="http://blog.codinghorror.com/the-ten-commandments-of-egoless-programming/">the ten commandments of egoless programming</a></li>
+<li>Ensure your estimates include enough contingency to allow for rapid prototyping and iterations during implementation.</li>
+<li>Stay pragmatic; aim high but know that perfection is subjective. Establishing coding standards can help guide when a design is good enough</li>
+</ul>
+
+
+<p>Do you have any particular techniques to help inspire your software designs? If so I&rsquo;d love to hear about them and try them out myself!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Making Awesome Software With Lean Principles - Part II]]></title>
@@ -229,54 +275,6 @@ Using synchronization is expensive (ie. It takes the computer a relatively long 
 
 
 <p>Stay tuned for more patterns to be added to this post!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The Observer Pattern Coding Kata]]></title>
-    <link href="http://bakingwebsites.co.uk/2013/05/29/the-observer-pattern-coding-kata/"/>
-    <updated>2013-05-29T08:53:06+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2013/05/29/the-observer-pattern-coding-kata</id>
-    <content type="html"><![CDATA[<p>The second design pattern I will be looking at is the Observer pattern, which is useful for safely passing data between objects. The Observer pattern is defined as:</p>
-
-<blockquote>"a one-to-many relationship between objects so that when one object changes state all it  dependants  are notified and updated automatically".</blockquote>
-
-
-<p>A good analogy for this pattern, described in the excellent <a href="http://www.headfirstlabs.com/books/hfdp/">Head First Design Patterns book</a>  is that of a magazine publisher and subscribers. Here the publisher is the <em>one</em>  in the relationship and the subscribers are the <em>many</em>. Typically the publisher will notify each of the subscribers of a new magazine edition by sending them the magazine in the post or through their e-book subscription.  Translated into the Observer pattern the Publisher is known as the Subject and the subscribers are the observers. The subject <em>notifies</em> the observers of changes in its state.</p>
-
-<p>Some important features to note about this pattern are:</p>
-
-<ul>
-    <li>Observers can not change the state of the subject and vice versa (ie. they are Loosely Coupled)</li>
-    <li>The state information can be either <em>pushed</em> out to the observers by the subject or <em>pulled</em> from the subject by the observers</li>
-    <li>Observers can be added and removed at any time</li>
-</ul>
-
-
-
-
-<h3>The brief</h3>
-
-
-<p>This is our  fictitious  brief for a new system which needs to be designed. It is election time and the polls are coming in. A local TV station would like us to design a system which can keep track of the results as they arrive. There are several hundred constituencies (areas of the country) which may declare for the Blue, Red, Yellow or Green party. The TV station wants to present this data in a number of ways:</p>
-
-<ul>
-    <li>As a leader board, showing the tally for each party</li>
-    <li>As a map, with each region coloured to the winning party</li>
-    <li>As a <a href="http://news.bbc.co.uk/1/hi/uk_politics/election_2010/8574653.stm">Swingometer</a>  showing the proportional change and overall result</li>
-</ul>
-
-
-<p>We don&rsquo;t need to worry about the implementation details of these display methods, the algorithms will be provided by the TV station. Our main concern is how to design a system to pass the data between the election object and the display objects.</p>
-
-<h3>Designing the Solution</h3>
-
-
-<p>Here is the class diagram for our solution, if you would like to try implementing the solution yourself the starting point for the kata is tagged here: <a href="https://github.com/MikeHook/DesignPatterns/tree/ObserverStart">Observer Pattern Kata Start</a>.</p>
-
-<p><img class="alignnone" alt="Observer pattern for election data" src="https://www.lucidchart.com/publicSegments/view/51892f26-05fc-4844-a25b-4c660a0087f6/image.png" width="579" height="597" /></p>
-
-<p>We have leveraged the Observer pattern in our solution. The Election object inherits from ISubject and each of the display methods inherit from IObserver. The Election object maintains a list of the observers, we can add or remove an observer to this list using the <em>Register</em> and <em>Unregister</em> methods. When the subjects <em>Notify</em> method is called it informs each of the observers that a change has occurred by calling their <em>Update</em> method. A completed implementation for the election scenario is tagged here: <a href="https://github.com/MikeHook/DesignPatterns/tree/ObserverEnd">Observer Pattern Kata End</a>.</p>
 ]]></content>
   </entry>
   
