@@ -2,7 +2,7 @@
 layout: post
 title: Continuous Delivery to Azure with AppVeyor
 comments: true
-categories: 
+categories:
 - Progress
 date: 2015-11-22 18:07:49 +01:00
 published: false
@@ -10,15 +10,17 @@ published: false
 
 [<img src="https://googledrive.com/host/0Bx-8nw9dhAQcN1lWbU1SLW91bEk/AppVeyorLogo.png" class="alignleft" title="AppVeyor" />](http://www.appveyor.com/)
 
-I've been using [Kudu to automate my website deployments](http://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/) from Github to Azure hosting for quite a while. Its worked out great but there are some limitations with it, primarily lack of control over whether changes are deployed, its very much an all or nothing tool.
+I've been using [Kudu to automate my website deployments](http://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/) from Github to Azure hosting for quite a while. Its worked out great but there are some limitations with it, primarily a lack of control over whether changes are deployed, its very much an all or nothing tool.
 
-The complexity of the web application reached a level where I wanted to ensure that the code builds and passes some automated tests before it is deployed. I couldn't see any way to incorporate those steps into a deployment pipeline with Kudu so decided to give AppVeyor a go. I'd heard about it on [Scott Hanselmans blog](http://www.hanselman.com/blog/AppVeyorAGoodContinuousIntegrationSystemIsAJoyToBehold.aspx) a while ago (my font of all .NET knowledge) and as it is free for open source projects I'd been itching to give it a go! 
+The complexity of the web application I'm maintaining reached a level where I wanted to ensure that the code builds and passes some automated tests before it is deployed. I couldn't see any way to incorporate those steps into a deployment pipeline with Kudu so decided to give AppVeyor a go. I'd heard about it on [Scott Hanselmans blog](http://www.hanselman.com/blog/AppVeyorAGoodContinuousIntegrationSystemIsAJoyToBehold.aspx) a while ago (AKA the font of 99% of .NET knowledge!) and as it is free for open source projects I'd been itching to give it a go!
 
 ##Build it, build it
 
-blah
+The first step was to get the website to build. Surprising as it may seem the website had never successfully built in Visual Studio as it used an old version of Umbraco which had some compile errors. I could either upgrade to a newer version or try and fix the compile errors. The upgrade route looked like it could take some time and fortunately Umbraco is open source so I could download the version with the issues and patch some fixes. It proved fairly straightforward, basically they has just missed out some files during the packaging of the version.
 
-##Tasty Tests  
+So now the website built locally in Visual Studio, however MSBuild still refused to build the site, not great as AppVeyor uses MSBuild to compile the website. After quite a bit of research I found that 
+
+##Tasty Tests
 
 blah 2
 
