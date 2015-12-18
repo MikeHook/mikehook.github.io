@@ -10,9 +10,9 @@ published: false
 
 [<img src="https://googledrive.com/host/0Bx-8nw9dhAQcN1lWbU1SLW91bEk/AppVeyorLogo.png" class="alignleft" title="AppVeyor" />](http://www.appveyor.com/)
 
-I've been using [Kudu to automate my website deployments](http://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/) from Github to Azure hosting for quite a while. Its worked out great but there are some limitations with it, primarily a lack of control over whether changes are deployed, its very much an all or nothing tool.
+I've been using [Kudu to automate my website deployments](http://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/) from Github to Azure for quite a while and its worked out great. But there are some limitations with it, primarily a lack of control over whether changes are deployed, its very much an all or nothing tool.
 
-The complexity of the web application I'm maintaining reached a level where I wanted to ensure that the code builds and passes some automated tests before it is deployed. I couldn't see any way to incorporate those steps into a deployment pipeline with Kudu so decided to give AppVeyor a go. I'd heard about it on [Scott Hanselmans blog](http://www.hanselman.com/blog/AppVeyorAGoodContinuousIntegrationSystemIsAJoyToBehold.aspx) a while ago (AKA the font of 99% of .NET knowledge!) and as it is free for open source projects I'd been itching to give it a go!
+The complexity of the web application I'm maintaining reached a level where I wanted to ensure that the code builds and passes some automated tests before it is deployed. I couldn't see any way to incorporate those steps into a deployment pipeline with Kudu so decided to try AppVeyor. I'd heard about it on [Scott Hanselmans blog](http://www.hanselman.com/blog/AppVeyorAGoodContinuousIntegrationSystemIsAJoyToBehold.aspx) a while ago (AKA the font of .NET knowledge!) and as it is free for open source projects I'd been itching to give it a go!
 
 ##Build it, build it
 
@@ -39,5 +39,12 @@ The final part of the jigsaw was to setup automated deployments, my requirements
 - Deploy changes commited to the staging branch to the staging site
 - Deploy changes commited to the master branch to the live site
 
-AppVeyor has a range of options for deployment including several specifically for Azure Cloud sites. However as my application is an old website I just wanted a basic file orientated publish and Web Deploy offered what I was looking for.
+AppVeyor has a range of options for deployment including several specifically for Azure Cloud sites. However as my application is an old website I just wanted a basic file orientated publish and Web Deploy offered what I was looking for. There is a handy guide on the App Veyor docs for [setting up Web Deploy with Azure sites](http://www.appveyor.com/docs/deployment/web-deploy#azure-web-sites) so I won't repeat that here. However there were some custom configuration steps I needed to take:
+
+- Add a path to the artifacts in App Veyor. These are the files which Web Deploy phyically copys to the Web Server. In my case this was just the whole 'website' directory.
+- Check the 'Remove additional files at destination' option to ensure files I've deleted locally are removed from the web server.
+- Specify 'Skip directories' to ensure assets and cached files for Umbraco are not removed. For my site the 'Skip directories' setting is '\\App_Data;\\media;\\data'.
+- Setup 2 separate Deployment providers, with the 'Deploy from branch' option set to 'staging' for the staging site and 'master' for the live site.
+
+So now whenever I push changes up to github App Veyor checks which branch I've pushed to and runs the deployment provider setup for that branch, you can see what has happened in the last few lines of the [console report](https://ci.appveyor.com/project/MikeHook/mstc). I've been really impressed with the usability and range of options available in App Veyor and it all comes at an unbeatable price of totally free for open source projects!
 
