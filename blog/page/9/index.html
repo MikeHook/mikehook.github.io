@@ -6,10 +6,10 @@
 <head>
 	<meta charset="utf-8">
 	<title>baking websites</title>
-	<meta name="author" content="Mike Hook">
+	<meta name="author" content="Hook Technologies Ltd">
 
 	
-	<meta name="description" content="Jan 10th, 2010 Hacking Comments Introducing recipestash.net With the turn of the year disappearing behind us, I thought it was about time that the &hellip;">
+	<meta name="description" content="Feb 12th, 2010 Hacking Comments You Have 20 Seconds to Comply Its pretty straight forward to generate a simple web page, there are several software &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,8 +67,8 @@
 <nav id="main-nav"><h3>categories</h3>
 <ul class="main-navigation">
 <li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
-<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 5 ]</li>
-<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 15 ]</li>
+<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 7 ]</li>
+<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 16 ]</li>
 <li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
 <li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 9 ]</li>
 
@@ -111,6 +111,266 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-02-12T09:00:00+00:00" data-updated="true" itemprop="datePublished">Feb 12<span>th</span>, 2010</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2010/02/12/you-have-20-seconds-to-comply/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2010/02/12/you-have-20-seconds-to-comply/" itemprop="url">You Have 20 Seconds to Comply</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Its pretty straight forward to generate a simple web page, there are several software tools available that will generate the mark up code for you. However, even using these tools, it is easy to misuse tags and not conform to the <a href="http://www.w3.org/TR/xhtml11/">XHTML standards</a>. If you were unfortunate enough to follow the previous link, you may well be thinking,</p>
+
+<blockquote>   What does it all mean, my web page looks fine so does compliance really matter?   </blockquote>
+
+
+<p>This is a valid point, however compliance is widely regarded to be important for a number of reasons. These are pretty <a href="http://www.leemunroe.com/how-important-is-valid-html-web-standards/">well documented</a> around the web so I   ll just highlight a couple of the reasons that I think are most important.</p>
+
+<p>Firstly a compliant web page should be assured of displaying fairly consistently across all major browsers, both now and in the future. Unfortunately some browsers are more compliant than others, internet explorer still demands some extra attention but it is much improved since the days of IE6. The newer browsers which have come onto the market, such as Firefox and Chrome, generally display compliant pages very well. Secondly I think that compliance is important as it makes the content more accessible to machine readers. For example the readers used by search engines will be able to read and index the page content easier, which will help increase traffic to the site. This theory has actually been tested and there is some evidence to back up the claims that <a href="http://www.hobo-web.co.uk/seo-blog/index.php/official-google-prefers-valid-html-css/">Google prefers valid HTML and CSS</a>.</p>
+
+<h4>Keep it clean</h4>
+
+
+<p>The first step to compliance is to separate the HTML mark-up from the presentation using a CSS (Cascading Style Sheet) document. This helps ensure that the web page is short and the content is easy to find. Apparently search engines are busy guys and they just don   t have the time to be reading all that content on your site. So they only read up to a certain number of characters, if your important content is pushed too far down the document then there is a rick that it will never get indexed.</p>
+
+<p>I   ve gone for a fairly straight forward layout on the recipe stash site, with a fixed width page of 960 pixels to target resolution widths of 1024 and above. The header, footer and main content are all in a single column. This layout can be created in CSS without too much trouble. I   ve tried to use the HTML tags as they were intended originally, for example the menus are tagged as an unordered list of elements, then styled to display horizontally.</p>
+
+<p>There is an unfortunate limitation with HTML, it does not support curved corners. So I   ve used to <a href="http://www.html.it/articoli/niftycube/index.html">Nifty Corners</a> to create the curved effect on the top navigation menu and latest recipes section:</p>
+
+<p><a href="http://lh3.ggpht.com/_5hQeqbPSrks/S3SKU8XP19I/AAAAAAAAAEg/LyqqweIM2DE/s1600-h/recipestash-nav%5B4%5D.jpg"><img title="recipestash-nav" src="http://lh5.ggpht.com/_5hQeqbPSrks/S3SKVdVr1qI/AAAAAAAAAEk/xCnYOpYSNAI/recipestash-nav_thumb%5B2%5D.jpg?imgmax=800" border="0" alt="recipestash-nav" width="492" height="56" /></a></p>
+
+<p>Nifty Corners is a JavaScript based tool which adds HTML and CSS to the page when it is loaded to create the effect of curved corners. The other option I considered to create the curved corners was to cut out images of the corners themselves and position them in the corners of the HTML elements. However I decided to use Nifty corners for a number of reasons:</p>
+
+<ul>
+    <li>No images are required</li>
+    <li>The generated HTML mark-up is compliant</li>
+    <li>The implementation is fast     just one line of JavaScript to call!</li>
+    <li>It degrades gracefully (If JavaScript is not available then it does nothing)</li>
+</ul>
+
+
+
+
+<h4>Exceptions to the rule</h4>
+
+
+<p>I mentioned earlier that internet explorer interprets style sheets differently to other browsers. This is so pronounced for version six that a completely different style sheet would be needed to create the same visual layout. I   ve decided that this would take up too much of my time and have instead used the <a href="http://forabeautifulweb.com/blog/about/universal_internet_explorer_6_css/">universal ie6 style sheet</a>, along with an upgrade message for anyone that is using IE6.</p>
+
+<p>I   m currently running on Windows Vista and it is pretty tricky to test for all versions of internet explorer. There are two main methods that can be used to test, either install a virtual machine running Windows XP with IE6 installed natively or use the <a href="http://www.my-debugbar.com/wiki/IETester/HomePage">IETester</a> program. I   ve gone for the IETester program, mainly because it is quicker to install and doesn   t take up a huge chunk of my hard drive. I   ve tried it out and it displays the basically styled page I would expect to see in IE6 mode:</p>
+
+<p><a href="http://lh5.ggpht.com/_5hQeqbPSrks/S3SKV6LNNrI/AAAAAAAAAEo/-kTCMp0wAF0/s1600-h/IETester2%5B3%5D.jpg"><img style="border:0 none;" title="IETester2" src="http://lh4.ggpht.com/_5hQeqbPSrks/S3SKWZVC3DI/AAAAAAAAAEs/JO8fB75k_mA/IETester2_thumb%5B1%5D.jpg?imgmax=800" border="0" alt="IETester2" width="481" height="471" /></a></p>
+
+<p><span style="color:#ff0000;"><span style="color:#000000;">The deficiencies of Internet Explorer versions seven and eight are less pronounced and I only needed to modify a couple of elements to give the same appearance to the web page:</span></span></p>
+
+<ul>
+    <li>Added fixed widths to the main div elements so margins are applied</li>
+    <li>Extra div element wrapper on the so the margin is applied</li>
+    <li>Add fixed widths to the navigation menu elements to fix nifty corners in ie7</li>
+</ul>
+
+
+
+
+<h4>Validating the page</h4>
+
+
+<p>It would be difficult to judge when the mark up and styling of a web page is actually valid, fortunately there are many tools freely available on the web to help. During development I generally use the <a href="http://users.skynet.be/mgueury/mozilla/">HTML validator</a> Firefox extension. This provides a little icon in the bottom right corner of the web browser that indicates whether the current page is valid or not. Clicking the icon brings up a list of validation errors for the page. I like this tool as it is quick to browse through a site and check the validation on each page.</p>
+
+<p>I   ve also included links to the <a href="http://www.w3.org/">World Wide Web Consortiums</a> XHTML and CSS <a href="http://validator.w3.org/">validation services</a> in the page footer. This will submit the current page to their online validation tools and display a report with suggestions for any problems that are found.</p>
+
+<p>Well that   s just about all I   ve got on compliance, however if you   re after a more    hard line    message then you can <a href="http://www.entertonement.com/clips/fhzjhvmbgv--You-have-20-seconds-to-complyRobocop-Jon-Davison-Ed-209-">check this out</a>!</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-02-02T08:49:00+00:00" data-updated="true" itemprop="datePublished">Feb 2<span>nd</span>, 2010</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2010/02/02/recipe-stash-homepage-visuals/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2010/02/02/recipe-stash-homepage-visuals/" itemprop="url">Recipe Stash Homepage Visuals</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>I   ve finished updating the mock-up for the recipe stash home page and converted it into a web page. There is a screen grab of the page below, unfortunately you can   t poke around the HTML and CSS but believe me it is all there! In this post I   m going to outline the decisions I   ve taken for the visual design of the page. The next post will go into the considerations I   ve taken to ensure the site will be standards compliant and work across all the major browsers. If that sounds a bit dry don   t worry I   ll be adding in some cheesy headings for your entertainment.</p></p>
+
+<table style="width:auto;"><tbody>     <tr>       <td><a href="http://picasaweb.google.com/lh/photo/8nH-_cfzbS3Wio7y4hrQQw?authkey=Gv1sRgCL7W-eqGn5fIcA&amp;feat=embedwebsite"><img src="http://lh6.ggpht.com/_5hQeqbPSrks/S2XR_Y8L0jI/AAAAAAAAAEE/xqw-y6LPaPo/s400/recipestash-home.jpg" /></a></td>     </tr>      <tr>       <td style="text-align:right;font-family:arial, sans-serif;font-size:11px;">From <a href="http://picasaweb.google.com/hook.mike/BakingWebsites?authkey=Gv1sRgCL7W-eqGn5fIcA&amp;feat=embedwebsite">Baking Websites</a></td>     </tr>   </tbody></table>
+
+
+
+
+<h4>Top to tail</h4>
+
+
+<p>The most immediate visual change you will probably notice, compared to the original mock-ups, is the header and footer background colour. This was a handy hint from the senior designer at <a href="http://www.cubeworks.co.uk">Cubeworks</a>, so thanks Jesse! I much prefer how this breaks up the page and gives a clear separation between the main content and the rest of the page.</p>
+
+<h4>Press my buttons</h4>
+
+
+<p>I put a bit of time into making a big shiny    Search    button to use in the header. I found it surprisingly tricky to choose a button that draws attention to the user but doesn   t stick out horribly from the rest of the design. I   m not entirely happy with the selection but I think its good enough for now. Another button image can easily be dropped in latter if I feel the need.&#160;&#160;&#160;&#160;</p>
+
+<h4>Tabs for Navs</h4>
+
+
+<p>Another major change in the design (and another top tip from Jesse) is a move away from the vertical icon based navigation menu in favour of a horizontal tabbed menu. This is a more conventional means of user navigation and will probably be easier for them to understand. I   m happy with how the visuals have turned out on the tabbed menu, keeping colours in line with the rest of the site and curved corners for a more current feel.</p>
+
+<h4>Heading Home</h4>
+
+
+<p>I   ve retained the icons that were originally used on the navigation. They are now displayed to the left hand side of the main h1 page heading. These icons are one of the few graphical elements on the site so I   m pleased that there is still a place for them here. I think they provide an immediate prompt to the user as to which section they are in, complimenting the nav menu highlighting and h1 heading text itself.</p>
+
+<h4>Colour me red</h4>
+
+
+<p>Although not really shown in the image above, the plan is to still use a different colour for each of the main sections, which will be most evident in the main navigation and heading colours. This point will be one to revisit once I   ve completed the other section pages.</p>
+
+<p>&lt;</p>
+
+<p>p&gt;That just about wraps up the main visual changes for the home page.&#160; In the next post I   ll be taking a look behind the scenes at the technical decisions I   ve made to generate the page.</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-01-13T19:51:00+00:00" data-updated="true" itemprop="datePublished">Jan 13<span>th</span>, 2010</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2010/01/13/recipestash-design-mock-ups/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2010/01/13/recipestash-design-mock-ups/" itemprop="url">Recipestash Design Mock-ups</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>The recipestash website is flush with a shiny new domain name, however it was sadly lacking in any kind of visual design. Up to now I   ve been working with a generic style sheet downloaded from <a href="http://www.freecsstemplates.org/">free CSS templates</a> however I think it is poorly suited to the site. So I   ve put some time into making some mock-ups in Photoshop. </p></p>
+
+<p>I   ve identified the site homepage, main search page and    Add a recipe    pages as the main areas to mock up. The remaining sections can be investigated later. The design mock-ups for each of the pages are shown below (full size versions can be viewed in the <a href="http://picasaweb.google.com/hook.mike/BakingWebsites?authkey=Gv1sRgCL7W-eqGn5fIcA&amp;feat=embedwebsite">Picasa web album</a>).</p>
+
+<h4><a href="http://picasaweb.google.com/lh/photo/SMxU9grhwyO-94vtTC6wlw?authkey=Gv1sRgCL7W-eqGn5fIcA&amp;feat=directlink">Home</a></h4>
+
+
+
+
+<table style="width:auto;"><tbody>     <tr>       <td><a href="http://picasaweb.google.com/lh/photo/SMxU9grhwyO-94vtTC6wlw?authkey=Gv1sRgCL7W-eqGn5fIcA&amp;feat=embedwebsite"><img src="http://lh4.ggpht.com/_5hQeqbPSrks/S0oq83g-3mI/AAAAAAAAACU/Itr3eLIfQac/s400/home-5.png" /></a></td>     </tr>      <tr>       <td style="text-align:right;font-family:arial, sans-serif;font-size:11px;">From <a href="http://picasaweb.google.com/hook.mike/BakingWebsites?authkey=Gv1sRgCL7W-eqGn5fIcA&amp;feat=embedwebsite">Baking Websites</a></td>     </tr>   </tbody></table>
+
+
+<p>I   ve gone for a minimal design on the homepage, the header will be used across all pages on the site and includes the site name, main search bar and login controls for the current user. The main content on the homepage highlights each of the four sections on the site which will be used most often. I   ve chosen a different colour for each of the main sections, hopefully this will give users a visual feel of where they are on the site. The four icons on the left will be displayed on all of the pages and be used as the main means of navigation. I   ll be looking to use some jQuery to display the section names when each of the icons is hovered over. If javascript is not available in the browser then a simple navigation menu will be displayed in the header.</p>
+
+<h4><a href="http://picasaweb.google.com/lh/photo/rGAahgUi9lxqrOS69MuHoQ?authkey=Gv1sRgCL7W-eqGn5fIcA&amp;feat=directlink">Browse recipes</a></h4>
+
+
+
+
+<table style="width:auto;"><tbody>     <tr>       <td><a href="http://picasaweb.google.com/lh/photo/rGAahgUi9lxqrOS69MuHoQ?authkey=Gv1sRgCL7W-eqGn5fIcA&amp;feat=embedwebsite"><img src="http://lh6.ggpht.com/_5hQeqbPSrks/S04japbJMsI/AAAAAAAAAC0/sW00NCbkFyc/s400/browse-2.png" /></a></td>     </tr>      <tr>       <td style="text-align:right;font-family:arial, sans-serif;font-size:11px;">From <a href="http://picasaweb.google.com/hook.mike/BakingWebsites?authkey=Gv1sRgCL7W-eqGn5fIcA&amp;feat=embedwebsite">Baking Websites</a></td>     </tr>   </tbody></table>
+
+
+<p>The    Browse recipes    page can be reached from either the navigation menu or the search bar. The main features of the page are:</p>
+
+<h5>Search keywords</h5>
+
+
+<p>If the page has been reached from a search the top section displays the keywords which have been searched for. Each of these can be removed from the search by pressing the    x    icon next to the keyword.</p>
+
+<h5>Filters </h5>
+
+
+<p>Each of the filters are a simple checkbox, which will cause the results to display only those matching the filters. I may include an    apply filters    button for accessibility as performing a postback on the checkbox selection would most likely require some javascript to operate.</p>
+
+<h5>List of recipes </h5>
+
+
+<p>The list of recipes will include summary information for each of the recipes, as shown in the mock-up above. The ordering of the recipes can be controlled by clicking on the column headings. I will look to colour one of the headings to indicate which is currently being used to order the results.</p>
+
+<h5>More recipes link </h5>
+
+
+<p>Clicking the link will cause more recipes to be loaded to the bottom of the search results.&#160;&#160;</p>
+
+<h4><a href="http://picasaweb.google.com/lh/photo/cC7X3M6u_Jo1M_AuXDawQw?authkey=Gv1sRgCL7W-eqGn5fIcA&amp;feat=directlink">Add a recipe</a></h4>
+
+
+
+
+<table style="width:auto;"><tbody>     <tr>       <td><a href="http://picasaweb.google.com/lh/photo/cC7X3M6u_Jo1M_AuXDawQw?authkey=Gv1sRgCL7W-eqGn5fIcA&amp;feat=embedwebsite"><img src="http://lh4.ggpht.com/_5hQeqbPSrks/S0pHr70y72I/AAAAAAAAACw/f6YE3GYZR-0/s400/add-recipe-1.png" /></a></td>     </tr>      <tr>       <td style="text-align:right;font-family:arial, sans-serif;font-size:11px;">From <a href="http://picasaweb.google.com/hook.mike/BakingWebsites?authkey=Gv1sRgCL7W-eqGn5fIcA&amp;feat=embedwebsite">Baking Websites</a></td>     </tr>   </tbody></table>
+
+
+<p>The functionality of the    Add a recipe    page is already largely complete. The above styling will need to be applied to the pages to format the form as displayed above. It may be tricky to apply the styling shown to the text boxes but there are other sites using similar effects so I can probably find some hints for the required CSS techniques from them!</p>
+
+<p>&lt;</p>
+
+<p>p&gt;Next up I will be looking to generate some HTML and CSS to match the mock-ups which can be used in the website views.</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -234,293 +494,6 @@
 
 </article>
 
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-11-16T20:45:00+00:00" data-updated="true" itemprop="datePublished">Nov 16<span>th</span>, 2009</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2009/11/16/integrating-the-tinymce-rich-text-editor/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2009/11/16/integrating-the-tinymce-rich-text-editor/" itemprop="url">Integrating the TinyMCE Rich Text Editor</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>I   ve been working on a page to add method descriptions for the recipes. The most simple solution for this would be a large text area allowing the user to add multiple lines of text for the recipe method. However I think this would be too limiting for the users and also offer poor formatting when the completed recipes are viewed. A better solution is to use a rich text editor which allows users to entered formatted text and generates HTML to use on the recipe views.</p>
-
-<p>The editor had to allow the users to enter formatted text including paragraphs, text highlighting, numbered and bulleted lists. It was also important that the editor could be limited to prevent users entering content which would break the styling of the site. For example no image tags should be entered in the method as there is already a separate image property for each recipe. Fortunately I   ve had experience using the <a href="http://tinymce.moxiecode.com/">TinyMCE rich text editor</a> from working on <a href="http://n2cms.com/">N2 CMS</a> based websites at work and this editor meets all of the requirements.</p>
-
-<p>Integrating TinyMCE into the site was pretty straightforward, there is detailed documentation on the <a href="http://wiki.moxiecode.com/">TinyMCE wiki</a>, including installation instructions. Adding the editor to the site is simply a case of downloading the assets, including them in the VS project and including a javascript call to load the editor in the page header. By default the call transforms all text areas into TinyMCE editors. I also found the simple mode provided the limited feature set I was looking for. There were just a couple of issues to resolve before the editor could be used.</p>
-
-<h4>Disable Input Validation</h4>
-
-
-<p>The editor generates HTML which is posted back to the server when the page is submitted. However by default MVC throws an exception as the postback contains HTML tags:</p>
-
-<blockquote><strong>Exception Details: </strong>System.Web.HttpRequestValidationException: A potentially dangerous Request.Form value was detected from the client (CookingMethod=&#8221;&lt;p&gt;A Test method&lt;/p&gt;
-&lt;u&#8230;&#8221;).</blockquote>
-
-
-<p>To prevent this exception from being thrown the page validation must be disabled. This is done by adding the <em>[ValidateInput(false)]</em> attribute to the controllers action method which is called when the page is submitted.</p>
-
-<h4>Protect Against Unwanted HTML / XSS</h4>
-
-
-<p>After making this change the editor content posts back to the server and can be saved to the repository. However disabling the input validation leaves the site open to cross site scripting (XSS) attacks so some extra precautions need to be put in place.
-TinyMCE already checks the content which is posted back, however the wiki points out that the editor can be easily disabled by any user by disabling javascript in the browser. They recommend that some server side checks are put in place to prevent any unwanted tags and scripts from being persisted to the repository.
-I   ve added some code to check the recipe method string and strip all unwanted tags. It uses a regular expression to allow a subset of tags to be saved. Any other tags are replaced by an empty string. I found a good <a href="http://stackoverflow.com/questions/307013/how-do-i-filter-all-html-tags-except-a-certain-whitelist">SantizeHTML method</a> posted on stack overflow, so no need to reinvent the wheel here!</p>
-
-<h4>Protect Against CSRF</h4>
-
-
-<p>While I was in the area of security I thought I may as well increase the protection of the form to cross site request forgery (CSRF) attacks. Steve Sanderson has already written a full <a href="http://blog.codeville.net/2008/09/01/prevent-cross-site-request-forgery-csrf-using-aspnet-mvcs-antiforgerytoken-helper/">blog post</a> on this subject (among others I   m sure) so I won   t go into detail on this. Suffice to say I thought it was worth adding as it only takes 5 minutes and provides an extra level of protection which may be needed later.</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-10-16T13:55:00+01:00" data-updated="true" itemprop="datePublished">Oct 16<span>th</span>, 2009</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/software-design/'>Software Design</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2009/10/16/optimising-data-access-queries-part-2/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2009/10/16/optimising-data-access-queries-part-2/" itemprop="url">Optimising Data Access Queries (Part 2)</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>In <a href="http://www.blogger.com/2009/10/optimising-data-access-queries-part-1.html">part 1</a> of this post I implemented a custom repository method to find all ingredients containing a keyword. The obvious improvement for this query was to extend the search to multiple keywords. As usual the first step was to write a unit test for the new method:</p>
-
-<pre style="border:1px dashed #999999;overflow:auto;background-color:#eeeeee;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:236px;line-height:14px;width:114.97%;padding:5px;"><code>        protected override void LoadTestData()
-        {
-            CreatePersistedIngredient(1, "Chicken thigh", FoodGroup.Meat);
-            CreatePersistedIngredient(2, "Chicken breast", FoodGroup.Meat);
-            CreatePersistedIngredient(3, "Red Pepper", FoodGroup.Vegetable);
-            CreatePersistedIngredient(4, "Jalapeno Chilli", FoodGroup.Vegetable);
-        }
-
-        [Test]
-        public void CanFindIngredientsByKeywords()
-        {
-            List&lt;Ingredient&gt; ingredients = ingredientRepository.FindByKeywords(new string[] { "chilli", "pepper" }).ToList();
-            ingredients.ShouldNotBeNull();
-            ingredients.Count.ShouldEqual(2);
-        }
-</code></pre>
-
-
-<p>The test expects 2 ingredients to be returned for the search     both the    Red pepper    and    Jalapeno Chilli    ingredients should be returned.</p>
-
-<h4>Predicate functions and Expression trees</h4>
-
-
-<p>I wanted to keep using the Linq-to-NHibernate library for the data access queries as this ensures that the queries inherit all the <a href="http://weblogs.asp.net/scottgu/archive/2006/05/14/Using-LINQ-with-ASP.NET-_2800_Part-1_2900_.aspx">benefits of Linq</a>. I also find it more intuitive to use than HQL, for simple queries at least! The core problem was how to write a Linq query that could be extended for an arbitrary number of keywords. In HQL this could be achieved by looping over the keywords and building up the query string. However it is not so easy to iteratively build a lambda function.</p>
-
-<p>My first effort involved chaining together <a href="http://www.codeproject.com/KB/cs/FunWithFunc1.aspx">predicate functions</a>. However after passing the chained predicate to NHibernate the rather less than impressive result was nothing    for any query! Looking at the SQL query produced showed that an incomplete statement was being passed without any of the filter keywords. I was unable to find any documentation to speak of for Linq-to-NHibernate but the <a href="http://groups.google.com/group/nhusers">NHibernate user group</a> did prove useful. They suggested that I may have more success building up an <a href="http://blogs.msdn.com/charlie/archive/2008/01/31/expression-tree-basics.aspx">expression tree</a> and using that as the predicate.
-<a href="http://blogs.msdn.com/charlie/archive/2008/01/31/expression-tree-basics.aspx"></a></p>
-
-<h4>Dynamic Linq-to-NHibernate Query</h4>
-
-
-<p>After reading up on expression trees I was in a position to code up a method to dynamically build the predicate. While researching the best way to tackle this, the internet again reminded me that there are not many original problems left in this world! This article by Joseph Albahari on  <a href="http://www.albahari.com/nutshell/predicatebuilder.aspx">dynamically composing expression predicates</a> demonstrated how a helper class could be used to farm out the work of building up the predicate. The following class makes use of the PredicateBuilder class provided in the article:</p>
-
-<pre style="border:1px dashed #999999;overflow:auto;background-color:#eeeeee;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:180px;line-height:14px;width:114.82%;padding:5px;"><code>        public IEnumerable&lt;Ingredient&gt; FindByKeywords(IEnumerable&lt;string&gt; keywords)
-        {
-            Expression&lt;Func&lt;Ingredient, bool&gt;&gt; predicate = PredicateBuilder.False&lt;Ingredient&gt;();
-
-            foreach (string keyword in keywords)
-            {
-                string temp = keyword;
-                predicate = predicate.Or(i =&gt; i.Name.Contains(temp));
-            }
-            return Session.Linq&lt;Ingredient&gt;().Where(predicate);
-        }
-</code></pre>
-
-
-
-
-<ul>
-    <li> The expression predicate is initialised to false</li>
-    <li>The predicate is chained together using the <em>Or</em> method of predicate builder class</li>
-    <li>The final predicate will return true for any Ingredient that has a Name containing any of the keywords.</li>
-</ul>
-
-
-<p>The FindByKeywords method passes the unit test at the start of the post. Implementing this method took a while, mostly due to the time taken to read up on the predicate functions and expression trees. However I think it was time worth spending as these language features are here to stay and will most likely increase in use over time. Also I now have a handy way of writing efficient Linq queries with multiple filter parameters :)</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-10-11T16:11:00+01:00" data-updated="true" itemprop="datePublished">Oct 11<span>th</span>, 2009</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/software-design/'>Software Design</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2009/10/11/optimising-data-access-queries-part-1/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2009/10/11/optimising-data-access-queries-part-1/" itemprop="url">Optimising Data Access Queries (Part 1)</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>In this post I will be looking at the best way to re-factor a data access query which is used on the add ingredients page. Initially the query was written quickly with no consideration given to the time it would take to execute. It is not currently a problem as the database is very small but in future the page could be very slow to load.<br /></p>
-
-<pre style="background-color:#eeeeee;border:1px dashed rgb(153,153,153);color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:40px;line-height:14px;overflow:auto;width:100.55%;padding:5px;"><code>    ingredientsModel.MatchingIngredients = IngredientRepository.GetAll()
-        .Where(i =&gt; i.Name.ToLower().Contains(ingredientsModel.SearchIngredient.ToLower())).ToList();
-</code></pre>
-
-
-<p>This is a poorly optimised query as the generic <a href="http://wiki.sharparchitecture.net/ClassLibraries.ashx#SharpArchData_2">Sharp Architecture repository</a> <i>GetAll()</i> method call retrieves the entire data set from the database. It is then filtered in memory to get the actual matching ingredients. For larger datasets, it would be much quicker if the data is filtered before it is retrieved from the database. The query could be rewritten to use the <i>FindAll(IDictionary propertyValuePairs)</i> method like this:<br /></p>
-
-<pre style="background-color:#eeeeee;border:1px dashed rgb(153,153,153);color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:32px;line-height:14px;overflow:auto;width:100.72%;padding:5px;"><code>    ingredientsModel.MatchingIngredients = IngredientRepository
-        .FindAll(new Dictionary { { "Name", ingredientsModel.SearchIngredient.ToLower()} });</code></pre>
-
-
-<p>This does solve the optimisation issue as the resulting database SQL query uses a <i>Where</i> clause to pre-filter the data. However, the query is limited to retrieving exact matches to the search string. It is unlikely that users will input the exact ingredient they are searching for, so it would be better if the query retrieved all ingredients that contain the search term. <br /></p>
-
-<h4>
-Unit Testing the Custom Repository</h4>
-
-
-<p>In order to do this I will use a custom repository and add my own query method. Much credit is due to the <a href="http://wiki.sharparchitecture.net/SettingUpNorthwind.ashx">Sharp Architecture example projects</a>, which provide a good basis for the techniques I   ve used here. First, I&rsquo;ll write a unit test for the new repository method. The test class is shown below and each section is explained after the class: <br /></p>
-
-<pre style="background-color:#eeeeee;border:1px dashed rgb(153,153,153);color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:471px;line-height:14px;overflow:auto;width:100.88%;padding:5px;"><code>    [TestFixture]
-    public class IngredientRepositoryTests : RepositoryTestsBase
-    {
-        protected override void LoadTestData()
-        {
-            CreatePersistedIngredient(1, "Chicken thigh", FoodGroup.Meat);
-            CreatePersistedIngredient(2, "Chicken breast", FoodGroup.Meat);
-            CreatePersistedIngredient(3, "Red Pepper", FoodGroup.Vegetable);
-            CreatePersistedIngredient(4, "Jalapeno Chilli", FoodGroup.Vegetable);
-        }
-
-        private IIngredientRepository ingredientRepository = new IngredientRepository();
-
-        private Ingredient CreatePersistedIngredient(int ingredientId, string ingredientName, FoodGroup foodGroup)
-        {
-            Ingredient ingredient = new Ingredient(ingredientName, foodGroup);
-            ingredientRepository.SaveOrUpdate(ingredient);
-            FlushSessionAndEvict(ingredient);
-            return ingredient;
-        }
-
-        [Test]
-        public void CanFindIngredientsByName()
-        {
-            List&lt;Ingredient&gt; ingredients = ingredientRepository.FindByName("chicken").ToList();
-            ingredients.ShouldNotBeNull();
-            ingredients.Count.ShouldEqual(2);
-        }
-    }
-</code></pre>
-
-
-
-
-<ul>
-<li>The unit test inherits from the RepositoryTestsBase (namespace SharpArch.Testing.NUnit.NHibernate) which enables test data to be easily loaded into the in-memory database by overriding the the LoadTestData method. </li>
-<li>The ingredientRepository property is the custom repository data access class </li>
-<li>The CreatePersistedIngredient method is used in the LoadTestData method to save a single ingredient entity to the in-memory database. Note the call to FlushSessionAndEvict is used to persist the saved entity to the database </li>
-<li>The CanFindIngredientsByName method is our test method which runs the repository FindByName method&nbsp; </li>
-<li>The test method asserts that the ingredients list is populated with 2 Ingredient entities </li>
-</ul>
-
-
-
-
-<h4>
-Implementing the Custom Repository </h4>
-
-
-<p>Now we are ready to implement the custom repository for the accessing ingredient data. Again, the class is shown below with explanations following it: <br /></p>
-
-<pre style="background-color:#eeeeee;border:1px dashed rgb(153,153,153);color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:110px;line-height:14px;overflow:auto;width:101.54%;padding:5px;"><code>    public class IngredientRepository : Repository&lt;Ingredient&gt;, IIngredientRepository
-    {        
-        public IEnumerable&lt;Ingredient&gt; FindByName(string ingredientName)
-        {
-            return Session.Linq&lt;Ingredient&gt;().Where(a =&gt; a.Name.Contains(ingredientName));
-        }
-    }
-</code></pre>
-
-
-
-
-<ul>
-<li>The custom repository inherits from the generic sharp architecture Repository class, ensuring that all the standard access methods are available </li>
-<li>It implements the IIngredientRepository interface. This enables IoC injection of the repository into the controllers. </li>
-<li>The FindByName method implements a <a href="http://nhforge.org/">Linq to NHibernate</a> query using the <i>Where</i> method. This will be transformed into a SQL query using a <i>Where</i> clause to prefilter the data before it is retrieved. </li>
-</ul>
-
-
-<p>The custom repository method passes the unit test and returns the expected data. The original query is now optimised and will perform much better against larger data sets. I   ve improved the efficiency of the data access, however I   d also like to improve the functionality. So in the next post I will be looking at extending the ingredient repository with a new dynamic query. This will enable searching by an arbitrary number of keywords.<br /></p>
-
-		
-		
-	</div>
-
-</article>
-
 </div>
 <nav id="pagenavi">
     
@@ -533,7 +506,7 @@ Implementing the Custom Repository </h4>
 </nav></div>
 			</div>
 			<footer id="footer" class="inner"><p>
-  Copyright &copy; 2015 - Mike Hook -
+  Copyright &copy; 2015 - Hook Technologies Ltd -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 </footer>

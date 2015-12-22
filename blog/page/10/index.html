@@ -6,10 +6,10 @@
 <head>
 	<meta charset="utf-8">
 	<title>baking websites</title>
-	<meta name="author" content="Mike Hook">
+	<meta name="author" content="Hook Technologies Ltd">
 
 	
-	<meta name="description" content="Sep 14th, 2009 Hacking Comments Custom Routing for the Recipe Controllers (MVC) I&rsquo;ve been working on re-factoring the add recipe feature to &hellip;">
+	<meta name="description" content="Nov 16th, 2009 Hacking Comments Integrating the TinyMCE Rich Text Editor I ve been working on a page to add method descriptions for the recipes. The &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,8 +67,8 @@
 <nav id="main-nav"><h3>categories</h3>
 <ul class="main-navigation">
 <li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
-<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 5 ]</li>
-<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 15 ]</li>
+<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 7 ]</li>
+<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 16 ]</li>
 <li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
 <li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 9 ]</li>
 
@@ -111,6 +111,293 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-16T20:45:00+00:00" data-updated="true" itemprop="datePublished">Nov 16<span>th</span>, 2009</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2009/11/16/integrating-the-tinymce-rich-text-editor/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2009/11/16/integrating-the-tinymce-rich-text-editor/" itemprop="url">Integrating the TinyMCE Rich Text Editor</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>I   ve been working on a page to add method descriptions for the recipes. The most simple solution for this would be a large text area allowing the user to add multiple lines of text for the recipe method. However I think this would be too limiting for the users and also offer poor formatting when the completed recipes are viewed. A better solution is to use a rich text editor which allows users to entered formatted text and generates HTML to use on the recipe views.</p>
+
+<p>The editor had to allow the users to enter formatted text including paragraphs, text highlighting, numbered and bulleted lists. It was also important that the editor could be limited to prevent users entering content which would break the styling of the site. For example no image tags should be entered in the method as there is already a separate image property for each recipe. Fortunately I   ve had experience using the <a href="http://tinymce.moxiecode.com/">TinyMCE rich text editor</a> from working on <a href="http://n2cms.com/">N2 CMS</a> based websites at work and this editor meets all of the requirements.</p>
+
+<p>Integrating TinyMCE into the site was pretty straightforward, there is detailed documentation on the <a href="http://wiki.moxiecode.com/">TinyMCE wiki</a>, including installation instructions. Adding the editor to the site is simply a case of downloading the assets, including them in the VS project and including a javascript call to load the editor in the page header. By default the call transforms all text areas into TinyMCE editors. I also found the simple mode provided the limited feature set I was looking for. There were just a couple of issues to resolve before the editor could be used.</p>
+
+<h4>Disable Input Validation</h4>
+
+
+<p>The editor generates HTML which is posted back to the server when the page is submitted. However by default MVC throws an exception as the postback contains HTML tags:</p>
+
+<blockquote><strong>Exception Details: </strong>System.Web.HttpRequestValidationException: A potentially dangerous Request.Form value was detected from the client (CookingMethod=&#8221;&lt;p&gt;A Test method&lt;/p&gt;
+&lt;u&#8230;&#8221;).</blockquote>
+
+
+<p>To prevent this exception from being thrown the page validation must be disabled. This is done by adding the <em>[ValidateInput(false)]</em> attribute to the controllers action method which is called when the page is submitted.</p>
+
+<h4>Protect Against Unwanted HTML / XSS</h4>
+
+
+<p>After making this change the editor content posts back to the server and can be saved to the repository. However disabling the input validation leaves the site open to cross site scripting (XSS) attacks so some extra precautions need to be put in place.
+TinyMCE already checks the content which is posted back, however the wiki points out that the editor can be easily disabled by any user by disabling javascript in the browser. They recommend that some server side checks are put in place to prevent any unwanted tags and scripts from being persisted to the repository.
+I   ve added some code to check the recipe method string and strip all unwanted tags. It uses a regular expression to allow a subset of tags to be saved. Any other tags are replaced by an empty string. I found a good <a href="http://stackoverflow.com/questions/307013/how-do-i-filter-all-html-tags-except-a-certain-whitelist">SantizeHTML method</a> posted on stack overflow, so no need to reinvent the wheel here!</p>
+
+<h4>Protect Against CSRF</h4>
+
+
+<p>While I was in the area of security I thought I may as well increase the protection of the form to cross site request forgery (CSRF) attacks. Steve Sanderson has already written a full <a href="http://blog.codeville.net/2008/09/01/prevent-cross-site-request-forgery-csrf-using-aspnet-mvcs-antiforgerytoken-helper/">blog post</a> on this subject (among others I   m sure) so I won   t go into detail on this. Suffice to say I thought it was worth adding as it only takes 5 minutes and provides an extra level of protection which may be needed later.</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-10-16T13:55:00+01:00" data-updated="true" itemprop="datePublished">Oct 16<span>th</span>, 2009</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/software-design/'>Software Design</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2009/10/16/optimising-data-access-queries-part-2/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2009/10/16/optimising-data-access-queries-part-2/" itemprop="url">Optimising Data Access Queries (Part 2)</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>In <a href="http://www.blogger.com/2009/10/optimising-data-access-queries-part-1.html">part 1</a> of this post I implemented a custom repository method to find all ingredients containing a keyword. The obvious improvement for this query was to extend the search to multiple keywords. As usual the first step was to write a unit test for the new method:</p>
+
+<pre style="border:1px dashed #999999;overflow:auto;background-color:#eeeeee;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:236px;line-height:14px;width:114.97%;padding:5px;"><code>        protected override void LoadTestData()
+        {
+            CreatePersistedIngredient(1, "Chicken thigh", FoodGroup.Meat);
+            CreatePersistedIngredient(2, "Chicken breast", FoodGroup.Meat);
+            CreatePersistedIngredient(3, "Red Pepper", FoodGroup.Vegetable);
+            CreatePersistedIngredient(4, "Jalapeno Chilli", FoodGroup.Vegetable);
+        }
+
+        [Test]
+        public void CanFindIngredientsByKeywords()
+        {
+            List&lt;Ingredient&gt; ingredients = ingredientRepository.FindByKeywords(new string[] { "chilli", "pepper" }).ToList();
+            ingredients.ShouldNotBeNull();
+            ingredients.Count.ShouldEqual(2);
+        }
+</code></pre>
+
+
+<p>The test expects 2 ingredients to be returned for the search     both the    Red pepper    and    Jalapeno Chilli    ingredients should be returned.</p>
+
+<h4>Predicate functions and Expression trees</h4>
+
+
+<p>I wanted to keep using the Linq-to-NHibernate library for the data access queries as this ensures that the queries inherit all the <a href="http://weblogs.asp.net/scottgu/archive/2006/05/14/Using-LINQ-with-ASP.NET-_2800_Part-1_2900_.aspx">benefits of Linq</a>. I also find it more intuitive to use than HQL, for simple queries at least! The core problem was how to write a Linq query that could be extended for an arbitrary number of keywords. In HQL this could be achieved by looping over the keywords and building up the query string. However it is not so easy to iteratively build a lambda function.</p>
+
+<p>My first effort involved chaining together <a href="http://www.codeproject.com/KB/cs/FunWithFunc1.aspx">predicate functions</a>. However after passing the chained predicate to NHibernate the rather less than impressive result was nothing    for any query! Looking at the SQL query produced showed that an incomplete statement was being passed without any of the filter keywords. I was unable to find any documentation to speak of for Linq-to-NHibernate but the <a href="http://groups.google.com/group/nhusers">NHibernate user group</a> did prove useful. They suggested that I may have more success building up an <a href="http://blogs.msdn.com/charlie/archive/2008/01/31/expression-tree-basics.aspx">expression tree</a> and using that as the predicate.
+<a href="http://blogs.msdn.com/charlie/archive/2008/01/31/expression-tree-basics.aspx"></a></p>
+
+<h4>Dynamic Linq-to-NHibernate Query</h4>
+
+
+<p>After reading up on expression trees I was in a position to code up a method to dynamically build the predicate. While researching the best way to tackle this, the internet again reminded me that there are not many original problems left in this world! This article by Joseph Albahari on  <a href="http://www.albahari.com/nutshell/predicatebuilder.aspx">dynamically composing expression predicates</a> demonstrated how a helper class could be used to farm out the work of building up the predicate. The following class makes use of the PredicateBuilder class provided in the article:</p>
+
+<pre style="border:1px dashed #999999;overflow:auto;background-color:#eeeeee;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:180px;line-height:14px;width:114.82%;padding:5px;"><code>        public IEnumerable&lt;Ingredient&gt; FindByKeywords(IEnumerable&lt;string&gt; keywords)
+        {
+            Expression&lt;Func&lt;Ingredient, bool&gt;&gt; predicate = PredicateBuilder.False&lt;Ingredient&gt;();
+
+            foreach (string keyword in keywords)
+            {
+                string temp = keyword;
+                predicate = predicate.Or(i =&gt; i.Name.Contains(temp));
+            }
+            return Session.Linq&lt;Ingredient&gt;().Where(predicate);
+        }
+</code></pre>
+
+
+
+
+<ul>
+    <li> The expression predicate is initialised to false</li>
+    <li>The predicate is chained together using the <em>Or</em> method of predicate builder class</li>
+    <li>The final predicate will return true for any Ingredient that has a Name containing any of the keywords.</li>
+</ul>
+
+
+<p>The FindByKeywords method passes the unit test at the start of the post. Implementing this method took a while, mostly due to the time taken to read up on the predicate functions and expression trees. However I think it was time worth spending as these language features are here to stay and will most likely increase in use over time. Also I now have a handy way of writing efficient Linq queries with multiple filter parameters :)</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-10-11T16:11:00+01:00" data-updated="true" itemprop="datePublished">Oct 11<span>th</span>, 2009</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/software-design/'>Software Design</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2009/10/11/optimising-data-access-queries-part-1/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2009/10/11/optimising-data-access-queries-part-1/" itemprop="url">Optimising Data Access Queries (Part 1)</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>In this post I will be looking at the best way to re-factor a data access query which is used on the add ingredients page. Initially the query was written quickly with no consideration given to the time it would take to execute. It is not currently a problem as the database is very small but in future the page could be very slow to load.<br /></p>
+
+<pre style="background-color:#eeeeee;border:1px dashed rgb(153,153,153);color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:40px;line-height:14px;overflow:auto;width:100.55%;padding:5px;"><code>    ingredientsModel.MatchingIngredients = IngredientRepository.GetAll()
+        .Where(i =&gt; i.Name.ToLower().Contains(ingredientsModel.SearchIngredient.ToLower())).ToList();
+</code></pre>
+
+
+<p>This is a poorly optimised query as the generic <a href="http://wiki.sharparchitecture.net/ClassLibraries.ashx#SharpArchData_2">Sharp Architecture repository</a> <i>GetAll()</i> method call retrieves the entire data set from the database. It is then filtered in memory to get the actual matching ingredients. For larger datasets, it would be much quicker if the data is filtered before it is retrieved from the database. The query could be rewritten to use the <i>FindAll(IDictionary propertyValuePairs)</i> method like this:<br /></p>
+
+<pre style="background-color:#eeeeee;border:1px dashed rgb(153,153,153);color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:32px;line-height:14px;overflow:auto;width:100.72%;padding:5px;"><code>    ingredientsModel.MatchingIngredients = IngredientRepository
+        .FindAll(new Dictionary { { "Name", ingredientsModel.SearchIngredient.ToLower()} });</code></pre>
+
+
+<p>This does solve the optimisation issue as the resulting database SQL query uses a <i>Where</i> clause to pre-filter the data. However, the query is limited to retrieving exact matches to the search string. It is unlikely that users will input the exact ingredient they are searching for, so it would be better if the query retrieved all ingredients that contain the search term. <br /></p>
+
+<h4>
+Unit Testing the Custom Repository</h4>
+
+
+<p>In order to do this I will use a custom repository and add my own query method. Much credit is due to the <a href="http://wiki.sharparchitecture.net/SettingUpNorthwind.ashx">Sharp Architecture example projects</a>, which provide a good basis for the techniques I   ve used here. First, I&rsquo;ll write a unit test for the new repository method. The test class is shown below and each section is explained after the class: <br /></p>
+
+<pre style="background-color:#eeeeee;border:1px dashed rgb(153,153,153);color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:471px;line-height:14px;overflow:auto;width:100.88%;padding:5px;"><code>    [TestFixture]
+    public class IngredientRepositoryTests : RepositoryTestsBase
+    {
+        protected override void LoadTestData()
+        {
+            CreatePersistedIngredient(1, "Chicken thigh", FoodGroup.Meat);
+            CreatePersistedIngredient(2, "Chicken breast", FoodGroup.Meat);
+            CreatePersistedIngredient(3, "Red Pepper", FoodGroup.Vegetable);
+            CreatePersistedIngredient(4, "Jalapeno Chilli", FoodGroup.Vegetable);
+        }
+
+        private IIngredientRepository ingredientRepository = new IngredientRepository();
+
+        private Ingredient CreatePersistedIngredient(int ingredientId, string ingredientName, FoodGroup foodGroup)
+        {
+            Ingredient ingredient = new Ingredient(ingredientName, foodGroup);
+            ingredientRepository.SaveOrUpdate(ingredient);
+            FlushSessionAndEvict(ingredient);
+            return ingredient;
+        }
+
+        [Test]
+        public void CanFindIngredientsByName()
+        {
+            List&lt;Ingredient&gt; ingredients = ingredientRepository.FindByName("chicken").ToList();
+            ingredients.ShouldNotBeNull();
+            ingredients.Count.ShouldEqual(2);
+        }
+    }
+</code></pre>
+
+
+
+
+<ul>
+<li>The unit test inherits from the RepositoryTestsBase (namespace SharpArch.Testing.NUnit.NHibernate) which enables test data to be easily loaded into the in-memory database by overriding the the LoadTestData method. </li>
+<li>The ingredientRepository property is the custom repository data access class </li>
+<li>The CreatePersistedIngredient method is used in the LoadTestData method to save a single ingredient entity to the in-memory database. Note the call to FlushSessionAndEvict is used to persist the saved entity to the database </li>
+<li>The CanFindIngredientsByName method is our test method which runs the repository FindByName method&nbsp; </li>
+<li>The test method asserts that the ingredients list is populated with 2 Ingredient entities </li>
+</ul>
+
+
+
+
+<h4>
+Implementing the Custom Repository </h4>
+
+
+<p>Now we are ready to implement the custom repository for the accessing ingredient data. Again, the class is shown below with explanations following it: <br /></p>
+
+<pre style="background-color:#eeeeee;border:1px dashed rgb(153,153,153);color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:110px;line-height:14px;overflow:auto;width:101.54%;padding:5px;"><code>    public class IngredientRepository : Repository&lt;Ingredient&gt;, IIngredientRepository
+    {        
+        public IEnumerable&lt;Ingredient&gt; FindByName(string ingredientName)
+        {
+            return Session.Linq&lt;Ingredient&gt;().Where(a =&gt; a.Name.Contains(ingredientName));
+        }
+    }
+</code></pre>
+
+
+
+
+<ul>
+<li>The custom repository inherits from the generic sharp architecture Repository class, ensuring that all the standard access methods are available </li>
+<li>It implements the IIngredientRepository interface. This enables IoC injection of the repository into the controllers. </li>
+<li>The FindByName method implements a <a href="http://nhforge.org/">Linq to NHibernate</a> query using the <i>Where</i> method. This will be transformed into a SQL query using a <i>Where</i> clause to prefilter the data before it is retrieved. </li>
+</ul>
+
+
+<p>The custom repository method passes the unit test and returns the expected data. The original query is now optimised and will perform much better against larger data sets. I   ve improved the efficiency of the data access, however I   d also like to improve the functionality. So in the next post I will be looking at extending the ingredient repository with a new dynamic query. This will enable searching by an arbitrary number of keywords.<br /></p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -362,231 +649,6 @@ This was the recipe controller signature before introducing the customer routing
 
 </article>
 
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-08-23T22:02:00+01:00" data-updated="true" itemprop="datePublished">Aug 23<span>rd</span>, 2009</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2009/08/23/branching-the-project/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2009/08/23/branching-the-project/" itemprop="url">Branching the Project</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>I have used an SVN repository for the project, hosted on <a href="http://www.unfuddle.com/">unfuddle</a>, enabling versioned source control on all files in the project. I can use the trusty <a href="http://tortoisesvn.net/">TortoiseSVN</a> Windows application to send and receive files to the remote repository directly from Windows Explorer. After each work session I commit the changes to source control. Apart from the obvious advantages of maintaining backups, if at any stage I realise that I have made a mistake, then the changes can be rolled back to the previous commit.<br />
-The source control recently came in useful when I needed to upgrade the version of Sharp Architecture used on the project. I won   t go into detail about the reasons for me upgrading, suffice to say most of the technology stack in Sharp Architecture had benefitted from version updates and I was limiting myself by using a pre version 1.0 release.<br />
-These are the steps I took to upgrade the Sharp Architecture version of the project:<br /></p>
-
-<ol><li>     <br />
-Use TortoiseSVN to Branch the code in source control from <i><span style="color:green;">/trunk</span></i> to <i><span style="color:green;">/branches/recipebookV1</span></i><br />
-</li>
-<li>     <br />
-Rename the working folder (ie. the local folder in Windows Explorer) to recipebookV1 and switch it to the branch.<br />
-</li>
-<li>     <br />
-Update the Sharp Architecture project to fetch v1.0 from source control and copy the new project template into the Visual Studio templates folder.<br />
-</li>
-<li>     <br />
-Generate a new Visual Studio project, named recipebook, from the v1.0  Sharp Architecture templates.<br />
-</li>
-<li>     <br />
-Use <a href="http://www.scootersoftware.com/">Beyond Compare</a> to copy all the files that I have manually added / changed in the recipebookV1 project to the new recipebook project<br />
-</li>
-<li>     <br />
-Add the files to the recipebook project in Visual Studio, cross fingers, compile and run!<br />
-</li>
-<li>     <br />
-Use the TortoiseSVN repo browser to delete all files from the Trunk    yes, I really deleted them all! <br />
-</li>
-<li>     <br />
-Import the new recipebook folder back into the trunk <br />
-</li>
-</ol>
-
-
-<p>After completing the upgrade I realised that there may be an easier way to upgrade, without the scary and somewhat bad practice of deleting all the old files from the trunk, only to upload most of them again. I will list them below so I can try them out later:<br /></p>
-
-<ol><li>     <br />
-Use TortoiseSVN to Branch the code in source control from <i><span style="color:green;">/trunk</span></i> to <i><span style="color:green;">/branches/recipebookV1</span></i><br />
-</li>
-<li>     <br />
-Rename the working folder (ie. the local folder in Windows Explorer) to recipebookN. <i>This enables a new visual studio project of the same name to be created, with namespaces which are the same as the working project.</i><br />
-</li>
-<li>     <br />
-Update the Sharp Architecture project to fetch v1.0 from source control and copy the new project template into the Visual Studio templates folder.<br />
-</li>
-<li>     <br />
-Generate a new Visual Studio project named recipebook from the V1.0 Sharp Architecture templates.<br />
-</li>
-<li>     <br />
-Use <a href="http://www.scootersoftware.com/">Beyond Compare</a> to copy all updated Sharp Architecture files from the new recipebook project to the working recipebookn folder<br />
-</li>
-<li>     <br />
-Add any extra files to the working recipebook project in Visual Studio, cross fingers, compile and run!<br />
-</li>
-<li>     <br />
-Commit the changes to the trunk, remove the new recipebook project and rename the existing recipebook project folder to recipebook.  <br />
-</li>
-</ol>
-
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-08-02T17:54:00+01:00" data-updated="true" itemprop="datePublished">Aug 2<span>nd</span>, 2009</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2009/08/02/add-recipe-feature-task-breakdown/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2009/08/02/add-recipe-feature-task-breakdown/" itemprop="url">Add Recipe Feature - Task Breakdown</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p><span>The add recipe feature is the first feature that will added to the site. This task can first be broken down into 4 subtasks:
-</span></p>
-
-<ol><li>Add a recipe summary</li><li>List / add ingredients
-</li><li>Add recipe ingredients</li><li>Add a recipe cooking method</li></ol>
-
-
-<p><span>However, the sharp architecture framework is designed for Test Driven Development. These are the TDD steps listed in the </span><span>sharp architecture</span><span> reference guide (in the docs folder of the SVN project):</span></p>
-
-<blockquote><ol><li>Write your test as if the target objects and API already exists.</li><li>Compile the solution and see it break.</li><li>Write just enough code to get it to compile.</li><li>Run the test and see if fail.</li><li>Write just enough code to get it to pass.</li><li>Run the test and see it pass!</li><li>Refactor if necessary!</li></ol></blockquote>
-
-
-<p>Taking another look at the feature subtasks  from a TDD perspective, the breakdown for each domain object looks more like this:
-<span>
-<span style="font-weight:bold;">Ingredient</span>
-</span></p>
-
-<ol><li>Add tests for the ingredient domain object and controller
-</li><li>Implement the ingredients domain object and controller to make the tests pass</li><li>Add Ingredients views for List and Create  </li></ol>
-
-
-<p><span style="font-weight:bold;">
-Recipe</span></p>
-
-<ol><li>Add tests for the recipe domain object and controller</li><li>Implement the recipe domain object and controller to make the tests pass</li><li>Add Recipe views for CreateSummary, CreateIngredients, CreateCookingMethod</li></ol>
-
-
-<p><span>
-Currently I just need to implement the Create view for the Ingredient object, then I can move onto recipes.</span></p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-06-28T13:30:00+01:00" data-updated="true" itemprop="datePublished">Jun 28<span>th</span>, 2009</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/testing/'>Testing</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2009/06/28/setting-up-the-nunit-gui/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2009/06/28/setting-up-the-nunit-gui/" itemprop="url">Setting Up the NUnit GUI</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>I&rsquo;ve setup the project using the default &rsquo;S#arp architecture Application&#8217; template. I won&rsquo;t go into detail about the steps taken to do this as it is all covered in the Sharp Architecture documentation. However I did hit a snag setting up the <a href="http://www.nunit.org/index.php">NUnit</a> project so I&rsquo;ll expand on that in this post.</p>
-
-<p>The Sharp Architecture template is setup for <a href="http://www.agiledata.org/essays/tdd.html">TDD</a> (Test Driven Design) and this is the approach I will be taking to the development. Having installed <a href="http://www.testdriven.net/">TestDriven.Net</a>, the tests can be run through visual studio, however I prefer the interface of the NUnit GUI. After each test run the results are displayed as a set of pleasing green ticks and/or nasty red crosses. Once you have a nice set of green ticks it becomes a bit of a fixation to keep it that way!</p>
-
-<p>The unit tests for the visual studio project can be easily loaded into the NUnit GUI. All you need to do is go to File &ndash;&gt; Open Project and navigate to the bin folder of the test project. Opening the compiled assembly (dll) of the test project will load all the unit tests into the GUI. Hitting the run button returns a nice list of green ticks as expected. However after saving the NUnit test project something alarming happens on the next test run. The standard Sharp Architecture Data tests all fail and nasty set of red ticks appear!</p>
-
-<p>The following error message is reported:</p>
-
-<br />
-
-
-
-
-<blockquote style="font-style:italic;">
-SharpArch.Core.PreconditionException : Please add an AppSetting to your app.config for &#8216;nhibernate.mapping.assembly.&#8217; This setting takes a comma delimited list of assemblies containing NHibernate mapping files. Including &#8216;.dll&#8217; at the end of each is optional.<br />
-</blockquote>
-
-
-<p>The error is pointing to a missing setting in the app.config file, however on checking the file the setting is present. Also the tests worked just fine before saving the NUnit project so why would they suddenly start to fail?</p>
-
-<p>The cause of the test failures appears to have been saving the NUnit project, this pointed to some settings changes which NUnit may have made during the save. Taking a look at the NUnit project settings the possible cause of the problem became clear. There are a couple of directory and file paths in the settings, of particular interest are a &lsquo;Configuration File Name&rsquo; and &lsquo;ApplicationBase&rsquo; settings.</p>
-
-<p><span style="font-size:100%;font-weight:bold;">Configuration File Name</span>
-When the test project assembly is first loaded this setting has a value of <span style="font-style:italic;">RecipeBook.Tests.dll.config</span>, however after saving the NUnit project the <span style="font-style:italic;">.dll </span>part of the filename disappears. So NUnit is no longer able to find the config file and read the settings from it.</p>
-
-<p><span style="font-weight:bold;">ApplicationBase</span>
-The ApplicationBase setting remains blank, however if you have saved the NUnit project in a different directory to the test project assembly you will need to change this. The path needs to be the relative path from your test project base to the test assembly location.</p>
-
-<p>Below is an image of the settings for my project:</p>
-
-<p><a href="http://imageshack.com/a/img15/3503/csy7.jpg"><img alt="" border="0" src="http://imagizer.imageshack.us/v2/320x240q90/15/csy7.jpg" /></a>
-After updating these settings NUnit was able to read the settings for the config file and the GUI happily reported a lovely set of green ticks :)<br /></p>
-
-		
-		
-	</div>
-
-</article>
-
 </div>
 <nav id="pagenavi">
     
@@ -599,7 +661,7 @@ After updating these settings NUnit was able to read the settings for the config
 </nav></div>
 			</div>
 			<footer id="footer" class="inner"><p>
-  Copyright &copy; 2015 - Mike Hook -
+  Copyright &copy; 2015 - Hook Technologies Ltd -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 </footer>

@@ -4,10 +4,10 @@
   <title><![CDATA[Category: Software Design | baking websites]]></title>
   <link href="http://bakingwebsites.co.uk/blog/categories/software-design/atom.xml" rel="self"/>
   <link href="http://bakingwebsites.co.uk/"/>
-  <updated>2015-09-06T12:07:07+01:00</updated>
+  <updated>2015-12-22T14:55:14+00:00</updated>
   <id>http://bakingwebsites.co.uk/</id>
   <author>
-    <name><![CDATA[Mike Hook]]></name>
+    <name><![CDATA[Hook Technologies Ltd]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
@@ -56,6 +56,70 @@
 
 
 <p>Do you have any particular techniques to help inspire your software designs? If so I&rsquo;d love to hear about them and try them out myself!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Re Architecting a Multi Tenant Platform]]></title>
+    <link href="http://bakingwebsites.co.uk/2015/08/16/re-architecting-a-platform/"/>
+    <updated>2015-08-16T18:07:49+01:00</updated>
+    <id>http://bakingwebsites.co.uk/2015/08/16/re-architecting-a-platform</id>
+    <content type="html"><![CDATA[<p>Intro &ndash; explain the problem and goals for the re architecture</p>
+
+<h2>High level plan</h2>
+
+<p>Diagrams for before and after, explain major changes</p>
+
+<p><img src="http://i49.photobucket.com/albums/f299/hookmike/74078639-2d6b-4179-883d-4be7d28c19c7_zpsbpo9illj.jpg" class="alignleft" title="Awesome image by Roberlan https://www.flickr.com/photos/roberlan" /></p>
+
+<h2>Implementing the changes</h2>
+
+<ul>
+<li>Analyse &amp; document current behaviour</li>
+<li>Spec new behaviour</li>
+<li>Implement with BDD</li>
+<li>Incremental releases</li>
+</ul>
+
+
+<h2>Pitfalls</h2>
+
+<ul>
+<li>&lsquo;Fix the world&rsquo; syndrome</li>
+<li>Guard against new technical debt</li>
+<li>Regression &ndash; may break existing working features!</li>
+<li>Majority of value is long term with low visibility</li>
+</ul>
+
+
+<h2>Conclusion</h2>
+
+<ul>
+<li>Work in progress</li>
+<li>Real world priorities may change</li>
+<li>Delivered 3 major new features that are DONE DONE DONE!</li>
+</ul>
+
+
+<h2>A Developer always pays his debts</h2>
+
+<p>Tell a story about a quest to the hallowed lands of technical excellence with zero bugs and no obsolete code.</p>
+
+<p>Hit points for every dead line of code removed, test added and stored procedure deleted
+Level up by simplifying system behaviour, other things?</p>
+
+<p>1st month
+Transitioning from old style N-tier architecture all in web app: JS &ndash;> WebMethod &ndash;> Business Logic &ndash;> SProc DAL to
+modular service oriented architecture: JS &ndash;> WebApi &ndash;> Business Logic &ndash;> EF DAL
+Shifted login, authentication and session management to API</p>
+
+<p>2nd month
+Tooled up with nuget libraries for WebApi comms
+Shifted registration to API</p>
+
+<p>3rd month
+Tooled up with TeamCity
+Shifted edit profile to API</p>
 ]]></content>
   </entry>
   
@@ -205,76 +269,6 @@
 
 
 <p>I&rsquo;d be interested to hear of your experiences of event storming and how effective you have found it to be?</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Design Patterns Without Katas]]></title>
-    <link href="http://bakingwebsites.co.uk/2013/06/13/design-patterns-without-katas/"/>
-    <updated>2013-06-13T09:05:05+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2013/06/13/design-patterns-without-katas</id>
-    <content type="html"><![CDATA[<p>There are a number of design patterns which I have chosen not to implement a coding kata for. This is because I felt that I would either not use the pattern regularly in practice or they have alternative solutions that make the pattern redundant. However I think it is worth calling out these patterns and summarising how they work.</p>
-
-<h2>The decorator pattern</h2>
-
-
-<p>This pattern provides a way of extending a classes behaviour without using inheritance, it is defined as:</p>
-
-<blockquote>The decorator pattern extends the functionality of individual objects by wrapping them with one or more decorator classes. These decorators can modify existing members and add new methods and properties at run-time.</blockquote>
-
-
-<p>The main reason I won&rsquo;t be using this pattern much in practice is that the class structure it generates is not very clear and also the behaviour of   the classes can change depending on the order they are instantiated. So I think implementing this pattern could cause more problems than it solves, especially if the system may need to be maintained by different people at a later date.</p>
-
-<h2>The factory pattern</h2>
-
-
-
-
-<blockquote><em>The factory method pattern allows for the creation of objects without specifying the type of object that is to be created in code. A factory class contains a method that allows determination of the created type at run-time.</em></blockquote>
-
-
-<p>Whilst the factory method has its uses it is basically just an implementation of sub classing, where parameters are defined as base classes to allow different derived classes to be passed at runtime. It is a straightforward pattern and the coding kata would be pretty short to implement it.</p>
-
-<p>Also one of the main issues the factory pattern tries to solve is centralising object creation, however we generally use IoC containers which provide <a href="http://stackoverflow.com/questions/871405/why-do-i-need-an-ioc-container-as-opposed-to-straightforward-di-code">low maintenance dependency injection</a>  out of the box. So this removes the main need for the factory pattern.</p>
-
-<h2>The Singleton pattern</h2>
-
-
-
-
-<blockquote>Ensure a class only has one instance and provide a global access point to it</blockquote>
-
-
-<p><img class="alignright size-medium wp-image-460" alt="asparagus shoot from http://sandyspringcsa.com/" src="http://imageshack.com/a/img32/7137/uwa5.jpg" width="300" />
-This is a pattern which can be very useful in applications, however the implementation is so short that a coding kata would have little content. There are just a couple of pitfalls to watch out for when implementing this pattern:</p>
-
-<ul>
-    <li><span style="line-height:16px;">Ensure the implementation is  thread safe
-In Java the synchronized keyword can be used on the method which returns the singleton to ensure only a single thread ever has access to the class at once. However that can lead to the second pitfall</span></li>
-    <li>Consider whether you implementation offers the best performance
-Using synchronization is expensive (ie. It takes the computer a relatively long time to process)</li>
-</ul>
-
-
-<p>This implementation avoids both of these pitfalls by creating the <em>uniqueInstance</em> when the class is first loaded:</p>
-
-<pre style="font-family:Andale Mono, Lucida Console, Monaco, fixed, monospace;color:#000000;background-color:#eee;font-size:12px;border:1px dashed #999999;line-height:14px;overflow:auto;width:100%;padding:5px;">public class Singleton {
-  private static Singleton uniqueInstance = new Singleton();
-
-  private Singleton() {}
-
-  public static Singleton getInstance()  {
-    return uniqueInstance;
-  }
-}</pre>
-
-
-<p>Finally, as with the factory pattern, if you are using an IoC container then they generally provide a way to configure a class as a singleton so there is rarely a need to implement this pattern manually yourself.</p>
-
-<h2>There may be more...</h2>
-
-
-<p>Stay tuned for more patterns to be added to this post!</p>
 ]]></content>
   </entry>
   

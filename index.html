@@ -6,10 +6,10 @@
 <head>
 	<meta charset="utf-8">
 	<title>baking websites</title>
-	<meta name="author" content="Mike Hook">
+	<meta name="author" content="Hook Technologies Ltd">
 
 	
-	<meta name="description" content="Sep 6th, 2015 Software Design Comments Inspiring Software Design The software design process can sometimes be difficult to quantify. From an &hellip;">
+	<meta name="description" content="Dec 22nd, 2015 Progress Comments Continuous Delivery to Azure With AppVeyor I&rsquo;ve been using Kudu to automate my website deployments from &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,8 +67,8 @@
 <nav id="main-nav"><h3>categories</h3>
 <ul class="main-navigation">
 <li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
-<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 5 ]</li>
-<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 15 ]</li>
+<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 7 ]</li>
+<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 16 ]</li>
 <li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
 <li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 9 ]</li>
 
@@ -111,6 +111,89 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-12-22T17:07:49+00:00" data-updated="true" itemprop="datePublished">Dec 22<span>nd</span>, 2015</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/progress/'>Progress</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2015/12/22/CI-with-appveyor/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2015/12/22/CI-with-appveyor/" itemprop="url">Continuous Delivery to Azure With AppVeyor</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><a href="http://www.appveyor.com/"><img src="https://googledrive.com/host/0Bx-8nw9dhAQcN1lWbU1SLW91bEk/AppVeyorLogo.png" class="alignleft" title="AppVeyor" /></a></p>
+
+<p>I&rsquo;ve been using <a href="http://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/">Kudu to automate my website deployments</a> from Github to Azure for quite a while and its worked out great. But there are some limitations with it, primarily a lack of control over whether changes are deployed, its very much an all or nothing tool.</p>
+
+<p>The complexity of the web application I&rsquo;m maintaining reached a level where I wanted to ensure that the code builds and passes some automated tests before it is deployed. I couldn&rsquo;t see any way to incorporate those steps into a deployment pipeline with Kudu so decided to try AppVeyor. I&rsquo;d heard about it on <a href="http://www.hanselman.com/blog/AppVeyorAGoodContinuousIntegrationSystemIsAJoyToBehold.aspx">Scott Hanselmans blog</a> and as it is free for open source projects I&rsquo;d been itching to give it a go!</p>
+
+<h2>Build it, build it</h2>
+
+<p>The first step was to get the website to build. Surprising as it may seem the website had never successfully built in Visual Studio as it used an old version of Umbraco which had some compile errors. My options were to either upgrade to a newer version or try and fix the compile errors. The upgrade route looked like it could take some time and fortunately Umbraco is open source so I could download the source code for the version with the issues and patch some fixes. It proved fairly straightforward, basically they has just missed out some files during the packaging of the version.</p>
+
+<p>So now the website built locally in Visual Studio, however MSBuild still refused to build the site, not great as AppVeyor uses MSBuild to compile the website!  After some research I found that the problem was to do with MSBuild attempting to not just build the website but also publish it. As the project is an old style <a href="https://msdn.microsoft.com/en-us/library/dd547590.aspx">Visual Studio <em>website</em> as opposed to a <em>web application</em></a> the options through MSBuild were somewhat limited as it only exposed a subset of the options for the <a href="https://msdn.microsoft.com/en-us/library/ms229863.aspx">aspnet compiler</a>. However I found that the publish option could be disabled by manually tweaking the solution file to remove the settings controlling the publish of the website, if your interested in the details you can see the change for this in <a href="https://github.com/MikeHook/MSTC/commit/7f352956d21ef7fb3b153fbdf756048a6849a310">this commit</a>. The only drawback with this technique is that Visual Studio trys to helpfully replace these settings each time you save a change to the solution file, another option I may investigate would be to use a custom build script in App Veyor.</p>
+
+<p>The only additional setup I needed to take to get AppVeyor to build the projects was to tell it to restore the nuget packages, as I hadn&rsquo;t checked them into source control. This was simply achieved by adding the following &lsquo;Before build script&rsquo; to the AppVeyor project settings:</p>
+
+<p><code>nuget restore</code></p>
+
+<h2>Tasty Tests</h2>
+
+<p>With all the solution projects building the next step was to configure the tests to run. With AppVeyor this is a zero configuration step as it auto detects any projects containing unit tests and runs them. However to speed things along you can explicitly define the path to the assembly containing your tests in the AppVeyor settings. After doing this AppVeyor gives a test runner output in the console (shown below) along with a <a href="https://ci.appveyor.com/project/MikeHook/mstc/build/tests">nice testing report which you can see directly in AppVeyor here</a>.</p>
+
+<p><img src="https://googledrive.com/host/0Bx-8nw9dhAQcN1lWbU1SLW91bEk/AppVeyorTests.png" title="AppVeyor Test Console" /></p>
+
+<h2>AppVeyor, meet Azure</h2>
+
+<p>The final part of the jigsaw was to setup automated deployments, my requirements for this were:</p>
+
+<ul>
+<li>Deployment to be triggered after a successful test run (default AppVeyor behaviour)</li>
+<li>Deploy all added, deleted and changed files to Azure</li>
+<li>Deploy changes commited to the staging branch to the staging site</li>
+<li>Deploy changes commited to the master branch to the live site</li>
+</ul>
+
+
+<p>AppVeyor has a range of options for deployment including several specifically for Azure Cloud sites. However as my application is an old website I just wanted a basic file orientated publish and Web Deploy offered what I was looking for. There is a handy guide on the App Veyor docs for <a href="http://www.appveyor.com/docs/deployment/web-deploy#azure-web-sites">setting up Web Deploy with Azure sites</a> so I won&rsquo;t repeat that here. However there were some custom configuration steps I needed to take:</p>
+
+<ul>
+<li>Add a path to the artifacts in App Veyor. These are the files which Web Deploy phyically copys to the Web Server. In my case this was just the whole &lsquo;website&rsquo; directory.</li>
+<li>Check the &lsquo;Remove additional files at destination&rsquo; option to ensure files I&rsquo;ve deleted locally are removed from the web server.</li>
+<li>Specify &lsquo;Skip directories&rsquo; to ensure assets and cached files for Umbraco are not removed. For my site the &lsquo;Skip directories&rsquo; setting is &lsquo;\App_Data;\media;\data&rsquo;.</li>
+<li>Setup 2 separate Deployment providers, with the &lsquo;Deploy from branch&rsquo; option set to &lsquo;staging&rsquo; for the staging site and &lsquo;master&rsquo; for the live site.</li>
+</ul>
+
+
+<p>So now whenever I push changes up to github App Veyor checks which branch I&rsquo;ve pushed to and runs the deployment provider setup for that branch, you can see what has happened at the end of the <a href="https://ci.appveyor.com/project/MikeHook/mstc">console report</a>. I&rsquo;ve been really impressed with the usability and range of options available in App Veyor, it all comes at an unbeatable price of totally free for open source projects and best of all I get to put these <a href="https://github.com/MikeHook/MSTC">cool badges on my repo</a> now!</p>
+
+<p><a href="https://github.com/MikeHook/MSTC"><img src="https://googledrive.com/host/0Bx-8nw9dhAQcN1lWbU1SLW91bEk/AppVeyorBadges.png" title="MSTC Repo badges" /></a></p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -261,6 +344,98 @@
   
 
 
+<time datetime="2015-08-16T18:07:49+01:00" data-updated="true" itemprop="datePublished">Aug 16<span>th</span>, 2015</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/software-design/'>Software Design</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2015/08/16/re-architecting-a-platform/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2015/08/16/re-architecting-a-platform/" itemprop="url">Re Architecting a Multi Tenant Platform</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Intro &ndash; explain the problem and goals for the re architecture</p>
+
+<h2>High level plan</h2>
+
+<p>Diagrams for before and after, explain major changes</p>
+
+<p><img src="http://i49.photobucket.com/albums/f299/hookmike/74078639-2d6b-4179-883d-4be7d28c19c7_zpsbpo9illj.jpg" class="alignleft" title="Awesome image by Roberlan https://www.flickr.com/photos/roberlan" /></p>
+
+<h2>Implementing the changes</h2>
+
+<ul>
+<li>Analyse &amp; document current behaviour</li>
+<li>Spec new behaviour</li>
+<li>Implement with BDD</li>
+<li>Incremental releases</li>
+</ul>
+
+
+<h2>Pitfalls</h2>
+
+<ul>
+<li>&lsquo;Fix the world&rsquo; syndrome</li>
+<li>Guard against new technical debt</li>
+<li>Regression &ndash; may break existing working features!</li>
+<li>Majority of value is long term with low visibility</li>
+</ul>
+
+
+<h2>Conclusion</h2>
+
+<ul>
+<li>Work in progress</li>
+<li>Real world priorities may change</li>
+<li>Delivered 3 major new features that are DONE DONE DONE!</li>
+</ul>
+
+
+<h2>A Developer always pays his debts</h2>
+
+<p>Tell a story about a quest to the hallowed lands of technical excellence with zero bugs and no obsolete code.</p>
+
+<p>Hit points for every dead line of code removed, test added and stored procedure deleted
+Level up by simplifying system behaviour, other things?</p>
+
+<p>1st month
+Transitioning from old style N-tier architecture all in web app: JS &ndash;> WebMethod &ndash;> Business Logic &ndash;> SProc DAL to
+modular service oriented architecture: JS &ndash;> WebApi &ndash;> Business Logic &ndash;> EF DAL
+Shifted login, authentication and session management to API</p>
+
+<p>2nd month
+Tooled up with nuget libraries for WebApi comms
+Shifted registration to API</p>
+
+<p>3rd month
+Tooled up with TeamCity
+Shifted edit profile to API</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
 <time datetime="2015-07-26T18:07:49+01:00" data-updated="true" itemprop="datePublished">Jul 26<span>th</span>, 2015</time></div>
 		<div class="tags">
 
@@ -327,197 +502,6 @@
 
 </article>
 
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-07-19T18:12:49+01:00" data-updated="true" itemprop="datePublished">Jul 19<span>th</span>, 2015</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/software-design/'>Software Design</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2015/07/19/lean-awesome-part-I/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2015/07/19/lean-awesome-part-I/" itemprop="url">Making Awesome Software With Lean Principles - Part 1</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p><a href="http://midsussextriclub.com"><img src="http://i49.photobucket.com/albums/f299/hookmike/MSTC%20_logo_yellow_280_zps4tnfm4qj.jpg" class="alignleft" alttext="MSTC Logo" /></a></p>
-
-<p>I&rsquo;ve been a keen amateur triathlete and member the <a href="http://midsussextriclub.com">Mid Sussex Tri Club</a> for a couple of years. Its a relatively small club but there is a surprising amount of administration involved in running it and after chatting to some of the clubs committee members it was clear that the admin overheads were becoming a burden. I could see the potential for software to help lessen the burden so I offered to take on the club&rsquo;s website and add some features to it.</p>
-
-<p>Fast forward a year and we have a greatly enhanced website with new features that have helped grow the club without taking up more of people&rsquo;s time. Throughout making these changes I&rsquo;ve applied Lean software principles which have really helped me. So in this post I&rsquo;m taking a look at the first 3 principles of Lean and how these have assisted on this project.</p>
-
-<h2>Eliminate waste</h2>
-
-<blockquote><p>Lean philosophy regards everything not adding value to the customer as waste.</p><footer><strong>Wikipedia</strong> <cite><a href='https://en.wikipedia.org/wiki/Lean_software_development'>Lean Software Development</a></cite></footer></blockquote>
-
-
-<p>I had great motivation to ensure that this principle was applied as I&rsquo;ve been making all the changes during my spare time. Its amazing what you can achieve in a short amount of time with a bit of planning. For example just last week I was able to add 2 new payment options to the site in an hour. The key techniques I&rsquo;ve used to help eliminate waste are:</p>
-
-<ul>
-<li>Make sure I understand what the key stakeholder wants to achieve from the feature before implementing it</li>
-<li>Design directly in HTML &ndash; I&rsquo;ve designed all the new user interfaces directly in HTML so when it comes to implementing the feature I just need to enhance the existing HTML with the dynamic data elements</li>
-<li>Use third parties to do the heavy lifting (ie. don&rsquo;t reinvent the wheel). For this project the key third party systems used are <a href="http://umbraco.com/">Umbraco</a> for content management, <a href="http://getbootstrap.com/">Bootstrap</a> for styling and <a href="https://gocardless.com/">GoCardless</a> for online direct debit payments</li>
-</ul>
-
-
-<h2>Amplify learning</h2>
-
-<blockquote><p>Software development is a continuous learning process with the additional challenge of development teams and end product sizes.</p><footer><strong>Wikipedia</strong> <cite><a href='https://en.wikipedia.org/wiki/Lean_software_development'>Lean Software Development</a></cite></footer></blockquote>
-
-
-<p>Working in a development team of one on this particular project obviously made knowledge sharing a non issue, however there were opportunities to ensure learning was applied instead of doing things the old way. Integrating the GoCardless payment system presented a great opportunity for learning. The club were reluctant to extend the existing paypal based solution due to the fees involved, with paypal charging nearly 4% per transaction.  So I did some research and found that the GoCardless direct debit service charged just 1% per transaction.</p>
-
-<p>We decided to trial the system and I was pleasantly surprised by how intuitive it was it integrate with. They have <a href="https://developer.gocardless.com/">top notch documentation of their API</a> and client libraries for a wide range of platforms including ours, .NET. I had a test payment process integrated with our website within a couple of hours, their support was also excellent and helped clarify the few points I wasn&rsquo;t clear on regarding setting up specific redirect URLs.</p>
-
-<p>The system has been up and running for around 6 months now and the only issue we&rsquo;ve had was with some intermittent error responses. Again their support team looked into the problem as soon as I raised it and implemented a fix. I&rsquo;m glad that I took the time to learn how to integrate with GoCardless as it has saved our small club hundreds of pounds in fees already!</p>
-
-<h2>Decide as late as possible</h2>
-
-<blockquote><p>As software development is always associated with some uncertainty, better results should be achieved with an options-based approach, delaying decisions as much as possible until they can be made based on facts and not on uncertain assumptions and predictions.</p><footer><strong>Wikipedia</strong> <cite><a href='https://en.wikipedia.org/wiki/Lean_software_development'>Lean Software Development</a></cite></footer></blockquote>
-
-
-<p>Taking this approach has helped me avoid the common &lsquo;analysis paralysis&rsquo; problem whereby you try and solve too many problems at once, tie yourself in knots and deliver nothing! I deferred the implementation of several tricky  features and was pleasantly surprised that the solutions turned out to be more straight forward than I&rsquo;d originally anticipated.</p>
-
-<p>For example we wanted to add an online entry system for several club events however the we needed to accept entries from club members, affiliated club members or guests. My initial thinking was to have an entry form for each type of entrant with some reporting so the event organisers could see who had entered. This sounded like a big feature that would take weeks to implement. So I started by just adding a simple form for existing members to enter our Duathlon event (fortunately no guests were allowed for our Duathlon!). Later on I returned to the problem of adding guest entries and suddenly it became obvious to me that guests could be members of the website as well just with a different role to limit their access. Then the same entry forms could be used for everyone and I wouldn&rsquo;t have to add any new reporting. Deferring the decision for how to implement this feature saved me loads of time and resulted in a simpler system, wins all round!</p>
-
-<h2>Stay tuned for part II&hellip;</h2>
-
-<p>The first three principles of Lean development have really helped me deliver on this project but there are still four more principles to go, so if you&rsquo;ve found this interesting check back soon for part II in the series!</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-08-13T10:10:43+01:00" data-updated="true" itemprop="datePublished">Aug 13<span>th</span>, 2014</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/progress/'>Progress</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2014/08/13/tin-can-api-overview/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2014/08/13/tin-can-api-overview/" itemprop="url">Tin Can API Overview</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p><img src="http://imageshack.com/a/img539/1961/OgE8tH.jpg" class="alignleft" alttext="Tin Can API Logo" /></p>
-
-<p>These are some notes from my reading on the Tin Can API, a specification for the transmission and storage of messages related to learning activities. The specification has been developed by parties in the e-learning industry and aims to be an elegant solution to enable learning systems to communicate with one another.</p>
-
-<p>All this information is available on the <a href="http://tincanapi.com/">Tin Can API website</a>, this is just my own <a href="http://en.wikipedia.org/wiki/Wikipedia:Too_long;_didn't_read">tl;dr</a> type summary.</p>
-
-<h3>What is it?</h3>
-
-<ul>
-<li>A RESTful web service specification</li>
-<li>Defines the structure for JSON messages which represent learning activities (Or other types of activity)</li>
-<li>Each message is called a <strong>Statement</strong></li>
-<li>A statement consists of 3 parts: <strong>Actor</strong>, <strong>Verb</strong> and <strong>Object</strong> like &ldquo;Mike read the Tin Can Explained article&rdquo;</li>
-<li>Based on the <a href="http://activitystrea.ms/">activity streams</a> specification developed by/for social networks</li>
-</ul>
-
-
-<h3>Why is it good?</h3>
-
-<ul>
-<li>More flexible version of the old SCORM standard</li>
-<li>Device agnostic &ndash; anything that can send HTTP requests can use the API</li>
-<li>Almost any type of content can be stored</li>
-<li>Decouples content from the LMS (Learning management system) by storing in a separate LRS (Learning Record Store)</li>
-<li>A single <em>statement</em> can be stored in multiple learning record stores</li>
-<li>Allows potential for a learner owning their own content instead of their employers</li>
-<li>Data is accessible and easy to report on</li>
-</ul>
-
-
-<h3>A statement example</h3>
-
-<pre><code>{
-    "actor": {
-        "name": "Sally Glider",
-            "mbox": "mailto:sally@example.com"
-        },
-    "verb": {
-            "id": "http://adlnet.gov/expapi/verbs/experienced",
-            "display": {"en-US": "experienced"}
-     },
-    "object": {
-            "id": "http://example.com/activities/solo-hang-gliding",
-            "definition": {
-                "name": { "en-US": "Solo Hang Gliding" }
-            }
-    }
-}
-</code></pre>
-
-<p>You can generate test statements with valid syntax using the <a href="http://tincanapi.com/statement-generator/">Statement Generator</a></p>
-
-<p>Details of the valid message formats are given on the <a href="https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md">full xAPI specification</a>.</p>
-
-<h2>The registry</h2>
-
-<ul>
-<li>Contains definitions for verbs, activities, activity types, attachment types and extensions</li>
-<li>Should be referenced to in messages by URIs</li>
-<li>A shared domain language for agreed definitions of terms</li>
-<li>Anyone can add their own definitions to <a href="https://registry.tincanapi.com/">the registry</a></li>
-</ul>
-
-
-<h2>Recipes</h2>
-
-<ul>
-<li><a href="http://tincanapi.com/recipeshow-it-works/">Recipes</a> provide a standardised way for people to describe activities</li>
-<li>Simplifies reporting as the same terms should be used to describe things</li>
-<li>A few recipes exist now, for example the <a href="https://registry.tincanapi.com/#profile/19">video recipe</a></li>
-<li>More recipes can be added by the community</li>
-<li>Helps keep the API flexible and useful for future applications that may not even exist yet!</li>
-</ul>
-
-
-<p>Reading about the Tin Can API over the last few days and seeing it in action in the <a href="https://www.tessello.co.uk">Tessello application</a> has really whet my appetite to work more with the specification. I can see great potential for systems that leverage this specification as it provides a flexible framework for messaging without being restrictive and gives us the basis for a common technical language to use to enable our systems to talk to one another.</p>
-
-		
-		
-	</div>
-
-</article>
-
 </div>
 <nav id="pagenavi">
     
@@ -528,7 +512,7 @@
 </nav></div>
 			</div>
 			<footer id="footer" class="inner"><p>
-  Copyright &copy; 2015 - Mike Hook -
+  Copyright &copy; 2015 - Hook Technologies Ltd -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 </footer>

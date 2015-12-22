@@ -6,10 +6,10 @@
 <head>
 	<meta charset="utf-8">
 	<title>baking websites</title>
-	<meta name="author" content="Mike Hook">
+	<meta name="author" content="Hook Technologies Ltd">
 
 	
-	<meta name="description" content="Feb 10th, 2011 Tips and Tricks Comments How to Handle the MVC HttpAntiForgeryException When developing forms for websites it is good practice to &hellip;">
+	<meta name="description" content="Mar 10th, 2011 Tips and Tricks Comments Android Dev Tip - Fix the Eclipse Auto-complete I recently had problems with the eclipse IDE auto-complete &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,8 +67,8 @@
 <nav id="main-nav"><h3>categories</h3>
 <ul class="main-navigation">
 <li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
-<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 5 ]</li>
-<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 15 ]</li>
+<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 7 ]</li>
+<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 16 ]</li>
 <li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
 <li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 9 ]</li>
 
@@ -111,6 +111,199 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-10T16:39:43+00:00" data-updated="true" itemprop="datePublished">Mar 10<span>th</span>, 2011</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/tips-and-tricks/'>Tips and Tricks</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/03/10/android-dev-tip-fix-the-eclipse-auto-complete/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/03/10/android-dev-tip-fix-the-eclipse-auto-complete/" itemprop="url">Android Dev Tip - Fix the Eclipse Auto-complete</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>I recently had problems with the eclipse IDE auto-complete not working.</p>
+
+<p>After Googling the problem, I managed to resolve this by downloading the source for the version I was using and extracting into the Android SDK folder, as detailed in <a href="http://code.google.com/p/android/issues/detail?id=7850#c8">this google code issue</a>.</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-02-23T19:48:46+00:00" data-updated="true" itemprop="datePublished">Feb 23<span>rd</span>, 2011</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/02/23/developing-android-apps-part-1-setting-up-your-machine/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/02/23/developing-android-apps-part-1-setting-up-your-machine/" itemprop="url">Developing Android Apps - Part 1: Setting Up Your Machine</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>This is the first in a series of posts I&rsquo;ll be making about developing Android applications. Hopefully there will be some useful tips in this series that will help other developers to get their apps off the ground.</p>
+
+<p>The first step is to get your PC setup with all the required software for writing the apps. There is a pretty good guide <a href="http://developer.android.com/sdk/index.html">setting up the Android SDK</a> on the Android developer site so I won&rsquo;t go into too much detail. However, I think their steps are in the wrong order so I&rsquo;ve amended them below (you should install the Android platforms before the ADT plugin):</p>
+
+<ol>
+    <li>Prepare your development computer and ensure it meets the system requirements.
+<ul>
+    <li>You need to install the Java Development kit here, if you just run their SDK installer it provides a link to the JDK.</li>
+</ul>
+</li>
+    <li>Install the SDK starter package from the table above. (If you&#8217;re on Windows, download the installer for help with the initial setup.)</li>
+    <li>Add Android platforms and other components to your SDK.
+<ul>
+    <li>I only added the 2 latest SDK platforms along with their samples, I doubt you would need the older ones unless you have to develop for some legacy device.</li>
+</ul>
+</li>
+    <li>If you don&#8217;t already have it,  <a href="http://www.eclipse.org/downloads/">download Eclipse</a> and install it
+<ul>
+    <li>While the platforms are downloading you can grab a copy of eclipse. It doesn&#8217;t need installing as such you can just extract to your hard drive.</li>
+</ul>
+</li>
+    <li>Install the <a href="http://developer.android.com/sdk/eclipse-adt.html">ADT Plugin for Eclipse</a>.
+<ul>
+    <li>After Eclipse has extracted and your android platforms are added, you can hook the Android SDK into Eclipse by installing the ADT plugin.</li>
+</ul>
+</li>
+    <li>Explore the contents of the Android SDK (optional).</li>
+</ol>
+
+
+<p>Once all the above are done you should be ready to start developing. A good place to start is with the <a href="http://developer.android.com/resources/tutorials/hello-world.html">hello world tutorial</a>, that takes you through setting up an Android virtual machine on    your computer and getting the application to run on it.</p>
+
+<p>I also wanted to see an app actually running on my phone so followed the <a href="http://developer.android.com/guide/developing/device.html">developing on a device guide</a> to get this up and running. I did hit a snag here with the USB drivers, my phone is an HTC desire and there is no driver to download from the HTC site. However if you download the HTC sync software then plug your phone into the USB it should install the driver for you. I had to restart the phone afterwards before it would bring up the menu to select the connection type, eventually the sync software sorted itself out and recognised the phone.</p>
+
+<p>When you select to run the application in Eclipse, your phone should then appear under the &lsquo;Choose a running Android device&rsquo; section. The app can be installed on the phone then selected from the usual apps menu.</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-02-17T19:19:43+00:00" data-updated="true" itemprop="datePublished">Feb 17<span>th</span>, 2011</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/software-design/'>Software Design</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/02/17/optimising-page-load-performance-with-database-files/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/02/17/optimising-page-load-performance-with-database-files/" itemprop="url">Optimising Page Load Performance With Database Files</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>I recently ran into an issue with a newly released web application. The test version of the application was performing fine, however the live version kept reporting  time out  errors.
+The page that was generating the time outs included a list of links to files stored in a database. After some investigation it became clear that the issue was being caused by the application loading all of these files into memory during the page load (yikes!).</p>
+
+<p>It had worked fine on the test site because the bandwidth between the database and the website was a lot higher and also only a couple of small files had been stored. However the live site was hitting the HTTP request timeout (90 seconds by default) before all of the files had finished loading into memory. There was not actually any need for these files loaded at all during page load, so I set about re-factoring the domain structure to reflect this.</p>
+
+<h3>Hurry up and be more lazy!</h3>
+
+
+<p>The application uses NHibernate to map the domain objects to an SQL database, this is an example similar to the object that was causing the performance issue:</p>
+
+<pre style="background-color:#eeeeee;border:1px dashed #999999;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:100px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>public class StoredFile
+{
+    public virtual string Name { get; set; }
+    public virtual string Extension { get; set; }
+    public virtual bool Saved { get; set; }
+    public virtual byte[] Contents { get; set; }
+}
+</code></pre>
+
+
+<p>You can see here that the FileContents property is an array of bytes, which will be loaded into memory when the StoredFile object is initialised. However the only properties we need to access during the page load are the FileName, FileExtension and FileSaved properties.</p>
+
+<p>If the FileContents property is moved to a separate object and then NHibernates <a href="http://martinfowler.com/eaaCatalog/lazyLoad.html">lazy loading</a> feature can be leveraged to only load that object if it is accessed. The revised domain structure looks like this:</p>
+
+<pre style="background-color:#eeeeee;border:1px dashed #999999;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:170px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>public class StoredFile
+{
+    public virtual string Name { get; set; }
+    public virtual string Extension { get; set; }
+    public virtual bool Saved { get; set; }
+    public virtual StoredFileContents FileContents { get; set; }
+}
+
+public class StoredFileContents
+{
+    public virtual byte[] Contents { get; set; }
+}
+</code></pre>
+
+
+
+
+<h3>NHibernate Mapping Issues</h3>
+
+
+<p>You may have noticed that the StoredFileContents class above does not include a reference to the parent StoredFile object. Originally I had included this reference and attempted to map it following <a href="http://ayende.com/Blog/archive/2009/04/19/nhibernate-mapping-ltone-to-onegt.aspx">Ayende&rsquo;s one-to-one mapping blog post</a>. However I hit problems when trying to save, as each record needed to know the primary key of the other record. This was only workable if one of the foreign key tables was set to nullable. In this case, as I don&rsquo;t  foresee  there being a need to access a StoredFile from a StoredFileContents instance, I decided it was better to keep the foreign key as non nullable and only map the relationship in one direction.</p>
+
+<p>In case you&rsquo;re wondering what effect the change had on the application, the  page load time was reduced to a couple of seconds (and even less on a decent connection), sorted!</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -277,247 +470,6 @@ public CompleteOrder()
 
 </article>
 
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-01-23T17:35:34+00:00" data-updated="true" itemprop="datePublished">Jan 23<span>rd</span>, 2011</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/tips-and-tricks/'>Tips and Tricks</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/01/23/episerver-6-developer-exam-tips/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/01/23/episerver-6-developer-exam-tips/" itemprop="url">EPiServer 6 Developer Exam Tips</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>Last Monday I made the trip to London to take the EPiServer CMS certification exam (version 6). I passed but it was quite a tricky exam so I thought I&rsquo;d post some tips that may be of help to others taking the test.</p>
-
-<p>The questions are randomised so you won   t get asked the same as me but the areas will probably be similar. There were 70 multiple choice questions split into four sections. I can&rsquo;t remember the exact breakdown but these numbers are close:</p>
-
-<h3>Installation / deployment (~10 questions)</h3>
-
-
-<p>These questions are not particularly difficult but if, like myself, you haven&rsquo;t needed to use the features much previously you might get stuck.</p>
-
-<ul>
-    <li>Deployment center     make sure you know everything you can do from here</li>
-    <li>Initialization module     What is it, when does it run etc (this is new to version 6, I missed the tech note and wished I&#8217;d read it)</li>
-    <li>Multi-Site installations</li>
-    <li>Upgrading to v6     What versions can you upgrade from, what is backed up / updated.</li>
-</ul>
-
-
-
-
-<h3>General Product Knowledge (~15 questions)</h3>
-
-
-<p>If you are familiar with the system and its features there is not much to worry about here</p>
-
-<ul>
-    <li><span style="font-weight:normal;font-size:13px;">Load balancing</span></li>
-    <li>Page type &amp; page template concepts</li>
-    <li>XForms - How to make one, how it works</li>
-    <li>Online center and gadgets</li>
-</ul>
-
-
-
-
-<h3>Standard Development (~25 questions)</h3>
-
-
-<p>Again, if you have developed a couple of sites then most of these are not too bad. However the customisation questions will be sticking points unless you are familiar with the tech notes.</p>
-
-<ul>
-    <li>Wiring up EPiServer / .NET web controls</li>
-    <li>Wiring up master pages</li>
-    <li>Custom membership provider</li>
-    <li>Custom virtual path provider</li>
-    <li>Globalization     What language is used in various scenarios</li>
-</ul>
-
-
-
-
-<h3>Advanced Development (~20 questions)</h3>
-
-
-<p>These questions are really tricky, and may involve quite a bit of guess work!</p>
-
-<ul>
-    <li>Mirroring     How is it setup / configured, what is mirrored</li>
-    <li>Scheduler service     What can and can   t be run</li>
-    <li>Dynamic data store</li>
-    <li>Page Objects (I missed this one completely)</li>
-    <li>Filters     adding code to a filter web control</li>
-    <li>Quick publishing configuration</li>
-    <li>Plugins / Modules     Installing</li>
-</ul>
-
-
-
-
-<h3>Preparing for the exam</h3>
-
-
-<p>To help pass I   d recommend in order of priority:</p>
-
-<ol>
-    <li>Install the example site and run everything you can in the deployment center</li>
-    <li>Try everything out in the CMS Online center (the Start page and menu bar) editor and admin sections while reading through the editor and admin manuals (particularly the admin manual)</li>
-    <li>Read all the tech notes and try to setup what they are describing. I wouldn&#8217;t worry about spending too much time on each though as long as you understand the concepts.</li>
-</ol>
-
-
-<p>There are quite a lot of resources available online and it can be a bit overwhelming. But don&rsquo;t despair, Jonathan&rsquo;s handy  <a href="http://www.jonathansewell.co.uk/index.php/2010/12/06/episerver-6-exam-bookmarks/">exam bookmarks post</a> is a good place to start!</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-01-16T18:01:36+00:00" data-updated="true" itemprop="datePublished">Jan 16<span>th</span>, 2011</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/tips-and-tricks/'>Tips and Tricks</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/01/16/investigating-an-nhibernate-stale-state-exception/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/01/16/investigating-an-nhibernate-stale-state-exception/" itemprop="url">Investigating an NHibernate &#8216;Stale State&#8217; Exception</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>I recently needed to investigate and fix this rather unpleasant sounding issue. It was  occurring, seemingly at random, on a live web service but could not be replicated in tests.  Occasionally the web service was throwing the exception when we made a call to delete a list of records from the database.</p>
-
-<p>The web service uses the NHibernate object relational mapper (ORM) tool to map our c# classes (domain objects ) to database tables. NHibernate was throwing this exception when we tried to delete the records:</p>
-
-<blockquote>NHibernate.StaleStateException: Unexpected row count: 0; expected: 1</blockquote>
-
-
-
-
-<h3>What is a stale state?</h3>
-
-
-<p>This issue was not one we had seen before and had us scratching our heads for a while. The first step was to understand what the exception itself meant.</p>
-
-<p>After some reading up in the <a href="http://nhforge.org/doc/nh/en/index.html">NHibernate documentation</a> it was more clear what the issue was.  NHibernate was complaining that the in-memory model of the database data had become stale, or in other words out of date.  So when NHibernate tried to persist the requested deletion to the database it was finding that it could not complete the operation.</p>
-
-<h3>Why was our state stale?</h3>
-
-
-<p>So, all well and good, we knew what the stale state was. However, it was rather more difficult to pin down why it was happening, especially because we were unable to reproduce the error during testing.</p>
-
-<p>It was only examining the event logs for the web service which enabled us to understand why this was happening.  The event logs showed that 2 separate instances of the web service were being called almost simultaneously on separate threads.  Both of those instances were basically calling the same delete operation on the same list of records.</p>
-
-<p>So the first instance would succeed in deleting the records, but the second instance would then also try to delete the records.  Of course the second instance would fail, as there were not longer any records to delete.</p>
-
-<h3>Preventing the stale state (odour  eaters?)</h3>
-
-
-<p>Once we understood why the exception was occurring it was a straight forward re-factoring exercise to prevent it in future.  In our case the code could be updated so that the delete operation never needed to be called in the first place, so this was an effective fix.</p>
-
-<p>The detailed event logging on the web service proved invaluable in solving this issue, without this it probably would of taken much longer to figure out what was happening!</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-01-06T20:13:22+00:00" data-updated="true" itemprop="datePublished">Jan 6<span>th</span>, 2011</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/tips-and-tricks/'>Tips and Tricks</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/01/06/troubleshooting-a-web-service-soapexception/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/01/06/troubleshooting-a-web-service-soapexception/" itemprop="url">Troubleshooting a Web Service SoapException</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>I recently encountered this exception consuming a web service from an application:</p>
-
-<blockquote>System.Web.Services.Protocols.SoapException:  Server did not recognize the value of HTTP Header SOAPAction: http://service.foo.com/baa.asmx</blockquote>
-
-
-<p>The code ran fine locally and only caused an exception running on the web server. Initially I thought it could be to do with the web server running a newer version of the .NET framework. But this proved not to be the case.</p>
-
-<p>Eventually I got the issue tracked down and it was a simple typo in the settings on the live environment.
-The system has the web service addresses stored in a database and the application assigns these dynamically at runtime (via the <em>Url </em>property). We have it  set-up  this way to enable the test application to send to a different end point from the live application. However this does rely on the same service being available on the end point and in this case it wasn&rsquo;t.</p>
-
-<p>So we were changing the URL to be:</p>
-
-<blockquote>http://service.foo.com/baa.asmx</blockquote>
-
-
-<p>But it needed to point to here instead:</p>
-
-<blockquote>http://service.foo.com/baas.asmx</blockquote>
-
-
-<p>Note the <em>s </em>on the end of the service method name, one little character causing one pesky SOAP exception!</p>
-
-		
-		
-	</div>
-
-</article>
-
 </div>
 <nav id="pagenavi">
     
@@ -530,7 +482,7 @@ The system has the web service addresses stored in a database and the applicatio
 </nav></div>
 			</div>
 			<footer id="footer" class="inner"><p>
-  Copyright &copy; 2015 - Mike Hook -
+  Copyright &copy; 2015 - Hook Technologies Ltd -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 </footer>

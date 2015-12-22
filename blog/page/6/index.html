@@ -6,10 +6,10 @@
 <head>
 	<meta charset="utf-8">
 	<title>baking websites</title>
-	<meta name="author" content="Mike Hook">
+	<meta name="author" content="Hook Technologies Ltd">
 
 	
-	<meta name="description" content="Aug 29th, 2011 Hacking Comments Nhibernate Generator Class for SQLite Databases I&rsquo;ve been developing a mobile app for Android which needs to &hellip;">
+	<meta name="description" content="Oct 23rd, 2011 Software Design Comments Behaviour Driven Design Encourages Shared Understanding Most recent projects I have worked on have used unit &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,8 +67,8 @@
 <nav id="main-nav"><h3>categories</h3>
 <ul class="main-navigation">
 <li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
-<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 5 ]</li>
-<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 15 ]</li>
+<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 7 ]</li>
+<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 16 ]</li>
 <li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
 <li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 9 ]</li>
 
@@ -111,6 +111,203 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-10-23T12:21:38+01:00" data-updated="true" itemprop="datePublished">Oct 23<span>rd</span>, 2011</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/software-design/'>Software Design</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/10/23/behaviour-driven-design-encourages-shared-understanding/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/10/23/behaviour-driven-design-encourages-shared-understanding/" itemprop="url">Behaviour Driven Design Encourages Shared Understanding</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Most recent projects I have worked on have used unit tests  to define the requirements of our code and ensure they are met. Typically the tests are written by the developer while they are coding the solution. However this means that the tests are based entirely on the developers understanding of the requirements, which may not always be the same as the stakeholders understanding.</p>
+
+<p>To combat this issue we are introducing <a href="http://dannorth.net/introducing-bdd/">behaviour driven development</a>, to agree on a set of requirements for each feature with the stakeholders before starting development. The requirements are captured using the Gherkin syntax (Given, When, Then) based on real world examples. These examples can then be wired up to the system directly as automated tests using <a href="http://specflow.org/">Specflow</a>.</p>
+
+<h2>OK, show me the example already</h2>
+
+
+<p>Here is a fictionalised scenario which demonstrates the value that BDD adds to a project. An abbreviated version of the initial scenarios drafted by the developer are as follows:</p>
+
+<pre style="font-size:small;font-family:Consolas, 'Courier New', Courier, Monospace;width:100%;overflow:auto;border:1px dashed #999999;background-color:#eeeeee;"><span style="color:#0000ff;font-weight:bold;">Feature</span>: Process 3D secure authentication response
+        As a logged in user
+        I would like to place a 3D secure authenticated order
+        so that I have assurance of the websites security
+
+<span style="color:#0000ff;font-weight:bold;">Scenario</span>: Handle a 3D secure response of AUTHORISED
+    <span style="color:#0000ff;"><strong>Given </strong></span>a 3D secure response of AUTHORISED
+        <span style="color:#0000ff;font-weight:bold;">When</span>  i view the order confirmation page
+        <span style="color:#0000ff;font-weight:bold;">Then</span>  the order status will be Complete
+
+<span style="color:#0000ff;font-weight:bold;">Scenario</span>: Handle a 3D secure response of NOT AUTHORISED
+    <span style="color:#0000ff;"><strong>Given </strong></span>a 3D secure response of NOT AUTHORISED
+        <span style="color:#0000ff;font-weight:bold;">When</span>  i view the order confirmation page
+        <span style="color:#0000ff;font-weight:bold;">Then</span>  the order status will be Cancelled
+
+<span style="color:#0000ff;font-weight:bold;">Scenario</span>: Handle a 3D response of NOT PROCESSED
+    <span style="color:#0000ff;"><strong>Given </strong></span>a 3D secure response of NOT PROCESSED
+        <span style="color:#0000ff;font-weight:bold;">When</span>  i view the order confirmation page
+        <span style="color:#0000ff;font-weight:bold;">Then</span>  the order status will be Cancelled</pre>
+
+
+
+
+<h2>Evolving the scenario</h2>
+
+
+<p>The assumptions shown in these scenarios are perfectly reasonable, an order will only be completed if the 3D secure security check returns an authorised response. However it should really be a decision for the stakeholder&rsquo;s business whether the system should behave in this way. There are several valid scenarios where all 3D responses should actually result in a completed order, for example:</p>
+
+<pre style="font-size:small;font-family:Consolas, 'Courier New', Courier, Monospace;width:100%;overflow:auto;border:1px dashed #999999;background-color:#eeeeee;"><span style="color:#0000ff;font-weight:bold;">Scenario</span>: Handle a 3D secure response of NOT AUTHORISED
+<span style="color:#0000ff;"><strong>Given</strong></span> a 3D secure response of NOT AUTHORISED
+<span style="color:#0000ff;"><strong>And</strong></span> a total order value order value under the following amount:   25
+<span style="color:#0000ff;font-weight:bold;">When</span>  i view the order confirmation page
+<span style="color:#0000ff;font-weight:bold;">Then</span>  the order status will be Complete</pre>
+
+
+<p>The stakeholders calculated that the risk of charge-backs was so low on orders under   25 that they could disregard the 3D secure response completely and allow &lsquo;not authorised&rsquo; transactions to be completed.</p>
+
+<p>Here we can see a clear benefit in the stakeholder sharing their understanding of the system requirements with the implementation team. Rules which are beneficial to their business can be incorporated into the system, resulting in a more effective solution from the outset.</p>
+
+<p>If you are interested in reading more about using BDD for web applications I can recommend <a href="http://blog.stevensanderson.com/2010/03/03/behavior-driven-development-bdd-with-specflow-and-aspnet-mvc/">Steven Sanderson&rsquo;s excellent blog post</a>.</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-10-07T17:32:44+01:00" data-updated="true" itemprop="datePublished">Oct 7<span>th</span>, 2011</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/progress/'>Progress</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/10/07/discovering-the-original-inventors-of-the-internet/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/10/07/discovering-the-original-inventors-of-the-internet/" itemprop="url">Discovering the Original Inventors of the Internet</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>I&rsquo;m sure many of you have heard about a chap called <a href="http://twitter.com/#!/timberners_lee">Tim Berners Lee</a> who is widely credited for inventing the world wide web as we know it today. The story is well known and I&rsquo;m not going to re-hash it here, however less is known about who may have come up with the first concept of the <a href="http://en.wikipedia.org/wiki/Internet">Internet</a>. You may be surprised to hear that the origins of the concept date back several centuries and take place on an entirely different continent, among a race of people commonly considered quite primitive and barbaric. Here&rsquo;s a little hint of who these people may have been.</p>
+
+<p><a href="http://imageshack.com/a/img835/4400/yrbq.jpg"><img class="size-medium wp-image-257" title="Machu_Picchu_1" src="http://imagizer.imageshack.us/v2/320x240q90/835/yrbq.jpg" alt="" width="320" /></a></p>
+
+<h2>The internet laid bare</h2>
+
+
+<p>You may well ask how the internet could exist centuries before computers had been invented or even the discovery of electricity. Naturally there was no way the internet as we know it today could be possible, however if we look at the abstract concept there are strong parallels. At it&rsquo;s heart the internet is a communications system made up of a group of connected devices. The power of the internet lies in its ability to efficiently send messages through the network from one node to another. When you open your web browser and type in www.google.co.uk your computer sends a message to the web server hosting google.co.uk asking for the web page. However this  message is not sent directly from your computer to the google web server, this would be very inefficient as each person that wanted to view the google web page would first need to establish a connection to their web server. As more people tried to connect to the same page the response would get slower and slower until the number of connections reached its limit.</p>
+
+<h2>Routing to the rescue</h2>
+
+
+<p>The internet has an elegant solution to this problem. Instead of attempting to establish a direct connection between the two end points, each of the nodes in the network just connects to their nearest nodes. So the end points are indirectly connected through the network in a similar way to this lovely node diagram:</p>
+
+<p><img class="size-full wp-image-252" title="onethousandpaintings_small1-300x300" src="http://imageshack.com/a/img834/8784/z6g.gif" alt="Network nodes" width="300" /></p>
+
+<p>Each message is sent with the address of its final destination, each node only needs to know what direction to send the message in order to get it closer to its destination. In this way the message is naturally <a href="http://en.wikipedia.org/wiki/Routing">routed</a> on the most efficient path from its source to the destination. It is this concept if a nodal network and message routing that has strong parallels with a very old method of communications.</p>
+
+<p><span class="Apple-style-span" style="font-size:20px;"><strong>An ancient  Inca  network</strong></span></p>
+
+<p>I recently took a trip to Peru to hike the Inca trail to Machu Picchu. So this post is a (hopefully interesting) way to shoehorn some of my holiday snaps onto this blog!</p>
+
+<p><a href="http://imageshack.com/a/img703/8159/inq4.jpg"><img class="size-medium wp-image-255" title="Machu_Picchu" src="http://imagizer.imageshack.us/v2/320x240q90/703/inq4.jpg" alt="" /></a></p>
+
+<p>However quite apart from that I learnt a great deal about the fascinating Inca culture. Before the trip I had thought that there was essentially one Inca trail in Peru leading to Machu Picchu, how wrong I was! The Inca trails actually comprised of thousands of miles of pathways connected across the whole of the Inca empire. They were the key to enabling the Inca rulers establish and run the largest single empire in South America.</p>
+
+<p>One of the main uses of the trails was as a communications network. There were small guard posts dotted across the network, often high up in remote mountain areas. If the Inca ruler wanted to send a message they would encode it using a &lsquo;<a href="http://en.wikipedia.org/wiki/Quipus">quipus</a>&rsquo;, a device made up of multi-coloured plied rope, threads and knots.     The exact method of encoding has unfortunately been lost in time but it may well of been a binary system quite similar to one used by computers today. It would have been quite possible to encode fairly sophisticated messages in this way.</p>
+
+<p><img class="size-full wp-image-259" title="quipus" src="http://imageshack.com/a/img14/4521/fqto.jpg" alt="" /></a></p>
+
+<p>The ruler would then pass the quipus to a messenger to deliver the message. However the messenger would only take the message to the nearest checkpoint, then pass it onto another messenger who would carry the message to the next checkpoint. Each checkpoint would be around 5-10 KM apart, more distance for flat sections and less for mountainous terrain. In this way each of the messengers could run between the checkpoints as fast as possible and the message itself would reach its destination far quicker than would otherwise be possible.</p>
+
+<p>To give you some indication of how efficient this system was during Inca times the capital city was Cuzco, situated at around 3,300 metres in the middle of the Andes mountains, several hundred miles from the coast. However the Inca king was able to eat fresh fish in the capital because it was sent over the Inca trail network. It is estimated that the same delivery made by road transport today takes longer than an equivalent delivery made over the Inca network in the 15th century!</p>
+
+<p>So now all the pieces of the puzzle are in place we can see that the Inca trail network used the some communication method as today&rsquo;s internet. The trail checkpoints are equivalent to an internet router, the messengers have now been replaced with fibre optic cables and of course the quipus is directly equivalent to an <a href="http://en.wikipedia.org/wiki/Network_packet">IP network packet</a>. So there you have it, the Inca empire invented the alpha version of the internet.</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-10-06T18:00:59+01:00" data-updated="true" itemprop="datePublished">Oct 6<span>th</span>, 2011</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/tips-and-tricks/'>Tips and Tricks</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/10/06/the-beauty-of-cherry-pick/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/10/06/the-beauty-of-cherry-pick/" itemprop="url">The Beauty of Cherry Pick</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>I&rsquo;m loving the <a href="http://gitready.com/intermediate/2009/03/04/pick-out-individual-commits.html">cherry pick command</a> in git right now, this is the scenario that it really helps me out for.</p>
+
+<p>I&rsquo;ve fixed a bug on the live branch, however before it can be published to the live website it needs to be tested. So I can first publish it to our UAT (user acceptance testing) site so the client can test the changes. However the UAT site already has a bunch of other unreleased features on it. If I merge my bug fix branch into the UAT branch it will overwrite some of the other feature changes.</p>
+
+<p>The solution here is to &lsquo;cherry pick&rsquo; just my changes from my bug fix branch and commit those to the UAT branch. In this way git doesn&rsquo;t merge all the other differences between the live and UAT branch.</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -231,199 +428,6 @@
 
 </article>
 
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-03-10T16:39:43+00:00" data-updated="true" itemprop="datePublished">Mar 10<span>th</span>, 2011</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/tips-and-tricks/'>Tips and Tricks</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/03/10/android-dev-tip-fix-the-eclipse-auto-complete/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/03/10/android-dev-tip-fix-the-eclipse-auto-complete/" itemprop="url">Android Dev Tip - Fix the Eclipse Auto-complete</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>I recently had problems with the eclipse IDE auto-complete not working.</p>
-
-<p>After Googling the problem, I managed to resolve this by downloading the source for the version I was using and extracting into the Android SDK folder, as detailed in <a href="http://code.google.com/p/android/issues/detail?id=7850#c8">this google code issue</a>.</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-02-23T19:48:46+00:00" data-updated="true" itemprop="datePublished">Feb 23<span>rd</span>, 2011</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/02/23/developing-android-apps-part-1-setting-up-your-machine/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/02/23/developing-android-apps-part-1-setting-up-your-machine/" itemprop="url">Developing Android Apps - Part 1: Setting Up Your Machine</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>This is the first in a series of posts I&rsquo;ll be making about developing Android applications. Hopefully there will be some useful tips in this series that will help other developers to get their apps off the ground.</p>
-
-<p>The first step is to get your PC setup with all the required software for writing the apps. There is a pretty good guide <a href="http://developer.android.com/sdk/index.html">setting up the Android SDK</a> on the Android developer site so I won&rsquo;t go into too much detail. However, I think their steps are in the wrong order so I&rsquo;ve amended them below (you should install the Android platforms before the ADT plugin):</p>
-
-<ol>
-    <li>Prepare your development computer and ensure it meets the system requirements.
-<ul>
-    <li>You need to install the Java Development kit here, if you just run their SDK installer it provides a link to the JDK.</li>
-</ul>
-</li>
-    <li>Install the SDK starter package from the table above. (If you&#8217;re on Windows, download the installer for help with the initial setup.)</li>
-    <li>Add Android platforms and other components to your SDK.
-<ul>
-    <li>I only added the 2 latest SDK platforms along with their samples, I doubt you would need the older ones unless you have to develop for some legacy device.</li>
-</ul>
-</li>
-    <li>If you don&#8217;t already have it,  <a href="http://www.eclipse.org/downloads/">download Eclipse</a> and install it
-<ul>
-    <li>While the platforms are downloading you can grab a copy of eclipse. It doesn&#8217;t need installing as such you can just extract to your hard drive.</li>
-</ul>
-</li>
-    <li>Install the <a href="http://developer.android.com/sdk/eclipse-adt.html">ADT Plugin for Eclipse</a>.
-<ul>
-    <li>After Eclipse has extracted and your android platforms are added, you can hook the Android SDK into Eclipse by installing the ADT plugin.</li>
-</ul>
-</li>
-    <li>Explore the contents of the Android SDK (optional).</li>
-</ol>
-
-
-<p>Once all the above are done you should be ready to start developing. A good place to start is with the <a href="http://developer.android.com/resources/tutorials/hello-world.html">hello world tutorial</a>, that takes you through setting up an Android virtual machine on    your computer and getting the application to run on it.</p>
-
-<p>I also wanted to see an app actually running on my phone so followed the <a href="http://developer.android.com/guide/developing/device.html">developing on a device guide</a> to get this up and running. I did hit a snag here with the USB drivers, my phone is an HTC desire and there is no driver to download from the HTC site. However if you download the HTC sync software then plug your phone into the USB it should install the driver for you. I had to restart the phone afterwards before it would bring up the menu to select the connection type, eventually the sync software sorted itself out and recognised the phone.</p>
-
-<p>When you select to run the application in Eclipse, your phone should then appear under the &lsquo;Choose a running Android device&rsquo; section. The app can be installed on the phone then selected from the usual apps menu.</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-02-17T19:19:43+00:00" data-updated="true" itemprop="datePublished">Feb 17<span>th</span>, 2011</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/software-design/'>Software Design</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/02/17/optimising-page-load-performance-with-database-files/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/02/17/optimising-page-load-performance-with-database-files/" itemprop="url">Optimising Page Load Performance With Database Files</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>I recently ran into an issue with a newly released web application. The test version of the application was performing fine, however the live version kept reporting  time out  errors.
-The page that was generating the time outs included a list of links to files stored in a database. After some investigation it became clear that the issue was being caused by the application loading all of these files into memory during the page load (yikes!).</p>
-
-<p>It had worked fine on the test site because the bandwidth between the database and the website was a lot higher and also only a couple of small files had been stored. However the live site was hitting the HTTP request timeout (90 seconds by default) before all of the files had finished loading into memory. There was not actually any need for these files loaded at all during page load, so I set about re-factoring the domain structure to reflect this.</p>
-
-<h3>Hurry up and be more lazy!</h3>
-
-
-<p>The application uses NHibernate to map the domain objects to an SQL database, this is an example similar to the object that was causing the performance issue:</p>
-
-<pre style="background-color:#eeeeee;border:1px dashed #999999;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:100px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>public class StoredFile
-{
-    public virtual string Name { get; set; }
-    public virtual string Extension { get; set; }
-    public virtual bool Saved { get; set; }
-    public virtual byte[] Contents { get; set; }
-}
-</code></pre>
-
-
-<p>You can see here that the FileContents property is an array of bytes, which will be loaded into memory when the StoredFile object is initialised. However the only properties we need to access during the page load are the FileName, FileExtension and FileSaved properties.</p>
-
-<p>If the FileContents property is moved to a separate object and then NHibernates <a href="http://martinfowler.com/eaaCatalog/lazyLoad.html">lazy loading</a> feature can be leveraged to only load that object if it is accessed. The revised domain structure looks like this:</p>
-
-<pre style="background-color:#eeeeee;border:1px dashed #999999;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:170px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>public class StoredFile
-{
-    public virtual string Name { get; set; }
-    public virtual string Extension { get; set; }
-    public virtual bool Saved { get; set; }
-    public virtual StoredFileContents FileContents { get; set; }
-}
-
-public class StoredFileContents
-{
-    public virtual byte[] Contents { get; set; }
-}
-</code></pre>
-
-
-
-
-<h3>NHibernate Mapping Issues</h3>
-
-
-<p>You may have noticed that the StoredFileContents class above does not include a reference to the parent StoredFile object. Originally I had included this reference and attempted to map it following <a href="http://ayende.com/Blog/archive/2009/04/19/nhibernate-mapping-ltone-to-onegt.aspx">Ayende&rsquo;s one-to-one mapping blog post</a>. However I hit problems when trying to save, as each record needed to know the primary key of the other record. This was only workable if one of the foreign key tables was set to nullable. In this case, as I don&rsquo;t  foresee  there being a need to access a StoredFile from a StoredFileContents instance, I decided it was better to keep the foreign key as non nullable and only map the relationship in one direction.</p>
-
-<p>In case you&rsquo;re wondering what effect the change had on the application, the  page load time was reduced to a couple of seconds (and even less on a decent connection), sorted!</p>
-
-		
-		
-	</div>
-
-</article>
-
 </div>
 <nav id="pagenavi">
     
@@ -436,7 +440,7 @@ public class StoredFileContents
 </nav></div>
 			</div>
 			<footer id="footer" class="inner"><p>
-  Copyright &copy; 2015 - Mike Hook -
+  Copyright &copy; 2015 - Hook Technologies Ltd -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 </footer>

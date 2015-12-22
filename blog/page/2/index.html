@@ -6,10 +6,10 @@
 <head>
 	<meta charset="utf-8">
 	<title>baking websites</title>
-	<meta name="author" content="Mike Hook">
+	<meta name="author" content="Hook Technologies Ltd">
 
 	
-	<meta name="description" content="Jul 2nd, 2014 Progress Comments Automated Azure Deployments Azure web site hosting has a great built in feature for deployment automation. All you &hellip;">
+	<meta name="description" content="Jul 19th, 2015 Software Design Comments Making Awesome Software With Lean Principles - Part 1 I&rsquo;ve been a keen amateur triathlete and member &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,8 +67,8 @@
 <nav id="main-nav"><h3>categories</h3>
 <ul class="main-navigation">
 <li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
-<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 5 ]</li>
-<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 15 ]</li>
+<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 7 ]</li>
+<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 16 ]</li>
 <li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
 <li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 9 ]</li>
 
@@ -111,6 +111,276 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-07-19T18:12:49+01:00" data-updated="true" itemprop="datePublished">Jul 19<span>th</span>, 2015</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/software-design/'>Software Design</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2015/07/19/lean-awesome-part-I/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2015/07/19/lean-awesome-part-I/" itemprop="url">Making Awesome Software With Lean Principles - Part 1</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><a href="http://midsussextriclub.com"><img src="http://i49.photobucket.com/albums/f299/hookmike/MSTC%20_logo_yellow_280_zps4tnfm4qj.jpg" class="alignleft" alttext="MSTC Logo" /></a></p>
+
+<p>I&rsquo;ve been a keen amateur triathlete and member the <a href="http://midsussextriclub.com">Mid Sussex Tri Club</a> for a couple of years. Its a relatively small club but there is a surprising amount of administration involved in running it and after chatting to some of the clubs committee members it was clear that the admin overheads were becoming a burden. I could see the potential for software to help lessen the burden so I offered to take on the club&rsquo;s website and add some features to it.</p>
+
+<p>Fast forward a year and we have a greatly enhanced website with new features that have helped grow the club without taking up more of people&rsquo;s time. Throughout making these changes I&rsquo;ve applied Lean software principles which have really helped me. So in this post I&rsquo;m taking a look at the first 3 principles of Lean and how these have assisted on this project.</p>
+
+<h2>Eliminate waste</h2>
+
+<blockquote><p>Lean philosophy regards everything not adding value to the customer as waste.</p><footer><strong>Wikipedia</strong> <cite><a href='https://en.wikipedia.org/wiki/Lean_software_development'>Lean Software Development</a></cite></footer></blockquote>
+
+
+<p>I had great motivation to ensure that this principle was applied as I&rsquo;ve been making all the changes during my spare time. Its amazing what you can achieve in a short amount of time with a bit of planning. For example just last week I was able to add 2 new payment options to the site in an hour. The key techniques I&rsquo;ve used to help eliminate waste are:</p>
+
+<ul>
+<li>Make sure I understand what the key stakeholder wants to achieve from the feature before implementing it</li>
+<li>Design directly in HTML &ndash; I&rsquo;ve designed all the new user interfaces directly in HTML so when it comes to implementing the feature I just need to enhance the existing HTML with the dynamic data elements</li>
+<li>Use third parties to do the heavy lifting (ie. don&rsquo;t reinvent the wheel). For this project the key third party systems used are <a href="http://umbraco.com/">Umbraco</a> for content management, <a href="http://getbootstrap.com/">Bootstrap</a> for styling and <a href="https://gocardless.com/">GoCardless</a> for online direct debit payments</li>
+</ul>
+
+
+<h2>Amplify learning</h2>
+
+<blockquote><p>Software development is a continuous learning process with the additional challenge of development teams and end product sizes.</p><footer><strong>Wikipedia</strong> <cite><a href='https://en.wikipedia.org/wiki/Lean_software_development'>Lean Software Development</a></cite></footer></blockquote>
+
+
+<p>Working in a development team of one on this particular project obviously made knowledge sharing a non issue, however there were opportunities to ensure learning was applied instead of doing things the old way. Integrating the GoCardless payment system presented a great opportunity for learning. The club were reluctant to extend the existing paypal based solution due to the fees involved, with paypal charging nearly 4% per transaction.  So I did some research and found that the GoCardless direct debit service charged just 1% per transaction.</p>
+
+<p>We decided to trial the system and I was pleasantly surprised by how intuitive it was it integrate with. They have <a href="https://developer.gocardless.com/">top notch documentation of their API</a> and client libraries for a wide range of platforms including ours, .NET. I had a test payment process integrated with our website within a couple of hours, their support was also excellent and helped clarify the few points I wasn&rsquo;t clear on regarding setting up specific redirect URLs.</p>
+
+<p>The system has been up and running for around 6 months now and the only issue we&rsquo;ve had was with some intermittent error responses. Again their support team looked into the problem as soon as I raised it and implemented a fix. I&rsquo;m glad that I took the time to learn how to integrate with GoCardless as it has saved our small club hundreds of pounds in fees already!</p>
+
+<h2>Decide as late as possible</h2>
+
+<blockquote><p>As software development is always associated with some uncertainty, better results should be achieved with an options-based approach, delaying decisions as much as possible until they can be made based on facts and not on uncertain assumptions and predictions.</p><footer><strong>Wikipedia</strong> <cite><a href='https://en.wikipedia.org/wiki/Lean_software_development'>Lean Software Development</a></cite></footer></blockquote>
+
+
+<p>Taking this approach has helped me avoid the common &lsquo;analysis paralysis&rsquo; problem whereby you try and solve too many problems at once, tie yourself in knots and deliver nothing! I deferred the implementation of several tricky  features and was pleasantly surprised that the solutions turned out to be more straight forward than I&rsquo;d originally anticipated.</p>
+
+<p>For example we wanted to add an online entry system for several club events however the we needed to accept entries from club members, affiliated club members or guests. My initial thinking was to have an entry form for each type of entrant with some reporting so the event organisers could see who had entered. This sounded like a big feature that would take weeks to implement. So I started by just adding a simple form for existing members to enter our Duathlon event (fortunately no guests were allowed for our Duathlon!). Later on I returned to the problem of adding guest entries and suddenly it became obvious to me that guests could be members of the website as well just with a different role to limit their access. Then the same entry forms could be used for everyone and I wouldn&rsquo;t have to add any new reporting. Deferring the decision for how to implement this feature saved me loads of time and resulted in a simpler system, wins all round!</p>
+
+<h2>Stay tuned for part II&hellip;</h2>
+
+<p>The first three principles of Lean development have really helped me deliver on this project but there are still four more principles to go, so if you&rsquo;ve found this interesting check back soon for part II in the series!</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-04-23T18:07:49+01:00" data-updated="true" itemprop="datePublished">Apr 23<span>rd</span>, 2015</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/progress/'>Progress</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2015/04/23/episode-VI/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2015/04/23/episode-VI/" itemprop="url">Software Development Episode VI - a New Dawn</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>As the somewhat cheesy title suggests, changes are afoot in the world of Baking Websites. Up to this point I&rsquo;ve been working as a permanent employee for a number of companies (five actually, hence Episode VI). But I felt that it was time to shake things up so imminently I will be starting out as a contracting software developer. While in practice I expect I will be doing much the same thing from day to day it was still quite a leap to leave the cosy environs of a permanent position. But before we get too far into that, in the best tradition of episodic film, lets take a recap on the story so far. In a galaxy far far away&hellip;</p>
+
+<h2>Episode I &ndash; A lone padawan</h2>
+
+<p>The first company I worked for, <a href="http://www.rfsolutions.co.uk/">RF Solutions</a>, was where I made my start on the journey of software development. Fresh out of university my mind was full of theory but completely devoid of any  practical business knowledge, invoices and purchase orders were foreign concepts to me! However that soon changed and I learnt what elements went together to make a business work.</p>
+
+<p>After a brief foray into the world of &lsquo;technical sales&rsquo; I gravitated towards the IT systems and was given a pretty opened ended brief of &lsquo;build us a new website where we can sell our products.&rsquo; So off I went and built a site leveraging an e-commerce product called <a href="http://www.actinic.co.uk/">Actinic</a>. It was a fun challenge and I learnt much about how online payments worked along with how a web application could be integrated with internal business systems. I&rsquo;m pleased to see that both the site I built and Actinic themselves are still going strong today, all be it in evolved forms!</p>
+
+<p>It gave me a taste for more and I set about learning all about the .Net framework and building my first custom application to process product returns. This was the first time I realized that the most difficult part can often be figuring out what you are meant to be making! It is one thing following tutorials to push data in and out of a database from a web page but quite another to apply that to a problem and come up with a solution that people will actually be able to use.</p>
+
+<p>My custom application worked but I knew I could do better, if only I had some way of learning the best way to approach these problems. This was when I made my first leap of faith&hellip;</p>
+
+<h2>Episode II &ndash; Yoda lives (in many forms!)</h2>
+
+<p>It was no good me being in an IT department of one so I had to move on but the trouble was no company would take me on as an experienced developer. I was well aware that my skill set was limited but knew I could learn so I started out as a junior developer at <a href="https://twitter.com/cubeworks">Cubeworks</a>. This turned out to be one of the best decisions I ever made, the company was full of talented developers, and I went into full sponge mode absorbing a great deal about best coding practices, new frameworks and collaborating. I owe a massive debt of thanks to the guys who were working there at the time for putting up with my endless questions! Sadly Cubeworks is no more, however it does live on as part of a larger agency <a href="http://www.mba.co.uk/">MBA</a> and many of the sites I helped build are still out there (Amongst others <a href="http://www.chichester.ac.uk/">Chichester college</a>, <a href="http://www.motoringassist.com/">GEM Motoring Assist</a> and <a href="http://www.changinghabbits.co.uk/">Changing Habbits</a>).</p>
+
+<h2>Episode III &ndash; Do or do not. There is no try</h2>
+
+<p>Like a bolt out of the blue a digital agency from &lsquo;the big smoke&rsquo; called <a href="http://www.fortunecookie.co.uk/">Fortune Cookie</a> contacted me directly, offering me a position. It was a wrench to leave Cubeworks but the opportunity to work on big projects for international clients was too good to turn down. Again this proved to be a period of learning, however much more in how to work in big multidisciplinary teams than how to develop solutions. The first project I worked on had about 8 developers, several designers, user experience experts, project managers and one poor overworked QA guy all trying to work together to deliver software. It was obvious that the overheads for organising and communicating in a large development team increased exponentially with size. Also maintaining code quality across the project became a real challenge but more on that later!</p>
+
+<p>The main program of work I was involved in was for <a href="https://www.netjets.com/">NetJets</a> a complete relaunch of their online presence, with a new flight booking engine thrown in for good measure! It was a great project to work on which involved close collaboration with the client across different time zones. It was soon clear that it was essential for us to maintain a &lsquo;mock&rsquo; version of the clients web services to enable us to work asynchronously, along with a suite of unit and integration tests to enable us to pin point the source of bugs. When a single user action is travelling through multiple layers of code across several applications debugging can be like going down the rabbit hole unless you have something to light your way!</p>
+
+<h2>Episode IV &ndash; In a dark place we find ourselves, and a little more knowledge lights our way</h2>
+
+<p>Unfortunately market forces conspired against me continuing to work for Fortune Cookie (or <a href="http://www.possible.com/">POSSIBLE</a> as they now were). The new projects were drying up and it was clear to me that long term the role would not be economical, so I decided to take action before someone made the decision for me. At the time the Test Driven Development movement was carrying a lot of influence in the industry and as I agreed with an approach to software development that put quality first I looked for a position that would align with my values.</p>
+
+<p>At the time <a href="http://www.wiggle.co.uk/">Wiggle</a>, an e-commerce sports retailer, were hiring TDD focussed agile developers and I jumped at the chance to work for a great company I already knew from competing in triathlons and cycling events in my spare time. I was again lucky to join a development team full of talented people and learnt a great deal about both automated testing, event driven architecture and true agile development processes.</p>
+
+<p>The whole team had a similar test first mindset and the benefits to a product of paired programming and code reviewing became clear. When members of a development team can freely collaborate then the solution benefits from their combined experience. Instead of a piecemeal code-base written from conflicting perspectives you produce a much more coherent product with consistent approaches to each particular problem.</p>
+
+<h2>Episode V &ndash; Difficult to see. Always in motion is the future&hellip;</h2>
+
+<p>Unfortunately events outside of my control once again forced me to look for alternative employment as the IT team was relocated. But working for Wiggle had given me a taste for working in a product team so I looked for a role in the same vein. Fortuitously Brightwave were looking to expand the development team for their tessello product so I jumped on board. The main product was quite a departure from all the applications I&rsquo;d worked on previously, a &lsquo;single page application&rsquo; with most of the code written in javascript to run client side directly in the users browser.</p>
+
+<p>The benefits to this approach are obvious when you use the application as interactions are much smoother without full page reloads and the user experience is much better. There has been tremendous growth in this area over the last couple of years with the emergence of many front end frameworks such as Angular, Backbone, Ember, React (I could go on but you get the idea!). I expect that this approach will become the norm over the next few years as any applications without smooth interactions will not be able to attract users.</p>
+
+<h2>Episode VI &ndash; Train yourself to let go of everything you fear to lose</h2>
+
+<p>Working with the tessello product team was a great experience and we made some great improvements to the platform. However the pace of change in the technology industry is clearly not slowing down and I felt I needed to make a change to enable me to keep up with these rapid changes.</p>
+
+<p>As a software developer (indeed any kind of knowledge worker) the most valuable commodity you possess is your time. Working for any company full time you effectively hand that commodity to the company and they apportion it as they see fit (quite rightly to, this is what we all sign up to when we join a company). However there is a problem with this model as opportunities to top up your knowledge bank are largely limited to concepts you encounter during your day to day work and whatever you can manage to cram in out of hours.</p>
+
+<p>My hope is that contracting work will enable me to make a bigger investment into my knowledge bank between contracts. Also I may be able to explore other opportunities in my own time which may or may not be successful but I&rsquo;m sure will be fun trying! Obviously this is all theoretical right now but there is only one way to properly test a theory and that is to give it a go, so watch this space!</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-13T10:10:43+01:00" data-updated="true" itemprop="datePublished">Aug 13<span>th</span>, 2014</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/progress/'>Progress</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2014/08/13/tin-can-api-overview/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2014/08/13/tin-can-api-overview/" itemprop="url">Tin Can API Overview</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><img src="http://imageshack.com/a/img539/1961/OgE8tH.jpg" class="alignleft" alttext="Tin Can API Logo" /></p>
+
+<p>These are some notes from my reading on the Tin Can API, a specification for the transmission and storage of messages related to learning activities. The specification has been developed by parties in the e-learning industry and aims to be an elegant solution to enable learning systems to communicate with one another.</p>
+
+<p>All this information is available on the <a href="http://tincanapi.com/">Tin Can API website</a>, this is just my own <a href="http://en.wikipedia.org/wiki/Wikipedia:Too_long;_didn't_read">tl;dr</a> type summary.</p>
+
+<h3>What is it?</h3>
+
+<ul>
+<li>A RESTful web service specification</li>
+<li>Defines the structure for JSON messages which represent learning activities (Or other types of activity)</li>
+<li>Each message is called a <strong>Statement</strong></li>
+<li>A statement consists of 3 parts: <strong>Actor</strong>, <strong>Verb</strong> and <strong>Object</strong> like &ldquo;Mike read the Tin Can Explained article&rdquo;</li>
+<li>Based on the <a href="http://activitystrea.ms/">activity streams</a> specification developed by/for social networks</li>
+</ul>
+
+
+<h3>Why is it good?</h3>
+
+<ul>
+<li>More flexible version of the old SCORM standard</li>
+<li>Device agnostic &ndash; anything that can send HTTP requests can use the API</li>
+<li>Almost any type of content can be stored</li>
+<li>Decouples content from the LMS (Learning management system) by storing in a separate LRS (Learning Record Store)</li>
+<li>A single <em>statement</em> can be stored in multiple learning record stores</li>
+<li>Allows potential for a learner owning their own content instead of their employers</li>
+<li>Data is accessible and easy to report on</li>
+</ul>
+
+
+<h3>A statement example</h3>
+
+<pre><code>{
+    "actor": {
+        "name": "Sally Glider",
+            "mbox": "mailto:sally@example.com"
+        },
+    "verb": {
+            "id": "http://adlnet.gov/expapi/verbs/experienced",
+            "display": {"en-US": "experienced"}
+     },
+    "object": {
+            "id": "http://example.com/activities/solo-hang-gliding",
+            "definition": {
+                "name": { "en-US": "Solo Hang Gliding" }
+            }
+    }
+}
+</code></pre>
+
+<p>You can generate test statements with valid syntax using the <a href="http://tincanapi.com/statement-generator/">Statement Generator</a></p>
+
+<p>Details of the valid message formats are given on the <a href="https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md">full xAPI specification</a>.</p>
+
+<h2>The registry</h2>
+
+<ul>
+<li>Contains definitions for verbs, activities, activity types, attachment types and extensions</li>
+<li>Should be referenced to in messages by URIs</li>
+<li>A shared domain language for agreed definitions of terms</li>
+<li>Anyone can add their own definitions to <a href="https://registry.tincanapi.com/">the registry</a></li>
+</ul>
+
+
+<h2>Recipes</h2>
+
+<ul>
+<li><a href="http://tincanapi.com/recipeshow-it-works/">Recipes</a> provide a standardised way for people to describe activities</li>
+<li>Simplifies reporting as the same terms should be used to describe things</li>
+<li>A few recipes exist now, for example the <a href="https://registry.tincanapi.com/#profile/19">video recipe</a></li>
+<li>More recipes can be added by the community</li>
+<li>Helps keep the API flexible and useful for future applications that may not even exist yet!</li>
+</ul>
+
+
+<p>Reading about the Tin Can API over the last few days and seeing it in action in the <a href="https://www.tessello.co.uk">Tessello application</a> has really whet my appetite to work more with the specification. I can see great potential for systems that leverage this specification as it provides a flexible framework for messaging without being restrictive and gives us the basis for a common technical language to use to enable our systems to talk to one another.</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -268,299 +538,6 @@ EXECUTE sp_rename N'Tempcmstasktype', N'cmstasktype', 'OBJECT'
 
 </article>
 
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-05-23T16:04:20+01:00" data-updated="true" itemprop="datePublished">May 23<span>rd</span>, 2014</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2014/05/23/cloud-hosting-for-prototype/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2014/05/23/cloud-hosting-for-prototype/" itemprop="url">Cloud Hosting for a Prototype Project</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p><img src="http://imagizer.imageshack.us/v2/320x240q90/838/0fsb.jpg" class="alignleft" alttext="Square peg - Round hole"  /></p>
-
-<br/><br/>
-
-
-<p>Today I am investigating cloud hosting platforms for a green field web application, there are quite a few platforms out there now, however I&rsquo;ll be looking at some of the big hitters as they are tried and tested in the marketplace.</p>
-
-<p>The full technology stack is still under review so the hosting capabilities need to be fairly flexible however the requirements we know for sure are:</p>
-
-<ul>
-<li>Able to spin up multiple instances to run testing, staging and production environments</li>
-<li>Low cost, ideally zero for testing / staging as this is grass roots project!</li>
-<li>Flexibility to host a range of technologies</li>
-<li>High reliability / speed (this should be a given for any hosting environment)</li>
-</ul>
-
-
-<h2>Contenders ready!</h2>
-
-<p>I&rsquo;m going to investigate 3 platforms against the main requirements above, Windows Azure, Amazon Web Services and Heroku. Each have their advantages, so lets find out which will be the best fit for our project.</p>
-
-<h3>Azure</h3>
-
-<p>Azure is the Microsoft Cloud offering. As such it has a Microsoft technologies leaning but is by no means limited to their stack.</p>
-
-<h4>OS / Languages / DBs</h4>
-
-<ul>
-<li>Windows or Linux</li>
-<li>.NET, Node.js, Java, PHP, Python, Ruby</li>
-<li>Native DBs: Azure SQL Server</li>
-<li>Third party DBs: Neo4j, MySQL, MongoDB (fiddly)</li>
-</ul>
-
-
-<h4>Pricing</h4>
-
-<ul>
-<li>30 day free trial then,</li>
-<li>$10/month per site</li>
-<li>$2.50/month per DB</li>
-</ul>
-
-
-<h3>AWS</h3>
-
-<p>Amazon Web Services were one of the first cloud based hosting solutions out there. It is a mature platform with many options but lets see whether the acronyms compare favourably.</p>
-
-<h4>OS / Languages</h4>
-
-<ul>
-<li>Windows or Linux</li>
-<li>.NET, Java, PHP, Python, Ruby</li>
-<li>Native DBs: SQL Server, MySQL, Oracle, PostgreSQL</li>
-<li>Third party DBs: Neo4j, MongoDB, RavenDB (basically anything you can run on VM)</li>
-</ul>
-
-
-<h4>Pricing</h4>
-
-<ul>
-<li>12 months free for 1 instance / DB</li>
-<li>$15/month per site</li>
-<li>$40/month per DB</li>
-</ul>
-
-
-<h3>Heroku</h3>
-
-<p>Heroku is more of a grass roots developer led cloud platform. It is well suited to an open source license free stack but will this be suitable for our application?</p>
-
-<h4>OS / Languages</h4>
-
-<ul>
-<li>Windows or Linux</li>
-<li>Node.js, Java, Python, Ruby</li>
-<li>Native DBs: Postgres</li>
-<li>Third party FBs: neo4j, MySQL</li>
-</ul>
-
-
-<h4>Pricing</h4>
-
-<ul>
-<li>1 dyno free, $35/month per extra instance</li>
-<li>Dev DBs free (Up to 10K rows), Basic $9/month</li>
-</ul>
-
-
-<h2>And the winner is&hellip;</h2>
-
-<p>The technology stack hasn&rsquo;t been chosen yet so we will just need to wait to see you the winner is!</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-28T09:58:09+01:00" data-updated="true" itemprop="datePublished">Apr 28<span>th</span>, 2014</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2014/04/28/migrating-umbraco-4-mysql-to-azure-hosting/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2014/04/28/migrating-umbraco-4-mysql-to-azure-hosting/" itemprop="url">Migrating Umbraco 4 Mysql to Azure Hosting</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<h2>Why Azure</h2>
-
-<p>I recently inherited an Umbraco version 4 site and need to setup web hosting for it. I decided that Azure would be a good option for hosting as it offers great benefits for future scalability and a good costing model. I also wanted to try it out and see what all the fuss is about!</p>
-
-<p>There were a few steps to carry out to get the site up and running in Azure, so I&rsquo;ve documented my experience here.</p>
-
-<h2>First steps</h2>
-
-<ul>
-<li>Obviously you need to sign up to a <a href="http://azure.microsoft.com/">Windows Azure account</a>. Its free to try but you do need a credit card. I guess this makes it nice and seamless for Microsoft to start charging you if you opt to continue past the 1 month trial!</li>
-<li>Now login to the portal and go to Websites &ndash;> new &ndash;> custom create &ndash;> enter details, selecting a mysql database from the drop down</li>
-</ul>
-
-
-<p><img src="http://imageshack.com/a/img834/4281/jf2b.png" class="alignleft" alttext="Azure create website dialog"  /></p>
-
-<h2>Migrating the database</h2>
-
-<ul>
-<li>Click on the new website and go to the &lsquo;linked resources&rsquo; tab. The MySql Database should be listed here</li>
-<li>Click the name to open ClearDB (the third party provider of MySql databases support for Windows Azure)</li>
-<li>Setup MySQL workbench to connect to ClearDB using an <a href="https://github.com/CloudBees-community/tomcat-clickstack/wiki/ClearDB-::--MySQL-SSL-Connection-MySQL-Workbench">SSL connection</a>. You may also need to install OpenSSL to enable generation of the rsa key.</li>
-<li>Reduce the database size to fit in the 20MB size limit by <a href="http://www.spyriadis.net/2012/07/umbraco-clear-old-document-versions-to-decrease-database-size-and-improve-performance/">removing old document versions and preview / log files.</a></li>
-</ul>
-
-
-<h2>Uploading the web site</h2>
-
-<ul>
-<li>Download the publish profile file from your azure account. It is available on the dashboard page of your website, under the &lsquo;quick glance&rsquo; menu</li>
-<li>Open the site in WebMatrix, press publish and browse to select the publish profile file you just downloaded.</li>
-<li>Web Matrix will now run a diff on the files and prompt you to upload any changes to Azure.</li>
-<li>In Azure go to the site configure tab and set the app settings for &lsquo;umbracoDbDSN&rsquo; and any other connection string values to the ClearDB database connection string. If you are not sure what the connection string you can get it from the &lsquo;quick glance&rsquo; menu.</li>
-</ul>
-
-
-<p>I like this ability to set your production connection strings / app settings in Azure. This will be help enable me to open source the code without storing these secure settings in the config files themselves.</p>
-
-<p>Hey presto, your site should be up and running!</p>
-
-<h2>So, what&rsquo;s the verdict?</h2>
-
-<p>Is Azure as nice a hue as promised or is it more murky in practice? Well from my experience its all worked pretty much as expected so far. Its clear the Microsoft has invested some serious resources into the platform and unlike some of their other products (ahem Windows 8) the usability is excellent.</p>
-
-<p>I think this is a decent work flow to initially get a site up and running. However in the long term I would want to hook up source control for the site to publish when merging to a branch. There is an option in Azure to &lsquo;Set up deployment from source control&rsquo; so I will be investigating how this works next.</p>
-
-<p>The main drawback I currently see with this setup is that the database has a limit on the number of connections. The free version has 4 which is fair enough, given it is just for trialling. However even the paid versions have low limits of 15, 30 or 40 for $10, $50 or $100 respectively. My feeling is that these limits may well cause problems when the site is running in production. I already hit the 4 connections limit just browsing the site myself and publishing a new page and it is bound to use more when real users are browsing at the same time.</p>
-
-<p>The SQL databases offered in Azure do not have this connections limit and would also be significantly cheaper in the long run, so I will be investigating the feasibility of migrating the Umbraco DB from MySQL into SQL.</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-01-29T17:38:27+00:00" data-updated="true" itemprop="datePublished">Jan 29<span>th</span>, 2014</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/software-design/'>Software Design</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2014/01/29/event-storming/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2014/01/29/event-storming/" itemprop="url">Event Storming a Distributed Solution</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>Software design and development techniques are constantly evolving, making the discipline a fascinating area to work in. Over the time I&rsquo;ve been working as a developer I&rsquo;ve seen various approaches to design from Code First, Data Driven to Domain Driven (DDD). My preference is to consider the scope of the problem first and design a solution to match and DDD is a good fit for this. However when looking at enterprise level problems we need to give more consideration to how a problem will scale&hellip; enter Event Storming.</p>
-
-<h2>Distributed design</h2>
-
-<p>I work in a development team which is responsible for several key business capabilities, there are already some software solutions in place for these capabilities however they were designed several years ago to solve problems at a scale at least an order of magnitude below where we currently find ourselves. Our stakeholders have expressed a desire that we could redesign a solution which would meet our current needs better, basically it needs to work <strong>faster</strong>, do <em>just</em> what is needed and ideally <strong>scale</strong> so that it will still perform well at the next order of magnitude up.</p>
-
-<p>We decided to have an Event Storming session to help us analyse the problem and come up with a high level distributed solution. We carried out the session in a couple of phases, first we reviewed the current solution, then we looked at the primary goals for the redesign then finally we started event storming a solution. Here are the team hard at work mid-storm:</p>
-
-<p><img src="http://imageshack.com/a/img542/5968/1l37.jpg" class="alignleft" alttext="Octopress Logo"  /></p>
-
-<h2>Collaborative analysis</h2>
-
-<p>The session first involved us all writing down on post-it notes business events that had some relevance to the feature we were analysing. We then stuck all these onto a big board and de-duped them. It was a bit tricky to order the post-its at this stage so we went for a loose left to right time sequence.</p>
-
-<p>Following this we got the post-it stack back in action and wrote down each of the commands that could have some influence on the events on the board. Then we linked each of the commands to events on the board, this wasn&rsquo;t always a one-to-one relationship which presented some practical problems, however on the whole I think working with physical post-its was far better than using something like Visio as its more democratic. Finally we arranged the post-its into discrete pieces of behaviour and mapped out the interactions between them.</p>
-
-<p>It was important that we recognised the difference between an event and a command during the exercise. As a rule of thumb commands are carried out by users and events are raised by the system to indicate something has happened. For example the <em>Create Product</em> command is raised when the user saves a product entry, whereas <em>&lsquo;Product Created&rsquo;</em> event is raised after the transaction has finished and a product has been persisted in the system. As I alluded to earlier there is no hard one-to-one relationship here, a single command can often result in multiple events being raised and vice versa. Its important to make sure the distinction is clear to everyone before the session begins, it saves a lot of time in the long run!</p>
-
-<p>The results of our session can be seen in the picture below:
-<img src="http://imageshack.com/a/img34/1388/bbid.jpg" class="alignleft" alttext="Octopress Logo"  /></p>
-
-<h2>A virtual solution</h2>
-
-<p>By the end of the session we had a virtual solution figured out that could be implemented with discrete modules communicating exclusively via messaging. I was pleasantly surprised by the elegance of the solution, by focussing on the interactions between the systems and isolating responsibilities it was clear that we only needed to pass a small amount of data between each module and could effectively encapsulate the behaviour. However Event Storming is just one technique and I wouldn&rsquo;t suggest it is a magic bullet design technique, these are the main pros and cons as I see it.</p>
-
-<h3>Advantages</h3>
-
-<ul>
-<li>Helps focus on the interactions between elements of a distributed system</li>
-<li>The whole team is involved at the analysis stage and visualize the same proposed solution</li>
-<li>Encourages scalable solutions</li>
-</ul>
-
-
-<h3>Drawbacks</h3>
-
-<ul>
-<li>Reliant on domain knowledge of team members to surface events / commands</li>
-<li>Design can get lost in a sea of post-it notes!</li>
-<li>Need to transfer quickly to implementation tasks to avoid losing insights</li>
-</ul>
-
-
-<p>I&rsquo;d be interested to hear of your experiences of event storming and how effective you have found it to be?</p>
-
-		
-		
-	</div>
-
-</article>
-
 </div>
 <nav id="pagenavi">
     
@@ -573,7 +550,7 @@ EXECUTE sp_rename N'Tempcmstasktype', N'cmstasktype', 'OBJECT'
 </nav></div>
 			</div>
 			<footer id="footer" class="inner"><p>
-  Copyright &copy; 2015 - Mike Hook -
+  Copyright &copy; 2015 - Hook Technologies Ltd -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 </footer>
