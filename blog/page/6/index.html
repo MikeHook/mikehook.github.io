@@ -9,7 +9,7 @@
 	<meta name="author" content="Hook Technologies Ltd">
 
 	
-	<meta name="description" content="Oct 23rd, 2011 Software Design Comments Behaviour Driven Design Encourages Shared Understanding Most recent projects I have worked on have used unit &hellip;">
+	<meta name="description" content="Oct 7th, 2011 Progress Comments Discovering the Original Inventors of the Internet I&rsquo;m sure many of you have heard about a chap called Tim &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,10 +67,10 @@
 <nav id="main-nav"><h3>categories</h3>
 <ul class="main-navigation">
 <li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
-<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 7 ]</li>
-<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 16 ]</li>
+<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 6 ]</li>
+<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 15 ]</li>
 <li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
-<li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 9 ]</li>
+<li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 10 ]</li>
 
 </ul>
 <br/>
@@ -111,91 +111,6 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-10-23T12:21:38+01:00" data-updated="true" itemprop="datePublished">Oct 23<span>rd</span>, 2011</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/software-design/'>Software Design</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/10/23/behaviour-driven-design-encourages-shared-understanding/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/10/23/behaviour-driven-design-encourages-shared-understanding/" itemprop="url">Behaviour Driven Design Encourages Shared Understanding</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>Most recent projects I have worked on have used unit tests  to define the requirements of our code and ensure they are met. Typically the tests are written by the developer while they are coding the solution. However this means that the tests are based entirely on the developers understanding of the requirements, which may not always be the same as the stakeholders understanding.</p>
-
-<p>To combat this issue we are introducing <a href="http://dannorth.net/introducing-bdd/">behaviour driven development</a>, to agree on a set of requirements for each feature with the stakeholders before starting development. The requirements are captured using the Gherkin syntax (Given, When, Then) based on real world examples. These examples can then be wired up to the system directly as automated tests using <a href="http://specflow.org/">Specflow</a>.</p>
-
-<h2>OK, show me the example already</h2>
-
-
-<p>Here is a fictionalised scenario which demonstrates the value that BDD adds to a project. An abbreviated version of the initial scenarios drafted by the developer are as follows:</p>
-
-<pre style="font-size:small;font-family:Consolas, 'Courier New', Courier, Monospace;width:100%;overflow:auto;border:1px dashed #999999;background-color:#eeeeee;"><span style="color:#0000ff;font-weight:bold;">Feature</span>: Process 3D secure authentication response
-        As a logged in user
-        I would like to place a 3D secure authenticated order
-        so that I have assurance of the websites security
-
-<span style="color:#0000ff;font-weight:bold;">Scenario</span>: Handle a 3D secure response of AUTHORISED
-    <span style="color:#0000ff;"><strong>Given </strong></span>a 3D secure response of AUTHORISED
-        <span style="color:#0000ff;font-weight:bold;">When</span>  i view the order confirmation page
-        <span style="color:#0000ff;font-weight:bold;">Then</span>  the order status will be Complete
-
-<span style="color:#0000ff;font-weight:bold;">Scenario</span>: Handle a 3D secure response of NOT AUTHORISED
-    <span style="color:#0000ff;"><strong>Given </strong></span>a 3D secure response of NOT AUTHORISED
-        <span style="color:#0000ff;font-weight:bold;">When</span>  i view the order confirmation page
-        <span style="color:#0000ff;font-weight:bold;">Then</span>  the order status will be Cancelled
-
-<span style="color:#0000ff;font-weight:bold;">Scenario</span>: Handle a 3D response of NOT PROCESSED
-    <span style="color:#0000ff;"><strong>Given </strong></span>a 3D secure response of NOT PROCESSED
-        <span style="color:#0000ff;font-weight:bold;">When</span>  i view the order confirmation page
-        <span style="color:#0000ff;font-weight:bold;">Then</span>  the order status will be Cancelled</pre>
-
-
-
-
-<h2>Evolving the scenario</h2>
-
-
-<p>The assumptions shown in these scenarios are perfectly reasonable, an order will only be completed if the 3D secure security check returns an authorised response. However it should really be a decision for the stakeholder&rsquo;s business whether the system should behave in this way. There are several valid scenarios where all 3D responses should actually result in a completed order, for example:</p>
-
-<pre style="font-size:small;font-family:Consolas, 'Courier New', Courier, Monospace;width:100%;overflow:auto;border:1px dashed #999999;background-color:#eeeeee;"><span style="color:#0000ff;font-weight:bold;">Scenario</span>: Handle a 3D secure response of NOT AUTHORISED
-<span style="color:#0000ff;"><strong>Given</strong></span> a 3D secure response of NOT AUTHORISED
-<span style="color:#0000ff;"><strong>And</strong></span> a total order value order value under the following amount:   25
-<span style="color:#0000ff;font-weight:bold;">When</span>  i view the order confirmation page
-<span style="color:#0000ff;font-weight:bold;">Then</span>  the order status will be Complete</pre>
-
-
-<p>The stakeholders calculated that the risk of charge-backs was so low on orders under   25 that they could disregard the 3D secure response completely and allow &lsquo;not authorised&rsquo; transactions to be completed.</p>
-
-<p>Here we can see a clear benefit in the stakeholder sharing their understanding of the system requirements with the implementation team. Rules which are beneficial to their business can be incorporated into the system, resulting in a more effective solution from the outset.</p>
-
-<p>If you are interested in reading more about using BDD for web applications I can recommend <a href="http://blog.stevensanderson.com/2010/03/03/behavior-driven-development-bdd-with-specflow-and-aspnet-mvc/">Steven Sanderson&rsquo;s excellent blog post</a>.</p>
-
-		
-		
-	</div>
-
-</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -428,6 +343,45 @@
 
 </article>
 
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-10T16:39:43+00:00" data-updated="true" itemprop="datePublished">Mar 10<span>th</span>, 2011</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/tips-and-tricks/'>Tips and Tricks</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/03/10/android-dev-tip-fix-the-eclipse-auto-complete/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/03/10/android-dev-tip-fix-the-eclipse-auto-complete/" itemprop="url">Android Dev Tip - Fix the Eclipse Auto-complete</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>I recently had problems with the eclipse IDE auto-complete not working.</p>
+
+<p>After Googling the problem, I managed to resolve this by downloading the source for the version I was using and extracting into the Android SDK folder, as detailed in <a href="http://code.google.com/p/android/issues/detail?id=7850#c8">this google code issue</a>.</p>
+
+		
+		
+	</div>
+
+</article>
+
 </div>
 <nav id="pagenavi">
     
@@ -440,7 +394,7 @@
 </nav></div>
 			</div>
 			<footer id="footer" class="inner"><p>
-  Copyright &copy; 2015 - Hook Technologies Ltd -
+  Copyright &copy; 2016 - Hook Technologies Ltd -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 </footer>

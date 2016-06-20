@@ -9,7 +9,7 @@
 	<meta name="author" content="Hook Technologies Ltd">
 
 	
-	<meta name="description" content="Dec 22nd, 2015 Progress Comments Continuous Delivery to Azure With AppVeyor I&rsquo;ve been using Kudu to automate my website deployments from &hellip;">
+	<meta name="description" content="Jun 20th, 2016 Tips and Tricks Comments Installing Node Modules in a TeamCity Build Keeping up with the inexorable rise of front end frameworks is a &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,10 +67,10 @@
 <nav id="main-nav"><h3>categories</h3>
 <ul class="main-navigation">
 <li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
-<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 7 ]</li>
-<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 16 ]</li>
+<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 6 ]</li>
+<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 15 ]</li>
 <li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
-<li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 9 ]</li>
+<li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 10 ]</li>
 
 </ul>
 <br/>
@@ -111,6 +111,65 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-06-20T00:00:00+01:00" data-updated="true" itemprop="datePublished">Jun 20<span>th</span>, 2016</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/tips-and-tricks/'>Tips and Tricks</a>
+
+
+</div>
+		
+			<span class="comments"><a href="http://bakingwebsites.co.uk/2016/06/20/Installing-node-from-TeamCity/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2016/06/20/Installing-node-from-TeamCity/" itemprop="url">Installing Node Modules in a TeamCity Build</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><a href="https://nodejs.org"><img src="https://googledrive.com/host/0Bx-8nw9dhAQcN1lWbU1SLW91bEk/nodejs-logo.jpg" class="alignleft" title="node js" /></a></p>
+
+<p>Keeping up with the inexorable rise of front end frameworks is a big challenge in modern web development is. My pathway is probably fairly common, starting out with <a href="https://jquery.com/">jQuery</a> and the humble selector, progressing onto <a href="http://knockoutjs.com/">Knockout</a> and embracing the joy of binding then finally onto the full on framework smorgasbord of <a href="https://angularjs.org/">Angular JS</a>. Now there is a new project on the horizon and Angular 2 has reached a good level of maturity, so &ldquo;Once more unto the breach, dear friends&rdquo; it is time to embrace the new all over again!</p>
+
+<p>Our project stack is a fairly standard .net picture, an ASP.NET MVC application on the front end talking to a REST API server side based on Web Api. Angular 2 sits firmly in the front end application and can be installed through node. I won&rsquo;t go into details of that setup here as Deborah Kurata has already covered that off in her excellent <a href="http://blogs.msmvps.com/deborahk/angular-2-getting-started-with-a-visual-studio-2015-asp-net-4-x-project/">Angular 2 Getting started with Visual Studio post</a>, however the point where I hit trouble was getting the application to build on our TeamCity build server.</p>
+
+<h2>Its Javascript Jim, but not as we know it</h2>
+
+<p>A big benefit of Angular 2 is its built in support for coding in TypeScript, a strongly typed  superset of JavaScript that can be transpiled into JavaScript before it is executed. While TypeScript has been around for quite a while now (compared to Angular 2 anyway!) and is baked into Visual Studio I still needed to get the newest version to enable visual studio to build the scripts. This was simply a case of downloading the latest version of <a href="https://www.microsoft.com/en-us/download/details.aspx?id=48593">TypeScript for Visual Studio 2015</a> and installing.</p>
+
+<p>Once the installation step had been repeated on our build server the compiler also ran through TeamCity. So far so good, however we didn&rsquo;t have the node_modules folder checked into source control (as they are external dependencies containing a crazy number of files!) so the Angular 2 source libraries were not present. Naturally this was a sticking point in getting our javascript code to compile or indeed run as Angular 2 didn&rsquo;t exist in the application on the build server! To fix this we needed to download all the dependencies in the node_modules folder during the build and save them into the expected location in the build servers workspace.</p>
+
+<h2>Hey node, give me the dependencies</h2>
+
+<p>TeamCity has a great plugin model which allows it capabilities to be easily extended and a quick google revealed that a <a href="https://github.com/jonnyzzz/TeamCity.Node">TeamCity Node plugin</a> already existed. After installing the plugin, along with Node on the build server, I was able to add a build step to execute the following command:</p>
+
+<p><code>npm install</code></p>
+
+<p>When this command is executed from the directory of our MVC application it interrogates the <strong>package.json</strong> file and installs all the dependencies listed in the json file. Well, that&rsquo;s what it <strong>should</strong> do, in my case all I got was a long pause followed by a network timeout, doh!</p>
+
+<p>I was prepared for this as we are working behind a corporate firewall and I&rsquo;d already spent quite some time finding out how to get a connection from my development machine. The solution, using the Cntlm Authentication proxy, is handily documented on StackOverflow in this <a href="https://stackoverflow.com/questions/18569054/npm-behind-ntlm-proxy/18570201#18570201">NPM behind NTLM proxy article</a>. However after following all the steps on the build server the network connections were still failing. I tried running the npm install locally on the build server and it worked fine so it seemed that the npm proxy settings were not being used when the program ran through TeamCity. After quite a bit of head scratching I resorted to reading the <a href="https://docs.npmjs.com/files/npmrc">npm manual</a> and there were some clues as to why the config might be ignored. When I looked in my C:\Users\{MyUsername}\ folder I could see a .npmrc file with the proxy settings, however there was no such file in the C:\Users\{TeamCityAgentUser}\ folder. So I copied my .npmrc file into here then bingo, it all worked through TeamCity!</p>
+
+<p>I&rsquo;m sure this won&rsquo;t be the last challenge Angular 2 throws at our Dev Ops efforts but we are in a good place now with the build running inside TeamCity.</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -344,98 +403,6 @@
   
 
 
-<time datetime="2015-08-16T18:07:49+01:00" data-updated="true" itemprop="datePublished">Aug 16<span>th</span>, 2015</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/software-design/'>Software Design</a>
-
-
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2015/08/16/re-architecting-a-platform/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2015/08/16/re-architecting-a-platform/" itemprop="url">Re Architecting a Multi Tenant Platform</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>Intro &ndash; explain the problem and goals for the re architecture</p>
-
-<h2>High level plan</h2>
-
-<p>Diagrams for before and after, explain major changes</p>
-
-<p><img src="http://i49.photobucket.com/albums/f299/hookmike/74078639-2d6b-4179-883d-4be7d28c19c7_zpsbpo9illj.jpg" class="alignleft" title="Awesome image by Roberlan https://www.flickr.com/photos/roberlan" /></p>
-
-<h2>Implementing the changes</h2>
-
-<ul>
-<li>Analyse &amp; document current behaviour</li>
-<li>Spec new behaviour</li>
-<li>Implement with BDD</li>
-<li>Incremental releases</li>
-</ul>
-
-
-<h2>Pitfalls</h2>
-
-<ul>
-<li>&lsquo;Fix the world&rsquo; syndrome</li>
-<li>Guard against new technical debt</li>
-<li>Regression &ndash; may break existing working features!</li>
-<li>Majority of value is long term with low visibility</li>
-</ul>
-
-
-<h2>Conclusion</h2>
-
-<ul>
-<li>Work in progress</li>
-<li>Real world priorities may change</li>
-<li>Delivered 3 major new features that are DONE DONE DONE!</li>
-</ul>
-
-
-<h2>A Developer always pays his debts</h2>
-
-<p>Tell a story about a quest to the hallowed lands of technical excellence with zero bugs and no obsolete code.</p>
-
-<p>Hit points for every dead line of code removed, test added and stored procedure deleted
-Level up by simplifying system behaviour, other things?</p>
-
-<p>1st month
-Transitioning from old style N-tier architecture all in web app: JS &ndash;> WebMethod &ndash;> Business Logic &ndash;> SProc DAL to
-modular service oriented architecture: JS &ndash;> WebApi &ndash;> Business Logic &ndash;> EF DAL
-Shifted login, authentication and session management to API</p>
-
-<p>2nd month
-Tooled up with nuget libraries for WebApi comms
-Shifted registration to API</p>
-
-<p>3rd month
-Tooled up with TeamCity
-Shifted edit profile to API</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
 <time datetime="2015-07-26T18:07:49+01:00" data-updated="true" itemprop="datePublished">Jul 26<span>th</span>, 2015</time></div>
 		<div class="tags">
 
@@ -512,7 +479,7 @@ Shifted edit profile to API</p>
 </nav></div>
 			</div>
 			<footer id="footer" class="inner"><p>
-  Copyright &copy; 2015 - Hook Technologies Ltd -
+  Copyright &copy; 2016 - Hook Technologies Ltd -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 </footer>

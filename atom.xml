@@ -4,7 +4,7 @@
   <title><![CDATA[baking websites]]></title>
   <link href="http://bakingwebsites.co.uk/atom.xml" rel="self"/>
   <link href="http://bakingwebsites.co.uk/"/>
-  <updated>2015-12-22T14:55:14+00:00</updated>
+  <updated>2016-06-20T15:07:59+01:00</updated>
   <id>http://bakingwebsites.co.uk/</id>
   <author>
     <name><![CDATA[Hook Technologies Ltd]]></name>
@@ -12,6 +12,37 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Installing node modules in a TeamCity build]]></title>
+    <link href="http://bakingwebsites.co.uk/2016/06/20/Installing-node-from-TeamCity/"/>
+    <updated>2016-06-20T00:00:00+01:00</updated>
+    <id>http://bakingwebsites.co.uk/2016/06/20/Installing-node-from-TeamCity</id>
+    <content type="html"><![CDATA[<p><a href="https://nodejs.org"><img src="https://googledrive.com/host/0Bx-8nw9dhAQcN1lWbU1SLW91bEk/nodejs-logo.jpg" class="alignleft" title="node js" /></a></p>
+
+<p>Keeping up with the inexorable rise of front end frameworks is a big challenge in modern web development is. My pathway is probably fairly common, starting out with <a href="https://jquery.com/">jQuery</a> and the humble selector, progressing onto <a href="http://knockoutjs.com/">Knockout</a> and embracing the joy of binding then finally onto the full on framework smorgasbord of <a href="https://angularjs.org/">Angular JS</a>. Now there is a new project on the horizon and Angular 2 has reached a good level of maturity, so &ldquo;Once more unto the breach, dear friends&rdquo; it is time to embrace the new all over again!</p>
+
+<p>Our project stack is a fairly standard .net picture, an ASP.NET MVC application on the front end talking to a REST API server side based on Web Api. Angular 2 sits firmly in the front end application and can be installed through node. I won&rsquo;t go into details of that setup here as Deborah Kurata has already covered that off in her excellent <a href="http://blogs.msmvps.com/deborahk/angular-2-getting-started-with-a-visual-studio-2015-asp-net-4-x-project/">Angular 2 Getting started with Visual Studio post</a>, however the point where I hit trouble was getting the application to build on our TeamCity build server.</p>
+
+<h2>Its Javascript Jim, but not as we know it</h2>
+
+<p>A big benefit of Angular 2 is its built in support for coding in TypeScript, a strongly typed  superset of JavaScript that can be transpiled into JavaScript before it is executed. While TypeScript has been around for quite a while now (compared to Angular 2 anyway!) and is baked into Visual Studio I still needed to get the newest version to enable visual studio to build the scripts. This was simply a case of downloading the latest version of <a href="https://www.microsoft.com/en-us/download/details.aspx?id=48593">TypeScript for Visual Studio 2015</a> and installing.</p>
+
+<p>Once the installation step had been repeated on our build server the compiler also ran through TeamCity. So far so good, however we didn&rsquo;t have the node_modules folder checked into source control (as they are external dependencies containing a crazy number of files!) so the Angular 2 source libraries were not present. Naturally this was a sticking point in getting our javascript code to compile or indeed run as Angular 2 didn&rsquo;t exist in the application on the build server! To fix this we needed to download all the dependencies in the node_modules folder during the build and save them into the expected location in the build servers workspace.</p>
+
+<h2>Hey node, give me the dependencies</h2>
+
+<p>TeamCity has a great plugin model which allows it capabilities to be easily extended and a quick google revealed that a <a href="https://github.com/jonnyzzz/TeamCity.Node">TeamCity Node plugin</a> already existed. After installing the plugin, along with Node on the build server, I was able to add a build step to execute the following command:</p>
+
+<p><code>npm install</code></p>
+
+<p>When this command is executed from the directory of our MVC application it interrogates the <strong>package.json</strong> file and installs all the dependencies listed in the json file. Well, that&rsquo;s what it <strong>should</strong> do, in my case all I got was a long pause followed by a network timeout, doh!</p>
+
+<p>I was prepared for this as we are working behind a corporate firewall and I&rsquo;d already spent quite some time finding out how to get a connection from my development machine. The solution, using the Cntlm Authentication proxy, is handily documented on StackOverflow in this <a href="https://stackoverflow.com/questions/18569054/npm-behind-ntlm-proxy/18570201#18570201">NPM behind NTLM proxy article</a>. However after following all the steps on the build server the network connections were still failing. I tried running the npm install locally on the build server and it worked fine so it seemed that the npm proxy settings were not being used when the program ran through TeamCity. After quite a bit of head scratching I resorted to reading the <a href="https://docs.npmjs.com/files/npmrc">npm manual</a> and there were some clues as to why the config might be ignored. When I looked in my C:\Users\{MyUsername}\ folder I could see a .npmrc file with the proxy settings, however there was no such file in the C:\Users\{TeamCityAgentUser}\ folder. So I copied my .npmrc file into here then bingo, it all worked through TeamCity!</p>
+
+<p>I&rsquo;m sure this won&rsquo;t be the last challenge Angular 2 throws at our Dev Ops efforts but we are in a good place now with the build running inside TeamCity.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Continuous Delivery to Azure with AppVeyor]]></title>
@@ -147,70 +178,6 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Re architecting a multi tenant platform]]></title>
-    <link href="http://bakingwebsites.co.uk/2015/08/16/re-architecting-a-platform/"/>
-    <updated>2015-08-16T18:07:49+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2015/08/16/re-architecting-a-platform</id>
-    <content type="html"><![CDATA[<p>Intro &ndash; explain the problem and goals for the re architecture</p>
-
-<h2>High level plan</h2>
-
-<p>Diagrams for before and after, explain major changes</p>
-
-<p><img src="http://i49.photobucket.com/albums/f299/hookmike/74078639-2d6b-4179-883d-4be7d28c19c7_zpsbpo9illj.jpg" class="alignleft" title="Awesome image by Roberlan https://www.flickr.com/photos/roberlan" /></p>
-
-<h2>Implementing the changes</h2>
-
-<ul>
-<li>Analyse &amp; document current behaviour</li>
-<li>Spec new behaviour</li>
-<li>Implement with BDD</li>
-<li>Incremental releases</li>
-</ul>
-
-
-<h2>Pitfalls</h2>
-
-<ul>
-<li>&lsquo;Fix the world&rsquo; syndrome</li>
-<li>Guard against new technical debt</li>
-<li>Regression &ndash; may break existing working features!</li>
-<li>Majority of value is long term with low visibility</li>
-</ul>
-
-
-<h2>Conclusion</h2>
-
-<ul>
-<li>Work in progress</li>
-<li>Real world priorities may change</li>
-<li>Delivered 3 major new features that are DONE DONE DONE!</li>
-</ul>
-
-
-<h2>A Developer always pays his debts</h2>
-
-<p>Tell a story about a quest to the hallowed lands of technical excellence with zero bugs and no obsolete code.</p>
-
-<p>Hit points for every dead line of code removed, test added and stored procedure deleted
-Level up by simplifying system behaviour, other things?</p>
-
-<p>1st month
-Transitioning from old style N-tier architecture all in web app: JS &ndash;> WebMethod &ndash;> Business Logic &ndash;> SProc DAL to
-modular service oriented architecture: JS &ndash;> WebApi &ndash;> Business Logic &ndash;> EF DAL
-Shifted login, authentication and session management to API</p>
-
-<p>2nd month
-Tooled up with nuget libraries for WebApi comms
-Shifted registration to API</p>
-
-<p>3rd month
-Tooled up with TeamCity
-Shifted edit profile to API</p>
-]]></content>
-  </entry>
-  
-  <entry>
     <title type="html"><![CDATA[Making awesome software with Lean principles - Part II]]></title>
     <link href="http://bakingwebsites.co.uk/2015/07/26/lean-awesome-part-II/"/>
     <updated>2015-07-26T18:07:49+01:00</updated>
@@ -311,57 +278,6 @@ Shifted edit profile to API</p>
 <h2>Stay tuned for part II&hellip;</h2>
 
 <p>The first three principles of Lean development have really helped me deliver on this project but there are still four more principles to go, so if you&rsquo;ve found this interesting check back soon for part II in the series!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Software Development Episode VI - A New Dawn]]></title>
-    <link href="http://bakingwebsites.co.uk/2015/04/23/episode-VI/"/>
-    <updated>2015-04-23T18:07:49+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2015/04/23/episode-VI</id>
-    <content type="html"><![CDATA[<p>As the somewhat cheesy title suggests, changes are afoot in the world of Baking Websites. Up to this point I&rsquo;ve been working as a permanent employee for a number of companies (five actually, hence Episode VI). But I felt that it was time to shake things up so imminently I will be starting out as a contracting software developer. While in practice I expect I will be doing much the same thing from day to day it was still quite a leap to leave the cosy environs of a permanent position. But before we get too far into that, in the best tradition of episodic film, lets take a recap on the story so far. In a galaxy far far away&hellip;</p>
-
-<h2>Episode I &ndash; A lone padawan</h2>
-
-<p>The first company I worked for, <a href="http://www.rfsolutions.co.uk/">RF Solutions</a>, was where I made my start on the journey of software development. Fresh out of university my mind was full of theory but completely devoid of any  practical business knowledge, invoices and purchase orders were foreign concepts to me! However that soon changed and I learnt what elements went together to make a business work.</p>
-
-<p>After a brief foray into the world of &lsquo;technical sales&rsquo; I gravitated towards the IT systems and was given a pretty opened ended brief of &lsquo;build us a new website where we can sell our products.&rsquo; So off I went and built a site leveraging an e-commerce product called <a href="http://www.actinic.co.uk/">Actinic</a>. It was a fun challenge and I learnt much about how online payments worked along with how a web application could be integrated with internal business systems. I&rsquo;m pleased to see that both the site I built and Actinic themselves are still going strong today, all be it in evolved forms!</p>
-
-<p>It gave me a taste for more and I set about learning all about the .Net framework and building my first custom application to process product returns. This was the first time I realized that the most difficult part can often be figuring out what you are meant to be making! It is one thing following tutorials to push data in and out of a database from a web page but quite another to apply that to a problem and come up with a solution that people will actually be able to use.</p>
-
-<p>My custom application worked but I knew I could do better, if only I had some way of learning the best way to approach these problems. This was when I made my first leap of faith&hellip;</p>
-
-<h2>Episode II &ndash; Yoda lives (in many forms!)</h2>
-
-<p>It was no good me being in an IT department of one so I had to move on but the trouble was no company would take me on as an experienced developer. I was well aware that my skill set was limited but knew I could learn so I started out as a junior developer at <a href="https://twitter.com/cubeworks">Cubeworks</a>. This turned out to be one of the best decisions I ever made, the company was full of talented developers, and I went into full sponge mode absorbing a great deal about best coding practices, new frameworks and collaborating. I owe a massive debt of thanks to the guys who were working there at the time for putting up with my endless questions! Sadly Cubeworks is no more, however it does live on as part of a larger agency <a href="http://www.mba.co.uk/">MBA</a> and many of the sites I helped build are still out there (Amongst others <a href="http://www.chichester.ac.uk/">Chichester college</a>, <a href="http://www.motoringassist.com/">GEM Motoring Assist</a> and <a href="http://www.changinghabbits.co.uk/">Changing Habbits</a>).</p>
-
-<h2>Episode III &ndash; Do or do not. There is no try</h2>
-
-<p>Like a bolt out of the blue a digital agency from &lsquo;the big smoke&rsquo; called <a href="http://www.fortunecookie.co.uk/">Fortune Cookie</a> contacted me directly, offering me a position. It was a wrench to leave Cubeworks but the opportunity to work on big projects for international clients was too good to turn down. Again this proved to be a period of learning, however much more in how to work in big multidisciplinary teams than how to develop solutions. The first project I worked on had about 8 developers, several designers, user experience experts, project managers and one poor overworked QA guy all trying to work together to deliver software. It was obvious that the overheads for organising and communicating in a large development team increased exponentially with size. Also maintaining code quality across the project became a real challenge but more on that later!</p>
-
-<p>The main program of work I was involved in was for <a href="https://www.netjets.com/">NetJets</a> a complete relaunch of their online presence, with a new flight booking engine thrown in for good measure! It was a great project to work on which involved close collaboration with the client across different time zones. It was soon clear that it was essential for us to maintain a &lsquo;mock&rsquo; version of the clients web services to enable us to work asynchronously, along with a suite of unit and integration tests to enable us to pin point the source of bugs. When a single user action is travelling through multiple layers of code across several applications debugging can be like going down the rabbit hole unless you have something to light your way!</p>
-
-<h2>Episode IV &ndash; In a dark place we find ourselves, and a little more knowledge lights our way</h2>
-
-<p>Unfortunately market forces conspired against me continuing to work for Fortune Cookie (or <a href="http://www.possible.com/">POSSIBLE</a> as they now were). The new projects were drying up and it was clear to me that long term the role would not be economical, so I decided to take action before someone made the decision for me. At the time the Test Driven Development movement was carrying a lot of influence in the industry and as I agreed with an approach to software development that put quality first I looked for a position that would align with my values.</p>
-
-<p>At the time <a href="http://www.wiggle.co.uk/">Wiggle</a>, an e-commerce sports retailer, were hiring TDD focussed agile developers and I jumped at the chance to work for a great company I already knew from competing in triathlons and cycling events in my spare time. I was again lucky to join a development team full of talented people and learnt a great deal about both automated testing, event driven architecture and true agile development processes.</p>
-
-<p>The whole team had a similar test first mindset and the benefits to a product of paired programming and code reviewing became clear. When members of a development team can freely collaborate then the solution benefits from their combined experience. Instead of a piecemeal code-base written from conflicting perspectives you produce a much more coherent product with consistent approaches to each particular problem.</p>
-
-<h2>Episode V &ndash; Difficult to see. Always in motion is the future&hellip;</h2>
-
-<p>Unfortunately events outside of my control once again forced me to look for alternative employment as the IT team was relocated. But working for Wiggle had given me a taste for working in a product team so I looked for a role in the same vein. Fortuitously Brightwave were looking to expand the development team for their tessello product so I jumped on board. The main product was quite a departure from all the applications I&rsquo;d worked on previously, a &lsquo;single page application&rsquo; with most of the code written in javascript to run client side directly in the users browser.</p>
-
-<p>The benefits to this approach are obvious when you use the application as interactions are much smoother without full page reloads and the user experience is much better. There has been tremendous growth in this area over the last couple of years with the emergence of many front end frameworks such as Angular, Backbone, Ember, React (I could go on but you get the idea!). I expect that this approach will become the norm over the next few years as any applications without smooth interactions will not be able to attract users.</p>
-
-<h2>Episode VI &ndash; Train yourself to let go of everything you fear to lose</h2>
-
-<p>Working with the tessello product team was a great experience and we made some great improvements to the platform. However the pace of change in the technology industry is clearly not slowing down and I felt I needed to make a change to enable me to keep up with these rapid changes.</p>
-
-<p>As a software developer (indeed any kind of knowledge worker) the most valuable commodity you possess is your time. Working for any company full time you effectively hand that commodity to the company and they apportion it as they see fit (quite rightly to, this is what we all sign up to when we join a company). However there is a problem with this model as opportunities to top up your knowledge bank are largely limited to concepts you encounter during your day to day work and whatever you can manage to cram in out of hours.</p>
-
-<p>My hope is that contracting work will enable me to make a bigger investment into my knowledge bank between contracts. Also I may be able to explore other opportunities in my own time which may or may not be successful but I&rsquo;m sure will be fun trying! Obviously this is all theoretical right now but there is only one way to properly test a theory and that is to give it a go, so watch this space!</p>
 ]]></content>
   </entry>
   
@@ -1219,6 +1135,53 @@ container.For(typeof(Cache)).Singleton().Use(HttpContext.Current.Cache);</pre>
 <p>When you issue the git stash command all your changes will be committed to a stack. Leaving you with no changes on your current working branch and free to branch where ever you want. So now you can switch to the live branch and do your bug fixing work. Once that is done you can simply move back to the feature branch and <em>apply</em> the stashed changes. Hey presto, you are back where you started with your uncommitted half complete work!</p>
 
 <p>If you really get into lots of parallel work you can stash multiple times, just be sure to remember that it is a stack and your last changes you have stashed will come back off stack first.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Microsoft jump on the Open Source band wagon]]></title>
+    <link href="http://bakingwebsites.co.uk/2012/04/03/microsoft-jump-on-the-open-source-band-wagon/"/>
+    <updated>2012-04-03T12:35:04+01:00</updated>
+    <id>http://bakingwebsites.co.uk/2012/04/03/microsoft-jump-on-the-open-source-band-wagon</id>
+    <content type="html"><![CDATA[<p><img class="alignright" title="Tux, the Linux Mascot" src="http://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Tux.png/220px-Tux.png" alt="" width="220" height="261" />
+A landmark decision was made last week by Microsoft&rsquo;s ASP.NET web development team. They announced that three key technologies used to develop web applications, <a href="http://weblogs.asp.net/scottgu/archive/2012/03/27/asp-net-mvc-web-api-razor-and-open-source.aspx">ASP.NET MVC, Web API and Razor would be made fully Open Source</a><sup>1</sup>. This is a big step for a company built on the sales of Closed Source software. I&rsquo;m going to have a look at what I think this decision means for the consumers, who use software built with these technologies, and the stakeholders who commission the software.</p>
+
+<h2>Open Sesame</h2>
+
+
+<p>For those those not involved directly in software development, the moniker &lsquo;Open Source&rsquo; may conjure up images of magicians pulling rabbits out of a hat<sup>2</sup>. However the reality could be viewed as the opposite of magic as Open source demystifies the software development process. In the traditional &lsquo;Closed Source&rsquo; licencing model, software is made by a company behind closed doors and the code is encrypted before release to the public. The traditional thinking is that this protects the company by preventing third parties from stealing their intellectual property. This is a subject of <a href="http://en.wikipedia.org/wiki/Software_patent_debate">some debate</a>  , which I won&rsquo;t go into here. However it is clear that many businesses are currently successful without relying on restrictive software patents.</p>
+
+<p>In an Open Source licencing model, the full unencrypted source code will be published at the same time as the software itself (indeed often before-hand in the case of preview and beta releases). Also, as in the case of this announcement, public contributions may be accepted to modify the original source code. Naturally the acceptance process is completely at the discretion of software company, so unhelpful or damaging contributions will not be accepted.</p>
+
+<p>A good example of the Open Source model working commercially is the Android operating system released by Google. A massive range of mobile devices run Android and it is not only the key competitor to Apple&rsquo;s iOS (iPhones &amp; iPad operating system but has helped ensure that most devices using Microsoft&rsquo;s Windows Mobile operating system are sitting on the scrap heap. I for one am glad that there is healthy competition to the world of Apple and its clone army of i-device accolytes.</p>
+
+<h2>Software that Just Works</h2>
+
+
+<p>From a consumer or stakeholder viewpoint the natural desire is to want software that &lsquo;just works&rsquo; and to reach that goal we just need to fix all the bugs in the software. Unfortunately the belief that all software bugs can be fixed is generally  infeasible  given time and budget restraints, due to the nature of programming the two go hand in hand. In each piece of code there are many paths that can be travelled, much like a maze in a country mansion garden. If you ask 10 different people to walk the maze the chances are each one will set off in a different direction. Most of them will hit a dead end before finding their way through and a nasty bug could be hiding at each of these dead ends!</p>
+
+<p>However Open Source software helps minimize the number bugs by accepting contributions to fix any that are found by the development community. In this way the software benefits from the knowledge of a much wider group of people than could be acheived if it was developed and maintained soley by a single company. Most software developers are driven by that itch to &lsquo;make stuff work&rsquo; and are only too happy to contribute to a project which helps make this happen. The end result is a product that is more reliable for the consumers and stakeholders and has the appearance of &lsquo;just working&rsquo;.</p>
+
+<h2>Security concerns</h2>
+
+
+<p>Typically the biggest obstruction to making software Open Source is the perceived risk to security. If anybody can view exactly how the software is operating then it is much easier for hackers to cause the software to break, exploit a vulnerability to propogate a virus or carry out other nefarious acts. The <a href="http://haacked.com/archive/2012/03/29/asp-net-mvc-now-accepting-pull-requests.aspx">indications by Phil Haack</a>, a former member of the MVC team, are that this decision by Mircosoft is no exception. So a great deal of credit should go to those involved at Microsoft for making change happen in their organization.</p>
+
+<p>Regarding the perceived risks to security, Open Source can actually reduce the risk for similar reasons to the improvement in relibility. Any security vulnerabilities will quickly be picked up by the community and fixed. The Open Source culture of continual improvement in the software makes for a much more secure product.</p>
+
+<p>Take the example of web browsers, a couple of years ago Microsoft&rsquo;s Internet Explorer browser had massive market share. However over time so many security vulnerabilities were exploited in the browser that the <a href="http://www.theinquirer.net/inquirer/news/1037530/us-government-warns-internet-explorer">US government themselves warned against using the software</a>!   Along came Mozilla&rsquo;s Firefox browser to save the day, with much improved security. Naturally Firefox has always been developed under an Open Source licence as explained in the <a href="http://www.mozilla.org/about/manifesto.html">Mozilla manifesto</a>.</p>
+
+<h2>Future developments</h2>
+
+
+<p>The likelyhood is that this announcement will not trigger a deluge of community updates and fixes to the frameworks in question. I anticipate that a minority of change submissions will make it back into the frameworks themselves. However it does demonstrate an important change in mindset from Microsoft and may well signal the beginnings of a new approach for the organisation. It is clear that in the fast moving world of software and digital media you need to adapt to survive and it is encouraging that even massive organisations such as Microsoft are able to do this.</p>
+
+<h5>Footnote</h5>
+
+
+<p><sup>1</sup>While the MVC framework has been open source since its original release, this announcement widens the license model to the Web API and Razor frameworks and also marks the first time that Microsoft will accept public contributions to the open source frameworks. If you are unfamiliar with these technologies then further information is available on the Microsoft blah blah (LINK).</p>
+
+<p><sup>2</sup>Or maybe thats just my fertile imagination!</p>
 ]]></content>
   </entry>
   

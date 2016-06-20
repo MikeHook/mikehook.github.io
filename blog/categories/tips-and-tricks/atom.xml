@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tips and Tricks | baking websites]]></title>
   <link href="http://bakingwebsites.co.uk/blog/categories/tips-and-tricks/atom.xml" rel="self"/>
   <link href="http://bakingwebsites.co.uk/"/>
-  <updated>2015-12-22T14:55:14+00:00</updated>
+  <updated>2016-06-20T15:07:59+01:00</updated>
   <id>http://bakingwebsites.co.uk/</id>
   <author>
     <name><![CDATA[Hook Technologies Ltd]]></name>
@@ -12,6 +12,37 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Installing Node Modules in a TeamCity Build]]></title>
+    <link href="http://bakingwebsites.co.uk/2016/06/20/Installing-node-from-TeamCity/"/>
+    <updated>2016-06-20T00:00:00+01:00</updated>
+    <id>http://bakingwebsites.co.uk/2016/06/20/Installing-node-from-TeamCity</id>
+    <content type="html"><![CDATA[<p><a href="https://nodejs.org"><img src="https://googledrive.com/host/0Bx-8nw9dhAQcN1lWbU1SLW91bEk/nodejs-logo.jpg" class="alignleft" title="node js" /></a></p>
+
+<p>Keeping up with the inexorable rise of front end frameworks is a big challenge in modern web development is. My pathway is probably fairly common, starting out with <a href="https://jquery.com/">jQuery</a> and the humble selector, progressing onto <a href="http://knockoutjs.com/">Knockout</a> and embracing the joy of binding then finally onto the full on framework smorgasbord of <a href="https://angularjs.org/">Angular JS</a>. Now there is a new project on the horizon and Angular 2 has reached a good level of maturity, so &ldquo;Once more unto the breach, dear friends&rdquo; it is time to embrace the new all over again!</p>
+
+<p>Our project stack is a fairly standard .net picture, an ASP.NET MVC application on the front end talking to a REST API server side based on Web Api. Angular 2 sits firmly in the front end application and can be installed through node. I won&rsquo;t go into details of that setup here as Deborah Kurata has already covered that off in her excellent <a href="http://blogs.msmvps.com/deborahk/angular-2-getting-started-with-a-visual-studio-2015-asp-net-4-x-project/">Angular 2 Getting started with Visual Studio post</a>, however the point where I hit trouble was getting the application to build on our TeamCity build server.</p>
+
+<h2>Its Javascript Jim, but not as we know it</h2>
+
+<p>A big benefit of Angular 2 is its built in support for coding in TypeScript, a strongly typed  superset of JavaScript that can be transpiled into JavaScript before it is executed. While TypeScript has been around for quite a while now (compared to Angular 2 anyway!) and is baked into Visual Studio I still needed to get the newest version to enable visual studio to build the scripts. This was simply a case of downloading the latest version of <a href="https://www.microsoft.com/en-us/download/details.aspx?id=48593">TypeScript for Visual Studio 2015</a> and installing.</p>
+
+<p>Once the installation step had been repeated on our build server the compiler also ran through TeamCity. So far so good, however we didn&rsquo;t have the node_modules folder checked into source control (as they are external dependencies containing a crazy number of files!) so the Angular 2 source libraries were not present. Naturally this was a sticking point in getting our javascript code to compile or indeed run as Angular 2 didn&rsquo;t exist in the application on the build server! To fix this we needed to download all the dependencies in the node_modules folder during the build and save them into the expected location in the build servers workspace.</p>
+
+<h2>Hey node, give me the dependencies</h2>
+
+<p>TeamCity has a great plugin model which allows it capabilities to be easily extended and a quick google revealed that a <a href="https://github.com/jonnyzzz/TeamCity.Node">TeamCity Node plugin</a> already existed. After installing the plugin, along with Node on the build server, I was able to add a build step to execute the following command:</p>
+
+<p><code>npm install</code></p>
+
+<p>When this command is executed from the directory of our MVC application it interrogates the <strong>package.json</strong> file and installs all the dependencies listed in the json file. Well, that&rsquo;s what it <strong>should</strong> do, in my case all I got was a long pause followed by a network timeout, doh!</p>
+
+<p>I was prepared for this as we are working behind a corporate firewall and I&rsquo;d already spent quite some time finding out how to get a connection from my development machine. The solution, using the Cntlm Authentication proxy, is handily documented on StackOverflow in this <a href="https://stackoverflow.com/questions/18569054/npm-behind-ntlm-proxy/18570201#18570201">NPM behind NTLM proxy article</a>. However after following all the steps on the build server the network connections were still failing. I tried running the npm install locally on the build server and it worked fine so it seemed that the npm proxy settings were not being used when the program ran through TeamCity. After quite a bit of head scratching I resorted to reading the <a href="https://docs.npmjs.com/files/npmrc">npm manual</a> and there were some clues as to why the config might be ignored. When I looked in my C:\Users\{MyUsername}\ folder I could see a .npmrc file with the proxy settings, however there was no such file in the C:\Users\{TeamCityAgentUser}\ folder. So I copied my .npmrc file into here then bingo, it all worked through TeamCity!</p>
+
+<p>I&rsquo;m sure this won&rsquo;t be the last challenge Angular 2 throws at our Dev Ops efforts but we are in a good place now with the build running inside TeamCity.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Rebase Your Way to Git Enlightenment]]></title>
@@ -78,40 +109,6 @@
     <content type="html"><![CDATA[<p>I recently had problems with the eclipse IDE auto-complete not working.</p>
 
 <p>After Googling the problem, I managed to resolve this by downloading the source for the version I was using and extracting into the Android SDK folder, as detailed in <a href="http://code.google.com/p/android/issues/detail?id=7850#c8">this google code issue</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to Handle the MVC HttpAntiForgeryException]]></title>
-    <link href="http://bakingwebsites.co.uk/2011/02/10/how-to-handle-the-mvc-httpantiforgeryexception/"/>
-    <updated>2011-02-10T21:24:16+00:00</updated>
-    <id>http://bakingwebsites.co.uk/2011/02/10/how-to-handle-the-mvc-httpantiforgeryexception</id>
-    <content type="html"><![CDATA[<p>When developing forms for websites it is good practice to guard against <a href="http://en.wikipedia.org/wiki/Cross-site_request_forgery">cross site request forgery</a> attacks. In MVC it is straightforward to do this using the <em>AntiForgeryToken()</em> helper method and the  <em>ValidateAntiForgeryToken </em>attribute (<a href="http://blog.stevensanderson.com/2008/09/01/prevent-cross-site-request-forgery-csrf-using-aspnet-mvcs-antiforgerytoken-helper/">as explained by Steve Sanderson</a>). However a side effect of this is that an  <em>HttpAntiForgeryException </em>like this will be thrown whenever a forgery attack is prevented:</p>
-
-<blockquote>System.Web.Mvc.HttpAntiForgeryException: A required anti-forgery token was not supplied or was invalid.</blockquote>
-
-
-<p>This is not generally a problem unless the site has been setup to notify you of any exceptions by email. Then you may find that your inbox quickly fills up with spam error reports and I think there is already quite enough spam in the world!
-The fix for this is to catch the exception before it makes it out of the application and into your inbox. The exception can be caught by adding the <em>HandleError </em>attribute to the controller class declaration as shown below:</p>
-
-<pre style="background-color:#eeeeee;border:1px dashed #999999;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:150px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>[HandleError(ExceptionType=typeof(HttpAntiForgeryException), View="Unauthorised")]
-public class MyController : Controller
-{
-  ...
-   public ActionResult Unauthorised()
-  {
-     return View("Unauthorised");
-  }
-}
-</code></pre>
-
-
-<p>Once the attribute has been added the <em>Unauthorised </em>view should be shown if a forgery attempt is intercepted. However in my case a different exception of the type shown below  was thrown instead:</p>
-
-<blockquote>The model item passed into the dictionary is of type 'System.Web.Mvc.HandleErrorInfo' but this dictionary requires a model item of type 'Core.Web.ViewModels.ISomeViewModel'.</blockquote>
-
-
-<p><span style="font-family:Georgia, 'Times New Roman', 'Bitstream Charter', Times, serif;line-height:19px;white-space:normal;font-size:13px;">This exception is thrown because (as described  <a href="http://aspnet.codeplex.com/workitem/1795">in this work item</a> on the MVC issue tracker) the default view model has been replaced by a <em>HandleErrorInfo </em>object and our master page is trying to access properties in the normal view model. So the straightforward fix for this is to remove the dependancy on the master page from the <em>Unauthorised </em>view. </span></p>
 ]]></content>
   </entry>
   

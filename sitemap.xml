@@ -2,284 +2,280 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://bakingwebsites.co.uk/2009/06/01/before-we-begin/</loc>
-        <lastmod>2015-07-19T17:17:52+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/2009/06/15/initial-website-features/</loc>
-        <lastmod>2015-07-19T17:17:52+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/2009/06/15/addedit-recipe-wireframes/</loc>
-        <lastmod>2015-07-19T17:17:52+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/2009/06/28/setting-up-the-nunit-gui/</loc>
-        <lastmod>2015-07-19T17:17:52+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/2009/08/02/add-recipe-feature-task-breakdown/</loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/2009/08/23/branching-the-project/</loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://bakingwebsites.co.uk/2009/08/27/preventing-dirty-domain-object-persistance/
         </loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://bakingwebsites.co.uk/2009/09/14/custom-routing-for-the-recipe-controllers-mvc/
         </loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/2009/10/11/optimising-data-access-queries-part-1/</loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/2009/10/16/optimising-data-access-queries-part-2/</loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://bakingwebsites.co.uk/2009/11/16/integrating-the-tinymce-rich-text-editor/
         </loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/2009/12/07/testing-code-coverage-with-ncover/</loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/2010/01/10/introducing-recipestash-net/</loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/2010/01/13/recipestash-design-mock-ups/</loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/2010/02/02/recipe-stash-homepage-visuals/</loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/2010/02/12/you-have-20-seconds-to-comply/</loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://bakingwebsites.co.uk/2010/08/22/upgrading-to-sharp-architecture-1-6-and-mvc-2/
         </loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://bakingwebsites.co.uk/2011/01/04/how-to-delete-old-log4net-database-records/
         </loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://bakingwebsites.co.uk/2011/01/06/troubleshooting-a-web-service-soapexception/
         </loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://bakingwebsites.co.uk/2011/01/16/investigating-an-nhibernate-stale-state-exception/
         </loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/2011/01/23/episerver-6-developer-exam-tips/</loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/2011/01/30/top-5-domain-object-optimisations/</loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://bakingwebsites.co.uk/2011/02/10/how-to-handle-the-mvc-httpantiforgeryexception/
         </loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://bakingwebsites.co.uk/2011/02/17/optimising-page-load-performance-with-database-files/
         </loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://bakingwebsites.co.uk/2011/02/23/developing-android-apps-part-1-setting-up-your-machine/
         </loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://bakingwebsites.co.uk/2011/03/10/android-dev-tip-fix-the-eclipse-auto-complete/
         </loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/2011/07/17/footylinks-roadmap/</loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://bakingwebsites.co.uk/2011/08/29/nhibernate-generator-class-for-sqlite-databases/
         </loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/2011/10/06/the-beauty-of-cherry-pick/</loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://bakingwebsites.co.uk/2011/10/07/discovering-the-original-inventors-of-the-internet/
         </loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://bakingwebsites.co.uk/2011/10/23/behaviour-driven-design-encourages-shared-understanding/
         </loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://bakingwebsites.co.uk/2011/11/07/quartz-makes-scheduling-jobs-easy-with-episerver-commerce/
         </loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://bakingwebsites.co.uk/2011/11/20/excel-reporting-from-web-apps-using-epplus/
         </loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://bakingwebsites.co.uk/2011/12/30/developing-android-apps-connect-to-an-existing-sqlite-database/
         </loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/2012/01/25/footy-links-alpha-released/</loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://bakingwebsites.co.uk/2012/04/03/microsoft-jump-on-the-open-source-band-wagon/
         </loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/2013/01/18/become-a-git-contortionist-with-stash/</loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://bakingwebsites.co.uk/2013/03/14/integrating-episerver-7-with-an-existing-mvc-site/
         </loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://bakingwebsites.co.uk/2013/04/09/integrating-episerver-7-with-mvc-next-steps/
         </loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/2013/05/07/strategy-pattern-coding-kata/</loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/2013/05/29/the-observer-pattern-coding-kata/</loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/2013/06/13/design-patterns-without-katas/</loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/2014/01/15/dear-wordpress-youre-dumped/</loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/2014/01/29/event-storming/</loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>
             http://bakingwebsites.co.uk/2014/04/28/migrating-umbraco-4-mysql-to-azure-hosting/
         </loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/2014/05/23/cloud-hosting-for-prototype/</loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/2014/06/19/mysql-to-azure-database-migration/</loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/</loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/2014/08/13/tin-can-api-overview/</loc>
-        <lastmod>2015-07-19T17:17:53+01:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bakingwebsites.co.uk/2015/04/23/episode-VI/</loc>
-        <lastmod>2015-07-19T17:22:52+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/2015/07/19/lean-awesome-part-I/</loc>
-        <lastmod>2015-08-01T10:12:44+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/2015/07/26/lean-awesome-part-II/</loc>
-        <lastmod>2015-08-01T10:12:56+01:00</lastmod>
-    </url>
-    <url>
-        <loc>http://bakingwebsites.co.uk/2015/08/16/re-architecting-a-platform/</loc>
-        <lastmod>2015-11-22T20:20:33+00:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/2015/08/16/rebase-git-enlightenment/</loc>
-        <lastmod>2015-08-16T19:17:36+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/2015/09/06/inspiration/</loc>
-        <lastmod>2015-09-06T12:03:36+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/2015/12/22/CI-with-appveyor/</loc>
-        <lastmod>2015-12-22T14:54:08+00:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://bakingwebsites.co.uk/2016/06/20/Installing-node-from-TeamCity/</loc>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/blog/archives/</loc>
-        <lastmod>2015-12-22T14:54:08+00:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/blog/categories/</loc>
-        <lastmod>2015-07-19T17:17:54+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/</loc>
-        <lastmod>2015-12-22T14:54:08+00:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://bakingwebsites.co.uk/robots.txt</loc>
-        <lastmod>2015-07-19T17:17:54+01:00</lastmod>
+        <lastmod>2016-06-20T14:57:25+01:00</lastmod>
     </url>
 </urlset>
