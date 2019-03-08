@@ -8,7 +8,7 @@ date: 2015-12-22 18:07:49 +01:00
 published: true
 ---
 
-[<img src="https://googledrive.com/host/0Bx-8nw9dhAQcN1lWbU1SLW91bEk/AppVeyorLogo.png" class="alignleft" title="AppVeyor" />](http://www.appveyor.com/)
+[<img src="/images/posts/AppVeyorLogo.png" class="alignleft" title="AppVeyor" />](http://www.appveyor.com/)
 
 I've been using [Kudu to automate my website deployments](http://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/) from Github to Azure for quite a while and its worked out great. But there are some limitations with it, primarily a lack of control over whether changes are deployed, its very much an all or nothing tool.
 
@@ -28,7 +28,7 @@ The only additional setup I needed to take to get AppVeyor to build the projects
 
 With all the solution projects building the next step was to configure the tests to run. With AppVeyor this is a zero configuration step as it auto detects any projects containing unit tests and runs them. However to speed things along you can explicitly define the path to the assembly containing your tests in the AppVeyor settings. After doing this AppVeyor gives a test runner output in the console (shown below) along with a [nice testing report which you can see directly in AppVeyor here](https://ci.appveyor.com/project/MikeHook/mstc/build/tests).
 
-<img src="https://googledrive.com/host/0Bx-8nw9dhAQcN1lWbU1SLW91bEk/AppVeyorTests.png" title="AppVeyor Test Console" />
+<img src="/images/posts/AppVeyorTests.png" title="AppVeyor Test Console" />
 
 ##AppVeyor, meet Azure
 
@@ -48,6 +48,6 @@ AppVeyor has a range of options for deployment including several specifically fo
 
 So now whenever I push changes up to github App Veyor checks which branch I've pushed to and runs the deployment provider setup for that branch, you can see what has happened at the end of the [console report](https://ci.appveyor.com/project/MikeHook/mstc). I've been really impressed with the usability and range of options available in App Veyor, it all comes at an unbeatable price of totally free for open source projects and best of all I get to put these [cool badges on my repo](https://github.com/MikeHook/MSTC) now! 
 
-[<img src="https://googledrive.com/host/0Bx-8nw9dhAQcN1lWbU1SLW91bEk/AppVeyorBadges.png" title="MSTC Repo badges" />](https://github.com/MikeHook/MSTC)
+[<img src="/images/posts/AppVeyorBadges.png" title="MSTC Repo badges" />](https://github.com/MikeHook/MSTC)
 
 

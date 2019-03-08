@@ -8,7 +8,7 @@ date: 2015-09-06 18:07:49 +01:00
 published: true
 ---
 
-[<img src="https://googledrive.com/host/0Bx-8nw9dhAQcN1lWbU1SLW91bEk/idea.jpg" class="alignleft" title="Ideas lightbulb" />](http://www.603copywriting.co.uk/blog-post-ideas/)
+[<img src="/images/posts/idea.jpg" class="alignleft" title="Ideas lightbulb" />](http://www.603copywriting.co.uk/blog-post-ideas/)
 
 The software design process can sometimes be difficult to quantify. From an external perspective of a development team, requirements go in and working software comes out. But what exactly happens in the middle to turn the stakeholders hopes and dreams into reliable, executable code? 
 

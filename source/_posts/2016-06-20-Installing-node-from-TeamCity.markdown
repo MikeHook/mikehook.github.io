@@ -8,7 +8,7 @@ date: 2016-06-20
 published: true
 ---
 
-[<img src="https://googledrive.com/host/0Bx-8nw9dhAQcN1lWbU1SLW91bEk/nodejs-logo.jpg" class="alignleft" title="node js" />](https://nodejs.org)
+[<img src="/images/posts/nodejs-logo.jpg" class="alignleft" title="node js" />](https://nodejs.org)
 
 Keeping up with the inexorable rise of front end frameworks is a big challenge in modern web development is. My pathway is probably fairly common, starting out with [jQuery](https://jquery.com/) and the humble selector, progressing onto [Knockout](http://knockoutjs.com/) and embracing the joy of binding then finally onto the full on framework smorgasbord of [Angular JS](https://angularjs.org/). Now there is a new project on the horizon and Angular 2 has reached a good level of maturity, so "Once more unto the breach, dear friends" it is time to embrace the new all over again!
 
