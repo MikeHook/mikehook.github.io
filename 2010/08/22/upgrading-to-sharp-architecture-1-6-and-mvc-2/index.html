@@ -26,14 +26,14 @@
 	<link href="https://bakingwebsites.co.uk/stylesheets/font-awesome.min.css" media="screen, projection"
 		rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 	<!--
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css"> 
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css"> 
 -->
-	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700" rel="stylesheet"
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700" rel="stylesheet"
 		type="text/css">
 
 
@@ -162,7 +162,8 @@
 							<p>One of the data unit tests was failing when trying to access an entity using the
 								<em>.Get(id)</em> method. This was strange as the entity was being loaded OK in the
 								setup method. I was also getting an exception from the website when trying to add an
-								entity to the database:</p>
+								entity to the database:
+							</p>
 
 							<blockquote><em>Invalid object name &#8216;hibernate_unique_key&#8217;.</em></blockquote>
 
@@ -171,7 +172,8 @@
 								convention for generating primary keys has been changed from <em>Native()</em> to
 								<em>HiLo(&ldquo;1000&rdquo;)</em>. So instead of the first record having a key of 0 it
 								would now try to use 1000. Changing this setting back to <em>Native()</em> fixed the
-								problem straight away.</p>
+								problem straight away.
+							</p>
 
 							<h3>Cascade Conventions</h3>
 
@@ -189,7 +191,8 @@
 								entities; it was trying to save a new <em>RecipeIngredientDraft</em> record without
 								first saving the new <em>Ingredient </em>record. This issue could be resolved by adding
 								a call to <em>instance.Cascade.SaveUpdate() </em>in the <em>ReferenceConvention </em>and
-								<em>HasManyConvention </em>classes.</p>
+								<em>HasManyConvention </em>classes.
+							</p>
 
 							<p>After fixing these issues the application worked just fine :)</p>
 						</div>
