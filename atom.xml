@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[baking websites]]></title>
-  <link href="http://bakingwebsites.co.uk/atom.xml" rel="self"/>
-  <link href="http://bakingwebsites.co.uk/"/>
+  <link href="https://bakingwebsites.co.uk/atom.xml" rel="self"/>
+  <link href="https://bakingwebsites.co.uk/"/>
   <updated>2016-06-20T15:07:59+01:00</updated>
-  <id>http://bakingwebsites.co.uk/</id>
+  <id>https://bakingwebsites.co.uk/</id>
   <author>
     <name><![CDATA[Hook Technologies Ltd]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Installing node modules in a TeamCity build]]></title>
-    <link href="http://bakingwebsites.co.uk/2016/06/20/Installing-node-from-TeamCity/"/>
+    <link href="https://bakingwebsites.co.uk/2016/06/20/Installing-node-from-TeamCity/"/>
     <updated>2016-06-20T00:00:00+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2016/06/20/Installing-node-from-TeamCity</id>
+    <id>https://bakingwebsites.co.uk/2016/06/20/Installing-node-from-TeamCity</id>
     <content type="html"><![CDATA[<p><a href="https://nodejs.org"><img src="https://googledrive.com/host/0Bx-8nw9dhAQcN1lWbU1SLW91bEk/nodejs-logo.jpg" class="alignleft" title="node js" /></a></p>
 
 <p>Keeping up with the inexorable rise of front end frameworks is a big challenge in modern web development is. My pathway is probably fairly common, starting out with <a href="https://jquery.com/">jQuery</a> and the humble selector, progressing onto <a href="http://knockoutjs.com/">Knockout</a> and embracing the joy of binding then finally onto the full on framework smorgasbord of <a href="https://angularjs.org/">Angular JS</a>. Now there is a new project on the horizon and Angular 2 has reached a good level of maturity, so &ldquo;Once more unto the breach, dear friends&rdquo; it is time to embrace the new all over again!</p>
@@ -46,12 +46,12 @@
   
   <entry>
     <title type="html"><![CDATA[Continuous Delivery to Azure with AppVeyor]]></title>
-    <link href="http://bakingwebsites.co.uk/2015/12/22/CI-with-appveyor/"/>
+    <link href="https://bakingwebsites.co.uk/2015/12/22/CI-with-appveyor/"/>
     <updated>2015-12-22T17:07:49+00:00</updated>
-    <id>http://bakingwebsites.co.uk/2015/12/22/CI-with-appveyor</id>
+    <id>https://bakingwebsites.co.uk/2015/12/22/CI-with-appveyor</id>
     <content type="html"><![CDATA[<p><a href="http://www.appveyor.com/"><img src="https://googledrive.com/host/0Bx-8nw9dhAQcN1lWbU1SLW91bEk/AppVeyorLogo.png" class="alignleft" title="AppVeyor" /></a></p>
 
-<p>I&rsquo;ve been using <a href="http://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/">Kudu to automate my website deployments</a> from Github to Azure for quite a while and its worked out great. But there are some limitations with it, primarily a lack of control over whether changes are deployed, its very much an all or nothing tool.</p>
+<p>I&rsquo;ve been using <a href="https://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/">Kudu to automate my website deployments</a> from Github to Azure for quite a while and its worked out great. But there are some limitations with it, primarily a lack of control over whether changes are deployed, its very much an all or nothing tool.</p>
 
 <p>The complexity of the web application I&rsquo;m maintaining reached a level where I wanted to ensure that the code builds and passes some automated tests before it is deployed. I couldn&rsquo;t see any way to incorporate those steps into a deployment pipeline with Kudu so decided to try AppVeyor. I&rsquo;d heard about it on <a href="http://www.hanselman.com/blog/AppVeyorAGoodContinuousIntegrationSystemIsAJoyToBehold.aspx">Scott Hanselmans blog</a> and as it is free for open source projects I&rsquo;d been itching to give it a go!</p>
 
@@ -101,9 +101,9 @@
   
   <entry>
     <title type="html"><![CDATA[Inspiring software design]]></title>
-    <link href="http://bakingwebsites.co.uk/2015/09/06/inspiration/"/>
+    <link href="https://bakingwebsites.co.uk/2015/09/06/inspiration/"/>
     <updated>2015-09-06T18:07:49+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2015/09/06/inspiration</id>
+    <id>https://bakingwebsites.co.uk/2015/09/06/inspiration</id>
     <content type="html"><![CDATA[<p><a href="http://www.603copywriting.co.uk/blog-post-ideas/"><img src="https://googledrive.com/host/0Bx-8nw9dhAQcN1lWbU1SLW91bEk/idea.jpg" class="alignleft" title="Ideas lightbulb" /></a></p>
 
 <p>The software design process can sometimes be difficult to quantify. From an external perspective of a development team, requirements go in and working software comes out. But what exactly happens in the middle to turn the stakeholders hopes and dreams into reliable, executable code?</p>
@@ -148,9 +148,9 @@
   
   <entry>
     <title type="html"><![CDATA[Rebase your way to Git enlightenment]]></title>
-    <link href="http://bakingwebsites.co.uk/2015/08/16/rebase-git-enlightenment/"/>
+    <link href="https://bakingwebsites.co.uk/2015/08/16/rebase-git-enlightenment/"/>
     <updated>2015-08-16T18:07:49+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2015/08/16/rebase-git-enlightenment</id>
+    <id>https://bakingwebsites.co.uk/2015/08/16/rebase-git-enlightenment</id>
     <content type="html"><![CDATA[<p><img src="http://i49.photobucket.com/albums/f299/hookmike/Pat-Morita_Karate_Kid_200_zpscufzef0b.jpg" class="alignleft" title="Pat Morita" /></p>
 
 <p>The path to Git enlightenment can be a long one for a developer used to centralized source control such as SVN.</p>
@@ -179,12 +179,12 @@
   
   <entry>
     <title type="html"><![CDATA[Making awesome software with Lean principles - Part II]]></title>
-    <link href="http://bakingwebsites.co.uk/2015/07/26/lean-awesome-part-II/"/>
+    <link href="https://bakingwebsites.co.uk/2015/07/26/lean-awesome-part-II/"/>
     <updated>2015-07-26T18:07:49+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2015/07/26/lean-awesome-part-II</id>
+    <id>https://bakingwebsites.co.uk/2015/07/26/lean-awesome-part-II</id>
     <content type="html"><![CDATA[<p><img src="http://i49.photobucket.com/albums/f299/hookmike/74078639-2d6b-4179-883d-4be7d28c19c7_zpsbpo9illj.jpg" class="alignleft" title="Awesome image by Roberlan https://www.flickr.com/photos/roberlan" /></p>
 
-<p>In the <a href="http://bakingwebsites.co.uk/2015/07/19/lean-awesome-part-I/">first part of Making awesome software with Lean principles</a> I started looking at how <a href="https://en.wikipedia.org/wiki/Lean_software_development">Lean principles</a> have helped me while working on the <a href="http://midsussextriclub.com/">Mid Sussex Tri Club website</a>.</p>
+<p>In the <a href="https://bakingwebsites.co.uk/2015/07/19/lean-awesome-part-I/">first part of Making awesome software with Lean principles</a> I started looking at how <a href="https://en.wikipedia.org/wiki/Lean_software_development">Lean principles</a> have helped me while working on the <a href="http://midsussextriclub.com/">Mid Sussex Tri Club website</a>.</p>
 
 <p>The first three principles <strong>Eliminating waste</strong>, <strong>Amplifying learning</strong> and <strong>Deciding as late as possible</strong> are all fundamental to help guide software development. However they only form part of the picture, there are still four more principles remaining that help guide our decisions so let&rsquo;s take a look at them now.</p>
 
@@ -193,7 +193,7 @@
 <blockquote><p>In the era of rapid technology evolution, it is not the biggest that survives, but the fastest. The sooner the end product is delivered without major defects, the sooner feedback can be received, and incorporated into the next iteration.</p><footer><strong>Wikipedia</strong> <cite><a href='https://en.wikipedia.org/wiki/Lean_software_development'>Lean Software Development</a></cite></footer></blockquote>
 
 
-<p>I&rsquo;ve seen the benefits of an iterative approach over and again throughout my professional life so I regard this as an essential principle to apply to all software projects. I put in place a pretty slick release process as one of the first changes I made and have been reaping the benefits ever since. Basically any check-ins on the master branch of the source code repository are immediately deployed to the website. I&rsquo;ve already blogged about how I set-up this <a href="http://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/">&lsquo;zero-click&rsquo; deploy process</a> and it has worked largely without problems since set-up.</p>
+<p>I&rsquo;ve seen the benefits of an iterative approach over and again throughout my professional life so I regard this as an essential principle to apply to all software projects. I put in place a pretty slick release process as one of the first changes I made and have been reaping the benefits ever since. Basically any check-ins on the master branch of the source code repository are immediately deployed to the website. I&rsquo;ve already blogged about how I set-up this <a href="https://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/">&lsquo;zero-click&rsquo; deploy process</a> and it has worked largely without problems since set-up.</p>
 
 <p>However, this technique must be used with caution and certainly in tandem with the &lsquo;<strong>Build quality in</strong>&rsquo; principle. It is essential to ensure that a suitable branching process is in place too and changes can only be deployed once they have been tested. If you are working in a larger team I&rsquo;d recommend limiting write access to the master branch to a single person who can coordinate the deployments. While automation is great for productivity people still need to understand how it all works and retain control of the systems.</p>
 
@@ -232,9 +232,9 @@
   
   <entry>
     <title type="html"><![CDATA[Making awesome software with Lean principles - Part 1]]></title>
-    <link href="http://bakingwebsites.co.uk/2015/07/19/lean-awesome-part-I/"/>
+    <link href="https://bakingwebsites.co.uk/2015/07/19/lean-awesome-part-I/"/>
     <updated>2015-07-19T18:12:49+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2015/07/19/lean-awesome-part-I</id>
+    <id>https://bakingwebsites.co.uk/2015/07/19/lean-awesome-part-I</id>
     <content type="html"><![CDATA[<p><a href="http://midsussextriclub.com"><img src="http://i49.photobucket.com/albums/f299/hookmike/MSTC%20_logo_yellow_280_zps4tnfm4qj.jpg" class="alignleft" alttext="MSTC Logo" /></a></p>
 
 <p>I&rsquo;ve been a keen amateur triathlete and member the <a href="http://midsussextriclub.com">Mid Sussex Tri Club</a> for a couple of years. Its a relatively small club but there is a surprising amount of administration involved in running it and after chatting to some of the clubs committee members it was clear that the admin overheads were becoming a burden. I could see the potential for software to help lessen the burden so I offered to take on the club&rsquo;s website and add some features to it.</p>
@@ -283,9 +283,9 @@
   
   <entry>
     <title type="html"><![CDATA[Tin Can API overview]]></title>
-    <link href="http://bakingwebsites.co.uk/2014/08/13/tin-can-api-overview/"/>
+    <link href="https://bakingwebsites.co.uk/2014/08/13/tin-can-api-overview/"/>
     <updated>2014-08-13T10:10:43+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2014/08/13/tin-can-api-overview</id>
+    <id>https://bakingwebsites.co.uk/2014/08/13/tin-can-api-overview</id>
     <content type="html"><![CDATA[<p><img src="http://imageshack.com/a/img539/1961/OgE8tH.jpg" class="alignleft" alttext="Tin Can API Logo" /></p>
 
 <p>These are some notes from my reading on the Tin Can API, a specification for the transmission and storage of messages related to learning activities. The specification has been developed by parties in the e-learning industry and aims to be an elegant solution to enable learning systems to communicate with one another.</p>
@@ -367,9 +367,9 @@
   
   <entry>
     <title type="html"><![CDATA[Automated Azure deployments]]></title>
-    <link href="http://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/"/>
+    <link href="https://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/"/>
     <updated>2014-07-02T10:29:24+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments</id>
+    <id>https://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments</id>
     <content type="html"><![CDATA[<p><img src="http://imagizer.imageshack.us/v2/320x240q90/850/r38o.jpg" class="alignleft" alttext="Wall-e the robot" /></p>
 
 <p>Azure web site hosting has a great built in feature for deployment automation. All you need to do is point Azure at the location of your website in your source control platform and it will automatically monitor for updates, pull them into Azure and deploy them, Boom! Well that is the theory anyway, turns out in my case I needed to do some tweaking to get the automation to work.</p>
@@ -403,12 +403,12 @@ project = website
   
   <entry>
     <title type="html"><![CDATA[Mysql to Azure database migration]]></title>
-    <link href="http://bakingwebsites.co.uk/2014/06/19/mysql-to-azure-database-migration/"/>
+    <link href="https://bakingwebsites.co.uk/2014/06/19/mysql-to-azure-database-migration/"/>
     <updated>2014-06-19T16:57:57+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2014/06/19/mysql-to-azure-database-migration</id>
+    <id>https://bakingwebsites.co.uk/2014/06/19/mysql-to-azure-database-migration</id>
     <content type="html"><![CDATA[<p><img src="http://imagizer.imageshack.us/v2/320x240q90/843/31nm.jpg" class="alignleft" alttext="Square peg - Round hole"  /></p>
 
-<p>If you have read my previous post on <a href="http://bakingwebsites.co.uk/2014/04/28/migrating-umbraco-4-mysql-to-azure-hosting/">Umbraco to Azure migration</a> the topic of this post will be of no surprise.</p>
+<p>If you have read my previous post on <a href="https://bakingwebsites.co.uk/2014/04/28/migrating-umbraco-4-mysql-to-azure-hosting/">Umbraco to Azure migration</a> the topic of this post will be of no surprise.</p>
 
 <p>I&rsquo;ve inherited an application using a MySQL database which I&rsquo;d like to host in Azure. However the hosting support for a MySQL database in Azure is expensive. So I have investigated migrating the DB into an SQL Azure supported format.</p>
 
@@ -467,9 +467,9 @@ EXECUTE sp_rename N'Tempcmstasktype', N'cmstasktype', 'OBJECT'
   
   <entry>
     <title type="html"><![CDATA[Cloud hosting for a prototype project]]></title>
-    <link href="http://bakingwebsites.co.uk/2014/05/23/cloud-hosting-for-prototype/"/>
+    <link href="https://bakingwebsites.co.uk/2014/05/23/cloud-hosting-for-prototype/"/>
     <updated>2014-05-23T16:04:20+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2014/05/23/cloud-hosting-for-prototype</id>
+    <id>https://bakingwebsites.co.uk/2014/05/23/cloud-hosting-for-prototype</id>
     <content type="html"><![CDATA[<p><img src="http://imagizer.imageshack.us/v2/320x240q90/838/0fsb.jpg" class="alignleft" alttext="Square peg - Round hole"  /></p>
 
 <br/><br/>
@@ -567,9 +567,9 @@ EXECUTE sp_rename N'Tempcmstasktype', N'cmstasktype', 'OBJECT'
   
   <entry>
     <title type="html"><![CDATA[migrating umbraco 4 mysql to azure hosting]]></title>
-    <link href="http://bakingwebsites.co.uk/2014/04/28/migrating-umbraco-4-mysql-to-azure-hosting/"/>
+    <link href="https://bakingwebsites.co.uk/2014/04/28/migrating-umbraco-4-mysql-to-azure-hosting/"/>
     <updated>2014-04-28T09:58:09+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2014/04/28/migrating-umbraco-4-mysql-to-azure-hosting</id>
+    <id>https://bakingwebsites.co.uk/2014/04/28/migrating-umbraco-4-mysql-to-azure-hosting</id>
     <content type="html"><![CDATA[<h2>Why Azure</h2>
 
 <p>I recently inherited an Umbraco version 4 site and need to setup web hosting for it. I decided that Azure would be a good option for hosting as it offers great benefits for future scalability and a good costing model. I also wanted to try it out and see what all the fuss is about!</p>
@@ -624,9 +624,9 @@ EXECUTE sp_rename N'Tempcmstasktype', N'cmstasktype', 'OBJECT'
   
   <entry>
     <title type="html"><![CDATA[Event Storming a distributed solution]]></title>
-    <link href="http://bakingwebsites.co.uk/2014/01/29/event-storming/"/>
+    <link href="https://bakingwebsites.co.uk/2014/01/29/event-storming/"/>
     <updated>2014-01-29T17:38:27+00:00</updated>
-    <id>http://bakingwebsites.co.uk/2014/01/29/event-storming</id>
+    <id>https://bakingwebsites.co.uk/2014/01/29/event-storming</id>
     <content type="html"><![CDATA[<p>Software design and development techniques are constantly evolving, making the discipline a fascinating area to work in. Over the time I&rsquo;ve been working as a developer I&rsquo;ve seen various approaches to design from Code First, Data Driven to Domain Driven (DDD). My preference is to consider the scope of the problem first and design a solution to match and DDD is a good fit for this. However when looking at enterprise level problems we need to give more consideration to how a problem will scale&hellip; enter Event Storming.</p>
 
 <h2>Distributed design</h2>
@@ -676,9 +676,9 @@ EXECUTE sp_rename N'Tempcmstasktype', N'cmstasktype', 'OBJECT'
   
   <entry>
     <title type="html"><![CDATA[Dear Wordpress, you're dumped!]]></title>
-    <link href="http://bakingwebsites.co.uk/2014/01/15/dear-wordpress-youre-dumped/"/>
+    <link href="https://bakingwebsites.co.uk/2014/01/15/dear-wordpress-youre-dumped/"/>
     <updated>2014-01-15T16:38:27+00:00</updated>
-    <id>http://bakingwebsites.co.uk/2014/01/15/dear-wordpress-youre-dumped</id>
+    <id>https://bakingwebsites.co.uk/2014/01/15/dear-wordpress-youre-dumped</id>
     <content type="html"><![CDATA[<p><img src="http://imageshack.com/a/img827/7426/w5v5.png " class="alignleft" alttext="Octopress Logo"  />
 There comes a time in a developers life (every couple of years it seems) when you are dissatisfied with your existing blogging platform. What had started as a beautiful and fulfilled relationship has decayed to the point where you barely interact. What once seemed like a cutting edge editing interface has become stayed and obtuse. Your eyes begin to wander, other blogging platforms seem so slick and modern in comparison, you wonder  &ldquo;why can&rsquo;t I have some of that?&rdquo;</p>
 
@@ -724,9 +724,9 @@ Then, provided your post links are maintained, when the blog is switched across 
   
   <entry>
     <title type="html"><![CDATA[Design patterns without Katas]]></title>
-    <link href="http://bakingwebsites.co.uk/2013/06/13/design-patterns-without-katas/"/>
+    <link href="https://bakingwebsites.co.uk/2013/06/13/design-patterns-without-katas/"/>
     <updated>2013-06-13T09:05:05+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2013/06/13/design-patterns-without-katas</id>
+    <id>https://bakingwebsites.co.uk/2013/06/13/design-patterns-without-katas</id>
     <content type="html"><![CDATA[<p>There are a number of design patterns which I have chosen not to implement a coding kata for. This is because I felt that I would either not use the pattern regularly in practice or they have alternative solutions that make the pattern redundant. However I think it is worth calling out these patterns and summarising how they work.</p>
 
 <h2>The decorator pattern</h2>
@@ -794,9 +794,9 @@ Using synchronization is expensive (ie. It takes the computer a relatively long 
   
   <entry>
     <title type="html"><![CDATA[The Observer pattern coding kata]]></title>
-    <link href="http://bakingwebsites.co.uk/2013/05/29/the-observer-pattern-coding-kata/"/>
+    <link href="https://bakingwebsites.co.uk/2013/05/29/the-observer-pattern-coding-kata/"/>
     <updated>2013-05-29T08:53:06+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2013/05/29/the-observer-pattern-coding-kata</id>
+    <id>https://bakingwebsites.co.uk/2013/05/29/the-observer-pattern-coding-kata</id>
     <content type="html"><![CDATA[<p>The second design pattern I will be looking at is the Observer pattern, which is useful for safely passing data between objects. The Observer pattern is defined as:</p>
 
 <blockquote>&#8220;a one-to-many relationship between objects so that when one object changes state all it  dependants  are notified and updated automatically&#8221;.</blockquote>
@@ -842,9 +842,9 @@ Using synchronization is expensive (ie. It takes the computer a relatively long 
   
   <entry>
     <title type="html"><![CDATA[Strategy pattern coding kata]]></title>
-    <link href="http://bakingwebsites.co.uk/2013/05/07/strategy-pattern-coding-kata/"/>
+    <link href="https://bakingwebsites.co.uk/2013/05/07/strategy-pattern-coding-kata/"/>
     <updated>2013-05-07T08:16:49+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2013/05/07/strategy-pattern-coding-kata</id>
+    <id>https://bakingwebsites.co.uk/2013/05/07/strategy-pattern-coding-kata</id>
     <content type="html"><![CDATA[<p>I&rsquo;ve been having a look at coding katas and design patterns over the last couple of weeks. If you are not familiar with either of these concepts then you can read <a href="http://butunclebob.com/ArticleS.UncleBob.TheBowlingGameKata">Uncle Bob&rsquo;s introduction to the Bowling Kata</a> and check out <a href="http://www.blackwasp.co.uk/GofPatterns.aspx">Richard Carr&rsquo;s great set of articles on design patterns</a>.</p>
 
 <p>My main goals are to:</p>
@@ -929,10 +929,10 @@ Using synchronization is expensive (ie. It takes the computer a relatively long 
   
   <entry>
     <title type="html"><![CDATA[Integrating EPiServer 7 with MVC - Next Steps]]></title>
-    <link href="http://bakingwebsites.co.uk/2013/04/09/integrating-episerver-7-with-mvc-next-steps/"/>
+    <link href="https://bakingwebsites.co.uk/2013/04/09/integrating-episerver-7-with-mvc-next-steps/"/>
     <updated>2013-04-09T17:40:42+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2013/04/09/integrating-episerver-7-with-mvc-next-steps</id>
-    <content type="html"><![CDATA[<p>My previous blog post, <a title="Integrating EPiServer 7 with an existing MVC  site" href="http://bakingwebsites.co.uk/2013/03/14/integrating-episerver-7-with-an-existing-mvc-site/">Integrating EPiServer 7 with an existing MVC site</a>, outlined the initial steps to get EPiServer 7 running. However there are a number of additional steps you may need to take before your site is fully integrated.</p>
+    <id>https://bakingwebsites.co.uk/2013/04/09/integrating-episerver-7-with-mvc-next-steps</id>
+    <content type="html"><![CDATA[<p>My previous blog post, <a title="Integrating EPiServer 7 with an existing MVC  site" href="https://bakingwebsites.co.uk/2013/03/14/integrating-episerver-7-with-an-existing-mvc-site/">Integrating EPiServer 7 with an existing MVC site</a>, outlined the initial steps to get EPiServer 7 running. However there are a number of additional steps you may need to take before your site is fully integrated.</p>
 
 <h3>Convert any Controllers not in Areas</h3>
 
@@ -992,9 +992,9 @@ Using synchronization is expensive (ie. It takes the computer a relatively long 
   
   <entry>
     <title type="html"><![CDATA[Integrating EPiServer 7 with an existing MVC site]]></title>
-    <link href="http://bakingwebsites.co.uk/2013/03/14/integrating-episerver-7-with-an-existing-mvc-site/"/>
+    <link href="https://bakingwebsites.co.uk/2013/03/14/integrating-episerver-7-with-an-existing-mvc-site/"/>
     <updated>2013-03-14T15:54:57+00:00</updated>
-    <id>http://bakingwebsites.co.uk/2013/03/14/integrating-episerver-7-with-an-existing-mvc-site</id>
+    <id>https://bakingwebsites.co.uk/2013/03/14/integrating-episerver-7-with-an-existing-mvc-site</id>
     <content type="html"><![CDATA[<p><img class="alignright size-full wp-image-408" alt="custom_integration" src="http://imageshack.com/a/img560/4853/3rqu.jpg" width="300" />This post assumes you have EPiServer 7 installed on your machine. If you don&rsquo;t have it then it is available from <a href="http://world.episerver.com/Download/Categories/Products/EPiServer-CMS/">EPiServer world</a>  (once you have created an account).</p>
 
 <p>There are 2 main options for creating a new EPiServer 7 MVC stylee site:</p>
@@ -1125,9 +1125,9 @@ container.For(typeof(Cache)).Singleton().Use(HttpContext.Current.Cache);</pre>
   
   <entry>
     <title type="html"><![CDATA[Become a Git contortionist with Stash]]></title>
-    <link href="http://bakingwebsites.co.uk/2013/01/18/become-a-git-contortionist-with-stash/"/>
+    <link href="https://bakingwebsites.co.uk/2013/01/18/become-a-git-contortionist-with-stash/"/>
     <updated>2013-01-18T19:16:05+00:00</updated>
-    <id>http://bakingwebsites.co.uk/2013/01/18/become-a-git-contortionist-with-stash</id>
+    <id>https://bakingwebsites.co.uk/2013/01/18/become-a-git-contortionist-with-stash</id>
     <content type="html"><![CDATA[<p><img class="size-medium wp-image-364 alignright" alt="Annie the Contortionist" src="http://imageshack.com/a/img856/5731/jyt7.jpg" width="300" />One of the great aspects of the Git source control system is its flexibility. Almost any sticky situation you may encounter  as a developer working with source control can be   solved with Git.</p>
 
 <p>Take this scenario, you&rsquo;re halfway through writing a class for a new feature when you get a call.. the client has found a show stopping bug in the application and it needs to be fixed right away. To be able to fix the bug you will need to switch onto the live code branch but you can&rsquo;t go switching branches with a load of uncommitted changes.  Now you don&rsquo;t want to commit your code as its half done and won&rsquo;t even compile right now, but you don&rsquo;t want to lose the changes either&hellip; <a href="http://git-scm.com/book/en/Git-Tools-Stashing"><em>git stash</em></a> to the rescue!</p>
@@ -1140,9 +1140,9 @@ container.For(typeof(Cache)).Singleton().Use(HttpContext.Current.Cache);</pre>
   
   <entry>
     <title type="html"><![CDATA[Microsoft jump on the Open Source band wagon]]></title>
-    <link href="http://bakingwebsites.co.uk/2012/04/03/microsoft-jump-on-the-open-source-band-wagon/"/>
+    <link href="https://bakingwebsites.co.uk/2012/04/03/microsoft-jump-on-the-open-source-band-wagon/"/>
     <updated>2012-04-03T12:35:04+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2012/04/03/microsoft-jump-on-the-open-source-band-wagon</id>
+    <id>https://bakingwebsites.co.uk/2012/04/03/microsoft-jump-on-the-open-source-band-wagon</id>
     <content type="html"><![CDATA[<p><img class="alignright" title="Tux, the Linux Mascot" src="http://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Tux.png/220px-Tux.png" alt="" width="220" height="261" />
 A landmark decision was made last week by Microsoft&rsquo;s ASP.NET web development team. They announced that three key technologies used to develop web applications, <a href="http://weblogs.asp.net/scottgu/archive/2012/03/27/asp-net-mvc-web-api-razor-and-open-source.aspx">ASP.NET MVC, Web API and Razor would be made fully Open Source</a><sup>1</sup>. This is a big step for a company built on the sales of Closed Source software. I&rsquo;m going to have a look at what I think this decision means for the consumers, who use software built with these technologies, and the stakeholders who commission the software.</p>
 

@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML>
 
 <html>
@@ -8,38 +7,42 @@
 	<title>Automated Azure deployments - baking websites</title>
 	<meta name="author" content="Hook Technologies Ltd">
 
-	
-	<meta name="description" content="Automated Azure Deployments Azure web site hosting has a great built in feature for deployment automation. All you need to do is point Azure at the &hellip;">
-	
 
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description"
+		content="Automated Azure Deployments Azure web site hosting has a great built in feature for deployment automation. All you need to do is point Azure at the &hellip;">
+
+
+	<!-- http://t.co/dKP3o1e -->
+	<meta name="HandheldFriendly" content="True">
+	<meta name="MobileOptimized" content="320">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link href="/atom.xml" rel="alternate" title="baking websites" type="application/atom+xml">
-	
-	<link rel="canonical" href="http://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/">
-	<link href="http://bakingwebsites.co.uk/favicon.png" rel="shortcut icon">
-	<link href="http://bakingwebsites.co.uk/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-	<link href="http://bakingwebsites.co.uk/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+
+	<link rel="canonical" href="https://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/">
+	<link href="https://bakingwebsites.co.uk/favicon.png" rel="shortcut icon">
+	<link href="https://bakingwebsites.co.uk/stylesheets/screen.css" media="screen, projection" rel="stylesheet"
+		type="text/css">
+	<link href="https://bakingwebsites.co.uk/stylesheets/font-awesome.min.css" media="screen, projection"
+		rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<!--
+	<!--
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css"> 
 -->
-<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700" rel="stylesheet" type="text/css">
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700" rel="stylesheet"
+		type="text/css">
 
-  
+
 	<script type="text/javascript">
 		var _gaq = _gaq || [];
 		_gaq.push(['_setAccount', 'UA-47738964-1']);
 		_gaq.push(['_trackPageview']);
 
-		(function() {
+		(function () {
 			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
 			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
@@ -54,154 +57,200 @@
 	<div class="container">
 		<div class="left-col">
 			<div class="intrude-less">
-			<header id="header" class="inner"><div class="profilepic">
-	<img src="/images/bread-Sq-zoom-150.jpg" alt="Profile Picture" style="width: 160px;" />
-</div>
-<hgroup>
-  <h1><a href="http://bakingwebsites.co.uk/">baking websites</a></h1>
-  
-    <h2>adventures in software development</h2>
-  
-</hgroup>
+				<header id="header" class="inner">
+					<div class="profilepic">
+						<img src="/images/bread-Sq-zoom-150.jpg" alt="Profile Picture" style="width: 160px;" />
+					</div>
+					<hgroup>
+						<h1><a href="https://bakingwebsites.co.uk/">baking websites</a></h1>
 
-<nav id="main-nav"><h3>categories</h3>
-<ul class="main-navigation">
-<li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
-<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 6 ]</li>
-<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 15 ]</li>
-<li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
-<li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 10 ]</li>
+						<h2>adventures in software development</h2>
 
-</ul>
-<br/>
-<a href="http://bakingwebsites.co.uk/blog/archives">Archives</a>
+					</hgroup>
+
+					<nav id="main-nav">
+						<h3>categories</h3>
+						<ul class="main-navigation">
+							<li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
+							<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 6 ]</li>
+							<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 15 ]
+							</li>
+							<li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
+							<li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 10 ]
+							</li>
+
+						</ul>
+						<br />
+						<a href="https://bakingwebsites.co.uk/blog/archives">Archives</a>
 
 
-</nav>
-<nav id="sub-nav">
-	<div class="social">
-		
-		
-		
-		
-			<a class="twitter" href="http://twitter.com/michael_hook" title="Twitter">Twitter</a>
-		
-		
-			<a class="github" href="https://github.com/MikeHook" title="GitHub">GitHub</a>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-			<a class="rss" href="/atom.xml" title="RSS">RSS</a>
-		
-	</div>
-</nav>
-</header>				
+					</nav>
+					<nav id="sub-nav">
+						<div class="social">
+
+
+
+
+							<a class="twitter" href="http://twitter.com/michael_hook" title="Twitter">Twitter</a>
+
+
+							<a class="github" href="https://github.com/MikeHook" title="GitHub">GitHub</a>
+
+
+
+
+
+
+
+
+
+							<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+
+						</div>
+					</nav>
+				</header>
 			</div>
-		</div>	
+		</div>
 		<div class="mid-col">
-			
-				
-			
+
+
+
 			<div class="mid-col-container">
-				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-	<h1 class="title" itemprop="name">Automated Azure Deployments</h1>
-	<div class="entry-content" itemprop="articleBody"><p><img src="http://imagizer.imageshack.us/v2/320x240q90/850/r38o.jpg" class="alignleft" alttext="Wall-e the robot" /></p>
+				<div id="content" class="inner">
+					<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+						<h1 class="title" itemprop="name">Automated Azure Deployments</h1>
+						<div class="entry-content" itemprop="articleBody">
+							<p><img src="http://imagizer.imageshack.us/v2/320x240q90/850/r38o.jpg" class="alignleft"
+									alttext="Wall-e the robot" /></p>
 
-<p>Azure web site hosting has a great built in feature for deployment automation. All you need to do is point Azure at the location of your website in your source control platform and it will automatically monitor for updates, pull them into Azure and deploy them, Boom! Well that is the theory anyway, turns out in my case I needed to do some tweaking to get the automation to work.</p>
+							<p>Azure web site hosting has a great built in feature for deployment automation. All you
+								need to do is point Azure at the location of your website in your source control
+								platform and it will automatically monitor for updates, pull them into Azure and deploy
+								them, Boom! Well that is the theory anyway, turns out in my case I needed to do some
+								tweaking to get the automation to work.</p>
 
-<h2>Tinkering under the hood</h2>
+							<h2>Tinkering under the hood</h2>
 
-<p>The first step to set up the automated deployment is involves going to your Azure website dashboard and selecting &lsquo;Setup up deployment from source control&rsquo;. There are a bunch of options for what source control services are supported and how they can be setup, this is all pretty well documented in the <a href="" title="https://azure.microsoft.com/en-us/documentation/articles/web-sites-publish-source-control/">Azure publishing from source control article</a> so I won&rsquo;t rehash all of that here. Suffice to say I pointed the website at my github repo and sorted out all the authentication, then Azure pulled through a fresh version to deploy.</p>
+							<p>The first step to set up the automated deployment is involves going to your Azure website
+								dashboard and selecting &lsquo;Setup up deployment from source control&rsquo;. There are
+								a bunch of options for what source control services are supported and how they can be
+								setup, this is all pretty well documented in the <a href=""
+									title="https://azure.microsoft.com/en-us/documentation/articles/web-sites-publish-source-control/">Azure
+									publishing from source control article</a> so I won&rsquo;t rehash all of that here.
+								Suffice to say I pointed the website at my github repo and sorted out all the
+								authentication, then Azure pulled through a fresh version to deploy.</p>
 
-<p>Unfortunately when I checked the shiny new &lsquo;Deployments&rsquo; tab I found that the deployment had failed, after looking in the error log the reason was clear enough:</p>
+							<p>Unfortunately when I checked the shiny new &lsquo;Deployments&rsquo; tab I found that the
+								deployment had failed, after looking in the error log the reason was clear enough:</p>
 
-<blockquote><p>&ldquo;Error: The site directory path should be the same as repository root or a sub-directory of it.&rdquo;</p></blockquote>
+							<blockquote>
+								<p>&ldquo;Error: The site directory path should be the same as repository root or a
+									sub-directory of it.&rdquo;</p>
+							</blockquote>
 
-<p>My website was not in the root folder of the repository, it is in a &lsquo;website&rsquo; folder as you can see in the <a href="" title="https://github.com/MikeHook/MSTC">repo here</a>. so I needed to tell whatever magic was running these deployments to check in that folder instead for the code changes. After a bit of googling I found out that the deployments are driven by an application called kudu which has some documenation on its <a href="" title="https://github.com/projectkudu/kudu/wiki">github wiki</a>. Turns out that it is pretty straight forward to modify the folder, as explained on the <a href="" title="https://github.com/projectkudu/kudu/wiki/Customizing-deployments">customising deployments wiki page</a> I just had to add a .deployment file to the repository root with these contents:</p>
+							<p>My website was not in the root folder of the repository, it is in a &lsquo;website&rsquo;
+								folder as you can see in the <a href="" title="https://github.com/MikeHook/MSTC">repo
+									here</a>. so I needed to tell whatever magic was running these deployments to check
+								in that folder instead for the code changes. After a bit of googling I found out that
+								the deployments are driven by an application called kudu which has some documenation on
+								its <a href="" title="https://github.com/projectkudu/kudu/wiki">github wiki</a>. Turns
+								out that it is pretty straight forward to modify the folder, as explained on the <a
+									href=""
+									title="https://github.com/projectkudu/kudu/wiki/Customizing-deployments">customising
+									deployments wiki page</a> I just had to add a .deployment file to the repository
+								root with these contents:</p>
 
-<pre><code>[config]
+							<pre><code>[config]
 project = website
 </code></pre>
 
-<p>Simples, the deployment worked fine after adding that file&hellip; well it did when I just tried it but previously it didn&rsquo;t seem to work. Either I made some stupid syntax error previously or kudu got fixed since last time I tried!</p>
+							<p>Simples, the deployment worked fine after adding that file&hellip; well it did when I
+								just tried it but previously it didn&rsquo;t seem to work. Either I made some stupid
+								syntax error previously or kudu got fixed since last time I tried!</p>
 
-<h2>A robot to build a robot</h2>
+							<h2>A robot to build a robot</h2>
 
-<p>The actual website is running a different configuration based on a custom deployment script, while this is a little OTT to just change the folder path going the extra mile paid dividends later on when I needed to make some other customisations during the deployment. It was pretty straightforward to set up, thanks to the azure-cli tool which generates a deployment script for you based on a set of parameters. Instructions on how to do this are on the <a href="" title="https://github.com/projectkudu/kudu/wiki/Deployment-hooks">kudu wiki deployment hooks page</a>. In my case I just needed to run the following command from my repository root to generate a working .deployment and deploy.cmd file.</p>
+							<p>The actual website is running a different configuration based on a custom deployment
+								script, while this is a little OTT to just change the folder path going the extra mile
+								paid dividends later on when I needed to make some other customisations during the
+								deployment. It was pretty straightforward to set up, thanks to the azure-cli tool which
+								generates a deployment script for you based on a set of parameters. Instructions on how
+								to do this are on the <a href=""
+									title="https://github.com/projectkudu/kudu/wiki/Deployment-hooks">kudu wiki
+									deployment hooks page</a>. In my case I just needed to run the following command
+								from my repository root to generate a working .deployment and deploy.cmd file.</p>
 
-<pre><code>azure site deploymentscript --aspWebSite -r website
+							<pre><code>azure site deploymentscript --aspWebSite -r website
 </code></pre>
 
-<p>Once checked in those files are used by kudu to control the automated deployment process. Check back in Azure and the deployment should now be showing as successful, awesome!</p>
-</div>
+							<p>Once checked in those files are used by kudu to control the automated deployment process.
+								Check back in Azure and the deployment should now be showing as successful, awesome!</p>
+						</div>
 
-</article>
+					</article>
 
-	<div class="share">
-	<div class="addthis_toolbox addthis_default_style ">
-	
-	
-	<a class="addthis_button_tweet"></a>
-	
-	
-	<a class="addthis_counter addthis_pill_style"></a>
-	</div>
-  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
-</div>
+					<div class="share">
+						<div class="addthis_toolbox addthis_default_style ">
 
 
+							<a class="addthis_button_tweet"></a>
 
-<section id="comment">
-    <h1 class="title">Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-</section>
-</div>
+
+							<a class="addthis_counter addthis_pill_style"></a>
+						</div>
+						<script type="text/javascript"
+							src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+					</div>
+
+
+
+					<section id="comment">
+						<h1 class="title">Comments</h1>
+						<div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a
+									href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+						</div>
+					</section>
+				</div>
 			</div>
-			<footer id="footer" class="inner"><p>
-  Copyright &copy; 2016 - Hook Technologies Ltd -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-</footer>
-			
-
-<script type="text/javascript">
-      var disqus_shortname = 'bakingwebsites';
-      
-        
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/';
-        var disqus_url = 'http://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/';
-        var disqus_script = 'embed.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
+			<footer id="footer" class="inner">
+				<p>
+					Copyright &copy; 2016 - Hook Technologies Ltd -
+					<span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+				</p>
+			</footer>
 
 
+			<script type="text/javascript">
+				var disqus_shortname = 'bakingwebsites';
 
+
+				// var disqus_developer = 1;
+				var disqus_identifier = 'https://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/';
+				var disqus_url = 'https://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/';
+				var disqus_script = 'embed.js';
+
+				(function () {
+					var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+					dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+					(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+				}());
+			</script>
 
 
 
 
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
+
+
+
+			<script type="text/javascript">
+				(function () {
+					var twitterWidgets = document.createElement('script');
+					twitterWidgets.type = 'text/javascript';
+					twitterWidgets.async = true;
+					twitterWidgets.src = '//platform.twitter.com/widgets.js';
+					document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+				})();
+			</script>
 
 
 
@@ -210,4 +259,5 @@ project = website
 		</div>
 	</div>
 </body>
+
 </html>

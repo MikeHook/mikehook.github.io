@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML>
 
 <html>
@@ -8,38 +7,42 @@
 	<title>baking websites</title>
 	<meta name="author" content="Hook Technologies Ltd">
 
-	
-	<meta name="description" content="Jan 16th, 2011 Tips and Tricks Comments Investigating an NHibernate &#8216;Stale State&#8217; Exception I recently needed to investigate and fix &hellip;">
-	
 
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description"
+		content="Jan 16th, 2011 Tips and Tricks Comments Investigating an NHibernate &#8216;Stale State&#8217; Exception I recently needed to investigate and fix &hellip;">
+
+
+	<!-- http://t.co/dKP3o1e -->
+	<meta name="HandheldFriendly" content="True">
+	<meta name="MobileOptimized" content="320">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link href="/atom.xml" rel="alternate" title="baking websites" type="application/atom+xml">
-	
-	<link rel="canonical" href="http://bakingwebsites.co.uk/blog/page/8/">
-	<link href="http://bakingwebsites.co.uk/favicon.png" rel="shortcut icon">
-	<link href="http://bakingwebsites.co.uk/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-	<link href="http://bakingwebsites.co.uk/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+
+	<link rel="canonical" href="https://bakingwebsites.co.uk/blog/page/8/">
+	<link href="https://bakingwebsites.co.uk/favicon.png" rel="shortcut icon">
+	<link href="https://bakingwebsites.co.uk/stylesheets/screen.css" media="screen, projection" rel="stylesheet"
+		type="text/css">
+	<link href="https://bakingwebsites.co.uk/stylesheets/font-awesome.min.css" media="screen, projection"
+		rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<!--
+	<!--
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css"> 
 -->
-<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700" rel="stylesheet" type="text/css">
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700" rel="stylesheet"
+		type="text/css">
 
-  
+
 	<script type="text/javascript">
 		var _gaq = _gaq || [];
 		_gaq.push(['_setAccount', 'UA-47738964-1']);
 		_gaq.push(['_trackPageview']);
 
-		(function() {
+		(function () {
 			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
 			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
@@ -54,68 +57,72 @@
 	<div class="container">
 		<div class="left-col">
 			<div class="intrude-less">
-			<header id="header" class="inner"><div class="profilepic">
-	<img src="/images/bread-Sq-zoom-150.jpg" alt="Profile Picture" style="width: 160px;" />
-</div>
-<hgroup>
-  <h1><a href="http://bakingwebsites.co.uk/">baking websites</a></h1>
-  
-    <h2>adventures in software development</h2>
-  
-</hgroup>
+				<header id="header" class="inner">
+					<div class="profilepic">
+						<img src="/images/bread-Sq-zoom-150.jpg" alt="Profile Picture" style="width: 160px;" />
+					</div>
+					<hgroup>
+						<h1><a href="https://bakingwebsites.co.uk/">baking websites</a></h1>
 
-<nav id="main-nav"><h3>categories</h3>
-<ul class="main-navigation">
-<li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
-<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 6 ]</li>
-<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 15 ]</li>
-<li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
-<li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 10 ]</li>
+						<h2>adventures in software development</h2>
 
-</ul>
-<br/>
-<a href="http://bakingwebsites.co.uk/blog/archives">Archives</a>
+					</hgroup>
+
+					<nav id="main-nav">
+						<h3>categories</h3>
+						<ul class="main-navigation">
+							<li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
+							<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 6 ]</li>
+							<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 15 ]
+							</li>
+							<li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
+							<li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 10 ]
+							</li>
+
+						</ul>
+						<br />
+						<a href="https://bakingwebsites.co.uk/blog/archives">Archives</a>
 
 
-</nav>
-<nav id="sub-nav">
-	<div class="social">
-		
-		
-		
-		
-			<a class="twitter" href="http://twitter.com/michael_hook" title="Twitter">Twitter</a>
-		
-		
-			<a class="github" href="https://github.com/MikeHook" title="GitHub">GitHub</a>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-			<a class="rss" href="/atom.xml" title="RSS">RSS</a>
-		
-	</div>
-</nav>
-</header>				
+					</nav>
+					<nav id="sub-nav">
+						<div class="social">
+
+
+
+
+							<a class="twitter" href="http://twitter.com/michael_hook" title="Twitter">Twitter</a>
+
+
+							<a class="github" href="https://github.com/MikeHook" title="GitHub">GitHub</a>
+
+
+
+
+
+
+
+
+
+							<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+
+						</div>
+					</nav>
+				</header>
 			</div>
-		</div>	
+		</div>
 		<div class="mid-col">
-			
-				
-			
+
+
+
 			<div class="mid-col-container">
 				<div id="content" class="inner">
-<div itemscope itemtype="http://schema.org/Blog">
+					<div itemscope itemtype="http://schema.org/Blog">
 
 
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
+						<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+							<div class="meta">
+								<div class="date">
 
 
 
@@ -124,152 +131,219 @@
 
 
 
-  
 
 
-<time datetime="2011-01-16T18:01:36+00:00" data-updated="true" itemprop="datePublished">Jan 16<span>th</span>, 2011</time></div>
-		<div class="tags">
 
+									<time datetime="2011-01-16T18:01:36+00:00" data-updated="true"
+										itemprop="datePublished">Jan 16<span>th</span>, 2011</time>
+								</div>
+								<div class="tags">
 
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/tips-and-tricks/'>Tips and Tricks</a>
 
+									<a class='category'
+										href='https://bakingwebsites.co.uk/blog/categories/tips-and-tricks/'>Tips and
+										Tricks</a>
 
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/01/16/investigating-an-nhibernate-stale-state-exception/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/01/16/investigating-an-nhibernate-stale-state-exception/" itemprop="url">Investigating an NHibernate &#8216;Stale State&#8217; Exception</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>I recently needed to investigate and fix this rather unpleasant sounding issue. It was  occurring, seemingly at random, on a live web service but could not be replicated in tests.  Occasionally the web service was throwing the exception when we made a call to delete a list of records from the database.</p>
 
-<p>The web service uses the NHibernate object relational mapper (ORM) tool to map our c# classes (domain objects ) to database tables. NHibernate was throwing this exception when we tried to delete the records:</p>
+								</div>
 
-<blockquote>NHibernate.StaleStateException: Unexpected row count: 0; expected: 1</blockquote>
+								<span class="comments"><a
+										href="https://bakingwebsites.co.uk/2011/01/16/investigating-an-nhibernate-stale-state-exception/#disqus_thread">Comments</a></span>
 
+							</div>
+							<h1 class="title" itemprop="name"><a
+									href="https://bakingwebsites.co.uk/2011/01/16/investigating-an-nhibernate-stale-state-exception/"
+									itemprop="url">Investigating an NHibernate &#8216;Stale State&#8217; Exception</a>
+							</h1>
+							<div class="entry-content" itemprop="articleBody">
+								<p>I recently needed to investigate and fix this rather unpleasant sounding issue. It
+									was occurring, seemingly at random, on a live web service but could not be
+									replicated in tests. Occasionally the web service was throwing the exception when we
+									made a call to delete a list of records from the database.</p>
 
+								<p>The web service uses the NHibernate object relational mapper (ORM) tool to map our c#
+									classes (domain objects ) to database tables. NHibernate was throwing this exception
+									when we tried to delete the records:</p>
 
+								<blockquote>NHibernate.StaleStateException: Unexpected row count: 0; expected: 1
+								</blockquote>
 
-<h3>What is a stale state?</h3>
 
 
-<p>This issue was not one we had seen before and had us scratching our heads for a while. The first step was to understand what the exception itself meant.</p>
 
-<p>After some reading up in the <a href="http://nhforge.org/doc/nh/en/index.html">NHibernate documentation</a> it was more clear what the issue was.  NHibernate was complaining that the in-memory model of the database data had become stale, or in other words out of date.  So when NHibernate tried to persist the requested deletion to the database it was finding that it could not complete the operation.</p>
+								<h3>What is a stale state?</h3>
 
-<h3>Why was our state stale?</h3>
 
+								<p>This issue was not one we had seen before and had us scratching our heads for a
+									while. The first step was to understand what the exception itself meant.</p>
 
-<p>So, all well and good, we knew what the stale state was. However, it was rather more difficult to pin down why it was happening, especially because we were unable to reproduce the error during testing.</p>
+								<p>After some reading up in the <a
+										href="http://nhforge.org/doc/nh/en/index.html">NHibernate documentation</a> it
+									was more clear what the issue was. NHibernate was complaining that the in-memory
+									model of the database data had become stale, or in other words out of date. So when
+									NHibernate tried to persist the requested deletion to the database it was finding
+									that it could not complete the operation.</p>
 
-<p>It was only examining the event logs for the web service which enabled us to understand why this was happening.  The event logs showed that 2 separate instances of the web service were being called almost simultaneously on separate threads.  Both of those instances were basically calling the same delete operation on the same list of records.</p>
+								<h3>Why was our state stale?</h3>
 
-<p>So the first instance would succeed in deleting the records, but the second instance would then also try to delete the records.  Of course the second instance would fail, as there were not longer any records to delete.</p>
 
-<h3>Preventing the stale state (odour  eaters?)</h3>
+								<p>So, all well and good, we knew what the stale state was. However, it was rather more
+									difficult to pin down why it was happening, especially because we were unable to
+									reproduce the error during testing.</p>
 
+								<p>It was only examining the event logs for the web service which enabled us to
+									understand why this was happening. The event logs showed that 2 separate instances
+									of the web service were being called almost simultaneously on separate threads. Both
+									of those instances were basically calling the same delete operation on the same list
+									of records.</p>
 
-<p>Once we understood why the exception was occurring it was a straight forward re-factoring exercise to prevent it in future.  In our case the code could be updated so that the delete operation never needed to be called in the first place, so this was an effective fix.</p>
+								<p>So the first instance would succeed in deleting the records, but the second instance
+									would then also try to delete the records. Of course the second instance would fail,
+									as there were not longer any records to delete.</p>
 
-<p>The detailed event logging on the web service proved invaluable in solving this issue, without this it probably would of taken much longer to figure out what was happening!</p>
+								<h3>Preventing the stale state (odour eaters?)</h3>
 
-		
-		
-	</div>
 
-</article>
+								<p>Once we understood why the exception was occurring it was a straight forward
+									re-factoring exercise to prevent it in future. In our case the code could be updated
+									so that the delete operation never needed to be called in the first place, so this
+									was an effective fix.</p>
 
+								<p>The detailed event logging on the web service proved invaluable in solving this
+									issue, without this it probably would of taken much longer to figure out what was
+									happening!</p>
 
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
 
 
+							</div>
 
+						</article>
 
 
+						<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+							<div class="meta">
+								<div class="date">
 
 
 
-  
 
 
-<time datetime="2011-01-06T20:13:22+00:00" data-updated="true" itemprop="datePublished">Jan 6<span>th</span>, 2011</time></div>
-		<div class="tags">
 
 
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/tips-and-tricks/'>Tips and Tricks</a>
 
 
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/01/06/troubleshooting-a-web-service-soapexception/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/01/06/troubleshooting-a-web-service-soapexception/" itemprop="url">Troubleshooting a Web Service SoapException</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>I recently encountered this exception consuming a web service from an application:</p>
 
-<blockquote>System.Web.Services.Protocols.SoapException:  Server did not recognize the value of HTTP Header SOAPAction: http://service.foo.com/baa.asmx</blockquote>
 
+									<time datetime="2011-01-06T20:13:22+00:00" data-updated="true"
+										itemprop="datePublished">Jan 6<span>th</span>, 2011</time>
+								</div>
+								<div class="tags">
 
-<p>The code ran fine locally and only caused an exception running on the web server. Initially I thought it could be to do with the web server running a newer version of the .NET framework. But this proved not to be the case.</p>
 
-<p>Eventually I got the issue tracked down and it was a simple typo in the settings on the live environment.
-The system has the web service addresses stored in a database and the application assigns these dynamically at runtime (via the <em>Url </em>property). We have it  set-up  this way to enable the test application to send to a different end point from the live application. However this does rely on the same service being available on the end point and in this case it wasn&rsquo;t.</p>
+									<a class='category'
+										href='https://bakingwebsites.co.uk/blog/categories/tips-and-tricks/'>Tips and
+										Tricks</a>
 
-<p>So we were changing the URL to be:</p>
 
-<blockquote>http://service.foo.com/baa.asmx</blockquote>
+								</div>
 
+								<span class="comments"><a
+										href="https://bakingwebsites.co.uk/2011/01/06/troubleshooting-a-web-service-soapexception/#disqus_thread">Comments</a></span>
 
-<p>But it needed to point to here instead:</p>
+							</div>
+							<h1 class="title" itemprop="name"><a
+									href="https://bakingwebsites.co.uk/2011/01/06/troubleshooting-a-web-service-soapexception/"
+									itemprop="url">Troubleshooting a Web Service SoapException</a></h1>
+							<div class="entry-content" itemprop="articleBody">
+								<p>I recently encountered this exception consuming a web service from an application:
+								</p>
 
-<blockquote>http://service.foo.com/baas.asmx</blockquote>
+								<blockquote>System.Web.Services.Protocols.SoapException: Server did not recognize the
+									value of HTTP Header SOAPAction: http://service.foo.com/baa.asmx</blockquote>
 
 
-<p>Note the <em>s </em>on the end of the service method name, one little character causing one pesky SOAP exception!</p>
+								<p>The code ran fine locally and only caused an exception running on the web server.
+									Initially I thought it could be to do with the web server running a newer version of
+									the .NET framework. But this proved not to be the case.</p>
 
-		
-		
-	</div>
+								<p>Eventually I got the issue tracked down and it was a simple typo in the settings on
+									the live environment.
+									The system has the web service addresses stored in a database and the application
+									assigns these dynamically at runtime (via the <em>Url </em>property). We have it
+									set-up this way to enable the test application to send to a different end point from
+									the live application. However this does rely on the same service being available on
+									the end point and in this case it wasn&rsquo;t.</p>
 
-</article>
+								<p>So we were changing the URL to be:</p>
 
+								<blockquote>http://service.foo.com/baa.asmx</blockquote>
 
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
 
+								<p>But it needed to point to here instead:</p>
 
+								<blockquote>http://service.foo.com/baas.asmx</blockquote>
 
 
+								<p>Note the <em>s </em>on the end of the service method name, one little character
+									causing one pesky SOAP exception!</p>
 
 
 
+							</div>
 
-  
+						</article>
 
 
-<time datetime="2011-01-04T19:43:12+00:00" data-updated="true" itemprop="datePublished">Jan 4<span>th</span>, 2011</time></div>
-		<div class="tags">
+						<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+							<div class="meta">
+								<div class="date">
 
 
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/tips-and-tricks/'>Tips and Tricks</a>
 
 
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2011/01/04/how-to-delete-old-log4net-database-records/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2011/01/04/how-to-delete-old-log4net-database-records/" itemprop="url">How to Delete Old Log4net Database Records</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>We have log4net setup to record events from a web application in a database.  However it had been running for a couple of weeks and the database table was getting rather large (144,000 records at last count).  This was causing performance issues when accessing the database table and also taking up quite a bit of disk space.  Obviously the database needed some kind of maintenance script to keep the size under control.</p>
 
-<p>I investigated the log4net support for maintaining the size of the database table  and there is none built in as such. However the configuration is fairly  verbose and it allows you to define the SQL script itself which is run to log the events. So with a fairly straightforward amendment to this script I was able to keep the database size in check:</p>
 
-<pre style="background-color:#eeeeee;border:1px dashed #999999;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:280px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>
+
+
+
+
+
+									<time datetime="2011-01-04T19:43:12+00:00" data-updated="true"
+										itemprop="datePublished">Jan 4<span>th</span>, 2011</time>
+								</div>
+								<div class="tags">
+
+
+									<a class='category'
+										href='https://bakingwebsites.co.uk/blog/categories/tips-and-tricks/'>Tips and
+										Tricks</a>
+
+
+								</div>
+
+								<span class="comments"><a
+										href="https://bakingwebsites.co.uk/2011/01/04/how-to-delete-old-log4net-database-records/#disqus_thread">Comments</a></span>
+
+							</div>
+							<h1 class="title" itemprop="name"><a
+									href="https://bakingwebsites.co.uk/2011/01/04/how-to-delete-old-log4net-database-records/"
+									itemprop="url">How to Delete Old Log4net Database Records</a></h1>
+							<div class="entry-content" itemprop="articleBody">
+								<p>We have log4net setup to record events from a web application in a database. However
+									it had been running for a couple of weeks and the database table was getting rather
+									large (144,000 records at last count). This was causing performance issues when
+									accessing the database table and also taking up quite a bit of disk space. Obviously
+									the database needed some kind of maintenance script to keep the size under control.
+								</p>
+
+								<p>I investigated the log4net support for maintaining the size of the database table and
+									there is none built in as such. However the configuration is fairly verbose and it
+									allows you to define the SQL script itself which is run to log the events. So with a
+									fairly straightforward amendment to this script I was able to keep the database size
+									in check:</p>
+
+								<pre
+									style="background-color:#eeeeee;border:1px dashed #999999;color:black;font-family:andale mono, lucida console, monaco, fixed, monospace;font-size:12px;height:280px;line-height:14px;overflow:auto;width:100%;padding:5px;"><code>
 &lt;appender name="EventLogAdoNetAppender" type="log4net.Appender.AdoNetAppender"&gt;          
   &lt;bufferSize value="0" /&gt;          
   &lt;connectionType value="System.Data.SqlClient.SqlConnection, System.Data, Version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" /&gt;
@@ -288,239 +362,368 @@ The system has the web service addresses stored in a database and the applicatio
 &lt;/appender&gt;</span></pre>
 
 
-<p>The key changes are to the commandText element. The default command just runs an insert query, this has been updated above to also run a delete query. This will remove any records in the EventLog table which are over 7 days old.
-It can easily be changed to a different record age by amending the second parameter of the DATEADD method.
-It was also necessary to wrap the command in a CDATA element because the delete query contains an reserved XML character (&lt;).</p>
+								<p>The key changes are to the commandText element. The default command just runs an
+									insert query, this has been updated above to also run a delete query. This will
+									remove any records in the EventLog table which are over 7 days old.
+									It can easily be changed to a different record age by amending the second parameter
+									of the DATEADD method.
+									It was also necessary to wrap the command in a CDATA element because the delete
+									query contains an reserved XML character (&lt;).</p>
 
-<p>I&rsquo;m aware that this is not the most efficient way to implement this, an alternative would be to add a scheduled task to the SQL Server Agent, however we do not have access to this on the database server.
-Also I prefer how the maintenance is built into the log4net configuration here so it will now work immediately on any database server without the need for separate configuration steps.</p>
+								<p>I&rsquo;m aware that this is not the most efficient way to implement this, an
+									alternative would be to add a scheduled task to the SQL Server Agent, however we do
+									not have access to this on the database server.
+									Also I prefer how the maintenance is built into the log4net configuration here so it
+									will now work immediately on any database server without the need for separate
+									configuration steps.</p>
 
-		
-		
-	</div>
 
-</article>
 
+							</div>
 
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
+						</article>
 
 
+						<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+							<div class="meta">
+								<div class="date">
 
 
 
 
 
 
-  
 
 
-<time datetime="2010-08-22T15:29:07+01:00" data-updated="true" itemprop="datePublished">Aug 22<span>nd</span>, 2010</time></div>
-		<div class="tags">
 
 
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
 
+									<time datetime="2010-08-22T15:29:07+01:00" data-updated="true"
+										itemprop="datePublished">Aug 22<span>nd</span>, 2010</time>
+								</div>
+								<div class="tags">
 
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2010/08/22/upgrading-to-sharp-architecture-1-6-and-mvc-2/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2010/08/22/upgrading-to-sharp-architecture-1-6-and-mvc-2/" itemprop="url">Upgrading to Sharp Architecture 1.6 and MVC 2</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>After a good few months in hibernation the guilt of leaving my poor pet project half-finished has finally got to me!</p>
 
-<p>I was also spurred on by several new (and not so new) software releases that I would like to try out:</p>
+									<a class='category'
+										href='https://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
 
-<ul>
-    <li><a href="http://devlicio.us/blogs/billy_mccafferty/archive/2010/08/19/s-arp-architecture-1-6-released.aspx">S#arp Architecture 1.6</a></li>
-    <li><a href="http://weblogs.asp.net/scottgu/archive/2010/03/11/asp-net-mvc-2-released.aspx">MVC version 2</a></li>
-    <li><a href="http://www.techfortesco.com/forum/index.php?topic=265.0">Tesco API Beta</a></li>
-</ul>
 
+								</div>
 
-<p>The first step I needed to take was to upgrade the project to use the new release of Sharp Architecture and MVC 2. The Sharp Architecture wiki has   a <a href="http://wiki.sharparchitecture.net/1.5UpgradeGuide.ashx">decent upgrade guide</a> and I was able to get most of the way there by following this.   However there were a couple extra step I needed to take in my project:</p>
+								<span class="comments"><a
+										href="https://bakingwebsites.co.uk/2010/08/22/upgrading-to-sharp-architecture-1-6-and-mvc-2/#disqus_thread">Comments</a></span>
 
-<h3>Upgrade to Fluent NHibernate</h3>
+							</div>
+							<h1 class="title" itemprop="name"><a
+									href="https://bakingwebsites.co.uk/2010/08/22/upgrading-to-sharp-architecture-1-6-and-mvc-2/"
+									itemprop="url">Upgrading to Sharp Architecture 1.6 and MVC 2</a></h1>
+							<div class="entry-content" itemprop="articleBody">
+								<p>After a good few months in hibernation the guilt of leaving my poor pet project
+									half-finished has finally got to me!</p>
 
+								<p>I was also spurred on by several new (and not so new) software releases that I would
+									like to try out:</p>
 
-<p>I think my project may have been on an earlier version than that in the guide because I needed to upgrade the Data project to use Fluent NHibernate. The issues here were pretty obvious as there were several compilation errors. I found the easiest solution was to generate a new empty Sharp Architecture project from the 1.6 template, then copy across the amended files in the NHibernateMaps folder.</p>
+								<ul>
+									<li><a
+											href="http://devlicio.us/blogs/billy_mccafferty/archive/2010/08/19/s-arp-architecture-1-6-released.aspx">S#arp
+											Architecture 1.6</a></li>
+									<li><a
+											href="http://weblogs.asp.net/scottgu/archive/2010/03/11/asp-net-mvc-2-released.aspx">MVC
+											version 2</a></li>
+									<li><a href="http://www.techfortesco.com/forum/index.php?topic=265.0">Tesco API
+											Beta</a></li>
+								</ul>
 
-<p>This got the application to compile OK, however there were a couple of differences in the configuration from my project.</p>
 
-<h3>Primary Key Convention</h3>
+								<p>The first step I needed to take was to upgrade the project to use the new release of
+									Sharp Architecture and MVC 2. The Sharp Architecture wiki has a <a
+										href="http://wiki.sharparchitecture.net/1.5UpgradeGuide.ashx">decent upgrade
+										guide</a> and I was able to get most of the way there by following this. However
+									there were a couple extra step I needed to take in my project:</p>
 
+								<h3>Upgrade to Fluent NHibernate</h3>
 
-<p>One of the data unit tests was failing when trying to access an entity using the <em>.Get(id)</em> method. This was strange as the entity was being loaded OK in the setup method. I was also getting an exception from the website when trying to add an entity to the database:</p>
 
-<blockquote><em>Invalid object name &#8216;hibernate_unique_key&#8217;.</em></blockquote>
+								<p>I think my project may have been on an earlier version than that in the guide because
+									I needed to upgrade the Data project to use Fluent NHibernate. The issues here were
+									pretty obvious as there were several compilation errors. I found the easiest
+									solution was to generate a new empty Sharp Architecture project from the 1.6
+									template, then copy across the amended files in the NHibernateMaps folder.</p>
 
+								<p>This got the application to compile OK, however there were a couple of differences in
+									the configuration from my project.</p>
 
-<p>The problem was due to a change in the <em>PrimaryKeyConvention</em> class. The convention for generating primary keys has been changed from <em>Native()</em> to <em>HiLo(&ldquo;1000&rdquo;)</em>. So instead of the first record having a key of 0 it would now try to use 1000. Changing this setting back to <em>Native()</em> fixed the problem straight away.</p>
+								<h3>Primary Key Convention</h3>
 
-<h3>Cascade Conventions</h3>
 
+								<p>One of the data unit tests was failing when trying to access an entity using the
+									<em>.Get(id)</em> method. This was strange as the entity was being loaded OK in the
+									setup method. I was also getting an exception from the website when trying to add an
+									entity to the database:</p>
 
-<p>The other issue I encountered occurred when trying to add a new ingredient to a recipe:</p>
+								<blockquote><em>Invalid object name &#8216;hibernate_unique_key&#8217;.</em>
+								</blockquote>
 
-<blockquote><em>Cannot insert the value NULL into column &#8216;IngredientFk&#8217;, table  &#8216;recipebook.dbo.RecipeIngredientDrafts&#8217;; column does not allow nulls. INSERT  fails.
-The statement has been terminated.</em></blockquote>
 
+								<p>The problem was due to a change in the <em>PrimaryKeyConvention</em> class. The
+									convention for generating primary keys has been changed from <em>Native()</em> to
+									<em>HiLo(&ldquo;1000&rdquo;)</em>. So instead of the first record having a key of 0
+									it would now try to use 1000. Changing this setting back to <em>Native()</em> fixed
+									the problem straight away.</p>
 
-<p>This error pointed to a problem with NHibernate not saving changes to associated entities; it was trying to save a new <em>RecipeIngredientDraft</em> record without first saving the new <em>Ingredient </em>record. This issue could be resolved by adding a call to <em>instance.Cascade.SaveUpdate() </em>in the <em>ReferenceConvention </em>and <em>HasManyConvention </em>classes.</p>
+								<h3>Cascade Conventions</h3>
 
-<p>After fixing these issues the application worked just fine :)</p>
 
-		
-		
-	</div>
+								<p>The other issue I encountered occurred when trying to add a new ingredient to a
+									recipe:</p>
 
-</article>
+								<blockquote><em>Cannot insert the value NULL into column &#8216;IngredientFk&#8217;,
+										table &#8216;recipebook.dbo.RecipeIngredientDrafts&#8217;; column does not allow
+										nulls. INSERT fails.
+										The statement has been terminated.</em></blockquote>
 
 
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
+								<p>This error pointed to a problem with NHibernate not saving changes to associated
+									entities; it was trying to save a new <em>RecipeIngredientDraft</em> record without
+									first saving the new <em>Ingredient </em>record. This issue could be resolved by
+									adding a call to <em>instance.Cascade.SaveUpdate() </em>in the
+									<em>ReferenceConvention </em>and <em>HasManyConvention </em>classes.</p>
 
+								<p>After fixing these issues the application worked just fine :)</p>
 
 
 
+							</div>
 
+						</article>
 
 
+						<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+							<div class="meta">
+								<div class="date">
 
-  
 
 
-<time datetime="2010-02-12T09:00:00+00:00" data-updated="true" itemprop="datePublished">Feb 12<span>th</span>, 2010</time></div>
-		<div class="tags">
 
 
-	<a class='category' href='http://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
 
 
-</div>
-		
-			<span class="comments"><a href="http://bakingwebsites.co.uk/2010/02/12/you-have-20-seconds-to-comply/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2010/02/12/you-have-20-seconds-to-comply/" itemprop="url">You Have 20 Seconds to Comply</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>Its pretty straight forward to generate a simple web page, there are several software tools available that will generate the mark up code for you. However, even using these tools, it is easy to misuse tags and not conform to the <a href="http://www.w3.org/TR/xhtml11/">XHTML standards</a>. If you were unfortunate enough to follow the previous link, you may well be thinking,</p>
 
-<blockquote>   What does it all mean, my web page looks fine so does compliance really matter?   </blockquote>
 
 
-<p>This is a valid point, however compliance is widely regarded to be important for a number of reasons. These are pretty <a href="http://www.leemunroe.com/how-important-is-valid-html-web-standards/">well documented</a> around the web so I   ll just highlight a couple of the reasons that I think are most important.</p>
 
-<p>Firstly a compliant web page should be assured of displaying fairly consistently across all major browsers, both now and in the future. Unfortunately some browsers are more compliant than others, internet explorer still demands some extra attention but it is much improved since the days of IE6. The newer browsers which have come onto the market, such as Firefox and Chrome, generally display compliant pages very well. Secondly I think that compliance is important as it makes the content more accessible to machine readers. For example the readers used by search engines will be able to read and index the page content easier, which will help increase traffic to the site. This theory has actually been tested and there is some evidence to back up the claims that <a href="http://www.hobo-web.co.uk/seo-blog/index.php/official-google-prefers-valid-html-css/">Google prefers valid HTML and CSS</a>.</p>
+									<time datetime="2010-02-12T09:00:00+00:00" data-updated="true"
+										itemprop="datePublished">Feb 12<span>th</span>, 2010</time>
+								</div>
+								<div class="tags">
 
-<h4>Keep it clean</h4>
 
+									<a class='category'
+										href='https://bakingwebsites.co.uk/blog/categories/hacking/'>Hacking</a>
 
-<p>The first step to compliance is to separate the HTML mark-up from the presentation using a CSS (Cascading Style Sheet) document. This helps ensure that the web page is short and the content is easy to find. Apparently search engines are busy guys and they just don   t have the time to be reading all that content on your site. So they only read up to a certain number of characters, if your important content is pushed too far down the document then there is a rick that it will never get indexed.</p>
 
-<p>I   ve gone for a fairly straight forward layout on the recipe stash site, with a fixed width page of 960 pixels to target resolution widths of 1024 and above. The header, footer and main content are all in a single column. This layout can be created in CSS without too much trouble. I   ve tried to use the HTML tags as they were intended originally, for example the menus are tagged as an unordered list of elements, then styled to display horizontally.</p>
+								</div>
 
-<p>There is an unfortunate limitation with HTML, it does not support curved corners. So I   ve used to <a href="http://www.html.it/articoli/niftycube/index.html">Nifty Corners</a> to create the curved effect on the top navigation menu and latest recipes section:</p>
+								<span class="comments"><a
+										href="https://bakingwebsites.co.uk/2010/02/12/you-have-20-seconds-to-comply/#disqus_thread">Comments</a></span>
 
-<p><a href="http://lh3.ggpht.com/_5hQeqbPSrks/S3SKU8XP19I/AAAAAAAAAEg/LyqqweIM2DE/s1600-h/recipestash-nav%5B4%5D.jpg"><img title="recipestash-nav" src="http://lh5.ggpht.com/_5hQeqbPSrks/S3SKVdVr1qI/AAAAAAAAAEk/xCnYOpYSNAI/recipestash-nav_thumb%5B2%5D.jpg?imgmax=800" border="0" alt="recipestash-nav" width="492" height="56" /></a></p>
+							</div>
+							<h1 class="title" itemprop="name"><a
+									href="https://bakingwebsites.co.uk/2010/02/12/you-have-20-seconds-to-comply/"
+									itemprop="url">You Have 20 Seconds to Comply</a></h1>
+							<div class="entry-content" itemprop="articleBody">
+								<p>Its pretty straight forward to generate a simple web page, there are several software
+									tools available that will generate the mark up code for you. However, even using
+									these tools, it is easy to misuse tags and not conform to the <a
+										href="http://www.w3.org/TR/xhtml11/">XHTML standards</a>. If you were
+									unfortunate enough to follow the previous link, you may well be thinking,</p>
 
-<p>Nifty Corners is a JavaScript based tool which adds HTML and CSS to the page when it is loaded to create the effect of curved corners. The other option I considered to create the curved corners was to cut out images of the corners themselves and position them in the corners of the HTML elements. However I decided to use Nifty corners for a number of reasons:</p>
+								<blockquote> What does it all mean, my web page looks fine so does compliance really
+									matter? </blockquote>
 
-<ul>
-    <li>No images are required</li>
-    <li>The generated HTML mark-up is compliant</li>
-    <li>The implementation is fast     just one line of JavaScript to call!</li>
-    <li>It degrades gracefully (If JavaScript is not available then it does nothing)</li>
-</ul>
 
+								<p>This is a valid point, however compliance is widely regarded to be important for a
+									number of reasons. These are pretty <a
+										href="http://www.leemunroe.com/how-important-is-valid-html-web-standards/">well
+										documented</a> around the web so I ll just highlight a couple of the reasons
+									that I think are most important.</p>
 
+								<p>Firstly a compliant web page should be assured of displaying fairly consistently
+									across all major browsers, both now and in the future. Unfortunately some browsers
+									are more compliant than others, internet explorer still demands some extra attention
+									but it is much improved since the days of IE6. The newer browsers which have come
+									onto the market, such as Firefox and Chrome, generally display compliant pages very
+									well. Secondly I think that compliance is important as it makes the content more
+									accessible to machine readers. For example the readers used by search engines will
+									be able to read and index the page content easier, which will help increase traffic
+									to the site. This theory has actually been tested and there is some evidence to back
+									up the claims that <a
+										href="http://www.hobo-web.co.uk/seo-blog/index.php/official-google-prefers-valid-html-css/">Google
+										prefers valid HTML and CSS</a>.</p>
 
+								<h4>Keep it clean</h4>
 
-<h4>Exceptions to the rule</h4>
 
+								<p>The first step to compliance is to separate the HTML mark-up from the presentation
+									using a CSS (Cascading Style Sheet) document. This helps ensure that the web page is
+									short and the content is easy to find. Apparently search engines are busy guys and
+									they just don t have the time to be reading all that content on your site. So they
+									only read up to a certain number of characters, if your important content is pushed
+									too far down the document then there is a rick that it will never get indexed.</p>
 
-<p>I mentioned earlier that internet explorer interprets style sheets differently to other browsers. This is so pronounced for version six that a completely different style sheet would be needed to create the same visual layout. I   ve decided that this would take up too much of my time and have instead used the <a href="http://forabeautifulweb.com/blog/about/universal_internet_explorer_6_css/">universal ie6 style sheet</a>, along with an upgrade message for anyone that is using IE6.</p>
+								<p>I ve gone for a fairly straight forward layout on the recipe stash site, with a fixed
+									width page of 960 pixels to target resolution widths of 1024 and above. The header,
+									footer and main content are all in a single column. This layout can be created in
+									CSS without too much trouble. I ve tried to use the HTML tags as they were intended
+									originally, for example the menus are tagged as an unordered list of elements, then
+									styled to display horizontally.</p>
 
-<p>I   m currently running on Windows Vista and it is pretty tricky to test for all versions of internet explorer. There are two main methods that can be used to test, either install a virtual machine running Windows XP with IE6 installed natively or use the <a href="http://www.my-debugbar.com/wiki/IETester/HomePage">IETester</a> program. I   ve gone for the IETester program, mainly because it is quicker to install and doesn   t take up a huge chunk of my hard drive. I   ve tried it out and it displays the basically styled page I would expect to see in IE6 mode:</p>
+								<p>There is an unfortunate limitation with HTML, it does not support curved corners. So
+									I ve used to <a href="http://www.html.it/articoli/niftycube/index.html">Nifty
+										Corners</a> to create the curved effect on the top navigation menu and latest
+									recipes section:</p>
 
-<p><a href="http://lh5.ggpht.com/_5hQeqbPSrks/S3SKV6LNNrI/AAAAAAAAAEo/-kTCMp0wAF0/s1600-h/IETester2%5B3%5D.jpg"><img style="border:0 none;" title="IETester2" src="http://lh4.ggpht.com/_5hQeqbPSrks/S3SKWZVC3DI/AAAAAAAAAEs/JO8fB75k_mA/IETester2_thumb%5B1%5D.jpg?imgmax=800" border="0" alt="IETester2" width="481" height="471" /></a></p>
+								<p><a
+										href="http://lh3.ggpht.com/_5hQeqbPSrks/S3SKU8XP19I/AAAAAAAAAEg/LyqqweIM2DE/s1600-h/recipestash-nav%5B4%5D.jpg"><img
+											title="recipestash-nav"
+											src="http://lh5.ggpht.com/_5hQeqbPSrks/S3SKVdVr1qI/AAAAAAAAAEk/xCnYOpYSNAI/recipestash-nav_thumb%5B2%5D.jpg?imgmax=800"
+											border="0" alt="recipestash-nav" width="492" height="56" /></a></p>
 
-<p><span style="color:#ff0000;"><span style="color:#000000;">The deficiencies of Internet Explorer versions seven and eight are less pronounced and I only needed to modify a couple of elements to give the same appearance to the web page:</span></span></p>
+								<p>Nifty Corners is a JavaScript based tool which adds HTML and CSS to the page when it
+									is loaded to create the effect of curved corners. The other option I considered to
+									create the curved corners was to cut out images of the corners themselves and
+									position them in the corners of the HTML elements. However I decided to use Nifty
+									corners for a number of reasons:</p>
 
-<ul>
-    <li>Added fixed widths to the main div elements so margins are applied</li>
-    <li>Extra div element wrapper on the so the margin is applied</li>
-    <li>Add fixed widths to the navigation menu elements to fix nifty corners in ie7</li>
-</ul>
+								<ul>
+									<li>No images are required</li>
+									<li>The generated HTML mark-up is compliant</li>
+									<li>The implementation is fast just one line of JavaScript to call!</li>
+									<li>It degrades gracefully (If JavaScript is not available then it does nothing)
+									</li>
+								</ul>
 
 
 
 
-<h4>Validating the page</h4>
+								<h4>Exceptions to the rule</h4>
 
 
-<p>It would be difficult to judge when the mark up and styling of a web page is actually valid, fortunately there are many tools freely available on the web to help. During development I generally use the <a href="http://users.skynet.be/mgueury/mozilla/">HTML validator</a> Firefox extension. This provides a little icon in the bottom right corner of the web browser that indicates whether the current page is valid or not. Clicking the icon brings up a list of validation errors for the page. I like this tool as it is quick to browse through a site and check the validation on each page.</p>
+								<p>I mentioned earlier that internet explorer interprets style sheets differently to
+									other browsers. This is so pronounced for version six that a completely different
+									style sheet would be needed to create the same visual layout. I ve decided that this
+									would take up too much of my time and have instead used the <a
+										href="http://forabeautifulweb.com/blog/about/universal_internet_explorer_6_css/">universal
+										ie6 style sheet</a>, along with an upgrade message for anyone that is using IE6.
+								</p>
 
-<p>I   ve also included links to the <a href="http://www.w3.org/">World Wide Web Consortiums</a> XHTML and CSS <a href="http://validator.w3.org/">validation services</a> in the page footer. This will submit the current page to their online validation tools and display a report with suggestions for any problems that are found.</p>
+								<p>I m currently running on Windows Vista and it is pretty tricky to test for all
+									versions of internet explorer. There are two main methods that can be used to test,
+									either install a virtual machine running Windows XP with IE6 installed natively or
+									use the <a href="http://www.my-debugbar.com/wiki/IETester/HomePage">IETester</a>
+									program. I ve gone for the IETester program, mainly because it is quicker to install
+									and doesn t take up a huge chunk of my hard drive. I ve tried it out and it displays
+									the basically styled page I would expect to see in IE6 mode:</p>
 
-<p>Well that   s just about all I   ve got on compliance, however if you   re after a more    hard line    message then you can <a href="http://www.entertonement.com/clips/fhzjhvmbgv--You-have-20-seconds-to-complyRobocop-Jon-Davison-Ed-209-">check this out</a>!</p>
+								<p><a
+										href="http://lh5.ggpht.com/_5hQeqbPSrks/S3SKV6LNNrI/AAAAAAAAAEo/-kTCMp0wAF0/s1600-h/IETester2%5B3%5D.jpg"><img
+											style="border:0 none;" title="IETester2"
+											src="http://lh4.ggpht.com/_5hQeqbPSrks/S3SKWZVC3DI/AAAAAAAAAEs/JO8fB75k_mA/IETester2_thumb%5B1%5D.jpg?imgmax=800"
+											border="0" alt="IETester2" width="481" height="471" /></a></p>
 
-		
-		
-	</div>
+								<p><span style="color:#ff0000;"><span style="color:#000000;">The deficiencies of
+											Internet Explorer versions seven and eight are less pronounced and I only
+											needed to modify a couple of elements to give the same appearance to the web
+											page:</span></span></p>
 
-</article>
+								<ul>
+									<li>Added fixed widths to the main div elements so margins are applied</li>
+									<li>Extra div element wrapper on the so the margin is applied</li>
+									<li>Add fixed widths to the navigation menu elements to fix nifty corners in ie7
+									</li>
+								</ul>
 
-</div>
-<nav id="pagenavi">
-    
-        <a href="http://bakingwebsites.co.uk/blog/page/7/" class="prev">Prev</a>
-    
-    
-        <a href="http://bakingwebsites.co.uk/blog/page/9/" class="next">Next</a>
-    
-    <div class="center"><a href="http://bakingwebsites.co.uk/blog/archives">Blog Archives</a></div>
-</nav></div>
+
+
+
+								<h4>Validating the page</h4>
+
+
+								<p>It would be difficult to judge when the mark up and styling of a web page is actually
+									valid, fortunately there are many tools freely available on the web to help. During
+									development I generally use the <a
+										href="http://users.skynet.be/mgueury/mozilla/">HTML validator</a> Firefox
+									extension. This provides a little icon in the bottom right corner of the web browser
+									that indicates whether the current page is valid or not. Clicking the icon brings up
+									a list of validation errors for the page. I like this tool as it is quick to browse
+									through a site and check the validation on each page.</p>
+
+								<p>I ve also included links to the <a href="http://www.w3.org/">World Wide Web
+										Consortiums</a> XHTML and CSS <a href="http://validator.w3.org/">validation
+										services</a> in the page footer. This will submit the current page to their
+									online validation tools and display a report with suggestions for any problems that
+									are found.</p>
+
+								<p>Well that s just about all I ve got on compliance, however if you re after a more
+									hard line message then you can <a
+										href="http://www.entertonement.com/clips/fhzjhvmbgv--You-have-20-seconds-to-complyRobocop-Jon-Davison-Ed-209-">check
+										this out</a>!</p>
+
+
+
+							</div>
+
+						</article>
+
+					</div>
+					<nav id="pagenavi">
+
+						<a href="https://bakingwebsites.co.uk/blog/page/7/" class="prev">Prev</a>
+
+
+						<a href="https://bakingwebsites.co.uk/blog/page/9/" class="next">Next</a>
+
+						<div class="center"><a href="https://bakingwebsites.co.uk/blog/archives">Blog Archives</a></div>
+					</nav>
+				</div>
 			</div>
-			<footer id="footer" class="inner"><p>
-  Copyright &copy; 2016 - Hook Technologies Ltd -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-</footer>
-			
-
-<script type="text/javascript">
-      var disqus_shortname = 'bakingwebsites';
-      
-        
-        var disqus_script = 'count.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
+			<footer id="footer" class="inner">
+				<p>
+					Copyright &copy; 2016 - Hook Technologies Ltd -
+					<span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+				</p>
+			</footer>
 
 
+			<script type="text/javascript">
+				var disqus_shortname = 'bakingwebsites';
 
+
+				var disqus_script = 'count.js';
+
+				(function () {
+					var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+					dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+					(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+				}());
+			</script>
 
 
 
 
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
+
+
+
+			<script type="text/javascript">
+				(function () {
+					var twitterWidgets = document.createElement('script');
+					twitterWidgets.type = 'text/javascript';
+					twitterWidgets.async = true;
+					twitterWidgets.src = '//platform.twitter.com/widgets.js';
+					document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+				})();
+			</script>
 
 
 
@@ -529,4 +732,5 @@ The statement has been terminated.</em></blockquote>
 		</div>
 	</div>
 </body>
+
 </html>

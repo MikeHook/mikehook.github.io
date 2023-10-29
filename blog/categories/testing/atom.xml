@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Testing | baking websites]]></title>
-  <link href="http://bakingwebsites.co.uk/blog/categories/testing/atom.xml" rel="self"/>
-  <link href="http://bakingwebsites.co.uk/"/>
+  <link href="https://bakingwebsites.co.uk/blog/categories/testing/atom.xml" rel="self"/>
+  <link href="https://bakingwebsites.co.uk/"/>
   <updated>2016-06-20T15:07:59+01:00</updated>
-  <id>http://bakingwebsites.co.uk/</id>
+  <id>https://bakingwebsites.co.uk/</id>
   <author>
     <name><![CDATA[Hook Technologies Ltd]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Testing Code Coverage With NCover]]></title>
-    <link href="http://bakingwebsites.co.uk/2009/12/07/testing-code-coverage-with-ncover/"/>
+    <link href="https://bakingwebsites.co.uk/2009/12/07/testing-code-coverage-with-ncover/"/>
     <updated>2009-12-07T21:47:00+00:00</updated>
-    <id>http://bakingwebsites.co.uk/2009/12/07/testing-code-coverage-with-ncover</id>
+    <id>https://bakingwebsites.co.uk/2009/12/07/testing-code-coverage-with-ncover</id>
     <content type="html"><![CDATA[<p>I   ve been developing the recipe book website mostly using TDD (Test Driven Design) and I thought it would be interesting to measure the code coverage of my unit tests. After researching what tools were available it looked like <a href="http://www.ncover.com/">NCover</a> was the best fit for the sites technology stack. The commercial version has some good features, such as measures for cyclomatic complexity, however it is a bit out of my budget (of approximately   0!). Fortunately a <a href="http://www.ncover.com/download/community">community edition of NCover</a> is also available for free and it stills works just fine for analysing current .NET assemblies.</p>
 
 <p>After installing NCover a console application is available for running code coverage analysis. I got this up and running but the command line interface isn   t exactly the most user friendly and the output is just a single summary report. I obviously wasn   t alone in these conclusions because back in 2006 Grant Drake developed the <a href="http://www.kiwidude.com/blog/2006/01/ncoverexplorer-debut.html">NCoverExplorer tool</a> to provide a GUI front end to NCover. This tool also has a community edition available (version 1.4) that works with the community edition of NCover.</p>
@@ -64,9 +64,9 @@
   
   <entry>
     <title type="html"><![CDATA[Setting Up the NUnit GUI]]></title>
-    <link href="http://bakingwebsites.co.uk/2009/06/28/setting-up-the-nunit-gui/"/>
+    <link href="https://bakingwebsites.co.uk/2009/06/28/setting-up-the-nunit-gui/"/>
     <updated>2009-06-28T13:30:00+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2009/06/28/setting-up-the-nunit-gui</id>
+    <id>https://bakingwebsites.co.uk/2009/06/28/setting-up-the-nunit-gui</id>
     <content type="html"><![CDATA[<p>I&rsquo;ve setup the project using the default &rsquo;S#arp architecture Application' template. I won&rsquo;t go into detail about the steps taken to do this as it is all covered in the Sharp Architecture documentation. However I did hit a snag setting up the <a href="http://www.nunit.org/index.php">NUnit</a> project so I&rsquo;ll expand on that in this post.</p>
 
 <p>The Sharp Architecture template is setup for <a href="http://www.agiledata.org/essays/tdd.html">TDD</a> (Test Driven Design) and this is the approach I will be taking to the development. Having installed <a href="http://www.testdriven.net/">TestDriven.Net</a>, the tests can be run through visual studio, however I prefer the interface of the NUnit GUI. After each test run the results are displayed as a set of pleasing green ticks and/or nasty red crosses. Once you have a nice set of green ticks it becomes a bit of a fixation to keep it that way!</p>

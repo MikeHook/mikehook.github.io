@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://bakingwebsites.co.uk/sitemap.xml 
+Sitemap: https://bakingwebsites.co.uk/sitemap.xml 

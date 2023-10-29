@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Progress | baking websites]]></title>
-  <link href="http://bakingwebsites.co.uk/blog/categories/progress/atom.xml" rel="self"/>
-  <link href="http://bakingwebsites.co.uk/"/>
+  <link href="https://bakingwebsites.co.uk/blog/categories/progress/atom.xml" rel="self"/>
+  <link href="https://bakingwebsites.co.uk/"/>
   <updated>2016-06-20T15:07:59+01:00</updated>
-  <id>http://bakingwebsites.co.uk/</id>
+  <id>https://bakingwebsites.co.uk/</id>
   <author>
     <name><![CDATA[Hook Technologies Ltd]]></name>
     
@@ -15,12 +15,12 @@
   
   <entry>
     <title type="html"><![CDATA[Continuous Delivery to Azure With AppVeyor]]></title>
-    <link href="http://bakingwebsites.co.uk/2015/12/22/CI-with-appveyor/"/>
+    <link href="https://bakingwebsites.co.uk/2015/12/22/CI-with-appveyor/"/>
     <updated>2015-12-22T17:07:49+00:00</updated>
-    <id>http://bakingwebsites.co.uk/2015/12/22/CI-with-appveyor</id>
+    <id>https://bakingwebsites.co.uk/2015/12/22/CI-with-appveyor</id>
     <content type="html"><![CDATA[<p><a href="http://www.appveyor.com/"><img src="https://googledrive.com/host/0Bx-8nw9dhAQcN1lWbU1SLW91bEk/AppVeyorLogo.png" class="alignleft" title="AppVeyor" /></a></p>
 
-<p>I&rsquo;ve been using <a href="http://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/">Kudu to automate my website deployments</a> from Github to Azure for quite a while and its worked out great. But there are some limitations with it, primarily a lack of control over whether changes are deployed, its very much an all or nothing tool.</p>
+<p>I&rsquo;ve been using <a href="https://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/">Kudu to automate my website deployments</a> from Github to Azure for quite a while and its worked out great. But there are some limitations with it, primarily a lack of control over whether changes are deployed, its very much an all or nothing tool.</p>
 
 <p>The complexity of the web application I&rsquo;m maintaining reached a level where I wanted to ensure that the code builds and passes some automated tests before it is deployed. I couldn&rsquo;t see any way to incorporate those steps into a deployment pipeline with Kudu so decided to try AppVeyor. I&rsquo;d heard about it on <a href="http://www.hanselman.com/blog/AppVeyorAGoodContinuousIntegrationSystemIsAJoyToBehold.aspx">Scott Hanselmans blog</a> and as it is free for open source projects I&rsquo;d been itching to give it a go!</p>
 
@@ -70,9 +70,9 @@
   
   <entry>
     <title type="html"><![CDATA[Tin Can API Overview]]></title>
-    <link href="http://bakingwebsites.co.uk/2014/08/13/tin-can-api-overview/"/>
+    <link href="https://bakingwebsites.co.uk/2014/08/13/tin-can-api-overview/"/>
     <updated>2014-08-13T10:10:43+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2014/08/13/tin-can-api-overview</id>
+    <id>https://bakingwebsites.co.uk/2014/08/13/tin-can-api-overview</id>
     <content type="html"><![CDATA[<p><img src="http://imageshack.com/a/img539/1961/OgE8tH.jpg" class="alignleft" alttext="Tin Can API Logo" /></p>
 
 <p>These are some notes from my reading on the Tin Can API, a specification for the transmission and storage of messages related to learning activities. The specification has been developed by parties in the e-learning industry and aims to be an elegant solution to enable learning systems to communicate with one another.</p>
@@ -154,9 +154,9 @@
   
   <entry>
     <title type="html"><![CDATA[Automated Azure Deployments]]></title>
-    <link href="http://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/"/>
+    <link href="https://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/"/>
     <updated>2014-07-02T10:29:24+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments</id>
+    <id>https://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments</id>
     <content type="html"><![CDATA[<p><img src="http://imagizer.imageshack.us/v2/320x240q90/850/r38o.jpg" class="alignleft" alttext="Wall-e the robot" /></p>
 
 <p>Azure web site hosting has a great built in feature for deployment automation. All you need to do is point Azure at the location of your website in your source control platform and it will automatically monitor for updates, pull them into Azure and deploy them, Boom! Well that is the theory anyway, turns out in my case I needed to do some tweaking to get the automation to work.</p>
@@ -190,9 +190,9 @@ project = website
   
   <entry>
     <title type="html"><![CDATA[Dear Wordpress, You're Dumped!]]></title>
-    <link href="http://bakingwebsites.co.uk/2014/01/15/dear-wordpress-youre-dumped/"/>
+    <link href="https://bakingwebsites.co.uk/2014/01/15/dear-wordpress-youre-dumped/"/>
     <updated>2014-01-15T16:38:27+00:00</updated>
-    <id>http://bakingwebsites.co.uk/2014/01/15/dear-wordpress-youre-dumped</id>
+    <id>https://bakingwebsites.co.uk/2014/01/15/dear-wordpress-youre-dumped</id>
     <content type="html"><![CDATA[<p><img src="http://imageshack.com/a/img827/7426/w5v5.png " class="alignleft" alttext="Octopress Logo"  />
 There comes a time in a developers life (every couple of years it seems) when you are dissatisfied with your existing blogging platform. What had started as a beautiful and fulfilled relationship has decayed to the point where you barely interact. What once seemed like a cutting edge editing interface has become stayed and obtuse. Your eyes begin to wander, other blogging platforms seem so slick and modern in comparison, you wonder  &ldquo;why can&rsquo;t I have some of that?&rdquo;</p>
 
@@ -238,9 +238,9 @@ Then, provided your post links are maintained, when the blog is switched across 
   
   <entry>
     <title type="html"><![CDATA[Microsoft Jump on the Open Source Band Wagon]]></title>
-    <link href="http://bakingwebsites.co.uk/2012/04/03/microsoft-jump-on-the-open-source-band-wagon/"/>
+    <link href="https://bakingwebsites.co.uk/2012/04/03/microsoft-jump-on-the-open-source-band-wagon/"/>
     <updated>2012-04-03T12:35:04+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2012/04/03/microsoft-jump-on-the-open-source-band-wagon</id>
+    <id>https://bakingwebsites.co.uk/2012/04/03/microsoft-jump-on-the-open-source-band-wagon</id>
     <content type="html"><![CDATA[<p><img class="alignright" title="Tux, the Linux Mascot" src="http://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Tux.png/220px-Tux.png" alt="" width="220" height="261" />
 A landmark decision was made last week by Microsoft&rsquo;s ASP.NET web development team. They announced that three key technologies used to develop web applications, <a href="http://weblogs.asp.net/scottgu/archive/2012/03/27/asp-net-mvc-web-api-razor-and-open-source.aspx">ASP.NET MVC, Web API and Razor would be made fully Open Source</a><sup>1</sup>. This is a big step for a company built on the sales of Closed Source software. I&rsquo;m going to have a look at what I think this decision means for the consumers, who use software built with these technologies, and the stakeholders who commission the software.</p>
 

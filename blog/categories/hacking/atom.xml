@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Hacking | baking websites]]></title>
-  <link href="http://bakingwebsites.co.uk/blog/categories/hacking/atom.xml" rel="self"/>
-  <link href="http://bakingwebsites.co.uk/"/>
+  <link href="https://bakingwebsites.co.uk/blog/categories/hacking/atom.xml" rel="self"/>
+  <link href="https://bakingwebsites.co.uk/"/>
   <updated>2016-06-20T15:07:59+01:00</updated>
-  <id>http://bakingwebsites.co.uk/</id>
+  <id>https://bakingwebsites.co.uk/</id>
   <author>
     <name><![CDATA[Hook Technologies Ltd]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Mysql to Azure Database Migration]]></title>
-    <link href="http://bakingwebsites.co.uk/2014/06/19/mysql-to-azure-database-migration/"/>
+    <link href="https://bakingwebsites.co.uk/2014/06/19/mysql-to-azure-database-migration/"/>
     <updated>2014-06-19T16:57:57+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2014/06/19/mysql-to-azure-database-migration</id>
+    <id>https://bakingwebsites.co.uk/2014/06/19/mysql-to-azure-database-migration</id>
     <content type="html"><![CDATA[<p><img src="http://imagizer.imageshack.us/v2/320x240q90/843/31nm.jpg" class="alignleft" alttext="Square peg - Round hole"  /></p>
 
 <p>If you have read my previous post on <a href="/2014/04/28/migrating-umbraco-4-mysql-to-azure-hosting/">Umbraco to Azure migration</a> the topic of this post will be of no surprise.</p>
@@ -79,9 +79,9 @@ EXECUTE sp_rename N'Tempcmstasktype', N'cmstasktype', 'OBJECT'
   
   <entry>
     <title type="html"><![CDATA[Cloud Hosting for a Prototype Project]]></title>
-    <link href="http://bakingwebsites.co.uk/2014/05/23/cloud-hosting-for-prototype/"/>
+    <link href="https://bakingwebsites.co.uk/2014/05/23/cloud-hosting-for-prototype/"/>
     <updated>2014-05-23T16:04:20+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2014/05/23/cloud-hosting-for-prototype</id>
+    <id>https://bakingwebsites.co.uk/2014/05/23/cloud-hosting-for-prototype</id>
     <content type="html"><![CDATA[<p><img src="http://imagizer.imageshack.us/v2/320x240q90/838/0fsb.jpg" class="alignleft" alttext="Square peg - Round hole"  /></p>
 
 <br/><br/>
@@ -179,9 +179,9 @@ EXECUTE sp_rename N'Tempcmstasktype', N'cmstasktype', 'OBJECT'
   
   <entry>
     <title type="html"><![CDATA[Migrating Umbraco 4 Mysql to Azure Hosting]]></title>
-    <link href="http://bakingwebsites.co.uk/2014/04/28/migrating-umbraco-4-mysql-to-azure-hosting/"/>
+    <link href="https://bakingwebsites.co.uk/2014/04/28/migrating-umbraco-4-mysql-to-azure-hosting/"/>
     <updated>2014-04-28T09:58:09+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2014/04/28/migrating-umbraco-4-mysql-to-azure-hosting</id>
+    <id>https://bakingwebsites.co.uk/2014/04/28/migrating-umbraco-4-mysql-to-azure-hosting</id>
     <content type="html"><![CDATA[<h2>Why Azure</h2>
 
 <p>I recently inherited an Umbraco version 4 site and need to setup web hosting for it. I decided that Azure would be a good option for hosting as it offers great benefits for future scalability and a good costing model. I also wanted to try it out and see what all the fuss is about!</p>
@@ -236,10 +236,10 @@ EXECUTE sp_rename N'Tempcmstasktype', N'cmstasktype', 'OBJECT'
   
   <entry>
     <title type="html"><![CDATA[Integrating EPiServer 7 With MVC - Next Steps]]></title>
-    <link href="http://bakingwebsites.co.uk/2013/04/09/integrating-episerver-7-with-mvc-next-steps/"/>
+    <link href="https://bakingwebsites.co.uk/2013/04/09/integrating-episerver-7-with-mvc-next-steps/"/>
     <updated>2013-04-09T17:40:42+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2013/04/09/integrating-episerver-7-with-mvc-next-steps</id>
-    <content type="html"><![CDATA[<p>My previous blog post, <a title="Integrating EPiServer 7 with an existing MVC  site" href="http://bakingwebsites.co.uk/2013/03/14/integrating-episerver-7-with-an-existing-mvc-site/">Integrating EPiServer 7 with an existing MVC site</a>, outlined the initial steps to get EPiServer 7 running. However there are a number of additional steps you may need to take before your site is fully integrated.</p>
+    <id>https://bakingwebsites.co.uk/2013/04/09/integrating-episerver-7-with-mvc-next-steps</id>
+    <content type="html"><![CDATA[<p>My previous blog post, <a title="Integrating EPiServer 7 with an existing MVC  site" href="https://bakingwebsites.co.uk/2013/03/14/integrating-episerver-7-with-an-existing-mvc-site/">Integrating EPiServer 7 with an existing MVC site</a>, outlined the initial steps to get EPiServer 7 running. However there are a number of additional steps you may need to take before your site is fully integrated.</p>
 
 <h3>Convert any Controllers not in Areas</h3>
 
@@ -299,9 +299,9 @@ EXECUTE sp_rename N'Tempcmstasktype', N'cmstasktype', 'OBJECT'
   
   <entry>
     <title type="html"><![CDATA[Integrating EPiServer 7 With an Existing MVC Site]]></title>
-    <link href="http://bakingwebsites.co.uk/2013/03/14/integrating-episerver-7-with-an-existing-mvc-site/"/>
+    <link href="https://bakingwebsites.co.uk/2013/03/14/integrating-episerver-7-with-an-existing-mvc-site/"/>
     <updated>2013-03-14T15:54:57+00:00</updated>
-    <id>http://bakingwebsites.co.uk/2013/03/14/integrating-episerver-7-with-an-existing-mvc-site</id>
+    <id>https://bakingwebsites.co.uk/2013/03/14/integrating-episerver-7-with-an-existing-mvc-site</id>
     <content type="html"><![CDATA[<p><img class="alignright size-full wp-image-408" alt="custom_integration" src="http://imageshack.com/a/img560/4853/3rqu.jpg" width="300" />This post assumes you have EPiServer 7 installed on your machine. If you don&rsquo;t have it then it is available from <a href="http://world.episerver.com/Download/Categories/Products/EPiServer-CMS/">EPiServer world</a>  (once you have created an account).</p>
 
 <p>There are 2 main options for creating a new EPiServer 7 MVC stylee site:</p>

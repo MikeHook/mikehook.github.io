@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Tips and Tricks | baking websites]]></title>
-  <link href="http://bakingwebsites.co.uk/blog/categories/tips-and-tricks/atom.xml" rel="self"/>
-  <link href="http://bakingwebsites.co.uk/"/>
+  <link href="https://bakingwebsites.co.uk/blog/categories/tips-and-tricks/atom.xml" rel="self"/>
+  <link href="https://bakingwebsites.co.uk/"/>
   <updated>2016-06-20T15:07:59+01:00</updated>
-  <id>http://bakingwebsites.co.uk/</id>
+  <id>https://bakingwebsites.co.uk/</id>
   <author>
     <name><![CDATA[Hook Technologies Ltd]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Installing Node Modules in a TeamCity Build]]></title>
-    <link href="http://bakingwebsites.co.uk/2016/06/20/Installing-node-from-TeamCity/"/>
+    <link href="https://bakingwebsites.co.uk/2016/06/20/Installing-node-from-TeamCity/"/>
     <updated>2016-06-20T00:00:00+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2016/06/20/Installing-node-from-TeamCity</id>
+    <id>https://bakingwebsites.co.uk/2016/06/20/Installing-node-from-TeamCity</id>
     <content type="html"><![CDATA[<p><a href="https://nodejs.org"><img src="https://googledrive.com/host/0Bx-8nw9dhAQcN1lWbU1SLW91bEk/nodejs-logo.jpg" class="alignleft" title="node js" /></a></p>
 
 <p>Keeping up with the inexorable rise of front end frameworks is a big challenge in modern web development is. My pathway is probably fairly common, starting out with <a href="https://jquery.com/">jQuery</a> and the humble selector, progressing onto <a href="http://knockoutjs.com/">Knockout</a> and embracing the joy of binding then finally onto the full on framework smorgasbord of <a href="https://angularjs.org/">Angular JS</a>. Now there is a new project on the horizon and Angular 2 has reached a good level of maturity, so &ldquo;Once more unto the breach, dear friends&rdquo; it is time to embrace the new all over again!</p>
@@ -46,9 +46,9 @@
   
   <entry>
     <title type="html"><![CDATA[Rebase Your Way to Git Enlightenment]]></title>
-    <link href="http://bakingwebsites.co.uk/2015/08/16/rebase-git-enlightenment/"/>
+    <link href="https://bakingwebsites.co.uk/2015/08/16/rebase-git-enlightenment/"/>
     <updated>2015-08-16T18:07:49+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2015/08/16/rebase-git-enlightenment</id>
+    <id>https://bakingwebsites.co.uk/2015/08/16/rebase-git-enlightenment</id>
     <content type="html"><![CDATA[<p><img src="http://i49.photobucket.com/albums/f299/hookmike/Pat-Morita_Karate_Kid_200_zpscufzef0b.jpg" class="alignleft" title="Pat Morita" /></p>
 
 <p>The path to Git enlightenment can be a long one for a developer used to centralized source control such as SVN.</p>
@@ -75,9 +75,9 @@
   
   <entry>
     <title type="html"><![CDATA[Become a Git Contortionist With Stash]]></title>
-    <link href="http://bakingwebsites.co.uk/2013/01/18/become-a-git-contortionist-with-stash/"/>
+    <link href="https://bakingwebsites.co.uk/2013/01/18/become-a-git-contortionist-with-stash/"/>
     <updated>2013-01-18T19:16:05+00:00</updated>
-    <id>http://bakingwebsites.co.uk/2013/01/18/become-a-git-contortionist-with-stash</id>
+    <id>https://bakingwebsites.co.uk/2013/01/18/become-a-git-contortionist-with-stash</id>
     <content type="html"><![CDATA[<p><img class="size-medium wp-image-364 alignright" alt="Annie the Contortionist" src="http://imageshack.com/a/img856/5731/jyt7.jpg" width="300" />One of the great aspects of the Git source control system is its flexibility. Almost any sticky situation you may encounter  as a developer working with source control can be   solved with Git.</p>
 
 <p>Take this scenario, you&rsquo;re halfway through writing a class for a new feature when you get a call.. the client has found a show stopping bug in the application and it needs to be fixed right away. To be able to fix the bug you will need to switch onto the live code branch but you can&rsquo;t go switching branches with a load of uncommitted changes.  Now you don&rsquo;t want to commit your code as its half done and won&rsquo;t even compile right now, but you don&rsquo;t want to lose the changes either&hellip; <a href="http://git-scm.com/book/en/Git-Tools-Stashing"><em>git stash</em></a> to the rescue!</p>
@@ -90,9 +90,9 @@
   
   <entry>
     <title type="html"><![CDATA[The Beauty of Cherry Pick]]></title>
-    <link href="http://bakingwebsites.co.uk/2011/10/06/the-beauty-of-cherry-pick/"/>
+    <link href="https://bakingwebsites.co.uk/2011/10/06/the-beauty-of-cherry-pick/"/>
     <updated>2011-10-06T18:00:59+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2011/10/06/the-beauty-of-cherry-pick</id>
+    <id>https://bakingwebsites.co.uk/2011/10/06/the-beauty-of-cherry-pick</id>
     <content type="html"><![CDATA[<p>I&rsquo;m loving the <a href="http://gitready.com/intermediate/2009/03/04/pick-out-individual-commits.html">cherry pick command</a> in git right now, this is the scenario that it really helps me out for.</p>
 
 <p>I&rsquo;ve fixed a bug on the live branch, however before it can be published to the live website it needs to be tested. So I can first publish it to our UAT (user acceptance testing) site so the client can test the changes. However the UAT site already has a bunch of other unreleased features on it. If I merge my bug fix branch into the UAT branch it will overwrite some of the other feature changes.</p>
@@ -103,9 +103,9 @@
   
   <entry>
     <title type="html"><![CDATA[Android Dev Tip - Fix the Eclipse Auto-complete]]></title>
-    <link href="http://bakingwebsites.co.uk/2011/03/10/android-dev-tip-fix-the-eclipse-auto-complete/"/>
+    <link href="https://bakingwebsites.co.uk/2011/03/10/android-dev-tip-fix-the-eclipse-auto-complete/"/>
     <updated>2011-03-10T16:39:43+00:00</updated>
-    <id>http://bakingwebsites.co.uk/2011/03/10/android-dev-tip-fix-the-eclipse-auto-complete</id>
+    <id>https://bakingwebsites.co.uk/2011/03/10/android-dev-tip-fix-the-eclipse-auto-complete</id>
     <content type="html"><![CDATA[<p>I recently had problems with the eclipse IDE auto-complete not working.</p>
 
 <p>After Googling the problem, I managed to resolve this by downloading the source for the version I was using and extracting into the Android SDK folder, as detailed in <a href="http://code.google.com/p/android/issues/detail?id=7850#c8">this google code issue</a>.</p>

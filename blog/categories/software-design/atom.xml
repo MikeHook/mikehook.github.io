@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Software Design | baking websites]]></title>
-  <link href="http://bakingwebsites.co.uk/blog/categories/software-design/atom.xml" rel="self"/>
-  <link href="http://bakingwebsites.co.uk/"/>
+  <link href="https://bakingwebsites.co.uk/blog/categories/software-design/atom.xml" rel="self"/>
+  <link href="https://bakingwebsites.co.uk/"/>
   <updated>2016-06-20T15:07:59+01:00</updated>
-  <id>http://bakingwebsites.co.uk/</id>
+  <id>https://bakingwebsites.co.uk/</id>
   <author>
     <name><![CDATA[Hook Technologies Ltd]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Inspiring Software Design]]></title>
-    <link href="http://bakingwebsites.co.uk/2015/09/06/inspiration/"/>
+    <link href="https://bakingwebsites.co.uk/2015/09/06/inspiration/"/>
     <updated>2015-09-06T18:07:49+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2015/09/06/inspiration</id>
+    <id>https://bakingwebsites.co.uk/2015/09/06/inspiration</id>
     <content type="html"><![CDATA[<p><a href="http://www.603copywriting.co.uk/blog-post-ideas/"><img src="https://googledrive.com/host/0Bx-8nw9dhAQcN1lWbU1SLW91bEk/idea.jpg" class="alignleft" title="Ideas lightbulb" /></a></p>
 
 <p>The software design process can sometimes be difficult to quantify. From an external perspective of a development team, requirements go in and working software comes out. But what exactly happens in the middle to turn the stakeholders hopes and dreams into reliable, executable code?</p>
@@ -61,12 +61,12 @@
   
   <entry>
     <title type="html"><![CDATA[Making Awesome Software With Lean Principles - Part II]]></title>
-    <link href="http://bakingwebsites.co.uk/2015/07/26/lean-awesome-part-II/"/>
+    <link href="https://bakingwebsites.co.uk/2015/07/26/lean-awesome-part-II/"/>
     <updated>2015-07-26T18:07:49+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2015/07/26/lean-awesome-part-II</id>
+    <id>https://bakingwebsites.co.uk/2015/07/26/lean-awesome-part-II</id>
     <content type="html"><![CDATA[<p><img src="http://i49.photobucket.com/albums/f299/hookmike/74078639-2d6b-4179-883d-4be7d28c19c7_zpsbpo9illj.jpg" class="alignleft" title="Awesome image by Roberlan https://www.flickr.com/photos/roberlan" /></p>
 
-<p>In the <a href="http://bakingwebsites.co.uk/2015/07/19/lean-awesome-part-I/">first part of Making awesome software with Lean principles</a> I started looking at how <a href="https://en.wikipedia.org/wiki/Lean_software_development">Lean principles</a> have helped me while working on the <a href="http://midsussextriclub.com/">Mid Sussex Tri Club website</a>.</p>
+<p>In the <a href="https://bakingwebsites.co.uk/2015/07/19/lean-awesome-part-I/">first part of Making awesome software with Lean principles</a> I started looking at how <a href="https://en.wikipedia.org/wiki/Lean_software_development">Lean principles</a> have helped me while working on the <a href="http://midsussextriclub.com/">Mid Sussex Tri Club website</a>.</p>
 
 <p>The first three principles <strong>Eliminating waste</strong>, <strong>Amplifying learning</strong> and <strong>Deciding as late as possible</strong> are all fundamental to help guide software development. However they only form part of the picture, there are still four more principles remaining that help guide our decisions so let&rsquo;s take a look at them now.</p>
 
@@ -74,7 +74,7 @@
 
 <p><blockquote><p>In the era of rapid technology evolution, it is not the biggest that survives, but the fastest. The sooner the end product is delivered without major defects, the sooner feedback can be received, and incorporated into the next iteration.</p><footer><strong>Wikipedia <a href="https://en.wikipedia.org/wiki/Lean_software_development">https://en.wikipedia.org/wiki/Lean_software_development</a> Lean software development</strong></footer></blockquote></p>
 
-<p>I&rsquo;ve seen the benefits of an iterative approach over and again throughout my professional life so I regard this as an essential principle to apply to all software projects. I put in place a pretty slick release process as one of the first changes I made and have been reaping the benefits ever since. Basically any check-ins on the master branch of the source code repository are immediately deployed to the website. I&rsquo;ve already blogged about how I set-up this <a href="http://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/">&lsquo;zero-click&rsquo; deploy process</a> and it has worked largely without problems since set-up.</p>
+<p>I&rsquo;ve seen the benefits of an iterative approach over and again throughout my professional life so I regard this as an essential principle to apply to all software projects. I put in place a pretty slick release process as one of the first changes I made and have been reaping the benefits ever since. Basically any check-ins on the master branch of the source code repository are immediately deployed to the website. I&rsquo;ve already blogged about how I set-up this <a href="https://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/">&lsquo;zero-click&rsquo; deploy process</a> and it has worked largely without problems since set-up.</p>
 
 <p>However, this technique must be used with caution and certainly in tandem with the &lsquo;<strong>Build quality in</strong>&rsquo; principle. It is essential to ensure that a suitable branching process is in place too and changes can only be deployed once they have been tested. If you are working in a larger team I&rsquo;d recommend limiting write access to the master branch to a single person who can coordinate the deployments. While automation is great for productivity people still need to understand how it all works and retain control of the systems.</p>
 
@@ -110,9 +110,9 @@
   
   <entry>
     <title type="html"><![CDATA[Making Awesome Software With Lean Principles - Part 1]]></title>
-    <link href="http://bakingwebsites.co.uk/2015/07/19/lean-awesome-part-I/"/>
+    <link href="https://bakingwebsites.co.uk/2015/07/19/lean-awesome-part-I/"/>
     <updated>2015-07-19T18:12:49+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2015/07/19/lean-awesome-part-I</id>
+    <id>https://bakingwebsites.co.uk/2015/07/19/lean-awesome-part-I</id>
     <content type="html"><![CDATA[<p><a href="http://midsussextriclub.com"><img src="http://i49.photobucket.com/albums/f299/hookmike/MSTC%20_logo_yellow_280_zps4tnfm4qj.jpg" class="alignleft" alttext="MSTC Logo" /></a></p>
 
 <p>I&rsquo;ve been a keen amateur triathlete and member the <a href="http://midsussextriclub.com">Mid Sussex Tri Club</a> for a couple of years. Its a relatively small club but there is a surprising amount of administration involved in running it and after chatting to some of the clubs committee members it was clear that the admin overheads were becoming a burden. I could see the potential for software to help lessen the burden so I offered to take on the club&rsquo;s website and add some features to it.</p>
@@ -158,9 +158,9 @@
   
   <entry>
     <title type="html"><![CDATA[Event Storming a Distributed Solution]]></title>
-    <link href="http://bakingwebsites.co.uk/2014/01/29/event-storming/"/>
+    <link href="https://bakingwebsites.co.uk/2014/01/29/event-storming/"/>
     <updated>2014-01-29T17:38:27+00:00</updated>
-    <id>http://bakingwebsites.co.uk/2014/01/29/event-storming</id>
+    <id>https://bakingwebsites.co.uk/2014/01/29/event-storming</id>
     <content type="html"><![CDATA[<p>Software design and development techniques are constantly evolving, making the discipline a fascinating area to work in. Over the time I&rsquo;ve been working as a developer I&rsquo;ve seen various approaches to design from Code First, Data Driven to Domain Driven (DDD). My preference is to consider the scope of the problem first and design a solution to match and DDD is a good fit for this. However when looking at enterprise level problems we need to give more consideration to how a problem will scale&hellip; enter Event Storming.</p>
 
 <h2>Distributed design</h2>
@@ -210,9 +210,9 @@
   
   <entry>
     <title type="html"><![CDATA[Design Patterns Without Katas]]></title>
-    <link href="http://bakingwebsites.co.uk/2013/06/13/design-patterns-without-katas/"/>
+    <link href="https://bakingwebsites.co.uk/2013/06/13/design-patterns-without-katas/"/>
     <updated>2013-06-13T09:05:05+01:00</updated>
-    <id>http://bakingwebsites.co.uk/2013/06/13/design-patterns-without-katas</id>
+    <id>https://bakingwebsites.co.uk/2013/06/13/design-patterns-without-katas</id>
     <content type="html"><![CDATA[<p>There are a number of design patterns which I have chosen not to implement a coding kata for. This is because I felt that I would either not use the pattern regularly in practice or they have alternative solutions that make the pattern redundant. However I think it is worth calling out these patterns and summarising how they work.</p>
 
 <h2>The decorator pattern</h2>

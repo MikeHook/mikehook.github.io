@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML>
 
 <html>
@@ -8,38 +7,42 @@
 	<title>Tin Can API overview - baking websites</title>
 	<meta name="author" content="Hook Technologies Ltd">
 
-	
-	<meta name="description" content="Tin Can API Overview These are some notes from my reading on the Tin Can API, a specification for the transmission and storage of messages related &hellip;">
-	
 
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description"
+		content="Tin Can API Overview These are some notes from my reading on the Tin Can API, a specification for the transmission and storage of messages related &hellip;">
+
+
+	<!-- http://t.co/dKP3o1e -->
+	<meta name="HandheldFriendly" content="True">
+	<meta name="MobileOptimized" content="320">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link href="/atom.xml" rel="alternate" title="baking websites" type="application/atom+xml">
-	
-	<link rel="canonical" href="http://bakingwebsites.co.uk/2014/08/13/tin-can-api-overview/">
-	<link href="http://bakingwebsites.co.uk/favicon.png" rel="shortcut icon">
-	<link href="http://bakingwebsites.co.uk/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-	<link href="http://bakingwebsites.co.uk/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+
+	<link rel="canonical" href="https://bakingwebsites.co.uk/2014/08/13/tin-can-api-overview/">
+	<link href="https://bakingwebsites.co.uk/favicon.png" rel="shortcut icon">
+	<link href="https://bakingwebsites.co.uk/stylesheets/screen.css" media="screen, projection" rel="stylesheet"
+		type="text/css">
+	<link href="https://bakingwebsites.co.uk/stylesheets/font-awesome.min.css" media="screen, projection"
+		rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<!--
+	<!--
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css"> 
 -->
-<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700" rel="stylesheet" type="text/css">
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700" rel="stylesheet"
+		type="text/css">
 
-  
+
 	<script type="text/javascript">
 		var _gaq = _gaq || [];
 		_gaq.push(['_setAccount', 'UA-47738964-1']);
 		_gaq.push(['_trackPageview']);
 
-		(function() {
+		(function () {
 			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
 			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
@@ -54,96 +57,115 @@
 	<div class="container">
 		<div class="left-col">
 			<div class="intrude-less">
-			<header id="header" class="inner"><div class="profilepic">
-	<img src="/images/bread-Sq-zoom-150.jpg" alt="Profile Picture" style="width: 160px;" />
-</div>
-<hgroup>
-  <h1><a href="http://bakingwebsites.co.uk/">baking websites</a></h1>
-  
-    <h2>adventures in software development</h2>
-  
-</hgroup>
+				<header id="header" class="inner">
+					<div class="profilepic">
+						<img src="/images/bread-Sq-zoom-150.jpg" alt="Profile Picture" style="width: 160px;" />
+					</div>
+					<hgroup>
+						<h1><a href="https://bakingwebsites.co.uk/">baking websites</a></h1>
 
-<nav id="main-nav"><h3>categories</h3>
-<ul class="main-navigation">
-<li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
-<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 6 ]</li>
-<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 15 ]</li>
-<li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
-<li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 10 ]</li>
+						<h2>adventures in software development</h2>
 
-</ul>
-<br/>
-<a href="http://bakingwebsites.co.uk/blog/archives">Archives</a>
+					</hgroup>
+
+					<nav id="main-nav">
+						<h3>categories</h3>
+						<ul class="main-navigation">
+							<li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
+							<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 6 ]</li>
+							<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 15 ]
+							</li>
+							<li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
+							<li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 10 ]
+							</li>
+
+						</ul>
+						<br />
+						<a href="https://bakingwebsites.co.uk/blog/archives">Archives</a>
 
 
-</nav>
-<nav id="sub-nav">
-	<div class="social">
-		
-		
-		
-		
-			<a class="twitter" href="http://twitter.com/michael_hook" title="Twitter">Twitter</a>
-		
-		
-			<a class="github" href="https://github.com/MikeHook" title="GitHub">GitHub</a>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-			<a class="rss" href="/atom.xml" title="RSS">RSS</a>
-		
-	</div>
-</nav>
-</header>				
+					</nav>
+					<nav id="sub-nav">
+						<div class="social">
+
+
+
+
+							<a class="twitter" href="http://twitter.com/michael_hook" title="Twitter">Twitter</a>
+
+
+							<a class="github" href="https://github.com/MikeHook" title="GitHub">GitHub</a>
+
+
+
+
+
+
+
+
+
+							<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+
+						</div>
+					</nav>
+				</header>
 			</div>
-		</div>	
+		</div>
 		<div class="mid-col">
-			
-				
-			
+
+
+
 			<div class="mid-col-container">
-				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-	<h1 class="title" itemprop="name">Tin Can API Overview</h1>
-	<div class="entry-content" itemprop="articleBody"><p><img src="http://imageshack.com/a/img539/1961/OgE8tH.jpg" class="alignleft" alttext="Tin Can API Logo" /></p>
+				<div id="content" class="inner">
+					<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+						<h1 class="title" itemprop="name">Tin Can API Overview</h1>
+						<div class="entry-content" itemprop="articleBody">
+							<p><img src="http://imageshack.com/a/img539/1961/OgE8tH.jpg" class="alignleft"
+									alttext="Tin Can API Logo" /></p>
 
-<p>These are some notes from my reading on the Tin Can API, a specification for the transmission and storage of messages related to learning activities. The specification has been developed by parties in the e-learning industry and aims to be an elegant solution to enable learning systems to communicate with one another.</p>
+							<p>These are some notes from my reading on the Tin Can API, a specification for the
+								transmission and storage of messages related to learning activities. The specification
+								has been developed by parties in the e-learning industry and aims to be an elegant
+								solution to enable learning systems to communicate with one another.</p>
 
-<p>All this information is available on the <a href="http://tincanapi.com/">Tin Can API website</a>, this is just my own <a href="http://en.wikipedia.org/wiki/Wikipedia:Too_long;_didn't_read">tl;dr</a> type summary.</p>
+							<p>All this information is available on the <a href="http://tincanapi.com/">Tin Can API
+									website</a>, this is just my own <a
+									href="http://en.wikipedia.org/wiki/Wikipedia:Too_long;_didn't_read">tl;dr</a> type
+								summary.</p>
 
-<h3>What is it?</h3>
+							<h3>What is it?</h3>
 
-<ul>
-<li>A RESTful web service specification</li>
-<li>Defines the structure for JSON messages which represent learning activities (Or other types of activity)</li>
-<li>Each message is called a <strong>Statement</strong></li>
-<li>A statement consists of 3 parts: <strong>Actor</strong>, <strong>Verb</strong> and <strong>Object</strong> like &ldquo;Mike read the Tin Can Explained article&rdquo;</li>
-<li>Based on the <a href="http://activitystrea.ms/">activity streams</a> specification developed by/for social networks</li>
-</ul>
-
-
-<h3>Why is it good?</h3>
-
-<ul>
-<li>More flexible version of the old SCORM standard</li>
-<li>Device agnostic &ndash; anything that can send HTTP requests can use the API</li>
-<li>Almost any type of content can be stored</li>
-<li>Decouples content from the LMS (Learning management system) by storing in a separate LRS (Learning Record Store)</li>
-<li>A single <em>statement</em> can be stored in multiple learning record stores</li>
-<li>Allows potential for a learner owning their own content instead of their employers</li>
-<li>Data is accessible and easy to report on</li>
-</ul>
+							<ul>
+								<li>A RESTful web service specification</li>
+								<li>Defines the structure for JSON messages which represent learning activities (Or
+									other types of activity)</li>
+								<li>Each message is called a <strong>Statement</strong></li>
+								<li>A statement consists of 3 parts: <strong>Actor</strong>, <strong>Verb</strong> and
+									<strong>Object</strong> like &ldquo;Mike read the Tin Can Explained article&rdquo;
+								</li>
+								<li>Based on the <a href="http://activitystrea.ms/">activity streams</a> specification
+									developed by/for social networks</li>
+							</ul>
 
 
-<h3>A statement example</h3>
+							<h3>Why is it good?</h3>
 
-<pre><code>{
+							<ul>
+								<li>More flexible version of the old SCORM standard</li>
+								<li>Device agnostic &ndash; anything that can send HTTP requests can use the API</li>
+								<li>Almost any type of content can be stored</li>
+								<li>Decouples content from the LMS (Learning management system) by storing in a separate
+									LRS (Learning Record Store)</li>
+								<li>A single <em>statement</em> can be stored in multiple learning record stores</li>
+								<li>Allows potential for a learner owning their own content instead of their employers
+								</li>
+								<li>Data is accessible and easy to report on</li>
+							</ul>
+
+
+							<h3>A statement example</h3>
+
+							<pre><code>{
     "actor": {
         "name": "Sally Glider",
             "mbox": "mailto:sally@example.com"
@@ -161,95 +183,111 @@
 }
 </code></pre>
 
-<p>You can generate test statements with valid syntax using the <a href="http://tincanapi.com/statement-generator/">Statement Generator</a></p>
+							<p>You can generate test statements with valid syntax using the <a
+									href="http://tincanapi.com/statement-generator/">Statement Generator</a></p>
 
-<p>Details of the valid message formats are given on the <a href="https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md">full xAPI specification</a>.</p>
+							<p>Details of the valid message formats are given on the <a
+									href="https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md">full xAPI
+									specification</a>.</p>
 
-<h2>The registry</h2>
+							<h2>The registry</h2>
 
-<ul>
-<li>Contains definitions for verbs, activities, activity types, attachment types and extensions</li>
-<li>Should be referenced to in messages by URIs</li>
-<li>A shared domain language for agreed definitions of terms</li>
-<li>Anyone can add their own definitions to <a href="https://registry.tincanapi.com/">the registry</a></li>
-</ul>
-
-
-<h2>Recipes</h2>
-
-<ul>
-<li><a href="http://tincanapi.com/recipeshow-it-works/">Recipes</a> provide a standardised way for people to describe activities</li>
-<li>Simplifies reporting as the same terms should be used to describe things</li>
-<li>A few recipes exist now, for example the <a href="https://registry.tincanapi.com/#profile/19">video recipe</a></li>
-<li>More recipes can be added by the community</li>
-<li>Helps keep the API flexible and useful for future applications that may not even exist yet!</li>
-</ul>
+							<ul>
+								<li>Contains definitions for verbs, activities, activity types, attachment types and
+									extensions</li>
+								<li>Should be referenced to in messages by URIs</li>
+								<li>A shared domain language for agreed definitions of terms</li>
+								<li>Anyone can add their own definitions to <a
+										href="https://registry.tincanapi.com/">the registry</a></li>
+							</ul>
 
 
-<p>Reading about the Tin Can API over the last few days and seeing it in action in the <a href="https://www.tessello.co.uk">Tessello application</a> has really whet my appetite to work more with the specification. I can see great potential for systems that leverage this specification as it provides a flexible framework for messaging without being restrictive and gives us the basis for a common technical language to use to enable our systems to talk to one another.</p>
-</div>
+							<h2>Recipes</h2>
 
-</article>
-
-	<div class="share">
-	<div class="addthis_toolbox addthis_default_style ">
-	
-	
-	<a class="addthis_button_tweet"></a>
-	
-	
-	<a class="addthis_counter addthis_pill_style"></a>
-	</div>
-  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
-</div>
+							<ul>
+								<li><a href="http://tincanapi.com/recipeshow-it-works/">Recipes</a> provide a
+									standardised way for people to describe activities</li>
+								<li>Simplifies reporting as the same terms should be used to describe things</li>
+								<li>A few recipes exist now, for example the <a
+										href="https://registry.tincanapi.com/#profile/19">video recipe</a></li>
+								<li>More recipes can be added by the community</li>
+								<li>Helps keep the API flexible and useful for future applications that may not even
+									exist yet!</li>
+							</ul>
 
 
+							<p>Reading about the Tin Can API over the last few days and seeing it in action in the <a
+									href="https://www.tessello.co.uk">Tessello application</a> has really whet my
+								appetite to work more with the specification. I can see great potential for systems that
+								leverage this specification as it provides a flexible framework for messaging without
+								being restrictive and gives us the basis for a common technical language to use to
+								enable our systems to talk to one another.</p>
+						</div>
 
-<section id="comment">
-    <h1 class="title">Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-</section>
-</div>
+					</article>
+
+					<div class="share">
+						<div class="addthis_toolbox addthis_default_style ">
+
+
+							<a class="addthis_button_tweet"></a>
+
+
+							<a class="addthis_counter addthis_pill_style"></a>
+						</div>
+						<script type="text/javascript"
+							src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+					</div>
+
+
+
+					<section id="comment">
+						<h1 class="title">Comments</h1>
+						<div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a
+									href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+						</div>
+					</section>
+				</div>
 			</div>
-			<footer id="footer" class="inner"><p>
-  Copyright &copy; 2016 - Hook Technologies Ltd -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-</footer>
-			
-
-<script type="text/javascript">
-      var disqus_shortname = 'bakingwebsites';
-      
-        
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://bakingwebsites.co.uk/2014/08/13/tin-can-api-overview/';
-        var disqus_url = 'http://bakingwebsites.co.uk/2014/08/13/tin-can-api-overview/';
-        var disqus_script = 'embed.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
+			<footer id="footer" class="inner">
+				<p>
+					Copyright &copy; 2016 - Hook Technologies Ltd -
+					<span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+				</p>
+			</footer>
 
 
+			<script type="text/javascript">
+				var disqus_shortname = 'bakingwebsites';
 
+
+				// var disqus_developer = 1;
+				var disqus_identifier = 'https://bakingwebsites.co.uk/2014/08/13/tin-can-api-overview/';
+				var disqus_url = 'https://bakingwebsites.co.uk/2014/08/13/tin-can-api-overview/';
+				var disqus_script = 'embed.js';
+
+				(function () {
+					var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+					dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+					(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+				}());
+			</script>
 
 
 
 
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
+
+
+
+			<script type="text/javascript">
+				(function () {
+					var twitterWidgets = document.createElement('script');
+					twitterWidgets.type = 'text/javascript';
+					twitterWidgets.async = true;
+					twitterWidgets.src = '//platform.twitter.com/widgets.js';
+					document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+				})();
+			</script>
 
 
 
@@ -258,4 +296,5 @@
 		</div>
 	</div>
 </body>
+
 </html>

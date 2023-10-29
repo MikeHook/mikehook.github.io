@@ -8,7 +8,8 @@
 	<meta name="author" content="Hook Technologies Ltd">
 
 
-	<meta name="description" content="Jun 20th, 2016 Tips and Tricks Comments Installing Node Modules in a TeamCity Build Keeping up with the inexorable rise of front end frameworks is a &hellip;">
+	<meta name="description"
+		content="Jun 20th, 2016 Tips and Tricks Comments Installing Node Modules in a TeamCity Build Keeping up with the inexorable rise of front end frameworks is a &hellip;">
 
 
 	<!-- http://t.co/dKP3o1e -->
@@ -18,11 +19,12 @@
 
 	<link href="/atom.xml" rel="alternate" title="baking websites" type="application/atom+xml">
 
-	<link rel="canonical" href="http://bakingwebsites.co.uk/">
+	<link rel="canonical" href="https://bakingwebsites.co.uk/">
 	<link href="https://bakingwebsites.co.uk/favicon.png" rel="shortcut icon">
-	<link href="https://bakingwebsites.co.uk/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-	<link href="https://bakingwebsites.co.uk/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet"
-	      type="text/css">
+	<link href="https://bakingwebsites.co.uk/stylesheets/screen.css" media="screen, projection" rel="stylesheet"
+		type="text/css">
+	<link href="https://bakingwebsites.co.uk/stylesheets/font-awesome.min.css" media="screen, projection"
+		rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
@@ -31,7 +33,8 @@
 <link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css"> 
 -->
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700" rel="stylesheet"
+		type="text/css">
 
 
 	<script type="text/javascript">
@@ -59,7 +62,7 @@
 						<img src="/images/bread-Sq-zoom-150.jpg" alt="Profile Picture" style="width: 160px;" />
 					</div>
 					<hgroup>
-						<h1><a href="http://bakingwebsites.co.uk/">baking websites</a></h1>
+						<h1><a href="https://bakingwebsites.co.uk/">baking websites</a></h1>
 
 						<h2>adventures in software development</h2>
 
@@ -70,13 +73,15 @@
 						<ul class="main-navigation">
 							<li class='category'><a href='/blog/categories/hacking/'>Hacking</a>[ 22 ]</li>
 							<li class='category'><a href='/blog/categories/progress/'>Progress</a>[ 6 ]</li>
-							<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 15 ]</li>
+							<li class='category'><a href='/blog/categories/software-design/'>Software Design</a>[ 15 ]
+							</li>
 							<li class='category'><a href='/blog/categories/testing/'>Testing</a>[ 2 ]</li>
-							<li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 10 ]</li>
+							<li class='category'><a href='/blog/categories/tips-and-tricks/'>Tips and Tricks</a>[ 10 ]
+							</li>
 
 						</ul>
 						<br />
-						<a href="http://bakingwebsites.co.uk/blog/archives">Archives</a>
+						<a href="https://bakingwebsites.co.uk/blog/archives">Archives</a>
 
 
 					</nav>
@@ -129,81 +134,127 @@
 
 
 
-									<time datetime="2016-06-20T00:00:00+01:00" data-updated="true" itemprop="datePublished">Jun 20<span>th</span>,
-										2016</time></div>
+									<time datetime="2016-06-20T00:00:00+01:00" data-updated="true"
+										itemprop="datePublished">Jun 20<span>th</span>,
+										2016</time>
+								</div>
 								<div class="tags">
 
 
-									<a class='category' href='http://bakingwebsites.co.uk/blog/categories/tips-and-tricks/'>Tips and Tricks</a>
+									<a class='category'
+										href='https://bakingwebsites.co.uk/blog/categories/tips-and-tricks/'>Tips and
+										Tricks</a>
 
 
 								</div>
 
-								<span class="comments"><a href="http://bakingwebsites.co.uk/2016/06/20/Installing-node-from-TeamCity/#disqus_thread">Comments</a></span>
+								<span class="comments"><a
+										href="https://bakingwebsites.co.uk/2016/06/20/Installing-node-from-TeamCity/#disqus_thread">Comments</a></span>
 
 							</div>
-							<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2016/06/20/Installing-node-from-TeamCity/"
-								   itemprop="url">Installing Node Modules in a TeamCity Build</a></h1>
+							<h1 class="title" itemprop="name"><a
+									href="https://bakingwebsites.co.uk/2016/06/20/Installing-node-from-TeamCity/"
+									itemprop="url">Installing Node Modules in a TeamCity Build</a></h1>
 							<div class="entry-content" itemprop="articleBody">
-								<p><a href="https://nodejs.org"><img src="/images/posts/nodejs-logo.jpg" class="alignleft" title="node js" /></a></p>
+								<p><a href="https://nodejs.org"><img src="/images/posts/nodejs-logo.jpg"
+											class="alignleft" title="node js" /></a></p>
 
-								<p>Keeping up with the inexorable rise of front end frameworks is a big challenge in modern web development is.
-									My pathway is probably fairly common, starting out with <a href="https://jquery.com/">jQuery</a> and the
-									humble selector, progressing onto <a href="http://knockoutjs.com/">Knockout</a> and embracing the joy of
-									binding then finally onto the full on framework smorgasbord of <a href="https://angularjs.org/">Angular JS</a>.
-									Now there is a new project on the horizon and Angular 2 has reached a good level of maturity, so &ldquo;Once
-									more unto the breach, dear friends&rdquo; it is time to embrace the new all over again!</p>
+								<p>Keeping up with the inexorable rise of front end frameworks is a big challenge in
+									modern web development is.
+									My pathway is probably fairly common, starting out with <a
+										href="https://jquery.com/">jQuery</a> and the
+									humble selector, progressing onto <a href="http://knockoutjs.com/">Knockout</a> and
+									embracing the joy of
+									binding then finally onto the full on framework smorgasbord of <a
+										href="https://angularjs.org/">Angular JS</a>.
+									Now there is a new project on the horizon and Angular 2 has reached a good level of
+									maturity, so &ldquo;Once
+									more unto the breach, dear friends&rdquo; it is time to embrace the new all over
+									again!</p>
 
-								<p>Our project stack is a fairly standard .net picture, an ASP.NET MVC application on the front end talking to
-									a REST API server side based on Web Api. Angular 2 sits firmly in the front end application and can be
-									installed through node. I won&rsquo;t go into details of that setup here as Deborah Kurata has already covered
-									that off in her excellent <a href="http://blogs.msmvps.com/deborahk/angular-2-getting-started-with-a-visual-studio-2015-asp-net-4-x-project/">Angular
-										2 Getting started with Visual Studio post</a>, however the point where I hit trouble was getting the
+								<p>Our project stack is a fairly standard .net picture, an ASP.NET MVC application on
+									the front end talking to
+									a REST API server side based on Web Api. Angular 2 sits firmly in the front end
+									application and can be
+									installed through node. I won&rsquo;t go into details of that setup here as Deborah
+									Kurata has already covered
+									that off in her excellent <a
+										href="http://blogs.msmvps.com/deborahk/angular-2-getting-started-with-a-visual-studio-2015-asp-net-4-x-project/">Angular
+										2 Getting started with Visual Studio post</a>, however the point where I hit
+									trouble was getting the
 									application to build on our TeamCity build server.</p>
 
 								<h2>Its Javascript Jim, but not as we know it</h2>
 
-								<p>A big benefit of Angular 2 is its built in support for coding in TypeScript, a strongly typed superset of
-									JavaScript that can be transpiled into JavaScript before it is executed. While TypeScript has been around for
-									quite a while now (compared to Angular 2 anyway!) and is baked into Visual Studio I still needed to get the
-									newest version to enable visual studio to build the scripts. This was simply a case of downloading the latest
-									version of <a href="https://www.microsoft.com/en-us/download/details.aspx?id=48593">TypeScript for Visual
+								<p>A big benefit of Angular 2 is its built in support for coding in TypeScript, a
+									strongly typed superset of
+									JavaScript that can be transpiled into JavaScript before it is executed. While
+									TypeScript has been around for
+									quite a while now (compared to Angular 2 anyway!) and is baked into Visual Studio I
+									still needed to get the
+									newest version to enable visual studio to build the scripts. This was simply a case
+									of downloading the latest
+									version of <a
+										href="https://www.microsoft.com/en-us/download/details.aspx?id=48593">TypeScript
+										for Visual
 										Studio 2015</a> and installing.</p>
 
-								<p>Once the installation step had been repeated on our build server the compiler also ran through TeamCity. So
-									far so good, however we didn&rsquo;t have the node_modules folder checked into source control (as they are
-									external dependencies containing a crazy number of files!) so the Angular 2 source libraries were not present.
-									Naturally this was a sticking point in getting our javascript code to compile or indeed run as Angular 2
-									didn&rsquo;t exist in the application on the build server! To fix this we needed to download all the
-									dependencies in the node_modules folder during the build and save them into the expected location in the build
+								<p>Once the installation step had been repeated on our build server the compiler also
+									ran through TeamCity. So
+									far so good, however we didn&rsquo;t have the node_modules folder checked into
+									source control (as they are
+									external dependencies containing a crazy number of files!) so the Angular 2 source
+									libraries were not present.
+									Naturally this was a sticking point in getting our javascript code to compile or
+									indeed run as Angular 2
+									didn&rsquo;t exist in the application on the build server! To fix this we needed to
+									download all the
+									dependencies in the node_modules folder during the build and save them into the
+									expected location in the build
 									servers workspace.</p>
 
 								<h2>Hey node, give me the dependencies</h2>
 
-								<p>TeamCity has a great plugin model which allows it capabilities to be easily extended and a quick google
-									revealed that a <a href="https://github.com/jonnyzzz/TeamCity.Node">TeamCity Node plugin</a> already existed.
-									After installing the plugin, along with Node on the build server, I was able to add a build step to execute
+								<p>TeamCity has a great plugin model which allows it capabilities to be easily extended
+									and a quick google
+									revealed that a <a href="https://github.com/jonnyzzz/TeamCity.Node">TeamCity Node
+										plugin</a> already existed.
+									After installing the plugin, along with Node on the build server, I was able to add
+									a build step to execute
 									the following command:</p>
 
 								<p><code>npm install</code></p>
 
-								<p>When this command is executed from the directory of our MVC application it interrogates the <strong>package.json</strong>
-									file and installs all the dependencies listed in the json file. Well, that&rsquo;s what it <strong>should</strong>
+								<p>When this command is executed from the directory of our MVC application it
+									interrogates the <strong>package.json</strong>
+									file and installs all the dependencies listed in the json file. Well, that&rsquo;s
+									what it <strong>should</strong>
 									do, in my case all I got was a long pause followed by a network timeout, doh!</p>
 
-								<p>I was prepared for this as we are working behind a corporate firewall and I&rsquo;d already spent quite some
-									time finding out how to get a connection from my development machine. The solution, using the Cntlm
-									Authentication proxy, is handily documented on StackOverflow in this <a href="https://stackoverflow.com/questions/18569054/npm-behind-ntlm-proxy/18570201#18570201">NPM
-										behind NTLM proxy article</a>. However after following all the steps on the build server the network
-									connections were still failing. I tried running the npm install locally on the build server and it worked fine
-									so it seemed that the npm proxy settings were not being used when the program ran through TeamCity. After
-									quite a bit of head scratching I resorted to reading the <a href="https://docs.npmjs.com/files/npmrc">npm
-										manual</a> and there were some clues as to why the config might be ignored. When I looked in my
-									C:\Users\{MyUsername}\ folder I could see a .npmrc file with the proxy settings, however there was no such
-									file in the C:\Users\{TeamCityAgentUser}\ folder. So I copied my .npmrc file into here then bingo, it all
+								<p>I was prepared for this as we are working behind a corporate firewall and I&rsquo;d
+									already spent quite some
+									time finding out how to get a connection from my development machine. The solution,
+									using the Cntlm
+									Authentication proxy, is handily documented on StackOverflow in this <a
+										href="https://stackoverflow.com/questions/18569054/npm-behind-ntlm-proxy/18570201#18570201">NPM
+										behind NTLM proxy article</a>. However after following all the steps on the
+									build server the network
+									connections were still failing. I tried running the npm install locally on the build
+									server and it worked fine
+									so it seemed that the npm proxy settings were not being used when the program ran
+									through TeamCity. After
+									quite a bit of head scratching I resorted to reading the <a
+										href="https://docs.npmjs.com/files/npmrc">npm
+										manual</a> and there were some clues as to why the config might be ignored. When
+									I looked in my
+									C:\Users\{MyUsername}\ folder I could see a .npmrc file with the proxy settings,
+									however there was no such
+									file in the C:\Users\{TeamCityAgentUser}\ folder. So I copied my .npmrc file into
+									here then bingo, it all
 									worked through TeamCity!</p>
 
-								<p>I&rsquo;m sure this won&rsquo;t be the last challenge Angular 2 throws at our Dev Ops efforts but we are in
+								<p>I&rsquo;m sure this won&rsquo;t be the last challenge Angular 2 throws at our Dev Ops
+									efforts but we are in
 									a good place now with the build running inside TeamCity.</p>
 
 
@@ -227,111 +278,169 @@
 
 
 
-									<time datetime="2015-12-22T17:07:49+00:00" data-updated="true" itemprop="datePublished">Dec 22<span>nd</span>,
-										2015</time></div>
+									<time datetime="2015-12-22T17:07:49+00:00" data-updated="true"
+										itemprop="datePublished">Dec 22<span>nd</span>,
+										2015</time>
+								</div>
 								<div class="tags">
 
 
-									<a class='category' href='http://bakingwebsites.co.uk/blog/categories/progress/'>Progress</a>
+									<a class='category'
+										href='https://bakingwebsites.co.uk/blog/categories/progress/'>Progress</a>
 
 
 								</div>
 
-								<span class="comments"><a href="http://bakingwebsites.co.uk/2015/12/22/CI-with-appveyor/#disqus_thread">Comments</a></span>
+								<span class="comments"><a
+										href="https://bakingwebsites.co.uk/2015/12/22/CI-with-appveyor/#disqus_thread">Comments</a></span>
 
 							</div>
-							<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2015/12/22/CI-with-appveyor/" itemprop="url">Continuous
+							<h1 class="title" itemprop="name"><a
+									href="https://bakingwebsites.co.uk/2015/12/22/CI-with-appveyor/"
+									itemprop="url">Continuous
 									Delivery to Azure With AppVeyor</a></h1>
 							<div class="entry-content" itemprop="articleBody">
-								<p><a href="http://www.appveyor.com/"><img src="/images/posts/AppVeyorLogo.png" class="alignleft" title="AppVeyor" /></a></p>
+								<p><a href="http://www.appveyor.com/"><img src="/images/posts/AppVeyorLogo.png"
+											class="alignleft" title="AppVeyor" /></a></p>
 
-								<p>I&rsquo;ve been using <a href="http://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/">Kudu to
-										automate my website deployments</a> from Github to Azure for quite a while and its worked out great. But
-									there are some limitations with it, primarily a lack of control over whether changes are deployed, its very
+								<p>I&rsquo;ve been using <a
+										href="https://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/">Kudu
+										to
+										automate my website deployments</a> from Github to Azure for quite a while and
+									its worked out great. But
+									there are some limitations with it, primarily a lack of control over whether changes
+									are deployed, its very
 									much an all or nothing tool.</p>
 
-								<p>The complexity of the web application I&rsquo;m maintaining reached a level where I wanted to ensure that
-									the code builds and passes some automated tests before it is deployed. I couldn&rsquo;t see any way to
-									incorporate those steps into a deployment pipeline with Kudu so decided to try AppVeyor. I&rsquo;d heard about
-									it on <a href="http://www.hanselman.com/blog/AppVeyorAGoodContinuousIntegrationSystemIsAJoyToBehold.aspx">Scott
-										Hanselmans blog</a> and as it is free for open source projects I&rsquo;d been itching to give it a go!</p>
+								<p>The complexity of the web application I&rsquo;m maintaining reached a level where I
+									wanted to ensure that
+									the code builds and passes some automated tests before it is deployed. I
+									couldn&rsquo;t see any way to
+									incorporate those steps into a deployment pipeline with Kudu so decided to try
+									AppVeyor. I&rsquo;d heard about
+									it on <a
+										href="http://www.hanselman.com/blog/AppVeyorAGoodContinuousIntegrationSystemIsAJoyToBehold.aspx">Scott
+										Hanselmans blog</a> and as it is free for open source projects I&rsquo;d been
+									itching to give it a go!</p>
 
 								<h2>Build it, build it</h2>
 
-								<p>The first step was to get the website to build. Surprising as it may seem the website had never successfully
-									built in Visual Studio as it used an old version of Umbraco which had some compile errors. My options were to
-									either upgrade to a newer version or try and fix the compile errors. The upgrade route looked like it could
-									take some time and fortunately Umbraco is open source so I could download the source code for the version with
-									the issues and patch some fixes. It proved fairly straightforward, basically they has just missed out some
+								<p>The first step was to get the website to build. Surprising as it may seem the website
+									had never successfully
+									built in Visual Studio as it used an old version of Umbraco which had some compile
+									errors. My options were to
+									either upgrade to a newer version or try and fix the compile errors. The upgrade
+									route looked like it could
+									take some time and fortunately Umbraco is open source so I could download the source
+									code for the version with
+									the issues and patch some fixes. It proved fairly straightforward, basically they
+									has just missed out some
 									files during the packaging of the version.</p>
 
-								<p>So now the website built locally in Visual Studio, however MSBuild still refused to build the site, not
-									great as AppVeyor uses MSBuild to compile the website! After some research I found that the problem was to do
-									with MSBuild attempting to not just build the website but also publish it. As the project is an old style <a
-									   href="https://msdn.microsoft.com/en-us/library/dd547590.aspx">Visual Studio <em>website</em> as opposed to
-										a <em>web application</em></a> the options through MSBuild were somewhat limited as it only exposed a subset
-									of the options for the <a href="https://msdn.microsoft.com/en-us/library/ms229863.aspx">aspnet compiler</a>.
-									However I found that the publish option could be disabled by manually tweaking the solution file to remove the
-									settings controlling the publish of the website, if your interested in the details you can see the change for
-									this in <a href="https://github.com/MikeHook/MSTC/commit/7f352956d21ef7fb3b153fbdf756048a6849a310">this commit</a>.
-									The only drawback with this technique is that Visual Studio trys to helpfully replace these settings each time
-									you save a change to the solution file, another option I may investigate would be to use a custom build script
+								<p>So now the website built locally in Visual Studio, however MSBuild still refused to
+									build the site, not
+									great as AppVeyor uses MSBuild to compile the website! After some research I found
+									that the problem was to do
+									with MSBuild attempting to not just build the website but also publish it. As the
+									project is an old style <a
+										href="https://msdn.microsoft.com/en-us/library/dd547590.aspx">Visual Studio
+										<em>website</em> as opposed to
+										a <em>web application</em></a> the options through MSBuild were somewhat limited
+									as it only exposed a subset
+									of the options for the <a
+										href="https://msdn.microsoft.com/en-us/library/ms229863.aspx">aspnet
+										compiler</a>.
+									However I found that the publish option could be disabled by manually tweaking the
+									solution file to remove the
+									settings controlling the publish of the website, if your interested in the details
+									you can see the change for
+									this in <a
+										href="https://github.com/MikeHook/MSTC/commit/7f352956d21ef7fb3b153fbdf756048a6849a310">this
+										commit</a>.
+									The only drawback with this technique is that Visual Studio trys to helpfully
+									replace these settings each time
+									you save a change to the solution file, another option I may investigate would be to
+									use a custom build script
 									in App Veyor.</p>
 
-								<p>The only additional setup I needed to take to get AppVeyor to build the projects was to tell it to restore
-									the nuget packages, as I hadn&rsquo;t checked them into source control. This was simply achieved by adding the
+								<p>The only additional setup I needed to take to get AppVeyor to build the projects was
+									to tell it to restore
+									the nuget packages, as I hadn&rsquo;t checked them into source control. This was
+									simply achieved by adding the
 									following &lsquo;Before build script&rsquo; to the AppVeyor project settings:</p>
 
 								<p><code>nuget restore</code></p>
 
 								<h2>Tasty Tests</h2>
 
-								<p>With all the solution projects building the next step was to configure the tests to run. With AppVeyor this
-									is a zero configuration step as it auto detects any projects containing unit tests and runs them. However to
-									speed things along you can explicitly define the path to the assembly containing your tests in the AppVeyor
-									settings. After doing this AppVeyor gives a test runner output in the console (shown below) along with a <a
-									   href="https://ci.appveyor.com/project/MikeHook/mstc/build/tests">nice testing report which you can see
+								<p>With all the solution projects building the next step was to configure the tests to
+									run. With AppVeyor this
+									is a zero configuration step as it auto detects any projects containing unit tests
+									and runs them. However to
+									speed things along you can explicitly define the path to the assembly containing
+									your tests in the AppVeyor
+									settings. After doing this AppVeyor gives a test runner output in the console (shown
+									below) along with a <a
+										href="https://ci.appveyor.com/project/MikeHook/mstc/build/tests">nice testing
+										report which you can see
 										directly in AppVeyor here</a>.</p>
 
 								<p><img src="/images/posts/AppVeyorTests.png" title="AppVeyor Test Console" /></p>
 
 								<h2>AppVeyor, meet Azure</h2>
 
-								<p>The final part of the jigsaw was to setup automated deployments, my requirements for this were:</p>
+								<p>The final part of the jigsaw was to setup automated deployments, my requirements for
+									this were:</p>
 
 								<ul>
-									<li>Deployment to be triggered after a successful test run (default AppVeyor behaviour)</li>
+									<li>Deployment to be triggered after a successful test run (default AppVeyor
+										behaviour)</li>
 									<li>Deploy all added, deleted and changed files to Azure</li>
 									<li>Deploy changes commited to the staging branch to the staging site</li>
 									<li>Deploy changes commited to the master branch to the live site</li>
 								</ul>
 
 
-								<p>AppVeyor has a range of options for deployment including several specifically for Azure Cloud sites. However
-									as my application is an old website I just wanted a basic file orientated publish and Web Deploy offered what
-									I was looking for. There is a handy guide on the App Veyor docs for <a href="http://www.appveyor.com/docs/deployment/web-deploy#azure-web-sites">setting
-										up Web Deploy with Azure sites</a> so I won&rsquo;t repeat that here. However there were some custom
+								<p>AppVeyor has a range of options for deployment including several specifically for
+									Azure Cloud sites. However
+									as my application is an old website I just wanted a basic file orientated publish
+									and Web Deploy offered what
+									I was looking for. There is a handy guide on the App Veyor docs for <a
+										href="http://www.appveyor.com/docs/deployment/web-deploy#azure-web-sites">setting
+										up Web Deploy with Azure sites</a> so I won&rsquo;t repeat that here. However
+									there were some custom
 									configuration steps I needed to take:</p>
 
 								<ul>
-									<li>Add a path to the artifacts in App Veyor. These are the files which Web Deploy phyically copys to the Web
+									<li>Add a path to the artifacts in App Veyor. These are the files which Web Deploy
+										phyically copys to the Web
 										Server. In my case this was just the whole &lsquo;website&rsquo; directory.</li>
-									<li>Check the &lsquo;Remove additional files at destination&rsquo; option to ensure files I&rsquo;ve deleted
+									<li>Check the &lsquo;Remove additional files at destination&rsquo; option to ensure
+										files I&rsquo;ve deleted
 										locally are removed from the web server.</li>
-									<li>Specify &lsquo;Skip directories&rsquo; to ensure assets and cached files for Umbraco are not removed. For
-										my site the &lsquo;Skip directories&rsquo; setting is &lsquo;\App_Data;\media;\data&rsquo;.</li>
-									<li>Setup 2 separate Deployment providers, with the &lsquo;Deploy from branch&rsquo; option set to
-										&lsquo;staging&rsquo; for the staging site and &lsquo;master&rsquo; for the live site.</li>
+									<li>Specify &lsquo;Skip directories&rsquo; to ensure assets and cached files for
+										Umbraco are not removed. For
+										my site the &lsquo;Skip directories&rsquo; setting is
+										&lsquo;\App_Data;\media;\data&rsquo;.</li>
+									<li>Setup 2 separate Deployment providers, with the &lsquo;Deploy from branch&rsquo;
+										option set to
+										&lsquo;staging&rsquo; for the staging site and &lsquo;master&rsquo; for the live
+										site.</li>
 								</ul>
 
 
-								<p>So now whenever I push changes up to github App Veyor checks which branch I&rsquo;ve pushed to and runs the
-									deployment provider setup for that branch, you can see what has happened at the end of the <a href="https://ci.appveyor.com/project/MikeHook/mstc">console
-										report</a>. I&rsquo;ve been really impressed with the usability and range of options available in App Veyor,
-									it all comes at an unbeatable price of totally free for open source projects and best of all I get to put
+								<p>So now whenever I push changes up to github App Veyor checks which branch I&rsquo;ve
+									pushed to and runs the
+									deployment provider setup for that branch, you can see what has happened at the end
+									of the <a href="https://ci.appveyor.com/project/MikeHook/mstc">console
+										report</a>. I&rsquo;ve been really impressed with the usability and range of
+									options available in App Veyor,
+									it all comes at an unbeatable price of totally free for open source projects and
+									best of all I get to put
 									these <a href="https://github.com/MikeHook/MSTC">cool badges on my repo</a> now!</p>
 
-								<p><a href="https://github.com/MikeHook/MSTC"><img src="/images/posts/AppVeyorBadges.png" title="MSTC Repo badges" /></a></p>
+								<p><a href="https://github.com/MikeHook/MSTC"><img
+											src="/images/posts/AppVeyorBadges.png" title="MSTC Repo badges" /></a></p>
 
 
 
@@ -354,104 +463,158 @@
 
 
 
-									<time datetime="2015-09-06T18:07:49+01:00" data-updated="true" itemprop="datePublished">Sep 6<span>th</span>,
-										2015</time></div>
+									<time datetime="2015-09-06T18:07:49+01:00" data-updated="true"
+										itemprop="datePublished">Sep 6<span>th</span>,
+										2015</time>
+								</div>
 								<div class="tags">
 
 
-									<a class='category' href='http://bakingwebsites.co.uk/blog/categories/software-design/'>Software Design</a>
+									<a class='category'
+										href='https://bakingwebsites.co.uk/blog/categories/software-design/'>Software
+										Design</a>
 
 
 								</div>
 
-								<span class="comments"><a href="http://bakingwebsites.co.uk/2015/09/06/inspiration/#disqus_thread">Comments</a></span>
+								<span class="comments"><a
+										href="https://bakingwebsites.co.uk/2015/09/06/inspiration/#disqus_thread">Comments</a></span>
 
 							</div>
-							<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2015/09/06/inspiration/" itemprop="url">Inspiring
+							<h1 class="title" itemprop="name"><a
+									href="https://bakingwebsites.co.uk/2015/09/06/inspiration/" itemprop="url">Inspiring
 									Software Design</a></h1>
 							<div class="entry-content" itemprop="articleBody">
-								<p><a href="http://www.603copywriting.co.uk/blog-post-ideas/"><img src="/images/posts/idea.jpg" class="alignleft"
-										     title="Ideas lightbulb" /></a></p>
+								<p><a href="http://www.603copywriting.co.uk/blog-post-ideas/"><img
+											src="/images/posts/idea.jpg" class="alignleft"
+											title="Ideas lightbulb" /></a></p>
 
-								<p>The software design process can sometimes be difficult to quantify. From an external perspective of a
-									development team, requirements go in and working software comes out. But what exactly happens in the middle to
+								<p>The software design process can sometimes be difficult to quantify. From an external
+									perspective of a
+									development team, requirements go in and working software comes out. But what
+									exactly happens in the middle to
 									turn the stakeholders hopes and dreams into reliable, executable code?</p>
 
-								<p>At its core software design is a methodical, incremental engineering process and there are no short cuts to
-									this process if we want to produce good results. However making really great software that will stand the test
-									of time often requires a little something extra, a bit of inspiration. So where exactly does that spark come
+								<p>At its core software design is a methodical, incremental engineering process and
+									there are no short cuts to
+									this process if we want to produce good results. However making really great
+									software that will stand the test
+									of time often requires a little something extra, a bit of inspiration. So where
+									exactly does that spark come
 									from and how can we help create the conditions to nurture it?</p>
 
 								<h2>A sticky design problem</h2>
 
-								<p>I&rsquo;ve recently been working on a feature to enable users to update their profiles through a web
-									application. This is a pretty standard problem however some extra complexities were introduced by the target
-									platform. Chief among those was the user interface which needed to be asynchronous and fit in with the
-									applications existing front end <a href="https://en.wikipedia.org/wiki/Single-page_application">SPA framework</a>.</p>
+								<p>I&rsquo;ve recently been working on a feature to enable users to update their
+									profiles through a web
+									application. This is a pretty standard problem however some extra complexities were
+									introduced by the target
+									platform. Chief among those was the user interface which needed to be asynchronous
+									and fit in with the
+									applications existing front end <a
+										href="https://en.wikipedia.org/wiki/Single-page_application">SPA framework</a>.
+								</p>
 
-								<p>I like to implement using the &lsquo;<a href="http://programmers.stackexchange.com/questions/166409/tdd-outside-in-vs-inside-out">outside
-										in</a>&rsquo; approach so began with the user interface, adding one section at a time then abstracting any
-									common patterns to make them reusable. However, after a day at the coal face writing code I took a step back
-									and wasn&rsquo;t pleased with my results. The code was reaching a point where I was struggling to keep track
-									of the workflow in my own head which doesn&rsquo;t exactly bode well for the poor guy that would inevitably
-									need to modify it 6 months down the line. The trouble was no matter how hard I stared at those lines of code a
+								<p>I like to implement using the &lsquo;<a
+										href="http://programmers.stackexchange.com/questions/166409/tdd-outside-in-vs-inside-out">outside
+										in</a>&rsquo; approach so began with the user interface, adding one section at a
+									time then abstracting any
+									common patterns to make them reusable. However, after a day at the coal face writing
+									code I took a step back
+									and wasn&rsquo;t pleased with my results. The code was reaching a point where I was
+									struggling to keep track
+									of the workflow in my own head which doesn&rsquo;t exactly bode well for the poor
+									guy that would inevitably
+									need to modify it 6 months down the line. The trouble was no matter how hard I
+									stared at those lines of code a
 									more elegant and simple solution would not present itself!</p>
 
-								<p>The very next day I woke up feeling sick and not be able to get into the office to finish implementing the
-									UI. However, it may well have been the most productive &lsquo;time off&rsquo; work I&rsquo;ve had in some
-									time. As I recuperated watching Hobbits and Orcs do battle on a grand scale my mind drifted back to the
-									problems I&rsquo;d been having yesterday. It suddenly became clear to me that I had been abstracting at too
-									low a level and trying to fit all of the behaviour into a single javascript module. However if I just created
-									a single module per user profile element I could create a common &lsquo;interface&rsquo; for each module and
+								<p>The very next day I woke up feeling sick and not be able to get into the office to
+									finish implementing the
+									UI. However, it may well have been the most productive &lsquo;time off&rsquo; work
+									I&rsquo;ve had in some
+									time. As I recuperated watching Hobbits and Orcs do battle on a grand scale my mind
+									drifted back to the
+									problems I&rsquo;d been having yesterday. It suddenly became clear to me that I had
+									been abstracting at too
+									low a level and trying to fit all of the behaviour into a single javascript module.
+									However if I just created
+									a single module per user profile element I could create a common
+									&lsquo;interface&rsquo; for each module and
 									easily iterate over them in the main module.</p>
 
 								<h2>Emergent architecture</h2>
 
-								<p>This new approach had all the hallmarks of a good design as my own reaction was along the lines of
-									&lsquo;that is so obviously better, why didn&rsquo;t I just do it like that in the first place?!&rsquo; That
-									is a pertinent question, and one that has probably troubled many a software developer. However my feeling is
-									that often it is not possible to skip the &lsquo;bad design&rsquo; and go straight to the better solution
-									because you don&rsquo;t know what all the problems are going to be until you start implementing. Thomas Edison
+								<p>This new approach had all the hallmarks of a good design as my own reaction was along
+									the lines of
+									&lsquo;that is so obviously better, why didn&rsquo;t I just do it like that in the
+									first place?!&rsquo; That
+									is a pertinent question, and one that has probably troubled many a software
+									developer. However my feeling is
+									that often it is not possible to skip the &lsquo;bad design&rsquo; and go straight
+									to the better solution
+									because you don&rsquo;t know what all the problems are going to be until you start
+									implementing. Thomas Edison
 									summed this up nicely in one of his most famous quotes:</p>
 
 								<blockquote>
-									<p>What it boils down to is one per cent inspiration and ninety-nine per cent perspiration.</p>
-									<footer><strong>Wikiquote</strong> <cite><a href='https://en.wikiquote.org/wiki/Thomas_Edison'>Thomas Edison</a></cite></footer>
+									<p>What it boils down to is one per cent inspiration and ninety-nine per cent
+										perspiration.</p>
+									<footer><strong>Wikiquote</strong> <cite><a
+												href='https://en.wikiquote.org/wiki/Thomas_Edison'>Thomas
+												Edison</a></cite></footer>
 								</blockquote>
 
 
-								<p>While its certainly true that experience can help you see patterns and spot the problems earlier I think it
-									is a mistake to try and design everything meticulously up front. There is bound to be some devil in the detail
-									which makes you pivot on the design halfway through so a lot of that up front time will have been wasted.</p>
+								<p>While its certainly true that experience can help you see patterns and spot the
+									problems earlier I think it
+									is a mistake to try and design everything meticulously up front. There is bound to
+									be some devil in the detail
+									which makes you pivot on the design halfway through so a lot of that up front time
+									will have been wasted.</p>
 
-								<p>I find it is best to have a balance, with an initial high level draft plan for the implementation usually
-									implemented through UML modelling. This helps guide lower level design decisions and keep one eye on the
-									bigger picture. To make the lower level design decisions I try and stay agile, adapt the code as I&rsquo;m
+								<p>I find it is best to have a balance, with an initial high level draft plan for the
+									implementation usually
+									implemented through UML modelling. This helps guide lower level design decisions and
+									keep one eye on the
+									bigger picture. To make the lower level design decisions I try and stay agile, adapt
+									the code as I&rsquo;m
 									going along and keep complexity at a minimum.</p>
 
 								<h2>Encouraging those aha! moments</h2>
 
-								<p>Often my best ideas are formed away from the computer, hours or even days after the initial problem arose.
-									The sub conscious mind is an amazing tool which can help you solve many intractable issues if you can give it
-									the space and time to join up those dots. Despite what our employment contracts may say, software development
-									really isn&rsquo;t a 9 to 5 job. In fact working &lsquo;harder&rsquo; during those office hours can sometimes
-									be counter productive when it comes to making great software. Good decisions and great solutions are formed in
-									relaxed and fresh minds, for that reason I&rsquo;d have to list my bike as one of my most essential software
+								<p>Often my best ideas are formed away from the computer, hours or even days after the
+									initial problem arose.
+									The sub conscious mind is an amazing tool which can help you solve many intractable
+									issues if you can give it
+									the space and time to join up those dots. Despite what our employment contracts may
+									say, software development
+									really isn&rsquo;t a 9 to 5 job. In fact working &lsquo;harder&rsquo; during those
+									office hours can sometimes
+									be counter productive when it comes to making great software. Good decisions and
+									great solutions are formed in
+									relaxed and fresh minds, for that reason I&rsquo;d have to list my bike as one of my
+									most essential software
 									design tools!</p>
 
-								<p>As developers we can encourage good software design by focussing on a couple of key elements:</p>
+								<p>As developers we can encourage good software design by focussing on a couple of key
+									elements:</p>
 
 								<ul>
-									<li>Collaborate on design, decisions should be guided by <a href="http://blog.codinghorror.com/the-ten-commandments-of-egoless-programming/">the
+									<li>Collaborate on design, decisions should be guided by <a
+											href="http://blog.codinghorror.com/the-ten-commandments-of-egoless-programming/">the
 											ten commandments of egoless programming</a></li>
-									<li>Ensure your estimates include enough contingency to allow for rapid prototyping and iterations during
+									<li>Ensure your estimates include enough contingency to allow for rapid prototyping
+										and iterations during
 										implementation.</li>
-									<li>Stay pragmatic; aim high but know that perfection is subjective. Establishing coding standards can help
+									<li>Stay pragmatic; aim high but know that perfection is subjective. Establishing
+										coding standards can help
 										guide when a design is good enough</li>
 								</ul>
 
 
-								<p>Do you have any particular techniques to help inspire your software designs? If so I&rsquo;d love to hear
+								<p>Do you have any particular techniques to help inspire your software designs? If so
+									I&rsquo;d love to hear
 									about them and try them out myself!</p>
 
 
@@ -475,83 +638,127 @@
 
 
 
-									<time datetime="2015-08-16T18:07:49+01:00" data-updated="true" itemprop="datePublished">Aug 16<span>th</span>,
-										2015</time></div>
+									<time datetime="2015-08-16T18:07:49+01:00" data-updated="true"
+										itemprop="datePublished">Aug 16<span>th</span>,
+										2015</time>
+								</div>
 								<div class="tags">
 
 
-									<a class='category' href='http://bakingwebsites.co.uk/blog/categories/tips-and-tricks/'>Tips and Tricks</a>
+									<a class='category'
+										href='https://bakingwebsites.co.uk/blog/categories/tips-and-tricks/'>Tips and
+										Tricks</a>
 
 
 								</div>
 
-								<span class="comments"><a href="http://bakingwebsites.co.uk/2015/08/16/rebase-git-enlightenment/#disqus_thread">Comments</a></span>
+								<span class="comments"><a
+										href="https://bakingwebsites.co.uk/2015/08/16/rebase-git-enlightenment/#disqus_thread">Comments</a></span>
 
 							</div>
-							<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2015/08/16/rebase-git-enlightenment/"
-								   itemprop="url">Rebase Your Way to Git Enlightenment</a></h1>
+							<h1 class="title" itemprop="name"><a
+									href="https://bakingwebsites.co.uk/2015/08/16/rebase-git-enlightenment/"
+									itemprop="url">Rebase Your Way to Git Enlightenment</a></h1>
 							<div class="entry-content" itemprop="articleBody">
-								<p><img src="http://i49.photobucket.com/albums/f299/hookmike/Pat-Morita_Karate_Kid_200_zpscufzef0b.jpg" class="alignleft"
-									     title="Pat Morita" /></p>
+								<p><img src="http://i49.photobucket.com/albums/f299/hookmike/Pat-Morita_Karate_Kid_200_zpscufzef0b.jpg"
+										class="alignleft" title="Pat Morita" /></p>
 
-								<p>The path to Git enlightenment can be a long one for a developer used to centralized source control such as
+								<p>The path to Git enlightenment can be a long one for a developer used to centralized
+									source control such as
 									SVN.</p>
 
-								<p>The first signs of trouble usually occur when trying to apply changes from one branch of code to another.
-									Some file change conflicts are likely if the same source file has been changed on both branches. The source
-									control system has no way to know which changes should be kept so it will quite rightly ask the developer to
-									choose, however this can cause some difficulty if the changes have been made by someone else who may not even
+								<p>The first signs of trouble usually occur when trying to apply changes from one branch
+									of code to another.
+									Some file change conflicts are likely if the same source file has been changed on
+									both branches. The source
+									control system has no way to know which changes should be kept so it will quite
+									rightly ask the developer to
+									choose, however this can cause some difficulty if the changes have been made by
+									someone else who may not even
 									be around to ask what has happened.</p>
 
-								<p>I have a feeling that the great Mr Miyagi would have loved using Git, as patience and dedication to the ways
-									of <a href="https://en.wikipedia.org/wiki/Distributed_revision_control">DVCS</a> are well rewarded in time.
-									Indeed, dealing with branches is one situation where patience is important to avoid introducing regression
+								<p>I have a feeling that the great Mr Miyagi would have loved using Git, as patience and
+									dedication to the ways
+									of <a href="https://en.wikipedia.org/wiki/Distributed_revision_control">DVCS</a> are
+									well rewarded in time.
+									Indeed, dealing with branches is one situation where patience is important to avoid
+									introducing regression
 									bugs.</p>
 
 								<blockquote>
 									<p>Patience, young grasshopper.</p>
-									<footer><strong>Wikipedia</strong> <cite><a href='https://en.wikipedia.org/wiki/Kesuke_Miyagi'>Kesuke Miyagi</a></cite></footer>
+									<footer><strong>Wikipedia</strong> <cite><a
+												href='https://en.wikipedia.org/wiki/Kesuke_Miyagi'>Kesuke
+												Miyagi</a></cite></footer>
 								</blockquote>
 
 
-								<p>There are a couple of different techniques which can be used to bring the changes on two branches together
-									and the Atlassian site has a great write up of these in it&rsquo;s <a href="https://www.atlassian.com/git/tutorials/merging-vs-rebasing/">merging
-										vs rebasing article</a>. The article describes the following scenario, you have created a <strong>feature</strong>
-									branch from the <strong>master</strong> and made some commits to your branch. Someone else has since made some
-									changes to the master branch which you now need to include in your branch, to get these changes you can either
+								<p>There are a couple of different techniques which can be used to bring the changes on
+									two branches together
+									and the Atlassian site has a great write up of these in it&rsquo;s <a
+										href="https://www.atlassian.com/git/tutorials/merging-vs-rebasing/">merging
+										vs rebasing article</a>. The article describes the following scenario, you have
+									created a <strong>feature</strong>
+									branch from the <strong>master</strong> and made some commits to your branch.
+									Someone else has since made some
+									changes to the master branch which you now need to include in your branch, to get
+									these changes you can either
 									merge or rebase.</p>
 
-								<p>My personal preference is to use the rebase command where possible for one key reason, <strong>merge
-										conflicts are easier to resolve!</strong> The reason for this is that when rebasing you apply <strong>your
-										changes</strong> on top of the master changes. This is different to a merge which will apply the master
-									changes on top of your feature changes. So effectively any conflicts which occur will be due to changes made
-									by yourself instead of someone else. My memory may not be great but I stand roughly 100% more chance of
-									remembering something I&rsquo;ve done as opposed to something someone else has done!</p>
+								<p>My personal preference is to use the rebase command where possible for one key
+									reason, <strong>merge
+										conflicts are easier to resolve!</strong> The reason for this is that when
+									rebasing you apply <strong>your
+										changes</strong> on top of the master changes. This is different to a merge
+									which will apply the master
+									changes on top of your feature changes. So effectively any conflicts which occur
+									will be due to changes made
+									by yourself instead of someone else. My memory may not be great but I stand roughly
+									100% more chance of
+									remembering something I&rsquo;ve done as opposed to something someone else has done!
+								</p>
 
-								<p>Hopefully you can see the benefits of this and are thinking, &lsquo;great I&rsquo;m going to give that a
-									go!&rsquo; But before you rush off a few words of warning, there is potential for things to go horribly wrong.</p>
+								<p>Hopefully you can see the benefits of this and are thinking, &lsquo;great I&rsquo;m
+									going to give that a
+									go!&rsquo; But before you rush off a few words of warning, there is potential for
+									things to go horribly wrong.</p>
 
 								<blockquote>
 									<p>First learn stand, then learn fly</p>
-									<footer><strong>Wikipedia</strong> <cite><a href='https://en.wikipedia.org/wiki/Kesuke_Miyagi'>Kesuke Miyagi</a></cite></footer>
+									<footer><strong>Wikipedia</strong> <cite><a
+												href='https://en.wikipedia.org/wiki/Kesuke_Miyagi'>Kesuke
+												Miyagi</a></cite></footer>
 								</blockquote>
 
 
-								<p>The trouble comes if there are 2 people working on the feature branch who have both pushed changes to a
-									remote repository. If you haven&rsquo;t fetched their changes before you push the rebased feature branch their
-									changes will get overwritten and lost forever! That would be bad but Git does try to help you out by blocking
-									the push, actually the only way you can push the rebased branch is by passing an extra parameter to <strong>force</strong>
-									the push. So this acts as a nice reminder to think about what you are doing, only tick that &lsquo;force
-									push&rsquo; box if you are sure your branch is fully up to date. Actually I&rsquo;d never use rebase if I had
+								<p>The trouble comes if there are 2 people working on the feature branch who have both
+									pushed changes to a
+									remote repository. If you haven&rsquo;t fetched their changes before you push the
+									rebased feature branch their
+									changes will get overwritten and lost forever! That would be bad but Git does try to
+									help you out by blocking
+									the push, actually the only way you can push the rebased branch is by passing an
+									extra parameter to <strong>force</strong>
+									the push. So this acts as a nice reminder to think about what you are doing, only
+									tick that &lsquo;force
+									push&rsquo; box if you are sure your branch is fully up to date. Actually I&rsquo;d
+									never use rebase if I had
 									any doubt that anyone else might be working on the same branch as me.</p>
 
-								<p>A final note about rebase, it may be difficult to carry out with some Git GUI tools. Some of my colleagues
-									like using <a href="https://www.sourcetreeapp.com/">Source Tree</a> and I&rsquo;ll agree it does look nice,
-									however it doesn&rsquo;t support this workflow well at all. After starting a rebase you get left in a weird
-									limbo state and have to keep re-requesting to rebase the branches after each and every commit. Then once the
-									rebase is complete there is no way to force the push through the UI, you have to drop down to the command line
-									to complete the action. I&rsquo;d recommend giving <a href="https://code.google.com/p/gitextensions/">Git
-										Extensions</a>, the reliable Ford Mondeo of Git GUIs, a go for this scenario, it work much more smoothly.</p>
+								<p>A final note about rebase, it may be difficult to carry out with some Git GUI tools.
+									Some of my colleagues
+									like using <a href="https://www.sourcetreeapp.com/">Source Tree</a> and I&rsquo;ll
+									agree it does look nice,
+									however it doesn&rsquo;t support this workflow well at all. After starting a rebase
+									you get left in a weird
+									limbo state and have to keep re-requesting to rebase the branches after each and
+									every commit. Then once the
+									rebase is complete there is no way to force the push through the UI, you have to
+									drop down to the command line
+									to complete the action. I&rsquo;d recommend giving <a
+										href="https://code.google.com/p/gitextensions/">Git
+										Extensions</a>, the reliable Ford Mondeo of Git GUIs, a go for this scenario, it
+									work much more smoothly.</p>
 
 
 
@@ -574,134 +781,201 @@
 
 
 
-									<time datetime="2015-07-26T18:07:49+01:00" data-updated="true" itemprop="datePublished">Jul 26<span>th</span>,
-										2015</time></div>
+									<time datetime="2015-07-26T18:07:49+01:00" data-updated="true"
+										itemprop="datePublished">Jul 26<span>th</span>,
+										2015</time>
+								</div>
 								<div class="tags">
 
 
-									<a class='category' href='http://bakingwebsites.co.uk/blog/categories/software-design/'>Software Design</a>
+									<a class='category'
+										href='https://bakingwebsites.co.uk/blog/categories/software-design/'>Software
+										Design</a>
 
 
 								</div>
 
-								<span class="comments"><a href="http://bakingwebsites.co.uk/2015/07/26/lean-awesome-part-II/#disqus_thread">Comments</a></span>
+								<span class="comments"><a
+										href="https://bakingwebsites.co.uk/2015/07/26/lean-awesome-part-II/#disqus_thread">Comments</a></span>
 
 							</div>
-							<h1 class="title" itemprop="name"><a href="http://bakingwebsites.co.uk/2015/07/26/lean-awesome-part-II/"
-								   itemprop="url">Making Awesome Software With Lean Principles - Part II</a></h1>
+							<h1 class="title" itemprop="name"><a
+									href="https://bakingwebsites.co.uk/2015/07/26/lean-awesome-part-II/"
+									itemprop="url">Making Awesome Software With Lean Principles - Part II</a></h1>
 							<div class="entry-content" itemprop="articleBody">
 								<p><img src="http://i49.photobucket.com/albums/f299/hookmike/74078639-2d6b-4179-883d-4be7d28c19c7_zpsbpo9illj.jpg"
-									     class="alignleft" title="Awesome image by Roberlan https://www.flickr.com/photos/roberlan" /></p>
+										class="alignleft"
+										title="Awesome image by Roberlan https://www.flickr.com/photos/roberlan" /></p>
 
-								<p>In the <a href="http://bakingwebsites.co.uk/2015/07/19/lean-awesome-part-I/">first part of Making awesome
-										software with Lean principles</a> I started looking at how <a href="https://en.wikipedia.org/wiki/Lean_software_development">Lean
-										principles</a> have helped me while working on the <a href="http://midsussextriclub.com/">Mid Sussex Tri Club
+								<p>In the <a href="https://bakingwebsites.co.uk/2015/07/19/lean-awesome-part-I/">first
+										part of Making awesome
+										software with Lean principles</a> I started looking at how <a
+										href="https://en.wikipedia.org/wiki/Lean_software_development">Lean
+										principles</a> have helped me while working on the <a
+										href="http://midsussextriclub.com/">Mid Sussex Tri Club
 										website</a>.</p>
 
-								<p>The first three principles <strong>Eliminating waste</strong>, <strong>Amplifying learning</strong> and
-									<strong>Deciding as late as possible</strong> are all fundamental to help guide software development. However
-									they only form part of the picture, there are still four more principles remaining that help guide our
-									decisions so let&rsquo;s take a look at them now.</p>
+								<p>The first three principles <strong>Eliminating waste</strong>, <strong>Amplifying
+										learning</strong> and
+									<strong>Deciding as late as possible</strong> are all fundamental to help guide
+									software development. However
+									they only form part of the picture, there are still four more principles remaining
+									that help guide our
+									decisions so let&rsquo;s take a look at them now.
+								</p>
 
 								<h2>Deliver as fast as possible</h2>
 
 								<blockquote>
-									<p>In the era of rapid technology evolution, it is not the biggest that survives, but the fastest. The sooner
-										the end product is delivered without major defects, the sooner feedback can be received, and incorporated
+									<p>In the era of rapid technology evolution, it is not the biggest that survives,
+										but the fastest. The sooner
+										the end product is delivered without major defects, the sooner feedback can be
+										received, and incorporated
 										into the next iteration.</p>
-									<footer><strong>Wikipedia</strong> <cite><a href='https://en.wikipedia.org/wiki/Lean_software_development'>Lean
+									<footer><strong>Wikipedia</strong> <cite><a
+												href='https://en.wikipedia.org/wiki/Lean_software_development'>Lean
 												Software Development</a></cite></footer>
 								</blockquote>
 
 
-								<p>I&rsquo;ve seen the benefits of an iterative approach over and again throughout my professional life so I
-									regard this as an essential principle to apply to all software projects. I put in place a pretty slick release
-									process as one of the first changes I made and have been reaping the benefits ever since. Basically any
-									check-ins on the master branch of the source code repository are immediately deployed to the website.
-									I&rsquo;ve already blogged about how I set-up this <a href="http://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/">&lsquo;zero-click&rsquo;
+								<p>I&rsquo;ve seen the benefits of an iterative approach over and again throughout my
+									professional life so I
+									regard this as an essential principle to apply to all software projects. I put in
+									place a pretty slick release
+									process as one of the first changes I made and have been reaping the benefits ever
+									since. Basically any
+									check-ins on the master branch of the source code repository are immediately
+									deployed to the website.
+									I&rsquo;ve already blogged about how I set-up this <a
+										href="https://bakingwebsites.co.uk/2014/07/02/automated-azure-deployments/">&lsquo;zero-click&rsquo;
 										deploy process</a> and it has worked largely without problems since set-up.</p>
 
-								<p>However, this technique must be used with caution and certainly in tandem with the &lsquo;<strong>Build
-										quality in</strong>&rsquo; principle. It is essential to ensure that a suitable branching process is in place
-									too and changes can only be deployed once they have been tested. If you are working in a larger team I&rsquo;d
-									recommend limiting write access to the master branch to a single person who can coordinate the deployments.
-									While automation is great for productivity people still need to understand how it all works and retain control
+								<p>However, this technique must be used with caution and certainly in tandem with the
+									&lsquo;<strong>Build
+										quality in</strong>&rsquo; principle. It is essential to ensure that a suitable
+									branching process is in place
+									too and changes can only be deployed once they have been tested. If you are working
+									in a larger team I&rsquo;d
+									recommend limiting write access to the master branch to a single person who can
+									coordinate the deployments.
+									While automation is great for productivity people still need to understand how it
+									all works and retain control
 									of the systems.</p>
 
 								<h2>Empower the team</h2>
 
 								<blockquote>
-									<p>The lean approach favors the aphorism &#8220;find good people and let them do their own job,&#8221;
-										encouraging progress, catching errors, and removing impediments, but not micro-managing.</p>
-									<footer><strong>Wikipedia</strong> <cite><a href='https://en.wikipedia.org/wiki/Lean_software_development'>Lean
+									<p>The lean approach favors the aphorism &#8220;find good people and let them do
+										their own job,&#8221;
+										encouraging progress, catching errors, and removing impediments, but not
+										micro-managing.</p>
+									<footer><strong>Wikipedia</strong> <cite><a
+												href='https://en.wikipedia.org/wiki/Lean_software_development'>Lean
 												Software Development</a></cite></footer>
 								</blockquote>
 
 
-								<p>I have been fortunate to be involved with an organisation that trusted me to make the technical decisions. I
-									presented my ideas on the features to implement and got feedback on any changes they thought may be needed. So
-									I was empowered to make the changes as and when they were needed. However I also think it is important to
-									&lsquo;bring the stakeholders with you&rsquo; when making the changes. This has several benefits, not only
-									does it help ensure that the features are relevant, it also gives me some good candidates for people to test
+								<p>I have been fortunate to be involved with an organisation that trusted me to make the
+									technical decisions. I
+									presented my ideas on the features to implement and got feedback on any changes they
+									thought may be needed. So
+									I was empowered to make the changes as and when they were needed. However I also
+									think it is important to
+									&lsquo;bring the stakeholders with you&rsquo; when making the changes. This has
+									several benefits, not only
+									does it help ensure that the features are relevant, it also gives me some good
+									candidates for people to test
 									the system before it goes live, which brings me neatly onto the next principle!</p>
 
 								<h2>Build quality in</h2>
 
 								<blockquote>
-									<p>Conceptual integrity means that the system’s separate components work well together as a whole with balance
+									<p>Conceptual integrity means that the system’s separate components work well
+										together as a whole with balance
 										between flexibility, maintainability, efficiency, and responsiveness.</p>
-									<footer><strong>Wikipedia</strong> <cite><a href='https://en.wikipedia.org/wiki/Lean_software_development'>Lean
+									<footer><strong>Wikipedia</strong> <cite><a
+												href='https://en.wikipedia.org/wiki/Lean_software_development'>Lean
 												Software Development</a></cite></footer>
 								</blockquote>
 
 
-								<p>As I mentioned earlier, this principle acts as a counterweight to some of the other Lean principles, such as
-									<strong>Deliver as fast as possible</strong>, to help ensure that changes are not rushed and the software
-									doesn&rsquo;t accumulate bugs and brittle implementations. For this project I&rsquo;ve not had the luxury of
-									any other developers who could review the code, however I&rsquo;ve still ensured that changes are functionally
-									reviewed before deploying them to the live site. To facilitate this I&rsquo;ve setup a &lsquo;staging&rsquo;
-									environment using the same deployment technique running off a separate &lsquo;staging&rsquo; repository
-									branch. I first implement the changes on the staging branch and only merge them into the live
-									&lsquo;master&rsquo; branch once someone has tested them out on the staging website.</p>
+								<p>As I mentioned earlier, this principle acts as a counterweight to some of the other
+									Lean principles, such as
+									<strong>Deliver as fast as possible</strong>, to help ensure that changes are not
+									rushed and the software
+									doesn&rsquo;t accumulate bugs and brittle implementations. For this project
+									I&rsquo;ve not had the luxury of
+									any other developers who could review the code, however I&rsquo;ve still ensured
+									that changes are functionally
+									reviewed before deploying them to the live site. To facilitate this I&rsquo;ve setup
+									a &lsquo;staging&rsquo;
+									environment using the same deployment technique running off a separate
+									&lsquo;staging&rsquo; repository
+									branch. I first implement the changes on the staging branch and only merge them into
+									the live
+									&lsquo;master&rsquo; branch once someone has tested them out on the staging website.
+								</p>
 
-								<p>On one occasion I skipped the staging process and fate taught me a lesson! The update was to use an Umbraco
-									plugin to automatically resize images but little did I know that there was a memory leak in the Umbraco plugin
-									which meant the site quickly went over its memory allocation and Azure automatically took it offline. That was
-									a nasty surprise to find on the live site and some load testing in the staging environment would certainly
+								<p>On one occasion I skipped the staging process and fate taught me a lesson! The update
+									was to use an Umbraco
+									plugin to automatically resize images but little did I know that there was a memory
+									leak in the Umbraco plugin
+									which meant the site quickly went over its memory allocation and Azure automatically
+									took it offline. That was
+									a nasty surprise to find on the live site and some load testing in the staging
+									environment would certainly
 									have helped!</p>
 
 								<h2>See the whole</h2>
 
 								<blockquote>
-									<p>By decomposing the big tasks into smaller tasks, and by standardizing different stages of development, the
+									<p>By decomposing the big tasks into smaller tasks, and by standardizing different
+										stages of development, the
 										root causes of defects should be found and eliminated.</p>
-									<footer><strong>Wikipedia</strong> <cite><a href='https://en.wikipedia.org/wiki/Lean_software_development'>Lean
+									<footer><strong>Wikipedia</strong> <cite><a
+												href='https://en.wikipedia.org/wiki/Lean_software_development'>Lean
 												Software Development</a></cite></footer>
 								</blockquote>
 
 
-								<p>There are two key elements to the last principle, <strong>See the whole</strong>. I&rsquo;ve already talked
-									about how the staging and live environments are standardized, in my case this was a fairly trivial exercise
-									made easy by modern hosting tools such as Azure and github that enable multiple environments to be set up at
-									very low cost. The small fee to run an extra Azure database is well worth the value it adds for the club.</p>
+								<p>There are two key elements to the last principle, <strong>See the whole</strong>.
+									I&rsquo;ve already talked
+									about how the staging and live environments are standardized, in my case this was a
+									fairly trivial exercise
+									made easy by modern hosting tools such as Azure and github that enable multiple
+									environments to be set up at
+									very low cost. The small fee to run an extra Azure database is well worth the value
+									it adds for the club.</p>
 
-								<p>The second element recommends splitting tasks into smaller pieces and is certainly one that I&rsquo;d
-									advocate. Limiting the number of changes made at any one time really helps with tracking down issues. Its a
-									practice which I&rsquo;ve learnt the hard way over the years, it can be tempting to try and &lsquo;fix the
-									world&rsquo; when you get your hands on a code-base and hammer out a high number of changes in a short time.
-									However, not only does this massively increase the probability for bugs, it also makes finding them much more
-									difficult. Looking for a bug in a commit with 50+ changed files isn&rsquo;t much fun!</p>
+								<p>The second element recommends splitting tasks into smaller pieces and is certainly
+									one that I&rsquo;d
+									advocate. Limiting the number of changes made at any one time really helps with
+									tracking down issues. Its a
+									practice which I&rsquo;ve learnt the hard way over the years, it can be tempting to
+									try and &lsquo;fix the
+									world&rsquo; when you get your hands on a code-base and hammer out a high number of
+									changes in a short time.
+									However, not only does this massively increase the probability for bugs, it also
+									makes finding them much more
+									difficult. Looking for a bug in a commit with 50+ changed files isn&rsquo;t much
+									fun!</p>
 
-								<p>I&rsquo;ve used the <a href="https://github.com/MikeHook/MSTC/issues">github issue tracker</a> on this
-									project, which may seem a bit odd when there is no one else to share the work with, however it has helped keep
-									me focussed on what I&rsquo;ve been trying to achieve, also its nice to get the satisfaction of pressing the
+								<p>I&rsquo;ve used the <a href="https://github.com/MikeHook/MSTC/issues">github issue
+										tracker</a> on this
+									project, which may seem a bit odd when there is no one else to share the work with,
+									however it has helped keep
+									me focussed on what I&rsquo;ve been trying to achieve, also its nice to get the
+									satisfaction of pressing the
 									&lsquo;Closed&rsquo; button after fixing each issue!</p>
 
 								<h2>Lean == Awesome</h2>
 
-								<p>I hope you&rsquo;ve enjoyed reading about my experiences with Lean principles. I&rsquo;d love to hear about
-									any opinions you&rsquo;ve got regarding the way I&rsquo;ve interpreted the principles or how you&rsquo;ve used
-									the principles to make your own awesome software, so feel free to comment on the posts below!</p>
+								<p>I hope you&rsquo;ve enjoyed reading about my experiences with Lean principles.
+									I&rsquo;d love to hear about
+									any opinions you&rsquo;ve got regarding the way I&rsquo;ve interpreted the
+									principles or how you&rsquo;ve used
+									the principles to make your own awesome software, so feel free to comment on the
+									posts below!</p>
 
 
 
@@ -713,9 +987,9 @@
 					<nav id="pagenavi">
 
 
-						<a href="http://bakingwebsites.co.uk/blog/page/2/" class="next">Next</a>
+						<a href="https://bakingwebsites.co.uk/blog/page/2/" class="next">Next</a>
 
-						<div class="center"><a href="http://bakingwebsites.co.uk/blog/archives">Blog Archives</a></div>
+						<div class="center"><a href="https://bakingwebsites.co.uk/blog/archives">Blog Archives</a></div>
 					</nav>
 				</div>
 			</div>
