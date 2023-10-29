@@ -151,7 +151,7 @@
     <link href="https://bakingwebsites.co.uk/2015/08/16/rebase-git-enlightenment/"/>
     <updated>2015-08-16T18:07:49+01:00</updated>
     <id>https://bakingwebsites.co.uk/2015/08/16/rebase-git-enlightenment</id>
-    <content type="html"><![CDATA[<p><img src="http://i49.photobucket.com/albums/f299/hookmike/Pat-Morita_Karate_Kid_200_zpscufzef0b.jpg" class="alignleft" title="Pat Morita" /></p>
+    <content type="html"><![CDATA[<p><img src="/images/posts/Pat-Morita_Karate_Kid_200.jpg" class="alignleft" title="Pat Morita" /></p>
 
 <p>The path to Git enlightenment can be a long one for a developer used to centralized source control such as SVN.</p>
 
@@ -182,7 +182,7 @@
     <link href="https://bakingwebsites.co.uk/2015/07/26/lean-awesome-part-II/"/>
     <updated>2015-07-26T18:07:49+01:00</updated>
     <id>https://bakingwebsites.co.uk/2015/07/26/lean-awesome-part-II</id>
-    <content type="html"><![CDATA[<p><img src="http://i49.photobucket.com/albums/f299/hookmike/74078639-2d6b-4179-883d-4be7d28c19c7_zpsbpo9illj.jpg" class="alignleft" title="Awesome image by Roberlan https://www.flickr.com/photos/roberlan" /></p>
+    <content type="html"><![CDATA[<p><img src="/images/posts/Font-Awesome.jpg" class="alignleft" title="Awesome image by Roberlan https://www.flickr.com/photos/roberlan" /></p>
 
 <p>In the <a href="https://bakingwebsites.co.uk/2015/07/19/lean-awesome-part-I/">first part of Making awesome software with Lean principles</a> I started looking at how <a href="https://en.wikipedia.org/wiki/Lean_software_development">Lean principles</a> have helped me while working on the <a href="http://midsussextriclub.com/">Mid Sussex Tri Club website</a>.</p>
 
@@ -235,7 +235,7 @@
     <link href="https://bakingwebsites.co.uk/2015/07/19/lean-awesome-part-I/"/>
     <updated>2015-07-19T18:12:49+01:00</updated>
     <id>https://bakingwebsites.co.uk/2015/07/19/lean-awesome-part-I</id>
-    <content type="html"><![CDATA[<p><a href="http://midsussextriclub.com"><img src="http://i49.photobucket.com/albums/f299/hookmike/MSTC%20_logo_yellow_280_zps4tnfm4qj.jpg" class="alignleft" alttext="MSTC Logo" /></a></p>
+    <content type="html"><![CDATA[<p><a href="http://midsussextriclub.com"><img src="/images/posts/MSTC _logo_yellow_280.jpg" class="alignleft" alttext="MSTC Logo" /></a></p>
 
 <p>I&rsquo;ve been a keen amateur triathlete and member the <a href="http://midsussextriclub.com">Mid Sussex Tri Club</a> for a couple of years. Its a relatively small club but there is a surprising amount of administration involved in running it and after chatting to some of the clubs committee members it was clear that the admin overheads were becoming a burden. I could see the potential for software to help lessen the burden so I offered to take on the club&rsquo;s website and add some features to it.</p>
 
